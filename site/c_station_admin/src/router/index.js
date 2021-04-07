@@ -167,6 +167,41 @@ export const constantRoutes = [
     ]
   },
 
+  // 权限管理
+  {
+    path: '/security',
+    component: Layout,
+    redirect: '/security/list',
+    name: 'Security',
+    meta: { title: '权限', icon: 'el-icon-unlock' },
+    children: [
+      {
+        path: 'list',
+        name: 'SecurityList',
+        component: () => import('@/views/security/list'),
+        meta: { title: '员工列表', icon: 'tree' }
+      },
+      {
+        path: 'roles',
+        name: 'RoleList',
+        component: () => import('@/views/security/roles'),
+        meta: { title: '角色列表', icon: 'el-icon-user-solid' }
+      },
+      {
+        path: 'menu',
+        name: 'MenuList',
+        component: () => import('@/views/security/menu'),
+        meta: { title: '菜单列表', icon: 'el-icon-menu' }
+      },
+      {
+        path: 'resource',
+        name: 'ResourceList',
+        component: () => import('@/views/security/resource'),
+        meta: { title: '资源列表', icon: 'el-icon-attract' }
+      }
+    ]
+  },
+
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]

@@ -1,4 +1,4 @@
-package cn.o0u0o.common.rsponse;
+package cn.o0u0o.common.response;
 
 import lombok.Getter;
 import lombok.ToString;

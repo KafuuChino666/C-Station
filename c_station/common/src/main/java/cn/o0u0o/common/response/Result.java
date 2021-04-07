@@ -1,6 +1,5 @@
-package cn.o0u0o.common.rsponse;
+package cn.o0u0o.common.response;
 
-import com.baomidou.mybatisplus.extension.api.R;
 import lombok.Data;
 
 import java.util.HashMap;
@@ -10,7 +9,7 @@ import java.util.Map;
  * 响应体, 响应请求结果给游览器
  */
 @Data
-public class Result<T> {
+public class Result {
 
     // 是否成功
     private Boolean success;
