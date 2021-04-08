@@ -1,4 +1,4 @@
-create table acl_admin
+create table acl_staff
 (
    id                   bigint not null auto_increment,
    username             varchar(64) comment '用户名',
@@ -26,10 +26,10 @@ create table acl_role
    primary key (id)
 );
 
-create table acl_admin_role
+create table acl_staff_role
 (
    id                   bigint not null auto_increment,
-   admin_id             bigint,
+   staff_id             bigint,
    role_id              bigint,
 	 gmt_create           datetime comment '创建时间',
    gmt_modified         datetime comment '修改时间',
