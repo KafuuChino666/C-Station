@@ -51,7 +51,7 @@ public class CodeGenerator {
 
         // 4、包配置
         PackageConfig pc = new PackageConfig();
-        pc.setParent("cn.o0u0o.service.admin");
+        pc.setParent("cn.o0u0o.service.security");
         pc.setController("controller");
         pc.setEntity("entity");
         pc.setService("service");
