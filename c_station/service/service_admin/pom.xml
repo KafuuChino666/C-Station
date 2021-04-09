@@ -10,6 +10,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>service_admin</artifactId>
+    <dependencies>
+
+        <!--<dependency>
+            <groupId>cn.o0u0o</groupId>
+            <artifactId>web</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>-->
+    </dependencies>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
