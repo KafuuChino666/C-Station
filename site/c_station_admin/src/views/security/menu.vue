@@ -8,10 +8,10 @@
 import BodyLayout from '@/views/common/BodyLayout'
 
 export default {
+  name: 'Menu',
   components: {
     BodyLayout
-  },
-  name: 'Menu'
+  }
 }
 </script>
 

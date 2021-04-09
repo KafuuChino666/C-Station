@@ -1,7 +1,10 @@
 package cn.o0u0o.service.security.mapper;
 
+import cn.o0u0o.service.security.entity.Role;
 import cn.o0u0o.service.security.entity.StaffRole;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface StaffRoleMapper extends BaseMapper<StaffRole> {
 
+    List<String> getByStatusId(Integer id);
 }

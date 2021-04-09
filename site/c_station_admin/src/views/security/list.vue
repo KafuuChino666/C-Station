@@ -2,41 +2,48 @@
   <div class="chart-container">
     <div class="top-container">
       <div class="text-con">
-        <span style="font-size: 18px"><i class="el-icon-search"/>搜索员工</span>
+        <span style="font-size: 18px"><i class="el-icon-search" />搜索员工</span>
       </div>
       <div class="search-con">
-        输入员工编号:<el-input v-model="searchText" placeholder="请输入内容"></el-input>
-        <el-button type="info" plain> 清空 </el-button>
-        <el-button type="primary">查询</el-button>
+        输入员工编号:<el-input v-model="searchText" placeholder="请输入内容" />
+        <el-button type="info" plain @click="searchText = ''"> 清空 </el-button>
+        <el-button type="primary" @click="search">查询</el-button>
       </div>
     </div>
     <div class="low-container">
-      <AdminList/>
+      <StaffList :list="list" />
       <div class="block">
         <el-pagination
           layout="prev, pager, next"
-          :total="1000">
-        </el-pagination>
+          :current-page="page"
+          :total="total"
+          :page-size="limit"
+          @current-change="changeCurrentPage"
+        />
       </div>
     </div>
+    <StaffForm />
   </div>
 </template>
 
 <script>
-import AdminList from '@/views/security/components/AdminList'
+import StaffList from '@/views/security/components/StaffList'
 import securityAPI from '@/api/securityAPI'
+import StaffForm from '@/views/security/components/StaffForm'
 
 export default {
-  components: {
-    AdminList
-  },
   name: 'List',
+  components: {
+    StaffList,
+    StaffForm
+  },
   data() {
     return {
       searchText: '',
       page: 1,
       limit: 7,
-      searchObj: null
+      list: [],
+      total: 0
     }
   },
 
@@ -46,10 +53,23 @@ export default {
   },
   methods: {
     fetchData() {
-      securityAPI.userList(this.page, this.limit, this.searchObj).then(response => {
+      securityAPI.pageStaffList(this.page, this.limit).then(response => {
         this.list = response.data.rows
         this.total = response.data.total
       })
+    },
+    search() {
+      if (this.searchText.trim() !== '') {
+        securityAPI.getStaffById(this.searchText).then(response => {
+          this.list = []
+          this.total = 0
+          this.list.push(response.data.rows)
+        })
+      }
+    },
+    changeCurrentPage(page) {
+      this.page = page
+      this.fetchData()
     }
   }
 }

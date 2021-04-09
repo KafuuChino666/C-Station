@@ -46,7 +46,13 @@ public class Staff extends BaseEntity {
     private String remark;
 
     @ApiModelProperty(value = "帐号启用状态：0：禁用；1：启用")
-    private Integer status;
+    private Boolean status;
 
-
+    public void setStatus(Integer status) {
+        if (status == 1) {
+            this.status = true;
+        } else {
+            this.status = false;
+        }
+    }
 }

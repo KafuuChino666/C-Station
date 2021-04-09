@@ -31,5 +31,11 @@ public class StaffRole extends BaseEntity {
 
     private Long roleId;
 
+    public StaffRole(Long staffId, Long roleId) {
+        this.staffId = staffId;
+        this.roleId = roleId;
+    }
 
+    public StaffRole() {
+    }
 }

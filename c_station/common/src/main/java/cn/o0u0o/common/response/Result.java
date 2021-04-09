@@ -12,7 +12,7 @@ import java.util.Map;
 public class Result {
 
     // 是否成功
-    private Boolean success;
+    private Boolean status;
 
     // 错误码
     private Integer code;
@@ -27,10 +27,14 @@ public class Result {
 
     }
 
-    public Result(Boolean success, Integer code, String message) {
-        this.success = success;
+    public Result(Boolean status, Integer code, String message) {
+        this.status = status;
         this.code = code;
         this.message = message;
+    }
+
+    public static Result ok() {
+        return Result.setResultCodeEnum(ResultCodeEnum.SUCCESS);
     }
 
     public static Result setResultCodeEnum(ResultCodeEnum re) {
@@ -38,7 +42,7 @@ public class Result {
     }
 
     public Result success(Boolean success) {
-        this.setSuccess(success);
+        this.setStatus(success);
         return this;
     }
 

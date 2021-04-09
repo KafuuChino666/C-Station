@@ -6,11 +6,11 @@
         <div style="margin-top: 15px; width: 30%">
           <el-input v-model="selectContent" placeholder="请输入姓名" class="input-with-select">
             <el-select slot="prepend" v-model="select" placeholder="请选择">
-              <el-option label="审核" value="1"></el-option>
-              <el-option label="管理员" value="2"></el-option>
-              <el-option label="超管" value="3"></el-option>
+              <el-option label="审核" value="1" />
+              <el-option label="管理员" value="2" />
+              <el-option label="超管" value="3" />
             </el-select>
-            <el-button slot="append" icon="el-icon-search"></el-button>
+            <el-button slot="append" icon="el-icon-search" />
           </el-input>
         </div>
         <!--  搜索框 END  -->
@@ -25,8 +25,8 @@
               background
               layout="prev, pager, next"
               :total="1000"
-              style="width: 100%">
-            </el-pagination>
+              style="width: 100%"
+            />
           </el-col>
         </el-row>
         <!--  分页 END  -->
@@ -39,10 +39,10 @@
 import EmList from '@/views/employee/components/EmList'
 
 export default {
+  name: 'List',
   components: {
     EmList
   },
-  name: 'List',
   data() {
     return {
       selectContent: '',

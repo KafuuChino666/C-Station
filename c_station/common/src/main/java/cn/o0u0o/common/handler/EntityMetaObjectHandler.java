@@ -2,9 +2,11 @@ package cn.o0u0o.common.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+@Component
 public class EntityMetaObjectHandler implements MetaObjectHandler {
 
     /**

@@ -12,5 +12,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2021-04-08
  */
 public interface StaffMapper extends BaseMapper<Staff> {
-
+    void updateStatus(Integer id, Integer status);
 }

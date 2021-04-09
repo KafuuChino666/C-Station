@@ -1,4 +1,4 @@
-import cn.o0u0o.CStationApplication;
+
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -16,7 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 
 
-@SpringBootTest(classes = CStationApplication.class)
+@SpringBootTest
 public class CodeGenerator {
 
     @Test

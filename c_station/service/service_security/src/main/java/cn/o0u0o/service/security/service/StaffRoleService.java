@@ -1,7 +1,13 @@
 package cn.o0u0o.service.security.service;
 
+import cn.o0u0o.common.response.Result;
+import cn.o0u0o.service.security.entity.Role;
+import cn.o0u0o.service.security.entity.Staff;
 import cn.o0u0o.service.security.entity.StaffRole;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +19,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface StaffRoleService extends IService<StaffRole> {
 
+    List<String> getByStatusId(Integer id);
+
+    Integer updateRolesById(Integer id, List<Integer> roles);
 }
