@@ -1,5 +1,8 @@
 
+<<<<<<< HEAD
 import cn.o0u0o.CStationApplication;
+=======
+>>>>>>> d9cec50db508c20c40f53eb89c3079ad4de350ef
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -52,7 +55,11 @@ public class CodeGenerator {
 
         // 4、包配置
         PackageConfig pc = new PackageConfig();
+<<<<<<< HEAD
         pc.setParent("cn.o0u0o.service.admin");
+=======
+        pc.setParent("cn.o0u0o.service");
+>>>>>>> d9cec50db508c20c40f53eb89c3079ad4de350ef
         pc.setController("controller");
         pc.setEntity("entity");
         pc.setService("service");
