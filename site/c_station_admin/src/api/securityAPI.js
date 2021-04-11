@@ -62,5 +62,69 @@ export default {
       },
       data: roles
     })
+  },
+
+  /**
+   * 资源相关API
+   */
+  // 删除资源
+  removeResourceById(id) {
+    return request({
+      url: '/admin/acl/resource/',
+      method: 'delete',
+      data: id
+    })
+  },
+  // 更新资源
+  updateResource(resource) {
+    return request({
+      url: '/admin/acl/resource/',
+      method: 'put',
+      data: resource
+    })
+  },
+  // 分页获取url资源数据
+  pageResourceList(page, limit) {
+    return request({
+      url: `/admin/acl/resource/list/${page}/${limit}`,
+      method: 'get'
+    })
+  },
+  // 根据资源id/资源名称获取
+  getResourceByText(text) {
+    return request({
+      url: `/admin/acl/resource/${text}`,
+      method: 'get'
+    })
+  },
+  // 添加资源
+  addResource(resource) {
+    return request({
+      url: '/admin/acl/resource/',
+      method: 'post',
+      data: resource
+    })
+  },
+
+  /**
+   * 菜单列表相关API
+   */
+  // 修改菜单隐藏状态
+  updateMenuStatus(id, status) {
+    return request({
+      url: '/admin/acl/menu/',
+      method: 'put',
+      params: {
+        'id': id,
+        'status': status
+      }
+    })
+  },
+  // 根据Menu id获取Roles
+  getRolesMenuById(id) {
+    return request({
+      url: `/admin/acl/role_menu/${id}/`,
+      method: 'get'
+    })
   }
 }

@@ -6,29 +6,35 @@
   >
     <el-table-column
       prop="id"
+      align="center"
       label="用户编号"
       width="180"
     />
     <el-table-column
       prop="username"
       label="账号"
+      align="center"
       width="180"
     />
     <el-table-column
       prop="nickName"
+      align="center"
       label="姓名"
     />
     <el-table-column
       prop="email"
+      align="center"
       label="邮箱"
     />
     <el-table-column
       prop="gmtCreate"
+      align="center"
       label="创建时间"
       :formatter="dateFormat"
     />
     <el-table-column
       prop="status"
+      align="center"
       label="是否可用"
     >
       <template slot-scope="scope">
@@ -42,6 +48,7 @@
     </el-table-column>
     <el-table-column
       prop="address"
+      align="center"
       label="操作"
     >
       <template slot-scope="scope">
