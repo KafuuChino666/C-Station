@@ -3,7 +3,9 @@ package cn.o0u0o.service.security.service.impl;
 import cn.o0u0o.service.security.entity.RoleMenu;
 import cn.o0u0o.service.security.mapper.RoleMenuMapper;
 import cn.o0u0o.service.security.service.RoleMenuService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**

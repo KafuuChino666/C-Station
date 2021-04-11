@@ -14,6 +14,7 @@
 import SearchBox from '@/views/security/components/SearchBox'
 import MenuTable from '@/views/security/components/MenuTable'
 import MenuRoleForm from '@/views/security/components/MenuRoleForm'
+import securityAPI from '@/api/securityAPI'
 
 export default {
   name: 'Menu',
@@ -21,6 +22,40 @@ export default {
     SearchBox,
     MenuTable,
     MenuRoleForm
+  },
+  data() {
+    return {
+      page: 1,
+      limit: 7,
+      list: [],
+      total: 0
+    }
+  },
+
+  // 页面渲染成功后获取数据
+  created() {
+    this.fetchData()
+  },
+  methods: {
+    fetchData() {
+      securityAPI.pageStaffList(this.page, this.limit).then(response => {
+        this.list = response.data.rows
+        this.total = response.data.total
+      })
+    },
+    searchFun(text) {
+      if (text !== '') {
+        securityAPI.getStaffById(text).then(response => {
+          this.list = []
+          this.total = 0
+          this.list.push(response.data.rows)
+        })
+      }
+    },
+    changeCurrentPage(page) {
+      this.page = page
+      this.fetchData()
+    }
   }
 }
 </script>
