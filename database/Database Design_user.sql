@@ -12,17 +12,6 @@ CREATE TABLE u_user (
 );
 #insert into user_tb(user_name, user_sign, gender, birth) values('qweqwe', 'qweqwe', 'W','2000-02-12');
 
-#图片表
-CREATE TABLE pub_img (
-	img_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	img_location VARCHAR(255) COMMENT '图片地址' NOT NULL,
-	user_id INT,
-	img_type INT NOT NULL COMMENT '图片类型',
-	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
-	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
-	FOREIGN KEY(user_id) REFERENCES u_user(user_id)
-);
-
 ########
 #账号安全表
 CREATE TABLE u_safe (
