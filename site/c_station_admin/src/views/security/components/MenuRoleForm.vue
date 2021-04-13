@@ -28,6 +28,7 @@ export default {
       checkAll: false,
       // 默认选中
       checkedCities: [1, 2],
+      menuId: 0,
       // 所有角色
       cities: [{
         id: 1,
@@ -64,6 +65,7 @@ export default {
   mounted() {
     PubSub.subscribe('menuRoleForm', (event, data) => {
       this.dialogFormVisible = true
+      this.menuId = data.id
 
       // 获取所有角色
       securityAPI.getRoleList().then(response => {
@@ -72,7 +74,7 @@ export default {
 
       // 获取此url拥有角色
       securityAPI.getRolesMenuById(data.id).then(response => {
-        this.checkedCities = response.status ? response.data : []
+        this.checkedCities = response.status ? response.data.rows : []
       })
     })
   },
@@ -96,7 +98,16 @@ export default {
     },
     // 确定函数
     confirmFun() {
-      this.dialogFormVisible = true
+      securityAPI.updataMenuRole(this.menuId, this.checkedCities).then(response => {
+        if (response.status) {
+          this.dialogFormVisible = false
+          this.$notify({
+            title: '成功',
+            message: '角色更新成功!',
+            type: 'success'
+          })
+        }
+      })
     }
   }
 }

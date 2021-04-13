@@ -28,10 +28,16 @@ public class RoleMenu extends BaseEntity {
     private static final long serialVersionUID=1L;
 
     @ApiModelProperty(value = "角色ID")
-    private Long roleId;
+    private String roleId;
 
     @ApiModelProperty(value = "菜单ID")
-    private Long menuId;
+    private String menuId;
 
+    public RoleMenu() {
+    }
 
+    public RoleMenu(String roleId, String menuId) {
+        this.roleId = roleId;
+        this.menuId = menuId;
+    }
 }

@@ -109,14 +109,21 @@ export default {
   /**
    * 菜单列表相关API
    */
+  // 分页获取Menu
+  pageMenuList(page, limit) {
+    return request({
+      url: `/admin/acl/menu/list/${page}/${limit}`,
+      method: 'get'
+    })
+  },
   // 修改菜单隐藏状态
   updateMenuStatus(id, status) {
     return request({
-      url: '/admin/acl/menu/',
+      url: '/admin/acl/menu/hidden/',
       method: 'put',
       params: {
-        'id': id,
-        'status': status
+        id,
+        status
       }
     })
   },
@@ -124,6 +131,55 @@ export default {
   getRolesMenuById(id) {
     return request({
       url: `/admin/acl/role_menu/${id}/`,
+      method: 'get'
+    })
+  },
+  // 修改菜单角色
+  updataMenuRole(id, roles) {
+    return request({
+      url: '/admin/acl/role_menu/',
+      method: 'put',
+      data: roles,
+      params: {
+        id
+      }
+    })
+  },
+  // 获取菜单列表
+  getMrnuList() {
+    return request({
+      url: `/admin/acl/menu/`,
+      method: 'get'
+    })
+  },
+  // 添加菜单
+  addMrnu(menu) {
+    return request({
+      url: '/admin/acl/menu/',
+      method: 'post',
+      data: menu
+    })
+  },
+  // 更新菜单
+  updateMenuById(menu) {
+    return request({
+      url: '/admin/acl/menu/',
+      method: 'put',
+      data: menu
+    })
+  },
+  // 根据id删除菜单
+  reomveMenuById(id) {
+    return request({
+      url: '/admin/acl/menu/',
+      method: 'delete',
+      data: id
+    })
+  },
+  // 根据名称搜索菜单
+  getMenuByName(name) {
+    return request({
+      url: `/admin/acl/menu/seek/${name}`,
       method: 'get'
     })
   }

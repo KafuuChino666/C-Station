@@ -3,6 +3,8 @@ package cn.o0u0o.service.security.mapper;
 import cn.o0u0o.service.security.entity.RoleMenu;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
+import java.util.List;
+
 /**
  * <p>
  *  Mapper 接口
@@ -14,4 +16,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 public interface RoleMenuMapper extends BaseMapper<RoleMenu> {
 
     Boolean updateHidden(String id, int hidden);
+
+    List<String> getRoleById(String id);
 }

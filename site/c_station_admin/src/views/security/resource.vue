@@ -4,7 +4,7 @@
     <div class="low-container">
       <!--   表   -->
       <ResourceTable :list="list" />
-      <div class="block" v-if="list.length > limit">
+      <div class="block" v-if="list.length >= limit || page !== 1">
         <el-pagination
           layout="prev, pager, next"
           :current-page="page"
@@ -55,7 +55,7 @@ export default {
     searchFun(text) {
       if (text !== '') {
         // 请求数据
-        securityAPI.getResourceByText(text).then(response => {
+        securityAPI.getMenuByName(text).then(response => {
           this.list = []
           this.total = 0
           this.list = response.data.rows

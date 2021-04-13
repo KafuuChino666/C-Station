@@ -28,7 +28,7 @@ public class Menu extends BaseEntity {
     private static final long serialVersionUID=1L;
 
     @ApiModelProperty(value = "父级ID")
-    private Long parentId;
+    private String parentId;
 
     @ApiModelProperty(value = "菜单名称")
     private String title;
@@ -48,5 +48,8 @@ public class Menu extends BaseEntity {
     @ApiModelProperty(value = "前端隐藏")
     private Integer hidden;
 
-
+    public Boolean getHidden() {
+        if (hidden == null) return false;
+        return hidden == 1;
+    }
 }

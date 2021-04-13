@@ -12,6 +12,9 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.regex.Pattern;
+
 /**
  * <p>
  *  前端控制器
@@ -21,7 +24,6 @@ import org.springframework.web.bind.annotation.*;
  * @since 2021-04-08
  */
 @RestController
-@RequestMapping("/role-menu")
 @CrossOrigin //跨域
 @RequestMapping("/admin/acl/role_menu")
 public class RoleMenuController {
@@ -29,6 +31,28 @@ public class RoleMenuController {
     @Autowired
     public RoleMenuService roleMenuService;
 
+    @ApiOperation("根据Menu id获取Roles")
+    @GetMapping("/{id}")
+    public Result getRolesMenuById(@PathVariable String id) {
+        Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");
+        if (pattern.matcher(id.trim()).matches()) {
+            List<String> roleIds =  roleMenuService.getRoleById(id);
+            return Result.ok().data("rows", roleIds);
+        }
+        return Result.setResultCodeEnum(ResultCodeEnum.PARAM_ERROR);
+    }
+
+    @ApiOperation("修改菜单角色")
+    @PutMapping("/")
+    public Result updataMenuRole(@RequestParam String id, @RequestBody List<String> roles) {
+        Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");
+        if (pattern.matcher(id.trim()).matches()) {
+            Boolean b = roleMenuService.updataRoleByMenuId(id, roles);
+            return b ? Result.ok() : Result.setResultCodeEnum(ResultCodeEnum.UNKNOWN_REASON);
+        }
+
+        return Result.setResultCodeEnum(ResultCodeEnum.PARAM_ERROR);
+    }
 
 }
 

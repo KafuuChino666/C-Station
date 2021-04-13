@@ -3,6 +3,8 @@ package cn.o0u0o.service.security.service;
 import cn.o0u0o.service.security.entity.RoleMenu;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -13,4 +15,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface RoleMenuService extends IService<RoleMenu> {
 
+    List<String> getRoleById(String id);
+
+    Boolean updataRoleByMenuId(String id, List<String> roles);
 }

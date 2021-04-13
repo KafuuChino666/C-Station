@@ -21,5 +21,5 @@ public interface StaffRoleService extends IService<StaffRole> {
 
     List<String> getByStatusId(Integer id);
 
-    Integer updateRolesById(Integer id, List<Integer> roles);
+    Integer updateRolesById(String id, List<String> roles);
 }

@@ -28,10 +28,10 @@ public class RoleResource extends BaseEntity {
     private static final long serialVersionUID=1L;
 
     @ApiModelProperty(value = "角色ID")
-    private Long roleId;
+    private String roleId;
 
     @ApiModelProperty(value = "资源ID")
-    private Long resourceId;
+    private String resourceId;
 
 
 }

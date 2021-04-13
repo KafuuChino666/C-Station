@@ -40,7 +40,7 @@ public class StaffRoleServiceImpl extends ServiceImpl<StaffRoleMapper, StaffRole
 
     @Override
     @Transactional // 开启事务
-    public Integer updateRolesById(Integer id, List<Integer> roles) {
+    public Integer updateRolesById(String id, List<String> roles) {
 
         // 清空此用户角色
         QueryWrapper queryWrapper = new QueryWrapper();
@@ -49,7 +49,7 @@ public class StaffRoleServiceImpl extends ServiceImpl<StaffRoleMapper, StaffRole
         // 添加角色
         Collection<StaffRole> staffRoles = new ArrayList<>();
         roles.forEach(role -> {
-            staffRoles.add(new StaffRole(Long.valueOf(id), Long.valueOf(role)));
+            staffRoles.add(new StaffRole(id, role));
         });
         boolean saveBatch = this.saveBatch(staffRoles);
 

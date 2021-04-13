@@ -40,7 +40,7 @@ public class StaffRoleController {
 
     @ApiOperation("更新员工角色")
     @PutMapping("/")
-    public Result updateRolesById(@RequestParam Integer id, @RequestBody List<Integer> roles) {
+    public Result updateRolesById(@RequestParam String id, @RequestBody List<String> roles) {
         Integer i = staffRoleService.updateRolesById(id, roles);
         if (i == 1) {
             return Result.ok();

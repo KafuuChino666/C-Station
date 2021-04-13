@@ -27,11 +27,11 @@ public class StaffRole extends BaseEntity {
 
     private static final long serialVersionUID=1L;
 
-    private Long staffId;
+    private String staffId;
 
-    private Long roleId;
+    private String roleId;
 
-    public StaffRole(Long staffId, Long roleId) {
+    public StaffRole(String staffId, String roleId) {
         this.staffId = staffId;
         this.roleId = roleId;
     }

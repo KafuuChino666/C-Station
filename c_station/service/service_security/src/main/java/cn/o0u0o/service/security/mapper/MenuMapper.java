@@ -13,5 +13,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface MenuMapper extends BaseMapper<Menu> {
 
-    Boolean updateHidden(String id, int i);
+    Boolean updateHidden(String id, int hidden);
+
 }

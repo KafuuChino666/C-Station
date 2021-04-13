@@ -3,10 +3,19 @@
     <SearchBox :search-fun="searchFun" title="菜单列表" label-text="输入菜单名称" :add-fun="addFun" icon="el-icon-menu" />
     <div class="low-container">
       <!--   表   -->
-      <MenuTable />
+      <MenuTable :table-data="tableData"/>
+      <div class="block" v-if="tableData.length >= limit || page !== 1">
+        <el-pagination
+          layout="prev, pager, next"
+          :current-page="page"
+          :total="total"
+          :page-size="limit"
+          @current-change="changeCurrentPage"
+        />
+      </div>
     </div>
-    <ResourceForm />
     <MenuRoleForm />
+    <MenuForm />
   </div>
 </template>
 
@@ -15,19 +24,22 @@ import SearchBox from '@/views/security/components/SearchBox'
 import MenuTable from '@/views/security/components/MenuTable'
 import MenuRoleForm from '@/views/security/components/MenuRoleForm'
 import securityAPI from '@/api/securityAPI'
+import MenuForm from '@/views/security/components/MenuForm'
+import PubSub from 'pubsub-js'
 
 export default {
   name: 'Menu',
   components: {
     SearchBox,
     MenuTable,
-    MenuRoleForm
+    MenuRoleForm,
+    MenuForm
   },
   data() {
     return {
       page: 1,
       limit: 7,
-      list: [],
+      tableData: [],
       total: 0
     }
   },
@@ -37,24 +49,30 @@ export default {
     this.fetchData()
   },
   methods: {
+    // 获取数据
     fetchData() {
-      securityAPI.pageStaffList(this.page, this.limit).then(response => {
-        this.list = response.data.rows
+      securityAPI.pageMenuList(this.page, this.limit).then(response => {
+        this.tableData = response.data.rows
         this.total = response.data.total
       })
     },
-    searchFun(text) {
-      if (text !== '') {
-        securityAPI.getStaffById(text).then(response => {
-          this.list = []
+    searchFun(name) {
+      if (name !== '') {
+        securityAPI.getMenuByName(name).then(response => {
+          this.tableData = []
           this.total = 0
-          this.list.push(response.data.rows)
+          this.tableData = response.data.rows
         })
       }
     },
     changeCurrentPage(page) {
       this.page = page
       this.fetchData()
+    },
+    addFun() {
+      PubSub.publish('menuForm', {
+        'formType': 'add'
+      })
     }
   }
 }

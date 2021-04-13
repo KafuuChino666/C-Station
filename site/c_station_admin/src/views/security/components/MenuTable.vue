@@ -7,6 +7,7 @@
       prop="id"
       label="ID"
       align="center"
+      :show-overflow-tooltip="true"
       width="50">
     </el-table-column>
     <el-table-column
@@ -57,13 +58,15 @@
           v-model="scope.row.hidden"
           active-color="#13ce66"
           inactive-color="#909399"
-          @change="changeHiddenStatus(scope.row.id, scope.row.status)"
+          @change="changeHiddenStatus(scope.row.id, scope.row.hidden)"
         />
       </template>
     </el-table-column>
     <el-table-column
       prop="gmtModified"
       align="center"
+      :show-overflow-tooltip="true"
+      :formatter="dateFormat"
       label="修改时间">
     </el-table-column>
     <el-table-column
@@ -82,23 +85,13 @@
 <script>
 import securityAPI from '@/api/securityAPI'
 import PubSub from 'pubsub-js'
+import moment from 'moment'
 
 export default {
   name: 'MenuTable',
-  data() {
-    return {
-      tableData: [{
-        id: '2',
-        parentId: '3',
-        title: '权限管理',
-        level: '0',
-        sort: '1',
-        name: '权限',
-        icon: 'el-icon-unlock',
-        hidden: false,
-        gmtModified: '2020-03-17 20:25:30'
-      }]
-    }
+  props: {
+    // eslint-disable-next-line vue/require-default-prop
+    tableData: Array
   },
   methods: {
     // 修改菜单隐藏状态
@@ -122,6 +115,10 @@ export default {
     },
     edit(row) {
       // 编辑
+      PubSub.publish('menuForm', {
+        'row': row,
+        'formType': 'update'
+      })
     },
     // 给菜单绑定角色
     bindingRole(id, name) {
@@ -133,6 +130,22 @@ export default {
     },
     reomveMenu(id) {
       // 删除菜单
+      securityAPI.reomveMenuById(id).then(response => {
+        if (response.status) {
+          this.$notify({
+            title: '成功',
+            message: '菜单删除成功！',
+            type: 'success'
+          })
+        }
+      })
+    },
+    dateFormat(row, column) {
+      const date = row[column.property]
+      if (date === undefined) {
+        return ''
+      }
+      return moment(date).format('YYYY-MM-DD HH:mm:ss')
     }
   }
 }
