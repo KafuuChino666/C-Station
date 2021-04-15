@@ -2,6 +2,7 @@ package cn.o0u0o.service.security.service;
 
 import cn.o0u0o.common.response.Result;
 import cn.o0u0o.service.security.entity.Role;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -17,4 +18,6 @@ import java.util.List;
 public interface RoleService extends IService<Role> {
 
     List<Role> getAll();
+
+    IPage<Role> selectPage(Integer page, Integer limit);
 }

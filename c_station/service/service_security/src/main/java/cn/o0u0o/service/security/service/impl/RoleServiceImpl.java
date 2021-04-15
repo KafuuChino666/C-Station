@@ -4,6 +4,8 @@ import cn.o0u0o.service.security.entity.Role;
 import cn.o0u0o.service.security.mapper.RoleMapper;
 import cn.o0u0o.service.security.service.RoleService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,5 +31,10 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
         QueryWrapper<Role> queryWrapper = new QueryWrapper<>();
         queryWrapper.select("*");
         return roleMapper.selectList(queryWrapper);
+    }
+
+    @Override
+    public IPage<Role> selectPage(Integer page, Integer limit) {
+        return roleMapper.selectPage(new Page<Role>(page, limit), null);
     }
 }

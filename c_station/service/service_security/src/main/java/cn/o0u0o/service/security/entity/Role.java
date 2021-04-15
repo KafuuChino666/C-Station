@@ -38,5 +38,7 @@ public class Role extends BaseEntity {
 
     private Integer sort;
 
-
+    public Boolean getStatus() {
+        return status == 1;
+    }
 }

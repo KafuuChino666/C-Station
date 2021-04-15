@@ -182,10 +182,26 @@ export const constantRoutes = [
         meta: { title: '员工列表', icon: 'tree' }
       },
       {
-        path: 'roles',
-        name: 'RoleList',
-        component: () => import('@/views/security/roles'),
-        meta: { title: '角色列表', icon: 'el-icon-user-solid' }
+        path: 'role',
+        name: 'Role1',
+        redirect: '/security/role/list',
+        meta: { title: '角色', icon: 'el-icon-user-solid' },
+        children: [
+          {
+            path: 'list',
+            name: 'RoleList',
+            component: () => import('@/views/security/roles'),
+            meta: { title: '角色列表' },
+            hidden: true
+          },
+          {
+            path: 'list1',
+            name: 'RoleList1',
+            component: () => import('@/views/security/roles'),
+            meta: { title: '角色列表111' },
+            hidden: true
+          }
+        ]
       },
       {
         path: 'menu',

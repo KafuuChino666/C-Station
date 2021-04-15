@@ -182,5 +182,12 @@ export default {
       url: `/admin/acl/menu/seek/${name}`,
       method: 'get'
     })
+  },
+  // 分页获取角色
+  pageRoleList(page, limit) {
+    return request({
+      url: `/admin/acl/role/list/${page}/${limit}`,
+      method: 'get'
+    })
   }
 }

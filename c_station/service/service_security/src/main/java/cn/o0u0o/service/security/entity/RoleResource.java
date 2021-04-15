@@ -21,7 +21,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-@TableName("acl_role_resource")
+@TableName("acl_Role_resource")
 @ApiModel(value="RoleResource对象", description="")
 public class RoleResource extends BaseEntity {
 

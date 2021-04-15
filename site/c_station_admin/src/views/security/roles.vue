@@ -11,6 +11,7 @@
 <script>
 import SearchBox from '@/views/security/components/SearchBox'
 import RolesTable from '@/views/security/components/RolesTable'
+import securityAPI from '@/api/securityAPI'
 
 export default {
   name: 'Roles',
@@ -20,13 +21,36 @@ export default {
   },
   data() {
     return {
-      tableData: []
+      page: 1,
+      limit: 7,
+      tableData: [],
+      total: 0
     }
   },
+
+  // 页面渲染成功后获取数据
+  created() {
+    this.fetchData()
+  },
   methods: {
+    fetchData() {
+      securityAPI.pageRoleList(this.page, this.limit).then(response => {
+        this.tableData = response.data.rows
+        this.total = response.data.total
+      })
+    },
     searchFun(text) {
-      // 1
-      alert(text)
+      if (text !== '') {
+        securityAPI.getStaffById(text).then(response => {
+          this.tableData = []
+          this.total = 0
+          this.tableData.push(response.data.rows)
+        })
+      }
+    },
+    changeCurrentPage(page) {
+      this.page = page
+      this.fetchData()
     }
   }
 }
