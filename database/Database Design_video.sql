@@ -17,6 +17,7 @@ CREATE TABLE v_video(
 CREATE TABLE v_video_info(
 	video_info_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	like_id INT NOT NULL UNIQUE,
+	play_nub LONG COMMENT '播放数' NOT NULL,
 	video_pnumb LONG COMMENT '分享数' NOT NULL,
 	video_coin LONG COMMENT '投币数' NOT NULL,
 	video_title VARCHAR(128) COMMENT '视频标题' NOT NULL,
