@@ -101,3 +101,12 @@ CREATE TABLE u_blacklist(
 	user_id INT NOT NULL,
 	FOREIGN KEY(user_id) REFERENCES u_user(user_id)
 );
+
+#收藏夹表
+CREATE TABLE u_facorites(
+	facorites_id INT PRIMARY KEY NOT AUTO_INCREMENT,
+	user_id INT,
+	facorites_name VARCHAR(32) COMMENT '收藏夹名' NOT NULL UNIQUE,
+	collect_id INT UNIQUE,
+	
+);
