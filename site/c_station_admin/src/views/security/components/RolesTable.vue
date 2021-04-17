@@ -43,7 +43,9 @@
     <el-table-column
       align="center"
       label="操作">
-      <el-button type="text" size="small">编辑</el-button>
+      <router-link :to="'/security/role/info/' + 1">
+        <el-button type="text" size="small">编辑</el-button>
+      </router-link>
       <el-button type="text" size="small">绑定菜单</el-button>
       <el-button type="text" size="small">绑定资源</el-button>
       <el-button type="text" size="small">删除</el-button>

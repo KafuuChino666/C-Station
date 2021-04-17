@@ -14,7 +14,7 @@ import RolesTable from '@/views/security/components/RolesTable'
 import securityAPI from '@/api/securityAPI'
 
 export default {
-  name: 'Roles',
+  name: 'RoleList',
   components: {
     SearchBox,
     RolesTable

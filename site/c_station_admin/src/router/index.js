@@ -183,23 +183,44 @@ export const constantRoutes = [
       },
       {
         path: 'role',
-        name: 'Role1',
-        redirect: '/security/role/list',
+        name: 'Role',
         meta: { title: '角色', icon: 'el-icon-user-solid' },
+        redirect: '/security/role/list',
+        component: () => import('@/views/security/role'),
         children: [
           {
             path: 'list',
+            component: () => import('@/views/security/components/RoleList'),
             name: 'RoleList',
-            component: () => import('@/views/security/roles'),
-            meta: { title: '角色列表' },
-            hidden: true
+            meta: { title: '角色列表' }
           },
           {
-            path: 'list1',
-            name: 'RoleList1',
-            component: () => import('@/views/security/roles'),
-            meta: { title: '角色列表111' },
-            hidden: true
+            path: 'info',
+            component: () => import('@/views/security/components/RoleForm'),
+            name: 'RoleInfo',
+            hidden: true,
+            meta: { title: '添加角色' }
+          },
+          {
+            path: 'info/:id',
+            component: () => import('@/views/security/components/RoleForm'),
+            name: 'RoleInfoEdit',
+            hidden: true,
+            meta: { title: '编辑角色' }
+          },
+          {
+            path: 'info/:id',
+            component: () => import('@/views/security/components/RoleForm'),
+            name: 'RoleMenuBind',
+            hidden: true,
+            meta: { title: '绑定菜单' }
+          },
+          {
+            path: 'info/:id',
+            component: () => import('@/views/security/components/RoleForm'),
+            name: 'RoleResourceBind',
+            hidden: true,
+            meta: { title: '绑定资源' }
           }
         ]
       },
