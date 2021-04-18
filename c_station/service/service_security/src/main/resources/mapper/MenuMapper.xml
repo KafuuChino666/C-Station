@@ -6,4 +6,15 @@
         update acl_menu set hidden = #{hidden} where id = #{id}
     </update>
 
+    <!-- 返回菜单层级结构 -->
+    <resultMap id="hierarchyMenu" type="cn.o0u0o.service.security.entity.vo.MenuVo">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <collection property="children" select="selectHierarchyMenuByParentId"
+                    ofType="cn.o0u0o.service.security.entity.vo.MenuVo" column="id"/>
+    </resultMap>
+
+    <select id="selectHierarchyMenuByParentId" resultMap="hierarchyMenu">
+        select id, name from acl_menu where parent_id = #{parentId}
+    </select>
 </mapper>

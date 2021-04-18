@@ -2,6 +2,7 @@ package cn.o0u0o.service.security.controller.admin;
 
 
 import cn.o0u0o.common.response.Result;
+import cn.o0u0o.common.response.ResultCodeEnum;
 import cn.o0u0o.service.security.entity.Menu;
 import cn.o0u0o.service.security.entity.Role;
 import cn.o0u0o.service.security.service.RoleService;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * <p>
@@ -41,6 +43,27 @@ public class RoleController {
         List<Role> records = pageModel.getRecords();
         long total = pageModel.getTotal();
         return  Result.ok().data("total", total).data("rows", records);
+    }
+
+    @ApiOperation("根据名称查询角色")
+    @GetMapping("/search/{name}")
+    public Result getByName(@PathVariable String name) {
+        if (!name.isEmpty()) {
+            List<Role> roles = roleService.getRoleByName(name);
+            return Result.ok().data("rows", roles);
+        }
+        return Result.setResultCodeEnum(ResultCodeEnum.PARAM_ERROR);
+    }
+
+    @ApiOperation("根据id获取")
+    @GetMapping("/{id}")
+    public Result getById(@PathVariable String id) {
+        Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");
+        if (pattern.matcher(id.trim()).matches()) {
+            Role role = roleService.getById(id);
+            return Result.ok().data("row", role);
+        }
+        return Result.setResultCodeEnum(ResultCodeEnum.PARAM_ERROR);
     }
 }
 

@@ -39,12 +39,12 @@ export default {
         this.total = response.data.total
       })
     },
-    searchFun(text) {
-      if (text !== '') {
-        securityAPI.getStaffById(text).then(response => {
+    searchFun(name) {
+      if (name !== '') {
+        securityAPI.getRoleByName(name).then(response => {
           this.tableData = []
           this.total = 0
-          this.tableData.push(response.data.rows)
+          this.tableData = response.data.rows
         })
       }
     },

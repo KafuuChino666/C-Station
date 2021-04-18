@@ -189,5 +189,26 @@ export default {
       url: `/admin/acl/role/list/${page}/${limit}`,
       method: 'get'
     })
+  },
+  // 根据角色名称查询角色
+  getRoleByName(name) {
+    return request({
+      url: `/admin/acl/role/search/${name}`,
+      method: 'get'
+    })
+  },
+  // 获取层级菜单结构
+  getHierarchyMenu() {
+    return request({
+      url: `/admin/acl/menu/hierarchy`,
+      method: 'get'
+    })
+  },
+  // 根据id获取角色
+  getMenuById(id) {
+    return request({
+      url: `/admin/acl/role/${id}`,
+      method: 'get'
+    })
   }
 }

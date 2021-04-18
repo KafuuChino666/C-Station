@@ -1,7 +1,10 @@
 package cn.o0u0o.service.security.mapper;
 
 import cn.o0u0o.service.security.entity.Menu;
+import cn.o0u0o.service.security.entity.vo.MenuVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+import java.util.List;
 
 /**
  * <p>
@@ -15,4 +18,5 @@ public interface MenuMapper extends BaseMapper<Menu> {
 
     Boolean updateHidden(String id, int hidden);
 
+    List<MenuVo> selectHierarchyMenuByParentId(int parentId);
 }

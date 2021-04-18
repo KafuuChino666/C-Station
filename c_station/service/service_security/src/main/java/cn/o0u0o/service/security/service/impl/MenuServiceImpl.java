@@ -2,6 +2,7 @@ package cn.o0u0o.service.security.service.impl;
 
 import cn.o0u0o.service.security.entity.Menu;
 import cn.o0u0o.service.security.entity.Resource;
+import cn.o0u0o.service.security.entity.vo.MenuVo;
 import cn.o0u0o.service.security.mapper.MenuMapper;
 import cn.o0u0o.service.security.service.MenuService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -69,6 +70,11 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
         queryWrapper.like("name", name);
 
         return menuMapper.selectList(queryWrapper);
+    }
+
+    @Override
+    public List<MenuVo> getHierarchyMenu() {
+        return menuMapper.selectHierarchyMenuByParentId(0);
     }
 
 }

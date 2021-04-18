@@ -37,4 +37,11 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
     public IPage<Role> selectPage(Integer page, Integer limit) {
         return roleMapper.selectPage(new Page<Role>(page, limit), null);
     }
+
+    @Override
+    public List<Role> getRoleByName(String name) {
+        QueryWrapper<Role> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like("name", name);
+        return roleMapper.selectList(queryWrapper);
+    }
 }

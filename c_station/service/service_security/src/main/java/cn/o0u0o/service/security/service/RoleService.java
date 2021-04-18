@@ -20,4 +20,6 @@ public interface RoleService extends IService<Role> {
     List<Role> getAll();
 
     IPage<Role> selectPage(Integer page, Integer limit);
+
+    List<Role> getRoleByName(String name);
 }

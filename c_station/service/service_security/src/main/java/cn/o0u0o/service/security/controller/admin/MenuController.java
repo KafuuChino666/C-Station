@@ -3,6 +3,7 @@ package cn.o0u0o.service.security.controller.admin;
 
 import cn.o0u0o.service.security.entity.Menu;
 import cn.o0u0o.service.security.entity.Resource;
+import cn.o0u0o.service.security.entity.vo.MenuVo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -92,6 +93,13 @@ public class MenuController {
             return Result.ok().data("rows", menus);
         }
         return Result.setResultCodeEnum(ResultCodeEnum.PARAM_ERROR);
+    }
+
+    @ApiOperation("返回层级格式列表")
+    @GetMapping("/hierarchy")
+    public Result getHierarchyMenuList() {
+        List<MenuVo> menuVos = menuService.getHierarchyMenu();
+        return Result.ok().data("rows", menuVos);
     }
 }
 

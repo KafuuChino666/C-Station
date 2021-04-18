@@ -1,6 +1,7 @@
 package cn.o0u0o.service.security.service;
 
 import cn.o0u0o.service.security.entity.Menu;
+import cn.o0u0o.service.security.entity.vo.MenuVo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -25,4 +26,6 @@ public interface MenuService extends IService<Menu> {
     boolean add(Menu menu);
 
     List<Menu> getByName(String name);
+
+    List<MenuVo> getHierarchyMenu();
 }
