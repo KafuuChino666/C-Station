@@ -91,6 +91,8 @@ CREATE TABLE u_follow(
 	follow_tb_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	follow_id INT NOT NULL,
 	user_id INT NOT NULL,
+	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
+	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
 	FOREIGN KEY(user_id) REFERENCES u_user(user_id)
 );
 
@@ -99,14 +101,35 @@ CREATE TABLE u_blacklist(
 	black_tb_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	black_id INT NOT NULL,
 	user_id INT NOT NULL,
+	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
+	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
 	FOREIGN KEY(user_id) REFERENCES u_user(user_id)
 );
 
 #收藏夹表
 CREATE TABLE u_facorites(
-	facorites_id INT PRIMARY KEY NOT AUTO_INCREMENT,
+	facorites_id INT PRIMARY KEY AUTO_INCREMENT,
 	user_id INT,
 	facorites_name VARCHAR(32) COMMENT '收藏夹名' NOT NULL UNIQUE,
 	collect_id INT UNIQUE,
+	# 视频id是要计算收藏夹的总播放量
+	video_id INT,
+	facorites_status VARCHAR(16) COMMENT '收藏夹状态' NOT NULL,
+	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
+	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
+	FOREIGN KEY(user_id) REFERENCES u_user(user_id),
+	FOREIGN KEY(video_id) REFERENCES v_video(video_id)
+);
+
+#收藏表
+CREATE TABLE u_collect(
+	collect_id INT PRIMARY KEY AUTO_INCREMENT,
+	video_id INT,
+	facorites_id INT,
+	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
+	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
+	FOREIGN KEY(video_id) REFERENCES v_video(video_id),
+	FOREIGN KEY(collect_id) REFERENCES u_facorites(collect_id),
+	FOREIGN KEY(facorites_id) REFERENCES u_facorites(facorites_id)
 	
 );
