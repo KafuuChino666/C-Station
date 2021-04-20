@@ -39,6 +39,19 @@ CREATE TABLE v_like(
 	FOREIGN KEY(like_id) REFERENCES v_video_info(like_id)
 );
 
+#弹幕表
+CREATE TABLE v_barrage(
+	barrage_id INT PRIMARY KEY AUTO_INCREMENT,
+	user_id INT,
+	video_id INT,
+	barrage_str TEXT COMMENT '弹幕内容' NOT NULL,
+	video_time TIME COMMENT '视频时间' NOT NULL,
+	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
+	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
+	FOREIGN KEY(user_id) REFERENCES v_video(video_id),
+	FOREIGN KEY(user_id) REFERENCES u_user(user_id)
+);
+
 #评论表1
 CREATE TABLE v_comment_first(
 	comment_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
