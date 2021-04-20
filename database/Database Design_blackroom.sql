@@ -13,7 +13,7 @@ CREATE TABLE b_ban_info(
 	ban_type VARCHAR(16) COMMENT '封禁类型' NOT NULL,
 	ban_cause_id INT NOT NULL UNIQUE,
 	ban_time DATETIME COMMENT '封禁时间' NOT NULL,
-	gmt_create DATETIME COMMENT '封禁时间' NOT NULL,
+	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
 	FOREIGN KEY(ban_info_id) REFERENCES b_black_room(ban_info_id),
 	FOREIGN KEY(user_id) REFERENCES u_user(user_id)

@@ -133,3 +133,18 @@ CREATE TABLE u_collect(
 	FOREIGN KEY(facorites_id) REFERENCES u_facorites(facorites_id)
 	
 );
+
+# 订阅表
+CREATE TABLE u_subscription (
+	subscription_id INT PRIMARY KEY AUTO_INCREMENT,
+	user_id INT,
+	sub_sitcom_id INT NOT NULL UNIQUE,
+	sub_bangumi_id INT NOT NULL UNIQUE,
+	label_id INT NOT NULL UNIQUE, 
+	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
+	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
+	FOREIGN KEY(user_id) REFERENCES u_user(user_id)
+)
+
+#追番表
+
