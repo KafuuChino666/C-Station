@@ -2,6 +2,7 @@ package cn.o0u0o.service.security.mapper;
 
 import cn.o0u0o.service.security.entity.Role;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Options;
 
 /**
  * <p>
@@ -13,4 +14,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface RoleMapper extends BaseMapper<Role> {
 
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
+    String createRole(Role roleInfo);
 }

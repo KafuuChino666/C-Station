@@ -50,8 +50,10 @@
         <router-link :to="{name:'RoleMenuBind', params: {id:scope.row.id, active:1}}">
           <el-button type="text" size="small">绑定菜单</el-button>
         </router-link>
-        <el-button type="text" size="small">绑定资源</el-button>
-        <el-button type="text" size="small">删除</el-button>
+        <router-link :to="{name:'RoleResourceBind', params: {id:scope.row.id, active:2}}">
+          <el-button type="text" size="small">绑定资源</el-button>
+        </router-link>
+        <el-button type="text" size="small" @click="removeRole(scope.row.id)">删除</el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -59,6 +61,7 @@
 
 <script>
 import moment from 'moment'
+import securityAPI from '@/api/securityAPI'
 
 export default {
   name: 'RolesTable',
@@ -73,6 +76,18 @@ export default {
         return ''
       }
       return moment(date).format('YYYY-MM-DD HH:mm:ss')
+    },
+    removeRole(id) {
+      securityAPI.removeRoleById(id).then(res => {
+        if (res.status) {
+          this.$notify({
+            title: '成功',
+            message: '角色删除成功！',
+            type: 'success'
+          })
+          this.$router.push('/security/role/list')
+        }
+      })
     }
   }
 }

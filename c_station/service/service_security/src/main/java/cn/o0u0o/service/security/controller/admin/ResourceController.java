@@ -75,5 +75,11 @@ public class ResourceController {
         }
         return Result.setResultCodeEnum(ResultCodeEnum.PARAM_ERROR);
     }
+
+    @ApiOperation("获取所有资源")
+    @GetMapping("/")
+    public Result getList() {
+        return Result.ok().data("rows", resourceService.list());
+    }
 }
 

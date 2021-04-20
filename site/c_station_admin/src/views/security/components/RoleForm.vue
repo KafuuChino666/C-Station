@@ -36,11 +36,19 @@ export default {
   },
   data() {
     return {
-      active: 0
+      active: 0,
+      addRoleForm: {
+        roleInfo: {}, // 角色信息
+        menuList: [], // 菜单列表
+        resourceList: [] // 资源列表
+      }
     }
   },
   mounted() {
-    this.active = this.$route.params.active
+    // 判断active
+    if (this.$route.params.active !== undefined) {
+      this.active = this.$route.params.active
+    }
   },
   methods: {
 

@@ -65,12 +65,15 @@ public class RoleMenuController {
         return Result.err();
     }
 
-//    // 根据角色ID更新菜单
-//    updateMenuByRoleId(roleId, menus) {
     @ApiOperation("根据角色ID更新菜单")
-    @PutMapping("/role/{roleId}")
-    public Result updateMenuByRoleId(@PathVariable String roleId, @RequestBody List<String> menus) {
-
+    @PutMapping("/role")
+    public Result updateMenuByRoleId(@RequestParam String roleId, @RequestBody List<String> menus) {
+        Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");
+        if (pattern.matcher(roleId.trim()).matches()) {
+            Boolean b = roleMenuService.updateByRoleId(roleId, menus);
+            return b ? Result.ok() : Result.err();
+        }
+        return Result.err();
     }
 }
 

@@ -52,6 +52,9 @@ export default {
         // 路由跳转->角色列表
         this.$router.push('/security/role/list')
       } else {
+        // 添加角色模式...
+        // 储存数据
+        this.$parent.addRoleForm.roleInfo = this.form
         this.saveBtnDisabled = true
         this.$parent.active = 1
       }

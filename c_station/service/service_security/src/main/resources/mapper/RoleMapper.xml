@@ -2,4 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.o0u0o.service.security.mapper.RoleMapper">
 
+    <insert id="createRole" useGeneratedKeys="true" keyProperty="id">
+        insert into acl_role (name,description,status) values (#{roleInfo.name}, #{roleInfo.description}, #{roleInfo.status})
+    </insert>
+
 </mapper>

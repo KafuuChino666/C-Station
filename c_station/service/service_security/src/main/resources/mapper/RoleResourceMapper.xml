@@ -2,4 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.o0u0o.service.security.mapper.RoleResourceMapper">
 
+    <select id="getResourceIdByRoleId" resultType="java.lang.String">
+        select resource_id from acl_role_resource where role_id = #{roleId}
+    </select>
 </mapper>

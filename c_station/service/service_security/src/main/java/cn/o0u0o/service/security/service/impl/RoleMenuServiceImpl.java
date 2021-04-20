@@ -52,4 +52,18 @@ public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuMapper, RoleMenu> i
     public List<String> getMenuIdByRoleId(String id) {
         return roleMenuMapper.getMenuIdByRoleId(id);
     }
+
+    @Override
+    @Transactional
+    public Boolean updateByRoleId(String roleId, List<String> menus) {
+        QueryWrapper<RoleMenu> removeWrapper = new QueryWrapper<>();
+        removeWrapper.eq("role_id", roleId);
+        roleMenuMapper.delete(removeWrapper);
+
+        List<RoleMenu> roleMenuList = new ArrayList<>();
+        menus.forEach(menuId -> {
+            roleMenuList.add(new RoleMenu(roleId, menuId));
+        });
+        return this.saveBatch(roleMenuList);
+    }
 }

@@ -2,6 +2,7 @@ package cn.o0u0o.service.security.service;
 
 import cn.o0u0o.common.response.Result;
 import cn.o0u0o.service.security.entity.Role;
+import cn.o0u0o.service.security.entity.vo.AddRoleVo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -22,4 +23,6 @@ public interface RoleService extends IService<Role> {
     IPage<Role> selectPage(Integer page, Integer limit);
 
     List<Role> getRoleByName(String name);
+
+    Boolean createRoleCoverMenuResource(AddRoleVo addRoleForm);
 }

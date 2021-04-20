@@ -229,12 +229,52 @@ export default {
   // 根据角色ID更新菜单
   updateMenuByRoleId(roleId, menus) {
     return request({
-      url: '/admin/acl/role/',
+      url: '/admin/acl/role_menu/role',
       method: 'put',
       params: {
         roleId
       },
       data: menus
+    })
+  },
+  getResourceList() {
+    return request({
+      url: `/admin/acl/resource/`,
+      method: 'get'
+    })
+  },
+  // 更新角色资源
+  updateRoleResourceByRoleId(roleId, resources) {
+    return request({
+      url: '/admin/acl/role-resource',
+      method: 'put',
+      params: {
+        roleId
+      },
+      data: resources
+    })
+  },
+  // 根据角色Id获取资源列表
+  getResourceByRoleId(roleId) {
+    return request({
+      url: `/admin/acl/role-resource/resource/${roleId}`,
+      method: 'get'
+    })
+  },
+  // 根据角色id删除角色
+  removeRoleById(id) {
+    return request({
+      url: '/admin/acl/role/',
+      method: 'delete',
+      data: id
+    })
+  },
+  // 添加角色
+  addRole(addRoleForm) {
+    return request({
+      url: '/admin/acl/role/',
+      method: 'post',
+      data: addRoleForm
     })
   }
 }

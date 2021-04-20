@@ -3,6 +3,8 @@ package cn.o0u0o.service.security.mapper;
 import cn.o0u0o.service.security.entity.RoleResource;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
+import java.util.List;
+
 /**
  * <p>
  *  Mapper 接口
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface RoleResourceMapper extends BaseMapper<RoleResource> {
 
+    List<String> getResourceIdByRoleId(String roleId);
 }

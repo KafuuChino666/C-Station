@@ -6,9 +6,11 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import cn.o0u0o.common.entity.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import lombok.experimental.Tolerate;
 
 /**
  * <p>
@@ -19,6 +21,7 @@ import lombok.experimental.Accessors;
  * @since 2021-04-08
  */
 @Data
+@Builder
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 @TableName("acl_role_menu")
@@ -40,4 +43,6 @@ public class RoleMenu extends BaseEntity {
         this.roleId = roleId;
         this.menuId = menuId;
     }
+
+
 }

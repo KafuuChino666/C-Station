@@ -5,6 +5,7 @@ import cn.o0u0o.common.response.Result;
 import cn.o0u0o.common.response.ResultCodeEnum;
 import cn.o0u0o.service.security.entity.Menu;
 import cn.o0u0o.service.security.entity.Role;
+import cn.o0u0o.service.security.entity.vo.AddRoleVo;
 import cn.o0u0o.service.security.service.RoleService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.annotations.ApiOperation;
@@ -72,6 +73,20 @@ public class RoleController {
     public Result updateById(@RequestBody Role role) {
         boolean b = roleService.updateById(role);
         return b ? Result.ok() : Result.err().message("角色更新失败！请稍后再试~");
+    }
+
+    @ApiOperation("根据id删除")
+    @DeleteMapping("/")
+    public Result removeById(@RequestBody String id) {
+        boolean b = roleService.removeById(id);
+        return b ? Result.ok() : Result.err();
+    }
+
+    @ApiOperation("创建角色")
+    @PostMapping("/")
+    public Result createRole(@RequestBody AddRoleVo addRoleForm) {
+        Boolean b = roleService.createRoleCoverMenuResource(addRoleForm);
+        return b ? Result.ok() : Result.err();
     }
 }
 

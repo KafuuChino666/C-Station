@@ -1,11 +1,11 @@
 package cn.o0u0o.service.security.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
+
 import cn.o0u0o.common.entity.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -21,7 +21,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-@TableName("acl_Role_resource")
+@TableName("acl_role_resource")
 @ApiModel(value="RoleResource对象", description="")
 public class RoleResource extends BaseEntity {
 
@@ -32,6 +32,11 @@ public class RoleResource extends BaseEntity {
 
     @ApiModelProperty(value = "资源ID")
     private String resourceId;
+    public RoleResource() {
+    }
 
-
+    public RoleResource(String roleId, String resourceId) {
+        this.roleId = roleId;
+        this.resourceId = resourceId;
+    }
 }
