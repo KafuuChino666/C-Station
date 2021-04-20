@@ -11,4 +11,3 @@ public class MenuVo {
     private String name;
     private List<MenuVo> children = new ArrayList<>();
 }
-
