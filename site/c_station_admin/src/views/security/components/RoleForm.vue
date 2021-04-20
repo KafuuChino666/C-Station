@@ -26,7 +26,6 @@
 import RoleInfo from '@/views/security/components/RoleInfo'
 import RoleMenuBind from '@/views/security/components/RoleMenuBind'
 import RoleResourceBind from '@/views/security/components/RoleResourceBind'
-import securityAPI from '@/api/securityAPI'
 
 export default {
   name: 'RoleForm',
@@ -37,29 +36,14 @@ export default {
   },
   data() {
     return {
-      active: 0,
-      id: this.$route.params.id,
-      form: {
-
-      }
+      active: 0
     }
   },
   mounted() {
-    // 加载数据
-    this.fetchData()
+    this.active = this.$route.params.active
   },
   methods: {
-    fetchData() {
-      // 判断id
-      if (this.id !== undefined && this.id > 0) {
-        // 请求
-        securityAPI.getMenuById(this.id).then(reponse => {
-          if (reponse.status) {
-            reponse.data.row
-          }
-        })
-      }
-    }
+
   }
 }
 </script>

@@ -5,4 +5,8 @@
     <select id="getRoleById" resultType="java.lang.String">
         select role_id from acl_role_menu where menu_id = #{id}
     </select>
+
+    <select id="getMenuIdByRoleId" resultType="java.lang.String">
+        select menu_id from acl_role_menu where role_id = #{id}
+    </select>
 </mapper>

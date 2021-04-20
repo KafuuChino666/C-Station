@@ -210,5 +210,31 @@ export default {
       url: `/admin/acl/role/${id}`,
       method: 'get'
     })
+  },
+  // 根据ID更新角色
+  updateRoleById(role) {
+    return request({
+      url: '/admin/acl/role/',
+      method: 'put',
+      data: role
+    })
+  },
+  // 根据角色ID获取菜单
+  getMenuByRoleId(role_id) {
+    return request({
+      url: `/admin/acl/role_menu/menu/${role_id}`,
+      method: 'get'
+    })
+  },
+  // 根据角色ID更新菜单
+  updateMenuByRoleId(roleId, menus) {
+    return request({
+      url: '/admin/acl/role/',
+      method: 'put',
+      params: {
+        roleId
+      },
+      data: menus
+    })
   }
 }

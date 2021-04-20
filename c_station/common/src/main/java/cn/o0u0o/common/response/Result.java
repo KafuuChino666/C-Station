@@ -37,6 +37,10 @@ public class Result {
         return Result.setResultCodeEnum(ResultCodeEnum.SUCCESS);
     }
 
+    public static Result err() {
+        return Result.setResultCodeEnum(ResultCodeEnum.UNKNOWN_REASON);
+    }
+
     public static Result setResultCodeEnum(ResultCodeEnum re) {
         return new Result(re.getSuccess(), re.getCode(), re.getMessage());
     }

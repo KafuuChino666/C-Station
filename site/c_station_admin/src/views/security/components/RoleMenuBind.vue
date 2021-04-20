@@ -42,6 +42,14 @@ export default {
     next() {
       this.$parent.active = 2
       console.log(this.$refs.tree.getCheckedKeys())
+      // 判断id 是否是编辑状态
+      const id = this.$route.params.active
+      if (id !== undefined) {
+        // eslint-disable-next-line no-undef
+        securityAPI.updateMenuByRoleId(role_id, menus).then(response => {
+
+        })
+      }
     },
 
     // 数据加载
@@ -51,6 +59,16 @@ export default {
           this.menuList = response.data.rows
         }
       })
+      // 判断id 是否是编辑状态
+      const id = this.$route.params.active
+      if (id !== undefined) {
+        // 获取角色所拥有的菜单
+        securityAPI.getMenuByRoleId(id).then(response => {
+          if (response.status) {
+            this.$refs.tree.setCheckedKeys(response.data.rows)
+          }
+        })
+      }
     }
   }
 }

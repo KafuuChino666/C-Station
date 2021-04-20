@@ -18,4 +18,6 @@ public interface RoleMenuService extends IService<RoleMenu> {
     List<String> getRoleById(String id);
 
     Boolean updataRoleByMenuId(String id, List<String> roles);
+
+    List<String> getMenuIdByRoleId(String id);
 }

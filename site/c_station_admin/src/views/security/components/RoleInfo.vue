@@ -22,24 +22,64 @@
 </template>
 
 <script>
+import securityAPI from '@/api/securityAPI'
+
 export default {
   name: 'RoleInfo',
   data() {
     return {
       saveBtnDisabled: false,
       form: {
+        id: this.$route.params.id,
         name: '',
-        status: true,
-        description: ''
+        description: '',
+        status: true
       },
       formLabelWidth: '120px'
     }
   },
+  mounted() {
+    // 加载数据
+    this.fetchData()
+  },
   methods: {
     // 保存并下一步
     saveAndNext() {
-      this.saveBtnDisabled = true
-      this.$parent.active = 1
+      // 如果id有值，则是编辑角色
+      if (this.form.id !== undefined && this.form.id > 0) {
+        // 调用接口修改角色
+        this.updateRole()
+        // 路由跳转->角色列表
+        this.$router.push('/security/role/list')
+      } else {
+        this.saveBtnDisabled = true
+        this.$parent.active = 1
+      }
+    },
+    // 获取数据
+    fetchData() {
+      // 判断id
+      if (this.form.id !== undefined && this.form.id > 0) {
+        // 请求
+        securityAPI.getMenuById(this.form.id).then(reponse => {
+          if (reponse.status) {
+            this.form = reponse.data.row
+          }
+        })
+      }
+    },
+    // 更新角色
+    updateRole() {
+      securityAPI.updateRoleById(this.form).then(response => {
+        if (response.status) {
+          // 提示成功消息
+          this.$notify({
+            title: '成功',
+            message: '角色更新成功！',
+            type: 'success'
+          })
+        }
+      })
     }
   }
 }

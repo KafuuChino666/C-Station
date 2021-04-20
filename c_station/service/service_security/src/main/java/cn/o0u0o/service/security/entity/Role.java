@@ -41,4 +41,8 @@ public class Role extends BaseEntity {
     public Boolean getStatus() {
         return status == 1;
     }
+
+    public void setStatus(Boolean status) {
+        this.status = status ? 1 : 0;
+    }
 }

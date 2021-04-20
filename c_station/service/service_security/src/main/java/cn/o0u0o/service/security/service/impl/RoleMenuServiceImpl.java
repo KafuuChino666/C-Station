@@ -47,4 +47,9 @@ public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuMapper, RoleMenu> i
         boolean b1 = this.saveBatch(roleMenuList);
         return b1;
     }
+
+    @Override
+    public List<String> getMenuIdByRoleId(String id) {
+        return roleMenuMapper.getMenuIdByRoleId(id);
+    }
 }

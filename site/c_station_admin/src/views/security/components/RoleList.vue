@@ -1,6 +1,6 @@
 <template>
   <div class="pater-container">
-    <SearchBox :search-fun="searchFun" title="角色列表" label-text="输入角色名称" icon="el-icon-user-solid" />
+    <SearchBox :search-fun="searchFun" title="角色列表" label-text="输入角色名称" icon="el-icon-user-solid" :add-fun="addFun"/>
     <div class="low-container">
       <!--   表   -->
       <RolesTable :table-data="tableData" />
@@ -51,6 +51,9 @@ export default {
     changeCurrentPage(page) {
       this.page = page
       this.fetchData()
+    },
+    addFun() {
+      this.$router.push('/security/role/info/')
     }
   }
 }

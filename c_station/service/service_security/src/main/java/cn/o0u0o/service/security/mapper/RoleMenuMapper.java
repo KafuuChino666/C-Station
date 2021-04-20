@@ -18,4 +18,6 @@ public interface RoleMenuMapper extends BaseMapper<RoleMenu> {
     Boolean updateHidden(String id, int hidden);
 
     List<String> getRoleById(String id);
+
+    List<String> getMenuIdByRoleId(String id);
 }

@@ -8,6 +8,7 @@ import cn.o0u0o.service.security.entity.Role;
 import cn.o0u0o.service.security.service.RoleService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.annotations.ApiOperation;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -64,6 +65,13 @@ public class RoleController {
             return Result.ok().data("row", role);
         }
         return Result.setResultCodeEnum(ResultCodeEnum.PARAM_ERROR);
+    }
+
+    @ApiOperation("根据Id修改角色")
+    @PutMapping("/")
+    public Result updateById(@RequestBody Role role) {
+        boolean b = roleService.updateById(role);
+        return b ? Result.ok() : Result.err().message("角色更新失败！请稍后再试~");
     }
 }
 
