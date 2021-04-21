@@ -26,6 +26,7 @@ public class VCommentSecond extends BaseEntity {
     private static final long serialVersionUID=1L;
 
       @TableId(value = "comment_id", type = IdType.AUTO)
+      @ApiModelProperty(value = "评论id")
     private Integer commentId;
 
     @ApiModelProperty(value = "评论2类型")

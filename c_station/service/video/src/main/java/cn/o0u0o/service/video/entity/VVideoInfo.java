@@ -28,8 +28,10 @@ public class VVideoInfo extends BaseEntity {
     private static final long serialVersionUID=1L;
 
       @TableId(value = "video_info_id", type = IdType.AUTO)
+      @ApiModelProperty(value = "视频信息id")
     private Integer videoInfoId;
 
+    @ApiModelProperty(value = "点赞id")
     private Integer likeId;
 
     @ApiModelProperty(value = "播放数")
@@ -47,8 +49,10 @@ public class VVideoInfo extends BaseEntity {
     @ApiModelProperty(value = "视频简介")
     private String videoBrief;
 
+    @ApiModelProperty(value = "审核id")
     private Integer auditId;
 
+    @ApiModelProperty(value = "视频状态id")
     private Integer videoStatusId;
 
 

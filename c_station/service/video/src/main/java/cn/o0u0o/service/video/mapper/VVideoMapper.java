@@ -2,6 +2,7 @@ package cn.o0u0o.service.video.mapper;
 
 import cn.o0u0o.service.video.entity.VVideo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Select;
 
 /**
  * <p>
@@ -13,4 +14,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface VVideoMapper extends BaseMapper<VVideo> {
 
+    @Select("select count(*) from v_video")
+    Integer getVideoCountById();
 }

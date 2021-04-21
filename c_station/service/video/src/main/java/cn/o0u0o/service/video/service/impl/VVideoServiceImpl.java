@@ -4,6 +4,7 @@ import cn.o0u0o.service.video.entity.VVideo;
 import cn.o0u0o.service.video.mapper.VVideoMapper;
 import cn.o0u0o.service.video.service.VVideoService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,4 +18,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class VVideoServiceImpl extends ServiceImpl<VVideoMapper, VVideo> implements VVideoService {
 
+    @Autowired
+    public VVideoMapper vVideoMapper;
+
+    @Override
+    public Integer getVideoCountbyId() {
+        Integer videoCountById = vVideoMapper.getVideoCountById();
+        return videoCountById;
+    }
 }

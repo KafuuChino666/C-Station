@@ -27,10 +27,13 @@ public class VBarrage extends BaseEntity {
     private static final long serialVersionUID=1L;
 
       @TableId(value = "barrage_id", type = IdType.AUTO)
+      @ApiModelProperty(value = "弹幕id")
     private Integer barrageId;
 
+    @ApiModelProperty(value = "用户id")
     private Integer userId;
 
+    @ApiModelProperty(value = "视频id")
     private Integer videoId;
 
     @ApiModelProperty(value = "弹幕内容")
