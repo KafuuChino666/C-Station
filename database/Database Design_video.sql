@@ -71,3 +71,12 @@ CREATE TABLE v_comment_second(
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
 	FOREIGN KEY(comment_id) REFERENCES v_comment_first(comment_id)
 );
+
+#视频状态表
+CREATE TABLE v_video_status(
+	video_status_id INT PRIMARY KEY AUTO_INCREMENT,
+	video_status VARCHAR(32) COMMENT '视频状态' NOT NULL,
+	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
+	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
+	FOREIGN KEY(video_status_id) REFERENCES v_video_info(video_status_id)
+);
