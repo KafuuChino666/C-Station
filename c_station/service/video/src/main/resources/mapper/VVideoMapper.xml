@@ -2,5 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.o0u0o.service.video.mapper.VVideoMapper">
 
-    <select id="getVideoCountById" resultType="java.lang.Integer"></select>
+    <select id="getZoneCountByType" resultType="java.lang.Integer">
+        SELECT COUNT(v.`zone_id`) FROM v_video v
+        LEFT JOIN pub_zone z
+        ON z.`zone_id` = v.`zone_id`
+        WHERE z.`zone_type` = #{type}
+    </select>
 </mapper>

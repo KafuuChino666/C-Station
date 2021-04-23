@@ -22,8 +22,15 @@ public class VVideoServiceImpl extends ServiceImpl<VVideoMapper, VVideo> impleme
     public VVideoMapper vVideoMapper;
 
     @Override
-    public Integer getVideoCountbyId() {
-        Integer videoCountById = vVideoMapper.getVideoCountById();
-        return videoCountById;
+    public Integer getVideoCount() {
+        Integer videoCount = vVideoMapper.getVideoCount();
+        return videoCount;
+    }
+
+    @Override
+    public Integer getZoneCountByType(Integer type) {
+        Integer zoneCountByType = vVideoMapper.getZoneCountByType(type);
+
+        return zoneCountByType;
     }
 }

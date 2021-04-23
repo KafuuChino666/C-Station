@@ -14,6 +14,9 @@ import org.apache.ibatis.annotations.Select;
  */
 public interface VVideoMapper extends BaseMapper<VVideo> {
 
-    @Select("select count(*) from v_video")
-    Integer getVideoCountById();
+    @Select("select count(video_id) from v_video")
+    Integer getVideoCount();
+
+    Integer getZoneCountByType(Integer type);
+
 }

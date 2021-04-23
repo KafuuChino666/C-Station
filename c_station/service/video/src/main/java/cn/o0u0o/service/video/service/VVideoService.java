@@ -13,5 +13,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface VVideoService extends IService<VVideo> {
 
-    Integer getVideoCountbyId();
+    Integer getVideoCount();
+
+    Integer getZoneCountByType(Integer type);
 }
