@@ -139,12 +139,21 @@ CREATE TABLE u_subscription (
 	subscription_id INT PRIMARY KEY AUTO_INCREMENT,
 	user_id INT,
 	sub_sitcom_id INT NOT NULL UNIQUE,
-	sub_bangumi_id INT NOT NULL UNIQUE,
+	sub_bangumi_id INT,
 	label_id INT NOT NULL UNIQUE, 
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
-	FOREIGN KEY(user_id) REFERENCES u_user(user_id)
-)
+	FOREIGN KEY(user_id) REFERENCES u_user(user_id),
+	FOREIGN KEY(sub_bangumi_id) REFERENCES u_sub_bangumi(sub_bangumi_id)
+);
 
 #追番表
-
+CREATE TABLE u_sub_bangumi (
+	sub_bangumi_id INT PRIMARY KEY AUTO_INCREMENT,
+	user_id INT,
+	bangumi_info_id INT,
+	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
+	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
+	FOREIGN KEY(user_id) REFERENCES u_user(user_id),
+	FOREIGN KEY(bangumi_info_id) REFERENCES bg_bangumi_info(bangumi_info_id)
+);
