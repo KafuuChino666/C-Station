@@ -99,6 +99,7 @@ export default {
         this.$refs.password.focus()
       })
     },
+    // 登陆请求
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {

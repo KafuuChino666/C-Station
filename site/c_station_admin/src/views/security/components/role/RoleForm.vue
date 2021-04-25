@@ -23,9 +23,9 @@
 </template>
 
 <script>
-import RoleInfo from '@/views/security/components/RoleInfo'
-import RoleMenuBind from '@/views/security/components/RoleMenuBind'
-import RoleResourceBind from '@/views/security/components/RoleResourceBind'
+import RoleInfo from '@/views/security/components/role/RoleInfo'
+import RoleMenuBind from '@/views/security/components/role/RoleMenuBind'
+import RoleResourceBind from '@/views/security/components/role/RoleResourceBind'
 
 export default {
   name: 'RoleForm',

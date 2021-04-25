@@ -16,4 +16,6 @@ import java.util.List;
 public interface RoleResourceMapper extends BaseMapper<RoleResource> {
 
     List<String> getResourceIdByRoleId(String roleId);
+
+    List<String> getRoleByResourceId(String id);
 }

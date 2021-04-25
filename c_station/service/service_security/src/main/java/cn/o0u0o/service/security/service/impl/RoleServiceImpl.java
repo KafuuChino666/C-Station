@@ -12,6 +12,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -61,22 +62,28 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
     @Transactional
     public Boolean createRoleCoverMenuResource(AddRoleVo addRoleForm) {
         // 创建Role 返回role_id
-        String role_id = roleMapper.createRole(addRoleForm.getRoleInfo());
+        int num = roleMapper.createRole(addRoleForm.getRoleInfo());
 
         // id存在时
-        if (!role_id.isEmpty()) {
+        if (num == 1) {
+            Role role = addRoleForm.getRoleInfo();
             boolean b1 = true, b2 = true;
             // 根据role_id绑定菜单
             if(addRoleForm.getMenuList().size() != 0) {
-                b1 = roleMenuService.updateByRoleId(role_id, addRoleForm.getMenuList());
+                b1 = roleMenuService.updateByRoleId(role.getId(), addRoleForm.getMenuList());
             }
             // 根据role_id绑定资源
             if (addRoleForm.getResourceList().size() != 0) {
-                b2 = roleResourceServicer.updateByRoleId(role_id, addRoleForm.getResourceList());
+                b2 = roleResourceServicer.updateByRoleId(role.getId(), addRoleForm.getResourceList());
             }
             return b1 && b2;
         }
 
         return false;
+    }
+
+    @Override
+    public Boolean updateStatusById(String id, boolean status) {
+        return roleMapper.updateStatusById(id, status);
     }
 }

@@ -15,5 +15,7 @@ import org.apache.ibatis.annotations.Options;
 public interface RoleMapper extends BaseMapper<Role> {
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    String createRole(Role roleInfo);
+    int createRole(Role role);
+
+    Boolean updateStatusById(String id, boolean status);
 }

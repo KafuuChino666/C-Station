@@ -1,4 +1,4 @@
-package cn.o0u0o.service.security.controller.admin;
+package cn.o0u0o.service.security.controller;
 
 
 import cn.o0u0o.common.response.Result;
@@ -30,8 +30,9 @@ public class StaffRoleController {
 
     @ApiOperation("获取员工角色")
     @GetMapping("/{id}")
-    public Result getRoleIdStatusById(@PathVariable Integer id) {
-        if (id > 0) {
+    public Result getRoleIdStatusById(@PathVariable String id) {
+        // 问题！ 后面处理
+        if (id.isEmpty()) {
             List<String> roles = staffRoleService.getByStatusId(id);
             return Result.ok().data("roles", roles);
         }

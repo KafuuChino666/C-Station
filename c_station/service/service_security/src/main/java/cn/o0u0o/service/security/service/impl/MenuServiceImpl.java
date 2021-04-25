@@ -54,12 +54,17 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
 
     @Override
     public boolean add(Menu menu) {
-        QueryWrapper<Menu> queryWrapper = new QueryWrapper<>();
-        queryWrapper.select("level");
-        queryWrapper.eq("id", menu.getParentId());
-        Menu parentMenu = menuMapper.selectOne(queryWrapper);
 
-        menu.setLevel(parentMenu.getLevel() + 1);
+        if(menu.getParentId() == null) {
+            menu.setParentId("1");
+            menu.setLevel(1);
+        } else {
+            QueryWrapper<Menu> queryWrapper = new QueryWrapper<>();
+            queryWrapper.select("level");
+            queryWrapper.eq("id", menu.getParentId());
+            Menu parentMenu = menuMapper.selectOne(queryWrapper);
+            menu.setLevel(parentMenu.getLevel() + 1);
+        }
         boolean b = this.save(menu);
         return b;
     }
@@ -74,7 +79,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
 
     @Override
     public List<MenuVo> getHierarchyMenu() {
-        return menuMapper.selectHierarchyMenuByParentId(0);
+        return menuMapper.selectHierarchyMenuByParentId(1);
     }
 
 }

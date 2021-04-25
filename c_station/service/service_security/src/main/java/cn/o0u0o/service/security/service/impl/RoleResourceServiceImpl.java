@@ -39,4 +39,9 @@ public class RoleResourceServiceImpl extends ServiceImpl<RoleResourceMapper, Rol
     public List<String> getResourceIdByRoleId(String roleId) {
         return roleResourceMapper.getResourceIdByRoleId(roleId);
     }
+
+    @Override
+    public List<String> getRoleByResourceId(String id) {
+        return roleResourceMapper.getRoleByResourceId(id);
+    }
 }

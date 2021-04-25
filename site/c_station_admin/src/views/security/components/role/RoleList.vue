@@ -4,13 +4,22 @@
     <div class="low-container">
       <!--   表   -->
       <RolesTable :table-data="tableData" />
+      <div class="block" v-if="tableData.length >= limit || page !== 1">
+        <el-pagination
+          layout="prev, pager, next"
+          :current-page="page"
+          :total="total"
+          :page-size="limit"
+          @current-change="changeCurrentPage"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import SearchBox from '@/views/security/components/SearchBox'
-import RolesTable from '@/views/security/components/RolesTable'
+import SearchBox from '@/views/security/components/staff/SearchBox'
+import RolesTable from '@/views/security/components/role/RoleTable'
 import securityAPI from '@/api/securityAPI'
 
 export default {
@@ -71,5 +80,11 @@ export default {
   width: 100%;
   padding: 20px;
   margin-top: 30px;
+}
+.block {
+  width: 300px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 10px;
 }
 </style>

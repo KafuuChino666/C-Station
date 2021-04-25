@@ -276,5 +276,15 @@ export default {
       method: 'post',
       data: addRoleForm
     })
+  },
+  updateRoleStatusById(id, status) {
+    return request({
+      url: '/admin/acl/role/status',
+      method: 'put',
+      params: {
+        id,
+        status
+      }
+    })
   }
 }

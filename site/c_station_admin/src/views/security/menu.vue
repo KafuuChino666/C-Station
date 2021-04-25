@@ -20,11 +20,11 @@
 </template>
 
 <script>
-import SearchBox from '@/views/security/components/SearchBox'
-import MenuTable from '@/views/security/components/MenuTable'
-import MenuRoleForm from '@/views/security/components/MenuRoleForm'
+import SearchBox from '@/views/security/components/staff/SearchBox'
+import MenuTable from '@/views/security/components/menu/MenuTable'
+import MenuRoleForm from '@/views/security/components/menu/MenuRoleForm'
 import securityAPI from '@/api/securityAPI'
-import MenuForm from '@/views/security/components/MenuForm'
+import MenuForm from '@/views/security/components/menu/MenuForm'
 import PubSub from 'pubsub-js'
 
 export default {

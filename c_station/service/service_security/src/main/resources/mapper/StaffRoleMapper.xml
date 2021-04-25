@@ -5,4 +5,16 @@
     <select id="getByStatusId" resultType="java.lang.String">
         select role_id from acl_staff_role where staff_id = #{id}
     </select>
+
+    <!-- 获取员工所有角色对象 -->
+    <select id="getRoleByStatusId" resultType="cn.o0u0o.service.security.entity.Role">
+        select r.id, r.name, r.description, r.status, r.sort, r.gmt_create, r.gmt_modified, sr.id, sr.staff_id, sr.role_id, sr.gmt_create, sr.gmt_modified
+        from acl_role r left join acl_staff_role sr on sr.role_id = r.id where sr.staff_id = #{id}
+    </select>
+
+    <!-- 获取员工资源 -->
+    <select id="getResourceByStaffId" resultType="java.lang.String">
+        select distinct url
+        from acl_resource r left join acl_role_resource rr left join acl_staff_role rs on rs.role_id = rr.role_id on rr.resource_id = r.id where rs.staff_id = #{id}
+    </select>
 </mapper>

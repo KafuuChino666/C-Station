@@ -23,7 +23,7 @@ import PubSub from 'pubsub-js'
 import securityAPI from '@/api/securityAPI'
 
 export default {
-  name: 'StaffForm',
+  name: 'StaffRoleBind',
   data() {
     return {
       id: 0,

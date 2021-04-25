@@ -3,7 +3,10 @@
 <mapper namespace="cn.o0u0o.service.security.mapper.RoleMapper">
 
     <insert id="createRole" useGeneratedKeys="true" keyProperty="id">
-        insert into acl_role (name,description,status) values (#{roleInfo.name}, #{roleInfo.description}, #{roleInfo.status})
+        insert into acl_role (name,description,status) values (#{name}, #{description}, #{status})
     </insert>
 
+    <update id="updateStatusById">
+        update acl_role set status = #{status} where id = #{id}
+    </update>
 </mapper>

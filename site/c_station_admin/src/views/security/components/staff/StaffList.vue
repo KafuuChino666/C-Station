@@ -52,8 +52,8 @@
       label="操作"
     >
       <template slot-scope="scope">
-        <el-button type="text" size="small" @click="handleClick(scope.row.id)">查看</el-button>
-        <el-button type="text" size="small">修改权限</el-button>
+        <el-button type="text" size="small">查看</el-button>
+        <el-button type="text" size="small" @click="handleClick(scope.row.id)">修改角色</el-button>
         <el-button type="text" size="small">删除</el-button>
       </template>
     </el-table-column>

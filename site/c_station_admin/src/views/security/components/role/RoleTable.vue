@@ -78,14 +78,41 @@ export default {
       return moment(date).format('YYYY-MM-DD HH:mm:ss')
     },
     removeRole(id) {
-      securityAPI.removeRoleById(id).then(res => {
+      // 弹出确认框
+      this.$confirm('此操作将永久删除该角色, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        // 点击确认删除后请求API
+        securityAPI.removeRoleById(id).then(res => {
+          if (res.status) {
+            this.$notify({
+              title: '成功',
+              message: '角色删除成功！',
+              type: 'success'
+            })
+            // this.$router.push('/security/role/list')
+            this.$parent.fetchData()
+          }
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
+    },
+    changeStatus(id, status) {
+      securityAPI.updateRoleStatusById(id, status).then(res => {
         if (res.status) {
           this.$notify({
             title: '成功',
             message: '角色删除成功！',
             type: 'success'
           })
-          this.$router.push('/security/role/list')
+        } else {
+          status = false
         }
       })
     }

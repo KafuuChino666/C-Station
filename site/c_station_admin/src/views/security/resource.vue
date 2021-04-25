@@ -19,9 +19,9 @@
 </template>
 
 <script>
-import SearchBox from '@/views/security/components/SearchBox'
-import ResourceTable from '@/views/security/components/ResourceTable'
-import ResourceForm from '@/views/security/components/ResourceForm'
+import SearchBox from '@/views/security/components/staff/SearchBox'
+import ResourceTable from '@/views/security/components/resource/ResourceTable'
+import ResourceForm from '@/views/security/components/resource/ResourceForm'
 import securityAPI from '@/api/securityAPI'
 import PubSub from 'pubsub-js'
 

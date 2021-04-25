@@ -1,9 +1,9 @@
 <template>
   <div class="pater-container">
-    <SearchBox :search-fun="searchFun" title="员工列表" label-text="输入员工编号" icon="tree" />
+    <SearchBox :search-fun="searchFun" title="员工列表" label-text="输入员工编号" icon="tree" :add-fun="addFun" />
     <div class="low-container">
       <StaffList :list="list" />
-      <div class="block">
+      <div v-if="list.length >= limit || page !== 1" class="block">
         <el-pagination
           layout="prev, pager, next"
           :current-page="page"
@@ -18,13 +18,13 @@
 </template>
 
 <script>
-import StaffList from '@/views/security/components/StaffList'
+import StaffList from '@/views/security/components/staff/StaffList'
 import securityAPI from '@/api/securityAPI'
-import StaffForm from '@/views/security/components/StaffForm'
-import SearchBox from '@/views/security/components/SearchBox'
+import StaffForm from '@/views/security/components/staff/StaffRoleBind'
+import SearchBox from '@/views/security/components/staff/SearchBox'
 
 export default {
-  name: 'List',
+  name: 'StaffIndex',
   components: {
     StaffList,
     StaffForm,
@@ -62,6 +62,9 @@ export default {
     changeCurrentPage(page) {
       this.page = page
       this.fetchData()
+    },
+    addFun() {
+      this.$router.push('/security/staff/info/')
     }
   }
 }

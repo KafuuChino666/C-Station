@@ -1,9 +1,7 @@
 package cn.o0u0o.service.security.service.impl;
 
 import cn.o0u0o.common.response.Result;
-import cn.o0u0o.service.security.entity.Role;
-import cn.o0u0o.service.security.entity.Staff;
-import cn.o0u0o.service.security.entity.StaffRole;
+import cn.o0u0o.service.security.entity.*;
 import cn.o0u0o.service.security.mapper.StaffMapper;
 import cn.o0u0o.service.security.mapper.StaffRoleMapper;
 import cn.o0u0o.service.security.service.StaffRoleService;
@@ -34,7 +32,7 @@ public class StaffRoleServiceImpl extends ServiceImpl<StaffRoleMapper, StaffRole
     public StaffRoleMapper staffRoleMapper;
 
     @Override
-    public List<String> getByStatusId(Integer id) {
+    public List<String> getByStatusId(String id) {
         return staffRoleMapper.getByStatusId(id);
     }
 
@@ -57,5 +55,15 @@ public class StaffRoleServiceImpl extends ServiceImpl<StaffRoleMapper, StaffRole
             return 1;
         }
         return 0;
+    }
+
+    @Override
+    public List<Role> selectByStaffId(String id) {
+        return staffRoleMapper.getRoleByStatusId(id);
+    }
+
+    @Override
+    public List<String> selectResourceByStaffId(String id) {
+        return staffRoleMapper.getResourceByStaffId(id);
     }
 }

@@ -171,15 +171,38 @@ export const constantRoutes = [
   {
     path: '/security',
     component: Layout,
-    redirect: '/security/list',
+    redirect: '/security/staff',
     name: 'Security',
     meta: { title: '权限', icon: 'el-icon-unlock' },
     children: [
       {
-        path: 'list',
-        name: 'SecurityList',
-        component: () => import('@/views/security/list'),
-        meta: { title: '员工列表', icon: 'tree' }
+        path: 'staff',
+        name: 'StaffList',
+        redirect: '/security/staff/list',
+        component: () => import('@/views/security/staff'),
+        meta: { title: '员工', icon: 'tree' },
+        children: [
+          {
+            path: 'list',
+            component: () => import('@/views/security/components/staff/StaffIndex'),
+            name: 'StaffInfo',
+            meta: { title: '员工列表' }
+          },
+          {
+            path: 'info',
+            component: () => import('@/views/security/components/staff/StaffInfo'),
+            name: 'StaffAdd',
+            hidden: true,
+            meta: { title: '添加员工' }
+          },
+          {
+            path: 'info/:id',
+            component: () => import('@/views/security/components/staff/StaffInfo'),
+            name: 'StaffInfoEdit',
+            hidden: true,
+            meta: { title: '修改员工' }
+          }
+        ]
       },
       {
         path: 'role',
@@ -190,34 +213,34 @@ export const constantRoutes = [
         children: [
           {
             path: 'list',
-            component: () => import('@/views/security/components/RoleList'),
+            component: () => import('@/views/security/components/role/RoleList'),
             name: 'RoleList',
             meta: { title: '角色列表' }
           },
           {
             path: 'info',
-            component: () => import('@/views/security/components/RoleForm'),
+            component: () => import('@/views/security/components/role/RoleForm'),
             name: 'RoleInfo',
             hidden: true,
             meta: { title: '添加角色' }
           },
           {
             path: 'info/:id',
-            component: () => import('@/views/security/components/RoleForm'),
+            component: () => import('@/views/security/components/role/RoleForm'),
             name: 'RoleInfoEdit',
             hidden: true,
             meta: { title: '编辑角色' }
           },
           {
             path: 'info/:id',
-            component: () => import('@/views/security/components/RoleForm'),
+            component: () => import('@/views/security/components/role/RoleForm'),
             name: 'RoleMenuBind',
             hidden: true,
             meta: { title: '绑定菜单' }
           },
           {
             path: 'info/:id',
-            component: () => import('@/views/security/components/RoleForm'),
+            component: () => import('@/views/security/components/role/RoleForm'),
             name: 'RoleResourceBind',
             hidden: true,
             meta: { title: '绑定资源' }

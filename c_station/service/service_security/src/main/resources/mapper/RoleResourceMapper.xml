@@ -5,4 +5,9 @@
     <select id="getResourceIdByRoleId" resultType="java.lang.String">
         select resource_id from acl_role_resource where role_id = #{roleId}
     </select>
+
+    <select id="getRoleByResourceId" resultType="java.lang.String">
+        select distinct r.name
+        from acl_role r left join acl_role_resource rr on r.id = rr.role_id where resource_id = #{id}
+    </select>
 </mapper>

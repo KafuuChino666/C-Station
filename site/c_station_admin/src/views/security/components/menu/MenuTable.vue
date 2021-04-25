@@ -13,6 +13,7 @@
     <el-table-column
       prop="parentId"
       label="父级ID"
+      :show-overflow-tooltip="true"
       align="center"
       width="80">
     </el-table-column>
@@ -104,6 +105,7 @@ export default {
             message: '更新菜单隐藏状态成功！',
             type: 'success'
           })
+          this.$router.push('/security/menu')
         } else {
           status = !status
           this.$notify.error({
@@ -137,6 +139,7 @@ export default {
             message: '菜单删除成功！',
             type: 'success'
           })
+          this.$router.push('/security/menu')
         }
       })
     },

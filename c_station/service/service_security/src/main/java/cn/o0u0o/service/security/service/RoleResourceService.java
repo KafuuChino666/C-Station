@@ -18,4 +18,6 @@ public interface RoleResourceService extends IService<RoleResource> {
     Boolean updateByRoleId(String roleId, List<String> resource);
 
     List<String> getResourceIdByRoleId(String roleId);
+
+    List<String> getRoleByResourceId(String id);
 }

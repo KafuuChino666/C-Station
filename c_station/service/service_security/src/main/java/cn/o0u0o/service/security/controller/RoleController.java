@@ -1,4 +1,4 @@
-package cn.o0u0o.service.security.controller.admin;
+package cn.o0u0o.service.security.controller;
 
 
 import cn.o0u0o.common.response.Result;
@@ -86,6 +86,13 @@ public class RoleController {
     @PostMapping("/")
     public Result createRole(@RequestBody AddRoleVo addRoleForm) {
         Boolean b = roleService.createRoleCoverMenuResource(addRoleForm);
+        return b ? Result.ok() : Result.err();
+    }
+
+    @ApiOperation("根据id更新角色状态status")
+    @PutMapping("/status")
+    public Result updateRoleStatusById(@RequestParam String id, @RequestParam boolean status) {
+        Boolean b = roleService.updateStatusById(id, status);
         return b ? Result.ok() : Result.err();
     }
 }
