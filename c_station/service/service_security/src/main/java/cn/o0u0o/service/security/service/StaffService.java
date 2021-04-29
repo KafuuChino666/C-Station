@@ -3,6 +3,7 @@ package cn.o0u0o.service.security.service;
 import cn.o0u0o.service.security.entity.Staff;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * <p>

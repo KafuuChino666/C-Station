@@ -1,12 +1,15 @@
 package cn.o0u0o.service.security.filter;
 
 import cn.o0u0o.service.security.acl.TokenManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -23,12 +26,14 @@ public class TokenAuthenticationFilter extends BasicAuthenticationFilter {
 
     private RedisTemplate redisTemplate;
     private TokenManager tokenManager;
+    private String tokenKey;
 
     public TokenAuthenticationFilter(AuthenticationManager authenticationManager,
-                                     TokenManager tokenManager, RedisTemplate redisTemplate) {
+                                     TokenManager tokenManager, RedisTemplate redisTemplate, String tokenKey) {
         super(authenticationManager);
         this.redisTemplate = redisTemplate;
         this.tokenManager = tokenManager;
+        this.tokenKey = tokenKey;
     }
 
     @Override
@@ -39,7 +44,6 @@ public class TokenAuthenticationFilter extends BasicAuthenticationFilter {
             return;
         }
 
-        System.out.println("doFilterInternal()");
         UsernamePasswordAuthenticationToken authentication = null;
         try {
             authentication = getAuthentication(request);
@@ -57,23 +61,12 @@ public class TokenAuthenticationFilter extends BasicAuthenticationFilter {
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
 
         //获取请求头中的token
-//        String token = request.getHeader("token");
-        String token = "";
-        Cookie[] cookies = request.getCookies();
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("token")) {
-                token = cookie.getValue();
-                break;
-            }
-        }
+        String token = request.getHeader(tokenKey);
 
         System.out.println("获取请求头中的token()" + token);
         //判断token存在或者不为空字符串
         if (token != null && !"".equals(token.trim())) {
-            System.out.println("存在token= " + token);
             String userName = tokenManager.getUserFromToken(token);
-            System.out.println("username" + userName);
-
 
             Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>) redisTemplate.opsForValue().get(userName);
 

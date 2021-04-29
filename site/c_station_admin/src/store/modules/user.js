@@ -1,6 +1,9 @@
 import { login, logout, getInfo } from '@/api/user'
+// import { logout, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
+// import axios from 'axios'
+// import { error } from 'echarts/types/src/util/log'
 
 const getDefaultState = () => {
   return {
@@ -33,14 +36,46 @@ const actions = {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
       login({ username: username.trim(), password: password }).then(response => {
-        const { data } = response
-        commit('SET_TOKEN', data.token)
-        setToken(data.token)
+        if (response.status) {
+          const { data } = response
+          commit('SET_TOKEN', data.token)
+          setToken(data.token, data.maxAge)
+        }
         resolve()
       }).catch(error => {
         reject(error)
       })
     })
+    // eslint-disable-next-line no-unreachable
+    // axios.post('/acl/login', { username: username.trim(), password: password }).then(response => {
+    //   // 1
+    // }).catch(error => {
+    //   alert(error)
+    // })
+
+    // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
+    // axios({
+    //   method: 'post',
+    //   url: 'http://127.0.0.1/acl/login',
+    //   data: {
+    //     'username': username.trim(),
+    //     'password': password
+    //   },
+    //   headers: {
+    //     'Content-Type': 'application/x-www-form-urlencoded'
+    //   },
+    //   withCredentials: true
+    // }).then(response => {
+    //   if (response.status) {
+    //     const { data } = response
+    //     commit('SET_TOKEN', data.token)
+    //     setToken(data.token)
+    //   }
+    //   // resolve()
+    // }).catch(error => {
+    //   // reject(error)
+    //   alert(error)
+    // })
   },
 
   // get user info
@@ -68,8 +103,8 @@ const actions = {
   logout({ commit, state }) {
     return new Promise((resolve, reject) => {
       logout(state.token).then(() => {
-        removeToken() // must remove  token  first
-        resetRouter()
+        removeToken() // 删除token
+        resetRouter() // 重置路由
         commit('RESET_STATE')
         resolve()
       }).catch(error => {

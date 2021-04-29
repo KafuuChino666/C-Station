@@ -48,28 +48,35 @@
 
 <script>
 import { validUsername } from '@/utils/validate'
+import { getPublicKey } from '@/api/user'
+import { JSEncrypt } from 'jsencrypt'
+import { getToken } from '@/utils/auth'
+import Vaptcha from '@/views/login/Vaptcha'
 
 export default {
   name: 'Login',
+  components: {
+    Vaptcha
+  },
   data() {
     const validateUsername = (rule, value, callback) => {
       if (!validUsername(value)) {
-        callback(new Error('Please enter the correct user name'))
+        callback(new Error('请输入正确的用户名'))
       } else {
         callback()
       }
     }
     const validatePassword = (rule, value, callback) => {
       if (value.length < 6) {
-        callback(new Error('The password can not be less than 6 digits'))
+        callback(new Error('密码不能少于6位'))
       } else {
         callback()
       }
     }
     return {
       loginForm: {
-        username: 'admin',
-        password: '111111'
+        username: '',
+        password: ''
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
@@ -77,9 +84,12 @@ export default {
       },
       loading: false,
       passwordType: 'password',
-      redirect: undefined
+      redirect: undefined,
+      publickey: '',
+      fetchDataNum: 0
     }
   },
+  // 监听redirect
   watch: {
     $route: {
       handler: function(route) {
@@ -88,7 +98,16 @@ export default {
       immediate: true
     }
   },
+  created() {
+    if (getToken()) {
+      // 跳转到用户首页
+      this.$router.push({ path: this.redirect || '/' })
+    } else {
+      this.fetchData()
+    }
+  },
   methods: {
+    // 现实密码
     showPwd() {
       if (this.passwordType === 'password') {
         this.passwordType = ''
@@ -100,10 +119,17 @@ export default {
       })
     },
     // 登陆请求
-    handleLogin() {
+    handleLogin(options) {
+      // 验证表单
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
+          // 加密明文密码
+          // eslint-disable-next-line no-undef
+          const jse = new JSEncrypt()
+          jse.setPublicKey(this.publickey)
+          this.loginForm.password = jse.encrypt(this.loginForm.password)
+          // 回调提交表单
           this.$store.dispatch('user/login', this.loginForm).then(() => {
             this.$router.push({ path: this.redirect || '/' })
             this.loading = false
@@ -115,6 +141,17 @@ export default {
           return false
         }
       })
+    },
+    fetchData() {
+      getPublicKey().then(res => {
+        this.publickey = res.data.publicKey
+      }).catch(() => {
+        // 再次请求
+        this.fetchDataNum += 1
+        if (this.fetchDataNum < 3) {
+          this.fetchData()
+        }
+      })
     }
   }
 }
@@ -123,7 +160,6 @@ export default {
 <style lang="scss">
 /* 修复input 背景不协调 和光标变色 */
 /* Detail see https://github.com/PanJiaChen/vue-element-admin/pull/927 */
-
 $bg:#283443;
 $light_gray:#fff;
 $cursor: #fff;

@@ -1,5 +1,7 @@
 package cn.o0u0o.service.security.acl;
 
+import cn.o0u0o.common.response.Result;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -24,12 +26,13 @@ public class StaffAuthenticationSuccessHandler implements AuthenticationSuccessH
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
         String token = tokenManager.createToken(authentication.getName());
+        // 向redis中缓存用户token
         redisTemplate.opsForValue().set(authentication.getName(), authentication.getAuthorities());
 
-        //ResponseUtil.out(res, R.ok().data("token", token));
-        Cookie cookie = new Cookie("token", token);
-        cookie.setMaxAge((int)TokenManager.tokenExpiration);
-        httpServletResponse.addCookie(cookie);
-        System.out.println("登陆成功,设置token");
+        Result result = Result.ok().message("登陆成功").data("token", token).data("maxAge", TokenManager.tokenExpiration);
+
+        // 登陆成功设置token
+        httpServletResponse.setContentType("text/json;charset=utf-8");
+        httpServletResponse.getWriter().write(JSONObject.toJSONString(result));
     }
 }

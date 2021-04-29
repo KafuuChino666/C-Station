@@ -4,9 +4,11 @@ import cn.o0u0o.service.security.acl.*;
 import cn.o0u0o.service.security.filter.TokenAuthenticationFilter;
 import cn.o0u0o.service.security.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,6 +17,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.CorsUtils;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 
 /**
@@ -23,6 +30,9 @@ import org.springframework.security.web.access.intercept.FilterSecurityIntercept
 @Configuration
 @EnableWebSecurity
 public class TokenWebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Value("${acl.token.key:ACL-Token}")
+    private String tokenKey;
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -42,10 +52,15 @@ public class TokenWebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private CustomizeAccessDecisionManager accessDecisionManager;
 
+    // 密码校验(RSA解密)
+    @Autowired
+    private StaffAuthenticationProvider staffAuthenticationProvider;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         // 配置默认密码编码
-        auth.userDetailsService(userDetailsService).passwordEncoder(defaultPasswordEncode);
+        auth.userDetailsService(userDetailsService).passwordEncoder(defaultPasswordEncode)
+            .and().authenticationProvider(staffAuthenticationProvider);
     }
 
     @Override
@@ -59,6 +74,13 @@ public class TokenWebSecurityConfig extends WebSecurityConfigurerAdapter {
                         return o;
                     }
                 })
+                .and()
+                .cors().and()
+                // 关闭csrf
+                .csrf()
+                .disable()
+                .authorizeRequests()
+                // .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
             .antMatchers("/admin/**")
                 .hasRole("ADMIN")
 
@@ -67,7 +89,7 @@ public class TokenWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .formLogin()
-                // .loginProcessingUrl("/acl/login") // 登陆地址
+                .loginProcessingUrl("/acl/login") // 登陆地址
                 .usernameParameter("username") // 修改表单默认字段
                 .passwordParameter("password")
 
@@ -86,27 +108,23 @@ public class TokenWebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true)// session失效
 
                 // 注销处理
-                .addLogoutHandler(new TokenLogoutHandler(tokenManager, redisTemplate))
+                .addLogoutHandler(new TokenLogoutHandler(tokenManager, redisTemplate, tokenKey))
                 // 注销成功以后
                 .logoutSuccessHandler(new StaffLogoutSuccessHandler())
 
                 .and()
                 // 令牌登陆过滤器
                 // .addFilter(new TokenLoginFilter(authenticationManager(),tokenManager, redisTemplate))
-                // .addFilter(new TokenAuthenticationFilter(authenticationManager(), tokenManager, redisTemplate))
+                .addFilter(new TokenAuthenticationFilter(authenticationManager(), tokenManager, redisTemplate, tokenKey))
                 .httpBasic()
                 .and()
 
                 .exceptionHandling()
                 // 异常处理，权限拒绝、登录失效
                 .accessDeniedHandler(new StaffAccessDeniedHandler())
-                .authenticationEntryPoint(new UnauthorizedEntryPoint())
-                .and()
+                .authenticationEntryPoint(new UnauthorizedEntryPoint());
 
-                // 关闭csrf
-                .csrf()
-                .disable();
-
+        http.cors(Customizer.withDefaults());
     }
 
     @Override
@@ -114,6 +132,18 @@ public class TokenWebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers(
                 "/api/**", "/swagger-ui.html/**", "/webjars/**", "/swagger-resources/**", "/v2/*" );
 //                "/**");
+    }
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.addAllowedOriginPattern("*");//修改为添加而不是设置，* 最好改为实际的需要，我这是非生产配置，所以粗暴了一点
+        configuration.addAllowedMethod("*");//修改为添加而不是设置
+        configuration.addAllowedHeader("*");//这里很重要，起码需要允许 Access-Control-Allow-Origin
+        configuration.setAllowCredentials(true);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
 }

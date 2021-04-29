@@ -13,7 +13,7 @@ import java.util.Date;
 @Component
 public class TokenManager {
 
-    public static long tokenExpiration = 24*60*60*10000;
+    public static long tokenExpiration = 24*60*60*7;
     private String tokenStringKey = "jfdblgkjhsdjkfhfgj";
 
     /**

@@ -2,9 +2,12 @@ import request from '@/utils/request'
 
 export function login(data) {
   return request({
-    url: '/admin/acl/staff/login',
+    url: '/acl/login',
     method: 'post',
-    data
+    params: {
+      'username': data.username,
+      'password': data.password
+    }
   })
 }
 
@@ -18,7 +21,14 @@ export function getInfo(token) {
 
 export function logout() {
   return request({
-    url: '/admin/acl/staff/logout',
+    url: '/acl/logout',
     method: 'post'
+  })
+}
+
+export function getPublicKey() {
+  return request({
+    url: '/acl/publickey',
+    method: 'get'
   })
 }
