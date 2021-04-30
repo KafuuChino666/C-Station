@@ -1,0 +1,8 @@
+#阿里云短信
+aliyun:
+  sms:
+    regionId: cn-hangzhou
+    keyId: LTAI4GGLCAbWjGCZn8tvfKMf
+    keySecret: Cm6p5rx9WDJbEzw0mu7KCnuSueQabM
+    templateCode: SMS_205457566
+    signName: Mcsql在线教育

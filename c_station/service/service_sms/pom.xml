@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>service_security</artifactId>
+    <artifactId>service_sms</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -17,23 +17,18 @@
     </properties>
 
     <dependencies>
+        <!--阿里云短信-->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-core</artifactId>
+            <version>4.5.3</version>
         </dependency>
 
-        <!-- JWT -->
+        <!--aliyun-java-sdk-dysmsapi-1.0.0.jar-->
         <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt</artifactId>
-            <version>0.7.0</version>
-        </dependency>
-
-        <!-- 顶象SDK -->
-        <dependency>
-            <groupId>com.dingxiang-inc</groupId>
-            <artifactId>ctu-client-sdk</artifactId>
-            <version>2.1</version>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
 

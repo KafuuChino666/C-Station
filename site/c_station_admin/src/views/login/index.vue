@@ -41,6 +41,17 @@
         </span>
       </el-form-item>
 
+      <el-form-item prop="captcha">
+        <span class="svg-container"><svg-icon icon-class="password" /></span>
+        <el-input
+          placeholder="验证码"
+        />
+        <span class="show-pwd" @click="showCaptcha">
+          <el-button :disabled="sendingState" v-text="captchaButText" type="warning"></el-button>
+          <div ref="demo" />
+        </span>
+      </el-form-item>
+
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">登陆</el-button>
     </el-form>
   </div>
@@ -51,13 +62,9 @@ import { validUsername } from '@/utils/validate'
 import { getPublicKey } from '@/api/user'
 import { JSEncrypt } from 'jsencrypt'
 import { getToken } from '@/utils/auth'
-import Vaptcha from '@/views/login/Vaptcha'
 
 export default {
   name: 'Login',
-  components: {
-    Vaptcha
-  },
   data() {
     const validateUsername = (rule, value, callback) => {
       if (!validUsername(value)) {
@@ -86,7 +93,11 @@ export default {
       passwordType: 'password',
       redirect: undefined,
       publickey: '',
-      fetchDataNum: 0
+      fetchDataNum: 0,
+      captcha: {},
+      sendingState: false,
+      captchaButText: '发送验证码',
+      second: 20
     }
   },
   // 监听redirect
@@ -105,6 +116,19 @@ export default {
     } else {
       this.fetchData()
     }
+  },
+  mounted() {
+    // eslint-disable-next-line no-undef
+    this.captcha = _dx.Captcha(this.$refs.demo, {
+      appId: 'f7789efe9697a602b53695a03f16a0ba',
+      style: 'popup', // 弹出式
+      success: token => {
+        // 隐藏验证码
+        this.captcha.hide()
+        // 获取短信验证码
+        this.getCodeFun()
+      }
+    })
   },
   methods: {
     // 现实密码
@@ -152,6 +176,35 @@ export default {
           this.fetchData()
         }
       })
+    },
+    // 显示验证码
+    showCaptcha() {
+      if (this.sendingState) {
+        return
+      }
+      this.captcha.show()
+    },
+    // 倒计时
+    timeDown() {
+      const result = setInterval(() => {
+        this.second--
+        this.captchaButText = '等待短信 ' + this.second + ' s'
+        if (this.second < 0) {
+          clearInterval(result)
+          this.sendingState = false
+          this.second = 20
+          this.captchaButText = '获取验证码'
+        }
+      }, 1000)
+    },
+    // 获取验证码
+    getCodeFun() {
+      if (this.sendingState) {
+        return
+      }
+      this.sendingState = true
+      this.timeDown()
+      // 请求Api
     }
   }
 }
