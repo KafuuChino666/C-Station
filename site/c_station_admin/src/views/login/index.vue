@@ -45,6 +45,9 @@
         <span class="svg-container"><svg-icon icon-class="password" /></span>
         <el-input
           placeholder="验证码"
+          v-model="loginForm.captcha"
+          name="captcha"
+          type="text"
         />
         <span class="show-pwd" @click="showCaptcha">
           <el-button :disabled="sendingState" v-text="captchaButText" type="warning"></el-button>
@@ -59,7 +62,7 @@
 
 <script>
 import { validUsername } from '@/utils/validate'
-import { getPublicKey } from '@/api/user'
+import { getPublicKey, sendCode } from '@/api/user'
 import { JSEncrypt } from 'jsencrypt'
 import { getToken } from '@/utils/auth'
 
@@ -83,7 +86,8 @@ export default {
     return {
       loginForm: {
         username: '',
-        password: ''
+        password: '',
+        captcha: ''
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
@@ -126,7 +130,7 @@ export default {
         // 隐藏验证码
         this.captcha.hide()
         // 获取短信验证码
-        this.getCodeFun()
+        this.getCodeFun(token)
       }
     })
   },
@@ -182,7 +186,11 @@ export default {
       if (this.sendingState) {
         return
       }
-      this.captcha.show()
+      this.$refs.loginForm.validate(valid => {
+        if (valid) {
+          this.captcha.show()
+        }
+      })
     },
     // 倒计时
     timeDown() {
@@ -198,13 +206,18 @@ export default {
       }, 1000)
     },
     // 获取验证码
-    getCodeFun() {
+    getCodeFun(token) {
       if (this.sendingState) {
         return
       }
       this.sendingState = true
       this.timeDown()
       // 请求Api
+      sendCode(this.loginForm.username, token).then(res => {
+
+      }).catch(error => {
+        console.log(error)
+      })
     }
   }
 }

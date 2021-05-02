@@ -6,3 +6,9 @@ aliyun:
     keySecret: Cm6p5rx9WDJbEzw0mu7KCnuSueQabM
     templateCode: SMS_205457566
     signName: Mcsql在线教育
+
+# 顶象
+dingxiang:
+  sms:
+    appId: f7789efe9697a602b53695a03f16a0ba
+    appSecret: 960e99d8de614ee44f8b707c68ae6876

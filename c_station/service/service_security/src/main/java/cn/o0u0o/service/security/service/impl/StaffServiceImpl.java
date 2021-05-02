@@ -46,4 +46,13 @@ public class StaffServiceImpl extends ServiceImpl<StaffMapper, Staff> implements
         staffMapper.updateStatus(id, status ? 1 : 0);
     }
 
+    @Override
+    public String getMobileByUsername(String username) {
+        QueryWrapper<Staff> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("username", username);
+        queryWrapper.select("mobile");
+        Staff staff = staffMapper.selectOne(queryWrapper);
+        return staff.getMobile();
+    }
+
 }

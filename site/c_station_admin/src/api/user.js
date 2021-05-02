@@ -32,3 +32,15 @@ export function getPublicKey() {
     method: 'get'
   })
 }
+
+// 发送验证码
+export function sendCode(username, token) {
+  return request({
+    url: '/acl/send',
+    method: 'post',
+    params: {
+      username,
+      token
+    }
+  })
+}

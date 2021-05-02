@@ -19,4 +19,6 @@ public interface StaffService extends IService<Staff> {
     IPage<Staff> selectPage(Long page, Long limit);
 
     void updateStatusById(Integer id, Boolean status);
+
+    String getMobileByUsername(String username);
 }

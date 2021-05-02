@@ -1,12 +1,18 @@
 package cn.o0u0o.service.security.controller;
 
 import cn.o0u0o.common.response.Result;
+import cn.o0u0o.common.response.ResultCodeEnum;
+import cn.o0u0o.service.security.service.AuthenticationService;
 import cn.o0u0o.service.security.util.CaptchaUtil;
 import cn.o0u0o.service.security.util.RSABase;
 import com.alibaba.fastjson.JSONObject;
+import com.dingxianginc.ctu.client.CaptchaClient;
+import com.dingxianginc.ctu.client.model.CaptchaResponse;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
@@ -20,6 +26,12 @@ public class AuthenticationController {
 
     @Autowired
     public RSABase rsaBase;
+
+    @Autowired
+    public CaptchaClient captchaClient;
+
+    @Autowired
+    public AuthenticationService authenticationService;
 
     @ApiOperation("生成公钥")
     @GetMapping("/publickey")
@@ -44,5 +56,25 @@ public class AuthenticationController {
                 ioException.printStackTrace();
             }
         }
+    }
+
+    @ApiOperation("发送验证码")
+    @PostMapping("/send")
+    public Result send(@RequestParam String username, @RequestParam String token) {
+        //校验token
+        try {
+            CaptchaResponse response = captchaClient.verifyToken(token);
+            if (response.getResult()) {
+                //token验证通过，继续其他流程
+                boolean is = authenticationService.sendCaptcha(username);
+                return is ? Result.ok() : Result.setResultCodeEnum(ResultCodeEnum.SMS_SEND_ERROR);
+            } else {
+                //token验证失败
+                return Result.setResultCodeEnum(ResultCodeEnum.CODE_ERROR);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Result.ok();
     }
 }

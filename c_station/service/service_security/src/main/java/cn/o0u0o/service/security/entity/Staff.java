@@ -39,6 +39,9 @@ public class Staff extends BaseEntity {
     @ApiModelProperty(value = "邮箱")
     private String email;
 
+    @ApiModelProperty(value = "手机号")
+    private String mobile;
+
     @ApiModelProperty(value = "昵称")
     private String nickName;
 

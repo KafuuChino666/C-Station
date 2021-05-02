@@ -55,8 +55,6 @@ public class SmsServiceImpl implements SmsService {
 
         if ("isv.BUSINESS_LIMIT_CONTROL".equals(sendSmsResponse.getCode())) {
             log.error("短信发送过于频繁 " + "【code】" + sendSmsResponse.getCode() + ", 【message】" + sendSmsResponse.getMessage());
-
         }
-
     }
 }
