@@ -1,7 +1,11 @@
 package cn.o0u0o.service.video.mapper;
 
 import cn.o0u0o.service.video.entity.VVideoInfo;
+import cn.o0u0o.service.video.entity.vo.QueryForm;
+import cn.o0u0o.service.video.entity.vo.TableData;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+import java.util.Date;
 
 /**
  * <p>
@@ -12,5 +16,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2021-04-20
  */
 public interface VVideoInfoMapper extends BaseMapper<VVideoInfo> {
+
+    TableData selectVideoByTerm(Integer videoId, String videoTitle, Integer authorId, Date startTime, Date endTime, Long playNub, String videoStatus);
 
 }

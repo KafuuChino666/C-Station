@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @CrossOrigin //跨域
 @RequestMapping("/admin/c/video")
-public class VideoController {
+public class VVideoController {
 
     @Autowired
     private VVideoService vVideoService;

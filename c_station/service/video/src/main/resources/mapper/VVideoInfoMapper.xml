@@ -2,4 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.o0u0o.service.video.mapper.VVideoInfoMapper">
 
+    <select id="selectVideoByTerm" resultType="cn.o0u0o.service.video.entity.vo.TableData">
+        SELECT img.img_location, info.video_title, v.author_id, zone_type, info.play_nub, video_status
+        FROM v_video v 
+        LEFT JOIN pub_img img ON img.`img_id` = v.`img_id`
+        LEFT JOIN v_video_info info ON v.`video_info_id` = info.`video_info_id`
+        LEFT JOIN pub_zone zone ON v.`zone_id` = zone.`zone_id`
+        LEFT JOIN v_video_status stat ON stat.`video_status_id` = info.`video_status_id`;
+        <where>
+            <if test="videoId != null and videoId != ''">
+                v.video_id = #{videoId}
+            </if>
+            <if test="videoTitle != null and videoTitle != ''">
+                and info.video_title = #{videoTitle}
+            </if>
+            <if test="authorId != null and authorId != ''">
+                and v.author_id = #{authorId}
+            </if>
+            <if test="startTime != null and startTime != ''">
+                and v.gmt_create &gt; #{startTime}
+            </if>
+            <if test="endTime != null and endTime != ''">
+                and v.gmt_create &lt; #{endTime}
+            </if>
+            <if test="playNub != null and playNub != ''">
+                and info.play_nub = #{playNub}
+            </if>
+            <if test="videoStatus != null and videoStatus != ''">
+                and stat.video_status = #{videoStatus}
+            </if>
+        </where>
+    </select>
 </mapper>

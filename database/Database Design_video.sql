@@ -80,3 +80,10 @@ CREATE TABLE v_video_status(
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
 	FOREIGN KEY(video_status_id) REFERENCES v_video_info(video_status_id)
 );
+
+SELECT img.img_location, info.video_title, v.author_id, zone_type, info.play_nub
+FROM v_video v 
+LEFT JOIN pub_img img ON img.`img_id` = v.`img_id`
+LEFT JOIN v_video_info info ON v.`video_info_id` = info.`video_info_id`
+LEFT JOIN pub_zone zone ON v.`zone_id` = zone.`zone_id`
+LEFT JOIN v_video_status stat ON stat.`video_status_id` = info.`video_status_id`;
