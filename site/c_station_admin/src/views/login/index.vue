@@ -114,6 +114,7 @@ export default {
     }
   },
   created() {
+    // 测试需要直接跳过
     if (getToken()) {
       // 跳转到用户首页
       this.$router.push({ path: this.redirect || '/' })

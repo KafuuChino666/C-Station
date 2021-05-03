@@ -125,8 +125,8 @@ export const constantRoutes = [
     },
     children: [
       {
-        path: 'dashboard',
-        component: () => import('@/views/404'), // Parent router-view
+        path: 'info',
+        component: () => import('@/views/video/info'), // Parent router-view
         name: 'VideoDashboard',
         meta: {
           title: '视频查询',
@@ -134,16 +134,23 @@ export const constantRoutes = [
         },
         children: [
           {
-            path: 'info',
-            component: () => import('@/views/404'),
-            name: 'VideoInfo',
+            path: 'dashboard',
+            component: () => import('@/views/video/info/VideoInfo'),
+            name: 'VideoDashboard',
             meta: { title: '视频统计' }
           },
           {
             path: 'query',
-            component: () => import('@/views/404'),
+            component: () => import('@/views/video/info/Query'),
             name: 'VideoQuery',
             meta: { title: '视频查询' }
+          },
+          {
+            path: 'videoInfo/:id',
+            component: () => import('@/views/video/info/VideoInfo'),
+            name: 'VideoInfo',
+            hidden: true,
+            meta: { title: '详细' }
           }
         ]
       },
