@@ -5,7 +5,6 @@ import cn.o0u0o.service.security.entity.Menu;
 import cn.o0u0o.service.security.entity.Resource;
 import cn.o0u0o.service.security.entity.vo.MenuVo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;

@@ -3,7 +3,10 @@ package cn.o0u0o.service.video.service;
 import cn.o0u0o.service.video.entity.VVideoInfo;
 import cn.o0u0o.service.video.entity.vo.QueryForm;
 import cn.o0u0o.service.video.entity.vo.TableData;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.Date;
 
 /**
  * <p>
@@ -15,6 +18,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface VVideoInfoService extends IService<VVideoInfo> {
 
-    TableData selectVideoByTerm(QueryForm queryForm);
+    IPage<TableData> selectVideoByTerm(Integer page, Integer limit, Integer videoId, String videoTitle, Integer authorId, Date startTime, Date endTime, Long playNub, String videoStatus);
 
 }
