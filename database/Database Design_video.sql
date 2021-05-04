@@ -33,7 +33,7 @@ CREATE TABLE v_video_info(
 CREATE TABLE v_like(
 	like_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	like_number INT COMMENT '点赞数' NOT NULL,
-	like_type VARCHAR(10) COMMENT '赞/踩',
+	down_number VARCHAR(10) COMMENT '点踩数',
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
 	FOREIGN KEY(like_id) REFERENCES v_video_info(like_id)
@@ -81,9 +81,20 @@ CREATE TABLE v_video_status(
 	FOREIGN KEY(video_status_id) REFERENCES v_video_info(video_status_id)
 );
 
-SELECT img.img_location, info.video_title, v.author_id, zone_type, info.play_nub
+SELECT img.img_location, info.video_title, v.author_id, zone_type, info.play_nub, video_status
 FROM v_video v 
 LEFT JOIN pub_img img ON img.`img_id` = v.`img_id`
 LEFT JOIN v_video_info info ON v.`video_info_id` = info.`video_info_id`
 LEFT JOIN pub_zone zone ON v.`zone_id` = zone.`zone_id`
 LEFT JOIN v_video_status stat ON stat.`video_status_id` = info.`video_status_id`;
+
+SELECT video_status FROM v_video_status;
+
+SELECT v.video_id, v.author_id, u.user_name, info.video_title, info.video_brief, v.gmt_create, info.play_nub, info.video_pnumb, info.video_coin, lk.like_number, lk.down_number, zone.zone_type, stat.video_status
+FROM  v_video v
+LEFT JOIN u_user u ON v.`author_id` = u.`user_id`
+LEFT JOIN v_video_info info ON v.`video_info_id` = info.`video_info_id`
+LEFT JOIN v_like lk ON info.`like_id` = lk.`like_id`
+LEFT JOIN pub_zone zone ON v.`zone_id` = zone.`zone_id`
+LEFT JOIN v_video_status stat ON stat.`video_status_id` = info.`video_status_id`;
+

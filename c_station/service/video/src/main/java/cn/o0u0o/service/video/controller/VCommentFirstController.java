@@ -12,6 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "一层评论控制类")
 @RestController
 @CrossOrigin //跨域
-@RequestMapping("/admin/c/video")
+@RequestMapping("/admin/VCommentFirst")
 public class VCommentFirstController {
 }

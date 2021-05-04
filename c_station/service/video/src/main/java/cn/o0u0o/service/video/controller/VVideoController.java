@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @Api(tags = "视频控制类")
 @RestController
 @CrossOrigin //跨域
-@RequestMapping("/admin/c/video")
+@RequestMapping("/admin/vVideo")
 public class VVideoController {
 
     @Autowired

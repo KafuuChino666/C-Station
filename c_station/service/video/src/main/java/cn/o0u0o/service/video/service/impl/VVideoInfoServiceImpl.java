@@ -3,6 +3,8 @@ package cn.o0u0o.service.video.service.impl;
 import cn.o0u0o.service.video.entity.VVideoInfo;
 import cn.o0u0o.service.video.entity.vo.QueryForm;
 import cn.o0u0o.service.video.entity.vo.TableData;
+import cn.o0u0o.service.video.entity.vo.VideoInfoForm;
+import cn.o0u0o.service.video.entity.vo.VideoInfoResult;
 import cn.o0u0o.service.video.mapper.VVideoInfoMapper;
 import cn.o0u0o.service.video.service.VVideoInfoService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -13,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -33,5 +36,36 @@ public class VVideoInfoServiceImpl extends ServiceImpl<VVideoInfoMapper, VVideoI
     public IPage<TableData> selectVideoByTerm(Integer page, Integer limit, Integer videoId, String videoTitle, Integer authorId, Date startTime, Date endTime, Long playNub, String videoStatus) {
         Page<QueryForm> pageParam = new Page<>(page, limit);
         return vVideoInfoMapper.selectVideoByTerm(pageParam, videoId, videoTitle, authorId, startTime, endTime, playNub, videoStatus);
+    }
+
+    @Override
+    public VideoInfoResult getVideoInfoById(Integer videoId) {
+        VideoInfoForm videoInfoById = vVideoInfoMapper.getVideoInfoById(videoId);
+
+        // 计算页面实际显示点赞数
+        Integer likeNumber = videoInfoById.getLikeNumber();
+        Integer downNumber = videoInfoById.getDownNumber();
+        Integer likeNub = 0;
+        if((likeNumber - downNumber) >= 0) {
+            likeNub = likeNumber - downNumber;
+        }
+
+        //获取信息
+        Integer authorId = videoInfoById.getAuthorId();
+        String userName = videoInfoById.getUserName();
+        String videoTitle = videoInfoById.getVideoTitle();
+        String videoBrief = videoInfoById.getVideoBrief();
+        Date gmtCreate = videoInfoById.getGmtCreate();
+        Integer playNub = videoInfoById.getPlayNub();
+        Integer videoPnumb = videoInfoById.getVideoPnumb();
+        Integer videoCoin = videoInfoById.getVideoCoin();
+        List<String> zoneType = videoInfoById.getZoneType();
+        String videoStatus = videoInfoById.getVideoStatus();
+
+
+        VideoInfoResult videoInfoResult
+                = new VideoInfoResult(videoId, authorId, userName, videoTitle, videoBrief, gmtCreate, playNub, videoPnumb, videoCoin, likeNub, zoneType, videoStatus);
+
+        return videoInfoResult;
     }
 }

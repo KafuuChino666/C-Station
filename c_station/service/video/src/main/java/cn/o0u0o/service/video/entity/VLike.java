@@ -32,8 +32,8 @@ public class VLike extends BaseEntity {
     @ApiModelProperty(value = "点赞数")
     private Integer likeNumber;
 
-    @ApiModelProperty(value = "赞/踩")
-    private String likeType;
+    @ApiModelProperty(value = "点踩数")
+    private String downNumber;
 
 
 }

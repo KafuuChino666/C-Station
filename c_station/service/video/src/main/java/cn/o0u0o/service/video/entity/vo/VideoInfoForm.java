@@ -32,6 +32,8 @@ public class VideoInfoForm {
     private Integer videoCoin;
     //点赞数
     private Integer likeNumber;
+    //点踩数
+    private Integer downNumber;
     //类型
     private List<String> zoneType;
     //视频状态

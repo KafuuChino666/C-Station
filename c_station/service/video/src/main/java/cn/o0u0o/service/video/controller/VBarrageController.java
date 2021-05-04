@@ -13,6 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "弹幕控制类")
 @RestController
 @CrossOrigin //跨域
-@RequestMapping("/admin/c/video")
+@RequestMapping("/admin/vBarrage")
 public class VBarrageController {
 }

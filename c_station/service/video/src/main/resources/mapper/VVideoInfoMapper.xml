@@ -33,4 +33,14 @@
             </if>
         </where>
     </select>
+    <select id="getVideoInfoById" resultType="cn.o0u0o.service.video.entity.vo.VideoInfoForm">
+        SELECT v.video_id, v.author_id, u.user_name, info.video_title, info.video_brief, v.gmt_create, info.play_nub, info.video_pnumb, info.video_coin, lk.like_number, lk.down_number, zone.zone_type, stat.video_status
+        FROM  v_video v
+        LEFT JOIN u_user u ON v.`author_id` = u.`user_id`
+        LEFT JOIN v_video_info info ON v.`video_info_id` = info.`video_info_id`
+        LEFT JOIN v_like lk ON info.`like_id` = lk.`like_id`
+        LEFT JOIN pub_zone zone ON v.`zone_id` = zone.`zone_id`
+        LEFT JOIN v_video_status stat ON stat.`video_status_id` = info.`video_status_id`
+        WHERE v.video_id = #{videoId}
+    </select>
 </mapper>

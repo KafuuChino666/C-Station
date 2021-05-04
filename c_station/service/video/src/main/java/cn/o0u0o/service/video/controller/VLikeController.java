@@ -12,6 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "点赞控制类")
 @RestController
 @CrossOrigin //跨域
-@RequestMapping("/admin/c/video")
+@RequestMapping("/admin/vLike")
 public class VLikeController {
 }
