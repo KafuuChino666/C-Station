@@ -7,8 +7,6 @@
         <module>common</module>
         <module>service</module>
         <module>web</module>
-        <module>video</module>
-        <module>service_sms</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -34,6 +32,10 @@
         <fastjson.version>1.2.28</fastjson.version>
         <gson.version>2.8.2</gson.version>
         <json.version>20170516</json.version>
+        <aliyun.oss.version>3.1.0</aliyun.oss.version>
+        <aliyun-java-sdk-core.version>4.3.3</aliyun-java-sdk-core.version>
+        <aliyun-java-sdk-vod.version>2.15.2</aliyun-java-sdk-vod.version>
+        <aliyun-sdk-vod-upload.version>1.4.11</aliyun-sdk-vod-upload.version>
     </properties>
 
     <dependencyManagement>
@@ -128,6 +130,29 @@
                 <version>${gson.version}</version>
             </dependency>
 
+            <!-- 阿里云VOD -->
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-core</artifactId>
+                <version>${aliyun-java-sdk-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.aliyun.oss</groupId>
+                <artifactId>aliyun-sdk-oss</artifactId>
+                <version>${aliyun.oss.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-vod</artifactId>
+                <version>${aliyun-java-sdk-vod.version}</version>
+            </dependency>
+
+            <!--非开源jar-->
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-sdk-vod-upload</artifactId>
+                <version>${aliyun-sdk-vod-upload.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>
