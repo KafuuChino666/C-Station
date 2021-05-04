@@ -64,6 +64,14 @@ import video from '@/api/video'
 
 export default {
   name: 'VideoInfo',
+  async asyncData(page) {
+    const vid = this.$route.query.id
+    const response = await video.getPlayAuth(vid)
+    return {
+      videoId: vid,
+      playAuth: response.data.playAuth
+    }
+  },
   data() {
     return {
       videoInfoForm: {
@@ -80,7 +88,8 @@ export default {
         zoneType: [], // 类型
         videoStatus: '' // 视频状态
       },
-      videoId: -1
+      videoId: -1,
+      playAuth: ''
     }
   },
   // 页面渲染成功后获取数据
@@ -95,7 +104,7 @@ export default {
 
       // 播放方式二：加密视频的播放：首先获取播放凭证
       // encryptType: '1', // 如果播放加密视频，则需设置encryptType=1，非加密视频无需设置此项
-      vid: this.vid,
+      vid: this.videoId,
       playauth: this.playAuth
     }, function(player) {
       console.log('播放器创建成功')

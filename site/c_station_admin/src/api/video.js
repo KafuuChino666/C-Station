@@ -26,5 +26,12 @@ export default {
       url: `/admin/video/info/${videoId}`,
       method: 'get'
     })
+  },
+  // 获取播放凭证
+  getPlayAuth(videoId) {
+    return request({
+      url: `/api/video/get-play-auth/${videoId}`,
+      method: 'get'
+    })
   }
 }

@@ -16,4 +16,6 @@ public interface VVideoService extends IService<VVideo> {
     Integer getVideoCount();
 
     Integer getZoneCountByType(Integer type);
+
+    String getVideoSource(String videoId);
 }

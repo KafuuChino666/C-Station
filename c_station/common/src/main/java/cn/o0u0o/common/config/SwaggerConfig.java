@@ -51,4 +51,44 @@ public class SwaggerConfig {
                 "http://www.apache.org/licenses/LICENSE-2.0",
                 new ArrayList());
     }
+
+    private ApiInfo apiInfo(String name, String description, String version) {
+        return new ApiInfoBuilder().title(name).description(description).version(version).build();
+    }
+
+    @Bean
+    public Docket web_api_admin_acl() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(apiInfo("acl-api", "权限管理系统", "1.0"))
+                .select()
+                .apis(RequestHandlerSelectors.any())
+                .paths(PathSelectors.ant("/admin/acl/**"))
+                .build()
+                .groupName("权限管理系统:web-admin-接口文档V1.0")
+                .pathMapping("/");
+    }
+
+    @Bean
+    public Docket web_api_acl() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(apiInfo("acl-api", "验证码相关api", "1.0"))
+                .select()
+                .apis(RequestHandlerSelectors.any())
+                .paths(PathSelectors.ant("/acl/**"))
+                .build()
+                .groupName("验证码相关api:web-admin-接口文档V1.0")
+                .pathMapping("/");
+    }
+
+    @Bean
+    public Docket web_api_video() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(apiInfo("video-api", "视频服务api", "1.0"))
+                .select()
+                .apis(RequestHandlerSelectors.any())
+                .paths(PathSelectors.ant("/api/video/**"))
+                .build()
+                .groupName("视频服务api:web-video-接口文档V1.0")
+                .pathMapping("/");
+    }
 }
