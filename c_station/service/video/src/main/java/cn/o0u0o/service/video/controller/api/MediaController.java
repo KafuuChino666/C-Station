@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/video/media")
 @Slf4j
-public class MediaController {
+public class MediaController {1
 
     @Autowired
     private MediaService mediaService;
@@ -24,15 +24,12 @@ public class MediaController {
     @Autowired
     private VVideoService vVideoService;
 
-    @GetMapping("get-play-auth/{videoId}")
-    public Result getPlayAuth(@ApiParam("视频的id") @PathVariable String videoId) {
+    @GetMapping("get-play-auth/{videoSourceId}")
+    public Result getPlayAuth(@ApiParam("阿里云视频文件的id") @PathVariable String videoSourceId) {
 
+        System.out.println(videoSourceId);
         try{
-            String videoSource = vVideoService.getVideoSource(videoId);
-            if (videoSource == null || videoSource.isEmpty()) {
-                return Result.setResultCodeEnum(ResultCodeEnum.FETCH_PLAYAUTH_ERROR);
-            }
-            String playAuth = mediaService.getPlayAuth(videoSource);
+            String playAuth = mediaService.getPlayAuth(videoSourceId);
             return  Result.ok().message("获取播放凭证成功").data("playAuth", playAuth);
         } catch (Exception e) {
             log.error(ExceptionUtils.getMessage(e));

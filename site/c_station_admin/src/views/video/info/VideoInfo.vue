@@ -1,7 +1,7 @@
 <template>
   <div class="pater-container">
     <el-col :span="24" style=" line-height: 23px">
-      <div class="ico" />
+      <div class="ico"/>
       妹子：被你看光了，这下嫁不出去了
       <span class="trail">视频详细与分析</span>
     </el-col>
@@ -31,10 +31,10 @@
               {{ videoInfoForm.gmtCreate }}
             </el-form-item>
             <el-form-item label="播放数：" class="item">
-              {{ videoInfoForm.playNub  }}
+              {{ videoInfoForm.playNub }}
             </el-form-item>
             <el-form-item label="分享数：" class="item">
-              {{ videoInfoForm.videoPnumb  }}
+              {{ videoInfoForm.videoPnumb }}
             </el-form-item>
             <el-form-item label="投币数：" class="item">
               {{ videoInfoForm.videoCoin }}
@@ -52,7 +52,7 @@
           </el-form>
         </el-col>
         <el-col :span="13">
-          <div id="J_prismPlayer" class="prism-player"/>
+          <div class="prism-player" id="player-con"></div>
         </el-col>
       </el-row>
     </div>
@@ -64,14 +64,6 @@ import video from '@/api/video'
 
 export default {
   name: 'VideoInfo',
-  async asyncData(page) {
-    const vid = this.$route.query.id
-    const response = await video.getPlayAuth(vid)
-    return {
-      videoId: vid,
-      playAuth: response.data.playAuth
-    }
-  },
   data() {
     return {
       videoInfoForm: {
@@ -89,6 +81,7 @@ export default {
         videoStatus: '' // 视频状态
       },
       videoId: -1,
+      vid: '30ac017200af4214ab82c02b6644662f',
       playAuth: ''
     }
   },
@@ -97,20 +90,20 @@ export default {
     this.fetchData()
   },
   mounted() {
-    /* eslint-disable no-undef */ // 忽略 no-undef 检测
-    /* const player = */ new Aliplayer({
-      id: 'J_prismPlayer',
-      width: '100%',
-
-      // 播放方式二：加密视频的播放：首先获取播放凭证
-      // encryptType: '1', // 如果播放加密视频，则需设置encryptType=1，非加密视频无需设置此项
-      vid: this.videoId,
-      playauth: this.playAuth
-    }, function(player) {
-      console.log('播放器创建成功')
-    })
+    this.d()
   },
   methods: {
+    async d() {
+      await this.asyncData() // 获取凭证
+      this.aliPlayer() // 渲染视频播放器
+    },
+    async asyncData() {
+      console.log('asyncData')
+      // const vid = this.$route.query.id
+      const vid = '30ac017200af4214ab82c02b6644662f'
+      const res = await video.getPlayAuth(vid)
+      this.playAuth = res.data.playAuth
+    },
     fetchData() {
       this.videoId = this.$route.query.id
       if (this.videoId.length > 0) {
@@ -119,6 +112,29 @@ export default {
           this.videoInfoForm = res.data.rows
         })
       }
+    },
+    aliPlayer() {
+      console.log('aliPlayer')
+      // eslint-disable-next-line no-undef
+      new Aliplayer({
+        'id': 'player-con',
+        'vid': this.vid,
+        'playauth': this.playAuth,
+        'qualitySort': 'asc',
+        'format': 'mp4',
+        'mediaType': 'video',
+        'width': '100%',
+        'autoplay': true,
+        'isLive': false,
+        'rePlay': false,
+        'playsinline': true,
+        'preload': true,
+        'controlBarVisibility': 'hover',
+        'useH5Prism': true
+      }, function(player) {
+        console.log('The player is created')
+      })
+      console.log('aliPlayer end')
     }
   }
 }
@@ -168,7 +184,7 @@ export default {
   margin-top: 50px;
 }
 
-.item .el-form-item__label{
+.item .el-form-item__label {
   color: #555555;
   font-size: 10px;
   font-weight: normal;
@@ -176,9 +192,10 @@ export default {
   padding-right: 5px;
 }
 
-.el-form-item{
+.el-form-item {
   margin-bottom: 0px;
 }
+
 .el-form-item__content {
   line-height: 23px;
   color: #555555;
@@ -196,19 +213,24 @@ export default {
 .el-col {
   border-radius: 4px;
 }
+
 .bg-purple-dark {
   background: #99a9bf;
 }
+
 .bg-purple {
   background: #d3dce6;
 }
+
 .bg-purple-light {
   background: #e5e9f2;
 }
+
 .grid-content {
   border-radius: 4px;
   min-height: 36px;
 }
+
 .row-bg {
   padding: 10px 0;
   background-color: #f9fafc;

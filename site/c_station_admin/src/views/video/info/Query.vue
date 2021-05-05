@@ -178,7 +178,8 @@ export default {
     // 操作相关方法
     info(row) {
       // 跳转 ,this.$route.query.id
-      this.$router.push({ name: 'VideoInfo', query: { id: row.videoId }})
+      // this.$router.push({ name: 'VideoInfo', query: { id: row.videoId }})
+      this.$router.push({ name: 'VideoInfo', query: { id: 1 }})
     },
     banned(row) {
       // 封禁视频

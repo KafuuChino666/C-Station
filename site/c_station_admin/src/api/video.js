@@ -28,9 +28,9 @@ export default {
     })
   },
   // 获取播放凭证
-  getPlayAuth(videoId) {
+  getPlayAuth(videoSourceId) {
     return request({
-      url: `/api/video/get-play-auth/${videoId}`,
+      url: `/api/video/media/get-play-auth/${videoSourceId}`,
       method: 'get'
     })
   }
