@@ -9,8 +9,8 @@ CREATE TABLE v_video(
 	zone_id INT NOT NULL UNIQUE, 
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
-	FOREIGN KEY(author_id) REFERENCES u_user(user_id),
-	FOREIGN KEY(img_id) REFERENCES pub_img(img_id)
+	#FOREIGN KEY(author_id) REFERENCES u_user(user_id),
+	#FOREIGN KEY(img_id) REFERENCES pub_img(img_id)
 );
 
 #视频信息
@@ -26,7 +26,7 @@ CREATE TABLE v_video_info(
 	video_status_id INT NOT NULL UNIQUE,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
-	FOREIGN KEY(video_info_id) REFERENCES v_video(video_info_id)
+	#FOREIGN KEY(video_info_id) REFERENCES v_video(video_info_id)
 );
 
 #点赞表
@@ -36,7 +36,7 @@ CREATE TABLE v_like(
 	down_number VARCHAR(10) COMMENT '点踩数',
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
-	FOREIGN KEY(like_id) REFERENCES v_video_info(like_id)
+	#FOREIGN KEY(like_id) REFERENCES v_video_info(like_id)
 );
 
 #弹幕表
@@ -48,8 +48,8 @@ CREATE TABLE v_barrage(
 	video_time TIME COMMENT '视频时间' NOT NULL,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
-	FOREIGN KEY(user_id) REFERENCES v_video(video_id),
-	FOREIGN KEY(user_id) REFERENCES u_user(user_id)
+	#FOREIGN KEY(user_id) REFERENCES v_video(video_id),
+	#FOREIGN KEY(user_id) REFERENCES u_user(user_id)
 );
 
 #评论表1
@@ -59,7 +59,7 @@ CREATE TABLE v_comment_first(
 	comment_text VARCHAR(255) COMMENT '评论1内容' NOT NULL,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME NOT NULL,
-	FOREIGN KEY(comment_id) REFERENCES v_video(comment_id)
+	#FOREIGN KEY(comment_id) REFERENCES v_video(comment_id)
 );
 
 #评论表2
@@ -69,7 +69,7 @@ CREATE TABLE v_comment_second(
 	comment_text VARCHAR(255) COMMENT '评论2内容' NOT NULL,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
-	FOREIGN KEY(comment_id) REFERENCES v_comment_first(comment_id)
+	#FOREIGN KEY(comment_id) REFERENCES v_comment_first(comment_id)
 );
 
 #视频状态表
@@ -78,7 +78,7 @@ CREATE TABLE v_video_status(
 	video_status VARCHAR(32) COMMENT '视频状态' NOT NULL,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
-	FOREIGN KEY(video_status_id) REFERENCES v_video_info(video_status_id)
+	#FOREIGN KEY(video_status_id) REFERENCES v_video_info(video_status_id)
 );
 
 SELECT img.img_location, info.video_title, v.author_id, zone_type, info.play_nub, video_status

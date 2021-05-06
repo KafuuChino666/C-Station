@@ -13,7 +13,7 @@ CREATE TABLE pub_hp_message(
 	customer_server_id INT UNIQUE NOT NULL,
 	bangumi_id INT UNIQUE NOT NULL,
 	cartoon_id INT UNIQUE NOT NULL,
-	FOREIGN KEY()
+	#FOREIGN KEY()
 )
 	
 #分区表(在视频表创建后创建)
@@ -22,7 +22,7 @@ CREATE TABLE pub_zone(
 	zone_type VARCHAR(20) COMMENT '分区类型' NOT NULL,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
-	FOREIGN KEY(zone_id) REFERENCES v_video(zone_id)
+	#FOREIGN KEY(zone_id) REFERENCES v_video(zone_id)
 );
 
 #图片表(在用户表创建后创建)
@@ -33,5 +33,5 @@ CREATE TABLE pub_img (
 	img_type INT NOT NULL COMMENT '图片类型',
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
-	FOREIGN KEY(user_id) REFERENCES u_user(user_id)
+	#FOREIGN KEY(user_id) REFERENCES u_user(user_id)
 );

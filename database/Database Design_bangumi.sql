@@ -18,6 +18,6 @@ CREATE TABLE bg_bangumi_info(
 	video_id INT,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
-	FOREIGN KEY(video_id) REFERENCES v_video(video_id),
-	FOREIGN KEY(sub_bangumi_id) REFERENCES u_sub_bangumi(sub_bangumi_id)
+	#FOREIGN KEY(video_id) REFERENCES v_video(video_id),
+	#FOREIGN KEY(sub_bangumi_id) REFERENCES u_sub_bangumi(sub_bangumi_id)
 );

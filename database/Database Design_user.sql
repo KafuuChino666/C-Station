@@ -23,7 +23,7 @@ CREATE TABLE u_safe (
 	rn_id INT NOT NULL UNIQUE,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
-	FOREIGN KEY(user_id) REFERENCES u_user(user_id)
+	#FOREIGN KEY(user_id) REFERENCES u_user(user_id)
 );
 
 #密保问题表
@@ -33,7 +33,7 @@ CREATE TABLE u_pb (
 	answer VARCHAR(255) COMMENT '密保答案' NOT NULL,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
-	FOREIGN KEY(ep_id) REFERENCES u_safe(ep_id)
+	#FOREIGN KEY(ep_id) REFERENCES u_safe(ep_id)
 );
 
 #实名表
@@ -43,7 +43,7 @@ CREATE TABLE u_realname (
 	ID_number VARCHAR(18) COMMENT '身份证号' NOT NULL,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
-	FOREIGN KEY(rn_id) REFERENCES u_safe(rn_id)
+	#FOREIGN KEY(rn_id) REFERENCES u_safe(rn_id)
 );
 
 ####
@@ -56,7 +56,7 @@ CREATE TABLE u_integral(
 	change_number INT COMMENT '消费数额' NOT NULL,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
-	FOREIGN KEY(user_id) REFERENCES u_user(user_id)
+	#FOREIGN KEY(user_id) REFERENCES u_user(user_id)
 );
 
 #硬币表
@@ -68,7 +68,7 @@ CREATE TABLE u_coin(
 	change_number INT COMMENT '投币数额' NOT NULL,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
-	FOREIGN KEY(user_id) REFERENCES u_user(user_id)
+	#FOREIGN KEY(user_id) REFERENCES u_user(user_id)
 );
 
 #钱包表
@@ -81,7 +81,7 @@ CREATE TABLE u_e_wallet(
 	modify_cause VARCHAR(255) COMMENT '消费信息' NOT NULL,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
-	FOREIGN KEY(user_id) REFERENCES u_user(user_id)
+	#FOREIGN KEY(user_id) REFERENCES u_user(user_id)
 );
 
 #预留:订单表
@@ -93,7 +93,7 @@ CREATE TABLE u_follow(
 	user_id INT NOT NULL,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
-	FOREIGN KEY(user_id) REFERENCES u_user(user_id)
+	#FOREIGN KEY(user_id) REFERENCES u_user(user_id)
 );
 
 #黑名单表
@@ -103,7 +103,7 @@ CREATE TABLE u_blacklist(
 	user_id INT NOT NULL,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
-	FOREIGN KEY(user_id) REFERENCES u_user(user_id)
+	#FOREIGN KEY(user_id) REFERENCES u_user(user_id)
 );
 
 #收藏夹表
@@ -117,8 +117,8 @@ CREATE TABLE u_facorites(
 	facorites_status VARCHAR(16) COMMENT '收藏夹状态' NOT NULL,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
-	FOREIGN KEY(user_id) REFERENCES u_user(user_id),
-	FOREIGN KEY(video_id) REFERENCES v_video(video_id)
+	#FOREIGN KEY(user_id) REFERENCES u_user(user_id),
+	#FOREIGN KEY(video_id) REFERENCES v_video(video_id)
 );
 
 #收藏表
@@ -128,9 +128,9 @@ CREATE TABLE u_collect(
 	facorites_id INT,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
-	FOREIGN KEY(video_id) REFERENCES v_video(video_id),
-	FOREIGN KEY(collect_id) REFERENCES u_facorites(collect_id),
-	FOREIGN KEY(facorites_id) REFERENCES u_facorites(facorites_id)
+	#FOREIGN KEY(video_id) REFERENCES v_video(video_id),
+	#FOREIGN KEY(collect_id) REFERENCES u_facorites(collect_id),
+	#FOREIGN KEY(facorites_id) REFERENCES u_facorites(facorites_id)
 	
 );
 
@@ -143,8 +143,8 @@ CREATE TABLE u_subscription (
 	label_id INT NOT NULL UNIQUE, 
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
-	FOREIGN KEY(user_id) REFERENCES u_user(user_id),
-	FOREIGN KEY(sub_bangumi_id) REFERENCES u_sub_bangumi(sub_bangumi_id)
+	#FOREIGN KEY(user_id) REFERENCES u_user(user_id),
+	#FOREIGN KEY(sub_bangumi_id) REFERENCES u_sub_bangumi(sub_bangumi_id)
 );
 
 #追番表
@@ -154,6 +154,6 @@ CREATE TABLE u_sub_bangumi (
 	bangumi_info_id INT,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL,
-	FOREIGN KEY(user_id) REFERENCES u_user(user_id),
-	FOREIGN KEY(bangumi_info_id) REFERENCES bg_bangumi_info(bangumi_info_id)
+	#FOREIGN KEY(user_id) REFERENCES u_user(user_id),
+	#FOREIGN KEY(bangumi_info_id) REFERENCES bg_bangumi_info(bangumi_info_id)
 );
