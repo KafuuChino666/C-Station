@@ -1,0 +1,23 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 2528932 */
+  src: url('iconfont.woff2?t=1620285871339') format('woff2'),
+       url('iconfont.woff?t=1620285871339') format('woff'),
+       url('iconfont.ttf?t=1620285871339') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-app:before {
+  content: "\e600";
+}
+
+.icon-keaigui6:before {
+  content: "\e652";
+}
+

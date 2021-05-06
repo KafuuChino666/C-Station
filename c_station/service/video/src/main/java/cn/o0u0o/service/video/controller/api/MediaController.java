@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/video/media")
 @Slf4j
-public class MediaController {1
+public class MediaController {
 
     @Autowired
     private MediaService mediaService;

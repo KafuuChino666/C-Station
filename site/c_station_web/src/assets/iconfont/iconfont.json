@@ -1,0 +1,23 @@
+{
+  "id": "2528932",
+  "name": "czhan",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "15783537",
+      "name": "app",
+      "font_class": "app",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "18883914",
+      "name": "可爱鬼6",
+      "font_class": "keaigui6",
+      "unicode": "e652",
+      "unicode_decimal": 58962
+    }
+  ]
+}
