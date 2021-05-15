@@ -19,7 +19,7 @@ import Foot from './components/Foot'
 import Navbar from './components/Navbar'
 
 export default {
-  name: 'Layout',
+  name: 'DefaultLayout',
   data () {
     return {
       url: 'https://mcsql-002.oss-cn-beijing.aliyuncs.com/head_background.png',
@@ -54,8 +54,6 @@ export default {
 .el-main {
   background-color: #E9EEF3;
   color: #333;
-  text-align: center;
-  line-height: 160px;
   overflow: hidden;
 }
 .el-footer {

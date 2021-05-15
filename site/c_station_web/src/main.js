@@ -13,6 +13,13 @@ import 'element-ui/lib/theme-chalk/index.css'
 // 消除子组件滑动条
 import VueScrollLock from 'vue-scroll-lock'
 
+// 引入layout
+import DefaultLayout from './layout/Default'
+import PlatformLayout from './layout/Platform'
+
+Vue.component('DefaultLayout', DefaultLayout)
+Vue.component('PlatformLayout', PlatformLayout)
+
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.use(VueScrollLock)
