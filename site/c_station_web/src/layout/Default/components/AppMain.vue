@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Promotion from '../../components/Promotion'
+import Promotion from '../../../components/Promotion'
 
 export default {
   name: 'AppMain',

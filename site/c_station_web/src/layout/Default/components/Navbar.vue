@@ -22,7 +22,7 @@
         <el-button slot="append" icon="el-icon-search"></el-button>
       </el-input>
     </el-menu-item>
-    <el-menu-item index="3">
+    <el-menu-item index="3" @click="goto()">
       <el-avatar :size="37" :src="avatarUrl"></el-avatar>
     </el-menu-item>
     <el-menu-item index="3">大会员</el-menu-item>
@@ -50,6 +50,10 @@ export default {
   methods: {
     handleSelect (key, keyPath) {
       console.log(key, keyPath)
+    },
+    goto () {
+      let routeData = this.$router.resolve({ path: '/platform', query: { id: 1 } })
+      window.open(routeData.href, '_blank')
     }
   }
 }

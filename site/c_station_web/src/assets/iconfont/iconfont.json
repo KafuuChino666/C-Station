@@ -6,6 +6,48 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "3143946",
+      "name": "广告",
+      "font_class": "guanggao",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    },
+    {
+      "icon_id": "5088395",
+      "name": "热点聚焦",
+      "font_class": "fire",
+      "unicode": "e622",
+      "unicode_decimal": 58914
+    },
+    {
+      "icon_id": "20241557",
+      "name": "喇叭",
+      "font_class": "laba",
+      "unicode": "e63f",
+      "unicode_decimal": 58943
+    },
+    {
+      "icon_id": "1209343",
+      "name": "作者-更新-位置",
+      "font_class": "zuozhegengxinweizhi",
+      "unicode": "e696",
+      "unicode_decimal": 59030
+    },
+    {
+      "icon_id": "1379892",
+      "name": "cli",
+      "font_class": "cli",
+      "unicode": "e61f",
+      "unicode_decimal": 58911
+    },
+    {
+      "icon_id": "21410608",
+      "name": "观看 (3)",
+      "font_class": "guankan3",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    },
+    {
       "icon_id": "15783537",
       "name": "app",
       "font_class": "app",
