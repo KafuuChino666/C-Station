@@ -21,7 +21,7 @@ public class QueryForm {
     //结束时间
     private Date endTime;
     //播放量
-    private Long playNub;
+    private String playNub;
     //视频状态
-    private String videoStatus;
+    private Integer videoStatus;
 }

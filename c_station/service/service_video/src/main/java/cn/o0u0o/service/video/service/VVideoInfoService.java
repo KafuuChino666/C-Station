@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -20,8 +21,10 @@ import java.util.Date;
  */
 public interface VVideoInfoService extends IService<VVideoInfo> {
 
-    IPage<TableData> selectVideoByTerm(Integer page, Integer limit, Integer videoId, String videoTitle, Integer authorId, Date startTime, Date endTime, Long playNub, String videoStatus);
+    IPage<TableData> selectVideoByTerm(Integer page, Integer limit, Integer videoId, String videoTitle, Integer authorId, Date startTime, Date endTime, String playNub, Integer videoStatus);
 
     VideoInfoResult getVideoInfoById(Integer videoId);
+
+    List<VVideoInfo> selectAllVideoStatus();
 
 }

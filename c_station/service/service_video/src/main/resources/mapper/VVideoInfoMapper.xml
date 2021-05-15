@@ -40,7 +40,6 @@
         LEFT JOIN v_video_info info ON v.`video_info_id` = info.`video_info_id`
         LEFT JOIN v_like lk ON info.`like_id` = lk.`like_id`
         LEFT JOIN pub_zone zone ON v.`zone_id` = zone.`zone_id`
-        LEFT JOIN v_video_status stat ON stat.`video_status_id` = info.`video_status_id`
         WHERE v.video_id = #{videoId}
     </select>
 </mapper>

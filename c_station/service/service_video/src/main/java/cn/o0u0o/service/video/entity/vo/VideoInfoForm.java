@@ -25,17 +25,17 @@ public class VideoInfoForm {
     //创建时间
     private Date gmtCreate;
     //播放量
-    private Integer playNub;
+    private String playNub;
     //分享数
-    private Integer videoPnumb;
+    private String videoPnumb;
     //投币数
-    private Integer videoCoin;
+    private String videoCoin;
     //点赞数
-    private Integer likeNumber;
+    private String likeNumber;
     //点踩数
-    private Integer downNumber;
+    private String downNumber;
     //类型
     private List<String> zoneType;
     //视频状态
-    private String videoStatus;
+    private Integer videoStatus;
 }

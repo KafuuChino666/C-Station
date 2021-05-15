@@ -52,8 +52,8 @@ public class VVideoInfo extends BaseEntity {
     @ApiModelProperty(value = "审核id")
     private Integer auditId;
 
-    @ApiModelProperty(value = "视频状态id")
-    private Integer videoStatusId;
+    @ApiModelProperty(value = "视频状态编号")
+    private Integer videoStatus;
 
 
 }

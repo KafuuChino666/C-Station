@@ -17,7 +17,7 @@ public class TableData {
     //视频分类类型
     private String zoneType;
     //视频播放量
-    private Integer playNub;
+    private String playNub;
     //视频状态
-    private String videoStatus;
+    private Integer videoStatus;
 }

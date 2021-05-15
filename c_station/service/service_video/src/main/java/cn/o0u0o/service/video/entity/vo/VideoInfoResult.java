@@ -24,22 +24,22 @@ public class VideoInfoResult {
     //创建时间
     private Date gmtCreate;
     //播放量
-    private Integer playNub;
+    private String playNub;
     //分享数
-    private Integer videoPnumb;
+    private String videoPnumb;
     //投币数
-    private Integer videoCoin;
+    private String videoCoin;
     //点赞数
-    private Integer likeNumber;
+    private String likeNumber;
     //类型
     private List<String> zoneType;
     //视频状态
-    private String videoStatus;
+    private Integer videoStatus;
 
     public VideoInfoResult() {
     }
 
-    public VideoInfoResult(Integer videoId, Integer authorId, String userName, String videoTitle, String videoBrief, Date gmtCreate, Integer playNub, Integer videoPnumb, Integer videoCoin, Integer likeNumber, List<String> zoneType, String videoStatus) {
+    public VideoInfoResult(Integer videoId, Integer authorId, String userName, String videoTitle, String videoBrief, Date gmtCreate, String playNub, String videoPnumb, String videoCoin, String likeNumber, List<String> zoneType, Integer videoStatus) {
         this.videoId = videoId;
         this.authorId = authorId;
         this.userName = userName;
