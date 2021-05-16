@@ -3,7 +3,7 @@ CREATE TABLE v_video(
 	video_id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT, #视频id
 	video_sort int unsigned not null,
 	video_title varchar(32) not null,
-	video_duration TIMESTAMP not null,
+	video_duration varchar(16) not null,
 	video_location VARCHAR(255) COMMENT '视频信息' NOT NULL, 	 #视频地址
 	video_info_id INT unsigned NOT NULL UNIQUE,								 #视频信息表
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
@@ -11,8 +11,6 @@ CREATE TABLE v_video(
 	#FOREIGN KEY(author_id) REFERENCES u_user(user_id),
 	#FOREIGN KEY(img_id) REFERENCES pub_img(img_id)
 );
-
-
 
 
 #视频信息
@@ -121,29 +119,56 @@ CREATE TABLE u_like_column(
 -- );
 
 #视频表索引
+
+show index from pub_img;
+show index from v_video_info;
+show index from pub_zone;
+show index from v_video_text;
+
+
 use db02;
 create index idx_pub_img_localtion on pub_img(img_location);
-create index idx_info_titlenubstatus on v_video_info(video_title, play_nub, video_status);
-create index idx_zone_type on pub_zone(zone_id);
+create index idx_info_nubstatus on v_video_info(play_nub, video_status);
+create index idx_zone_type on pub_zone(zone_type);
+create index idx_text_titleauthor on v_video_text(video_info_id, video_title, author_id);
 
+drop index idx_pub_img_localtion on pub_img;
+drop index idx_info_nubstatus on v_video_info;
+drop index idx_zone_type on pub_zone;
+drop index idx_text_titleauthor on v_video_text;
+drop index video_info_id on v_video_text;
+drop index zone_id on v_video_text;
+drop index comment_id on v_video_text;
 
-EXPLAIN SELECT img.img_location, info.video_title, v.author_id, zone.zone_type, info.play_nub, info.video_status
+EXPLAIN SELECT img.img_location, text.video_title, text.author_id, zone.zone_type, info.play_nub, info.video_status
 FROM v_video v 
-LEFT JOIN pub_img img ON img.`img_id` = v.`img_id`
 LEFT JOIN v_video_info info ON v.`video_info_id` = info.`video_info_id`
-LEFT JOIN pub_zone zone ON v.`zone_id` = zone.`zone_id`;
+left join v_video_text text on v.`video_info_id` = text.`video_info_id`
+LEFT JOIN pub_zone zone ON text.`zone_id` = zone.`zone_id`
+LEFT JOIN pub_img img ON img.`img_id` = text.`img_id`;
 
 
 #索引
-create index idx_video_id on v_video(video_id);
+show index from u_user;
+show index from v_video_info;
+show index from v_like;
+show index from pub_zone;
+show index from v_video_text;
+
+create index idx_video_v on v_video(video_id);
+create index idx_user_username on u_user(user_name);
+create index idx_text_iatb on v_video_text(video_info_id, author_id, video_title, video_brief);
+create index idx_info_gppcs on v_video_info(video_info_id, gmt_create, play_nub, video_pnumb, video_coin, video_status);
+create index idx_lk_ud on v_like(like_number, down_number);
 
 
-EXPLAIN SELECT v.video_id, v.author_id, u.user_name, info.video_title, info.video_brief, v.gmt_create, info.play_nub, info.video_pnumb, info.video_coin, lk.like_number, lk.down_number, zone.zone_type, info.video_status
+EXPLAIN SELECT v.video_id, text.author_id, u.user_name, text.video_title, text.video_brief, info.gmt_create, info.play_nub, info.video_pnumb, info.video_coin, lk.like_number, lk.down_number, zone.zone_type, info.video_status
 FROM  v_video v
-LEFT JOIN u_user u ON v.`author_id` = u.`user_id`
 LEFT JOIN v_video_info info ON v.`video_info_id` = info.`video_info_id`
+left join v_video_text text on v.`video_info_id` = text.`video_info_id`
+LEFT JOIN u_user u ON text.`author_id` = u.`user_id`
 LEFT JOIN v_like lk ON info.`like_id` = lk.`like_id`
-LEFT JOIN pub_zone zone ON v.`zone_id` = zone.`zone_id`
+LEFT JOIN pub_zone zone ON text.`zone_id` = zone.`zone_id`
 where v.video_id=1;
 
 
