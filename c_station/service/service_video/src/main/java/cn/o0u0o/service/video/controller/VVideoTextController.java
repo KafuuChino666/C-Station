@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021-05-17
  */
 @RestController
-@RequestMapping("/v-video")
-public class VVideoController {
+@RequestMapping("/v-video-text")
+public class VVideoTextController {
 
 }
 

@@ -26,7 +26,7 @@ public interface VVideoInfoMapper extends BaseMapper<VVideoInfo> {
 
     VideoInfoForm getVideoInfoById(Integer videoId);
 
-    @Select("SELECT video_status FROM v_video_info")
+    @Select("SELECT video_status_id, video_status FROM v_video_status")
     List<VVideoInfo> selectAllVideoStatus();
 
 }

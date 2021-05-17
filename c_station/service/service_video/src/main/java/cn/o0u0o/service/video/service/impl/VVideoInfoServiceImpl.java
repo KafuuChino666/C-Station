@@ -53,7 +53,7 @@ public class VVideoInfoServiceImpl extends ServiceImpl<VVideoInfoMapper, VVideoI
             likeNub = like - down;
         }
 
-        String likenumb = likeNub.toString();
+        String likenumb = Long.toString(likeNub);
 
         //获取信息
         Integer authorId = videoInfoById.getAuthorId();

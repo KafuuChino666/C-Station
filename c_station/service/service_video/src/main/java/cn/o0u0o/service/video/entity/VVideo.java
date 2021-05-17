@@ -15,7 +15,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author Caleb Chen
- * @since 2021-04-20
+ * @since 2021-05-17
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -26,26 +26,18 @@ public class VVideo extends BaseEntity {
     private static final long serialVersionUID=1L;
 
       @TableId(value = "video_id", type = IdType.AUTO)
-      @ApiModelProperty(value = "视频id")
     private Integer videoId;
 
-    @ApiModelProperty(value = "作者id")
-    private Integer authorId;
+    private Integer videoSort;
 
-    @ApiModelProperty(value = "评论id")
-    private Integer commentId;
+    private String videoTitle;
 
-    @ApiModelProperty(value = "视频信息id")
-    private Integer videoInfoId;
+    private String videoDuration;
 
-    @ApiModelProperty(value = "视频地址")
+    @ApiModelProperty(value = "视频信息")
     private String videoLocation;
 
-    @ApiModelProperty(value = "图片id(封面)")
-    private Integer imgId;
-
-    @ApiModelProperty(value = "分区id")
-    private Integer zoneId;
+    private Integer videoInfoId;
 
 
 }

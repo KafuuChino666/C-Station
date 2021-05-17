@@ -14,7 +14,7 @@
     <modules>
         <module>service_admin</module>
         <module>service_security</module>
-        <module>video</module>
+        <module>service_video</module>
         <module>service_sms</module>
     </modules>
 

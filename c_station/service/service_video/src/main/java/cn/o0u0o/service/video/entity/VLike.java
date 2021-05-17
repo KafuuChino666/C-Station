@@ -15,7 +15,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author Caleb Chen
- * @since 2021-04-20
+ * @since 2021-05-17
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -26,11 +26,10 @@ public class VLike extends BaseEntity {
     private static final long serialVersionUID=1L;
 
       @TableId(value = "like_id", type = IdType.AUTO)
-      @ApiModelProperty(value = "点赞id")
     private Integer likeId;
 
     @ApiModelProperty(value = "点赞数")
-    private Integer likeNumber;
+    private String likeNumber;
 
     @ApiModelProperty(value = "点踩数")
     private String downNumber;

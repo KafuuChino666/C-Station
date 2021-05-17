@@ -22,7 +22,7 @@ public class CodeGenerator {
     @Test
     public void genCode() {
 
-        String moduleName = "video";
+        String moduleName = "service_video";
 
         // 1、创建代码生成器
         AutoGenerator mpg = new AutoGenerator();
@@ -42,7 +42,7 @@ public class CodeGenerator {
 
         // 3、数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://8.131.121.227:3306/Test2?serverTimezone=GMT%2B8");
+        dsc.setUrl("jdbc:mysql://8.131.121.227:3306/TestVideo?serverTimezone=GMT%2B8");
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("YUNwei233");

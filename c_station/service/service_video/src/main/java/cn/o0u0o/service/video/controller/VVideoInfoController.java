@@ -38,8 +38,8 @@ public class VVideoInfoController {
                                       @RequestParam(required = false) Integer authorId,
                                       @RequestParam(required = false) Date startTime,
                                       @RequestParam(required = false) Date endTime,
-                                      @RequestParam(required = false) Long playNub,
-                                      @RequestParam(required = false) String videoStatus) {
+                                      @RequestParam(required = false) String playNub,
+                                      @RequestParam(required = false) Integer videoStatus) {
 
         IPage<TableData> queryFormIPage = vVideoInfoService.selectVideoByTerm(page, limit, videoId, videoTitle, authorId, startTime, endTime, playNub, videoStatus);
         List<TableData> records = queryFormIPage.getRecords();
