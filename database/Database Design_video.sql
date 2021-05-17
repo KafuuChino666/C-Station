@@ -110,13 +110,13 @@ CREATE TABLE u_like_column(
 -- 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
 -- );
 
--- #视频状态表
--- CREATE TABLE v_video_status(
--- 	video_status_id INT unsigned PRIMARY KEY AUTO_INCREMENT,
--- 	video_status VARCHAR(32) COMMENT '视频状态' NOT NULL,
--- 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
--- 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
--- );
+#视频状态表
+CREATE TABLE v_video_status(
+	video_status_id INT unsigned PRIMARY KEY AUTO_INCREMENT,
+	video_status VARCHAR(32) COMMENT '视频状态' NOT NULL,
+	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
+	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
+);
 
 #视频表索引
 
@@ -162,6 +162,7 @@ create index idx_info_gppcs on v_video_info(video_info_id, gmt_create, play_nub,
 create index idx_lk_ud on v_like(like_number, down_number);
 
 
+
 EXPLAIN SELECT v.video_id, text.author_id, u.user_name, text.video_title, text.video_brief, info.gmt_create, info.play_nub, info.video_pnumb, info.video_coin, lk.like_number, lk.down_number, zone.zone_type, info.video_status
 FROM  v_video v
 LEFT JOIN v_video_info info ON v.`video_info_id` = info.`video_info_id`
@@ -172,8 +173,11 @@ LEFT JOIN pub_zone zone ON text.`zone_id` = zone.`zone_id`
 where v.video_id=1;
 
 
-create index indx_video_status on v_video_info(video_status);
+show index from v_video_info;
+show index from v_video_status;
 
-EXPLAIN SELECT video_id, video_status FROM v_video_info;
+create index idx_video_idstatus on v_video_status(video_status_id, video_status);
+
+EXPLAIN SELECT video_status_id, video_status FROM v_video_status;
 
 drop index indx_video_status on v_video_info;
