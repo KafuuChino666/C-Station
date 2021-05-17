@@ -1,10 +1,10 @@
 <template>
   <div class="pater-container">
-    <el-col :span="24" style=" line-height: 23px">
+    <div :span="24" style=" line-height: 23px; margin-bottom: 20px">
       <div class="ico"/>
       妹子：被你看光了，这下嫁不出去了
       <span class="trail">视频详细与分析</span>
-    </el-col>
+    </div>
     <div class="low-container">
       <el-row>
         <el-col :span="5">
@@ -145,7 +145,6 @@ export default {
   position: relative;
   width: 100%;
   height: calc(100vh - 84px);
-  padding: 30px;
 }
 
 .ico {
@@ -181,7 +180,6 @@ export default {
   box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
   width: 100%;
   padding: 20px;
-  margin-top: 50px;
 }
 
 .item .el-form-item__label {
@@ -209,30 +207,4 @@ export default {
   display: inline;
 }
 
-/* 测试css 不需要则删除 */
-.el-col {
-  border-radius: 4px;
-}
-
-.bg-purple-dark {
-  background: #99a9bf;
-}
-
-.bg-purple {
-  background: #d3dce6;
-}
-
-.bg-purple-light {
-  background: #e5e9f2;
-}
-
-.grid-content {
-  border-radius: 4px;
-  min-height: 36px;
-}
-
-.row-bg {
-  padding: 10px 0;
-  background-color: #f9fafc;
-}
 </style>
