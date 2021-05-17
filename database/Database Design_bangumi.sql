@@ -1,6 +1,6 @@
 # 番剧表 bg开头
 CREATE TABLE bg_bangumi_indexs(
-	bangumi_id INT unsigned PRIMARY KEY AUTO_INCREMENT,
+	id INT unsigned PRIMARY KEY AUTO_INCREMENT,
 	bangumi_type VARCHAR(32) COMMENT '番剧类型' NOT NULL,
 	bangumi_info_id INT unsigned NOT NULL UNIQUE,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE bg_bangumi_indexs(
 
 #番剧信息
 CREATE TABLE bg_bangumi_info(
-	bangumi_info_id INT unsigned PRIMARY KEY AUTO_INCREMENT,
+	id INT unsigned PRIMARY KEY AUTO_INCREMENT,
 	bangumi_name VARCHAR(32) NOT NULL COMMENT '番剧名称' NOT NULL,
 	bangumi_info_str varchar(255) NOT NULL COMMENT '番剧简介信息' NOT NULL,
 	bangumi_status VARCHAR(20) COMMENT '番剧状态' NOT NULL,

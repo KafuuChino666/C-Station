@@ -1,7 +1,7 @@
 
 #用户表
 CREATE TABLE u_user (
-	user_id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	user_passwd VARCHAR(32) COMMENT '用户密码' NOT NULL,
 	user_name VARCHAR(64) COMMENT '昵称' NOT NULL,
 	user_sign VARCHAR(255) COMMENT '用户签名',
@@ -15,7 +15,7 @@ CREATE TABLE u_user (
 ########
 #账号安全表
 CREATE TABLE u_safe (
-	safe_id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	user_id INT unsigned,
 	email VARCHAR(20) COMMENT '邮箱',
 	phone INT unsigned COMMENT '电话号码',
@@ -28,7 +28,7 @@ CREATE TABLE u_safe (
 
 #密保问题表
 CREATE TABLE u_pb (
-	ep_id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	problem VARCHAR(255) COMMENT '密保问题' NOT NULL,
 	answer VARCHAR(255) COMMENT '密保答案' NOT NULL,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE u_pb (
 
 #实名表
 CREATE TABLE u_realname (
-	rn_id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	realname VARCHAR(20) COMMENT '真实姓名' NOT NULL,
 	ID_number VARCHAR(18) COMMENT '身份证号' NOT NULL,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE u_realname (
 ####
 #积分表
 CREATE TABLE u_integral(
-	integral_id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	user_id INT unsigned,
 	ig_balance INT unsigned COMMENT '积分余额' NOT NULL,
 	modify_cause VARCHAR(255) COMMENT '消费原因' NOT NULL,
@@ -61,7 +61,7 @@ CREATE TABLE u_integral(
 
 #硬币表
 CREATE TABLE u_coin(
-	coin_id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	user_id INT unsigned,
 	coin_balance INT COMMENT '硬币余额' NOT NULL, 
 	modify_cause VARCHAR(255) COMMENT '投币信息' NOT NULL,
@@ -73,7 +73,7 @@ CREATE TABLE u_coin(
 
 #钱包表
 CREATE TABLE u_e_wallet(
-	wallet_id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	c_money INT unsigned COMMENT 'c币余额' NOT NULL,
 	user_id INT unsigned,
 	order_id INT unsigned NOT NULL,
@@ -88,7 +88,7 @@ CREATE TABLE u_e_wallet(
 
 #关注表
 CREATE TABLE u_follow(
-	follow_tb_id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	follow_id INT unsigned NOT NULL,
 	user_id INT unsigned NOT NULL,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
@@ -98,7 +98,7 @@ CREATE TABLE u_follow(
 
 #黑名单表
 CREATE TABLE u_blacklist(
-	black_tb_id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	black_id INT unsigned NOT NULL,
 	user_id INT unsigned NOT NULL,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
@@ -108,7 +108,7 @@ CREATE TABLE u_blacklist(
 
 #收藏夹表
 CREATE TABLE u_facorites(
-	facorites_id INT unsigned PRIMARY KEY AUTO_INCREMENT,
+	id INT unsigned PRIMARY KEY AUTO_INCREMENT,
 	user_id INT unsigned,
 	facorites_name VARCHAR(32) COMMENT '收藏夹名' NOT NULL UNIQUE,
 	collect_id INT unsigned UNIQUE,
@@ -123,7 +123,7 @@ CREATE TABLE u_facorites(
 
 #收藏表
 CREATE TABLE u_collect(
-	collect_id INT unsigned PRIMARY KEY AUTO_INCREMENT,
+	id INT unsigned PRIMARY KEY AUTO_INCREMENT,
 	video_id INT unsigned,
 	facorites_id INT unsigned,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
@@ -136,7 +136,7 @@ CREATE TABLE u_collect(
 
 # 订阅表
 CREATE TABLE u_subscription (
-	subscription_id INT PRIMARY KEY AUTO_INCREMENT,
+	id INT PRIMARY KEY AUTO_INCREMENT,
 	user_id INT unsigned,
 	sub_sitcom_id INT unsigned NOT NULL UNIQUE,
 	sub_bangumi_id INT unsigned,
@@ -149,7 +149,7 @@ CREATE TABLE u_subscription (
 
 #追番表
 CREATE TABLE u_sub_bangumi (
-	sub_bangumi_id INT unsigned PRIMARY KEY AUTO_INCREMENT,
+	id INT unsigned PRIMARY KEY AUTO_INCREMENT,
 	user_id INT unsigned,
 	bangumi_info_id INT unsigned,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
@@ -160,7 +160,7 @@ CREATE TABLE u_sub_bangumi (
 
 #记录用户点赞视频
 CREATE TABLE u_like_video(
-	post_id int unsigned primary key auto_increment,
+	id int unsigned primary key auto_increment,
 	user_id int unsigned not null,
 	video_id int unsigned not null,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
@@ -169,7 +169,7 @@ CREATE TABLE u_like_video(
 
 #记录用户点赞评论
 CREATE TABLE u_like_comment(
-	post_id int unsigned primary key auto_increment,
+	id int unsigned primary key auto_increment,
 	user_id int unsigned not null,
 	comment_id int unsigned not null,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
@@ -178,7 +178,7 @@ CREATE TABLE u_like_comment(
 
 #记录用户点赞专栏
 CREATE TABLE u_like_column(
-	post_id int unsigned primary key auto_increment,
+	id int unsigned primary key auto_increment,
 	user_id int unsigned not null,
 	column_id int unsigned not null,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,

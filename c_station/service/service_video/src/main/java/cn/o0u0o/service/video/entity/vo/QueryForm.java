@@ -11,7 +11,7 @@ import java.util.Date;
 @Data
 public class QueryForm {
     //视频id
-    private Integer videoId;
+    private Integer id;
     //视频标题
     private String videoTitle;
     //uuid

@@ -5,7 +5,6 @@ import com.aliyuncs.exceptions.ClientException;
 
 import java.io.InputStream;
 
-
 public interface MediaService {
     String getPlayAuth(String videoSourceId) throws ClientException, ClientException;
 

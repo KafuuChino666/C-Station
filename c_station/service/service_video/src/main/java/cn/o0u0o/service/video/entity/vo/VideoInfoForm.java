@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 public class VideoInfoForm {
     //视频id
-    private Integer videoId;
+    private Integer id;
     //作者ID
     private Integer authorId;
     //作者昵称

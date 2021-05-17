@@ -25,9 +25,6 @@ public class VVideoText extends BaseEntity {
 
     private static final long serialVersionUID=1L;
 
-      @TableId(value = "video_text_id", type = IdType.AUTO)
-    private Integer videoTextId;
-
     private Integer videoInfoId;
 
     private Integer zoneId;

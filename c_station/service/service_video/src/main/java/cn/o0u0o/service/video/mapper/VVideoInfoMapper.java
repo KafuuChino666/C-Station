@@ -18,15 +18,15 @@ import java.util.List;
  * </p>
  *
  * @author Caleb Chen
- * @since 2021-04-20
+ * @since 2021-05-17
  */
 public interface VVideoInfoMapper extends BaseMapper<VVideoInfo> {
-
     IPage<TableData> selectVideoByTerm(Page<QueryForm> page, Integer videoId, String videoTitle, Integer authorId, Date startTime, Date endTime, String playNub, Integer videoStatus);
 
-    VideoInfoForm getVideoInfoById(Integer videoId);
+    VideoInfoForm getVideoInfoById(Integer id);
 
-    @Select("SELECT video_status_id, video_status FROM v_video_status")
+    @Select("SELECT id, video_status FROM v_video_status")
     List<VVideoInfo> selectAllVideoStatus();
 
+//    Object test();
 }

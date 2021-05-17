@@ -26,9 +26,6 @@ public class VBarrage extends BaseEntity {
 
     private static final long serialVersionUID=1L;
 
-      @TableId(value = "barrage_id", type = IdType.AUTO)
-    private Integer barrageId;
-
     private Integer userId;
 
     private Integer videoId;
