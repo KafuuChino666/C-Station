@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 public class VideoInfoResult {
     //视频id
-    private Integer videoId;
+    private Integer id;
     //作者ID
     private Integer authorId;
     //作者昵称
@@ -39,8 +39,8 @@ public class VideoInfoResult {
     public VideoInfoResult() {
     }
 
-    public VideoInfoResult(Integer videoId, Integer authorId, String userName, String videoTitle, String videoBrief, Date gmtCreate, String playNub, String videoPnumb, String videoCoin, String likeNumber, List<String> zoneType, Integer videoStatus) {
-        this.videoId = videoId;
+    public VideoInfoResult(Integer id, Integer authorId, String userName, String videoTitle, String videoBrief, Date gmtCreate, String playNub, String videoPnumb, String videoCoin, String likeNumber, List<String> zoneType, Integer videoStatus) {
+        this.id = id;
         this.authorId = authorId;
         this.userName = userName;
         this.videoTitle = videoTitle;

@@ -1,6 +1,6 @@
 #视频表
 CREATE TABLE v_video(
-	video_id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT, #视频id
+	id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT, #视频id
 	video_sort int unsigned not null,
 	video_title varchar(32) not null,
 	video_duration varchar(16) not null,
@@ -15,7 +15,7 @@ CREATE TABLE v_video(
 
 #视频信息
 CREATE TABLE v_video_info(
-	video_info_id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	like_id varchar(12) NOT NULL UNIQUE,
 	play_nub varchar(12) COMMENT '播放数' NOT NULL,
 	video_pnumb varchar(12) COMMENT '分享数' NOT NULL,
@@ -29,7 +29,7 @@ CREATE TABLE v_video_info(
 
 #视频信息表分表字段
 CREATE TABLE v_video_text(
-	video_text_id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	video_info_id INT unsigned NOT NULL UNIQUE,								 #视频信息表
 	zone_id INT unsigned NOT NULL UNIQUE, 										 #类型
 	img_id INT unsigned NOT NULL, 														 #图片id
@@ -43,7 +43,7 @@ CREATE TABLE v_video_text(
 
 #点赞表
 CREATE TABLE v_like(
-	like_id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	like_number VARCHAR(12) COMMENT '点赞数' NOT NULL,
 	down_number VARCHAR(12) COMMENT '点踩数',
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE v_like(
 
 #弹幕表
 CREATE TABLE v_barrage(
-	barrage_id INT PRIMARY KEY AUTO_INCREMENT,
+	id INT PRIMARY KEY AUTO_INCREMENT,
 	user_id INT unsigned,
 	video_id INT unsigned,
 	barrage_str varchar(200) COMMENT '弹幕内容' NOT NULL,
@@ -84,7 +84,7 @@ CREATE TABLE v_barrage(
 
 #视频状态表
 CREATE TABLE v_video_status(
-	video_status_id INT unsigned PRIMARY KEY AUTO_INCREMENT,
+	id INT unsigned PRIMARY KEY AUTO_INCREMENT,
 	video_status VARCHAR(32) COMMENT '视频状态' NOT NULL,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL

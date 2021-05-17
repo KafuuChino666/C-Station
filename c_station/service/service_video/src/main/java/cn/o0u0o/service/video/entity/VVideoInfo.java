@@ -25,9 +25,6 @@ public class VVideoInfo extends BaseEntity {
 
     private static final long serialVersionUID=1L;
 
-      @TableId(value = "video_info_id", type = IdType.AUTO)
-    private Integer videoInfoId;
-
     private String likeId;
 
     @ApiModelProperty(value = "播放数")

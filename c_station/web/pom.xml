@@ -21,12 +21,12 @@
     <dependencies>
         <dependency>
             <groupId>cn.o0u0o</groupId>
-            <artifactId>service_security</artifactId>
+            <artifactId>service_video</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>cn.o0u0o</groupId>
-            <artifactId>service_video</artifactId>
+            <artifactId>service_security</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>

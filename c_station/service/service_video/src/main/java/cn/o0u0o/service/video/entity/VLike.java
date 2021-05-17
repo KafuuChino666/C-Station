@@ -25,9 +25,6 @@ public class VLike extends BaseEntity {
 
     private static final long serialVersionUID=1L;
 
-      @TableId(value = "like_id", type = IdType.AUTO)
-    private Integer likeId;
-
     @ApiModelProperty(value = "点赞数")
     private String likeNumber;
 

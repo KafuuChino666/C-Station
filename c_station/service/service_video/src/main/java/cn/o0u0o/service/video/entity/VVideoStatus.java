@@ -25,9 +25,6 @@ public class VVideoStatus extends BaseEntity {
 
     private static final long serialVersionUID=1L;
 
-      @TableId(value = "video_status_id", type = IdType.AUTO)
-    private Integer videoStatusId;
-
     @ApiModelProperty(value = "视频状态")
     private String videoStatus;
 

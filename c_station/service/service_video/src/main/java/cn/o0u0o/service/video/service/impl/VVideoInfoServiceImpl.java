@@ -7,7 +7,6 @@ import cn.o0u0o.service.video.entity.vo.VideoInfoForm;
 import cn.o0u0o.service.video.entity.vo.VideoInfoResult;
 import cn.o0u0o.service.video.mapper.VVideoInfoMapper;
 import cn.o0u0o.service.video.service.VVideoInfoService;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -23,14 +22,13 @@ import java.util.List;
  * </p>
  *
  * @author Caleb Chen
- * @since 2021-04-20
+ * @since 2021-05-17
  */
 @Service
 public class VVideoInfoServiceImpl extends ServiceImpl<VVideoInfoMapper, VVideoInfo> implements VVideoInfoService {
 
     @Autowired
-    public VVideoInfoMapper vVideoInfoMapper;
-
+    private VVideoInfoMapper vVideoInfoMapper;
 
     @Override
     public IPage<TableData> selectVideoByTerm(Integer page, Integer limit, Integer videoId, String videoTitle, Integer authorId, Date startTime, Date endTime, String playNub, Integer videoStatus) {
@@ -76,7 +74,6 @@ public class VVideoInfoServiceImpl extends ServiceImpl<VVideoInfoMapper, VVideoI
 
     @Override
     public List<VVideoInfo> selectAllVideoStatus() {
-
         List<VVideoInfo> statusList = vVideoInfoMapper.selectAllVideoStatus();
         return statusList;
     }

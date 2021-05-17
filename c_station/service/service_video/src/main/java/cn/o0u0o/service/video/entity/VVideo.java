@@ -25,9 +25,6 @@ public class VVideo extends BaseEntity {
 
     private static final long serialVersionUID=1L;
 
-      @TableId(value = "video_id", type = IdType.AUTO)
-    private Integer videoId;
-
     private Integer videoSort;
 
     private String videoTitle;
