@@ -29,7 +29,7 @@ import java.util.List;
 public class VVideoInfoServiceImpl extends ServiceImpl<VVideoInfoMapper, VVideoInfo> implements VVideoInfoService {
 
     @Autowired
-    private VVideoInfoMapper vVideoInfoMapper;
+    public VVideoInfoMapper vVideoInfoMapper;
 
 
     @Override

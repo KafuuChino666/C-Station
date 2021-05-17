@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author Caleb Chen
  * @since 2021-05-17
  */
+
 public interface VVideoTextService extends IService<VVideoText> {
 
 }
