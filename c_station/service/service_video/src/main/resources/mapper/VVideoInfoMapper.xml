@@ -3,12 +3,13 @@
 <mapper namespace="cn.o0u0o.service.video.mapper.VVideoInfoMapper">
 
     <select id="selectVideoByTerm" resultType="cn.o0u0o.service.video.entity.vo.TableData">
-        SELECT img.img_location, info.video_title, v.author_id, zone_type, info.play_nub, video_status
-        FROM v_video v 
-        LEFT JOIN pub_img img ON img.`img_id` = v.`img_id`
+        SELECT img.img_location, text.video_title, text.author_id, zone.zone_type, info.play_nub, s.video_status
+        FROM v_video v
         LEFT JOIN v_video_info info ON v.`video_info_id` = info.`video_info_id`
-        LEFT JOIN pub_zone zone ON v.`zone_id` = zone.`zone_id`
-        LEFT JOIN v_video_status stat ON stat.`video_status_id` = info.`video_status_id`;
+        left join v_video_text text on v.`video_info_id` = text.`video_info_id`
+        LEFT JOIN pub_zone zone ON text.`zone_id` = zone.`zone_id`
+        LEFT JOIN pub_img img ON img.`img_id` = text.`img_id`
+        left join v_video_status s on info.`video_status` = s.`video_status_id`
         <where>
             <if test="videoId != null and videoId != ''">
                 v.video_id = #{videoId}
@@ -34,12 +35,14 @@
         </where>
     </select>
     <select id="getVideoInfoById" resultType="cn.o0u0o.service.video.entity.vo.VideoInfoForm">
-        SELECT v.video_id, v.author_id, u.user_name, info.video_title, info.video_brief, v.gmt_create, info.play_nub, info.video_pnumb, info.video_coin, lk.like_number, lk.down_number, zone.zone_type, stat.video_status
+        SELECT v.video_id, text.author_id, u.user_name, text.video_title, text.video_brief, info.gmt_create, info.play_nub, info.video_pnumb, info.video_coin, lk.like_number, lk.down_number, zone.zone_type, s.video_status
         FROM  v_video v
-        LEFT JOIN u_user u ON v.`author_id` = u.`user_id`
         LEFT JOIN v_video_info info ON v.`video_info_id` = info.`video_info_id`
+        left join v_video_text text on v.`video_info_id` = text.`video_info_id`
+        LEFT JOIN u_user u ON text.`author_id` = u.`user_id`
         LEFT JOIN v_like lk ON info.`like_id` = lk.`like_id`
-        LEFT JOIN pub_zone zone ON v.`zone_id` = zone.`zone_id`
+        LEFT JOIN pub_zone zone ON text.`zone_id` = zone.`zone_id`
+        left join v_video_status s on info.`video_status` = s.`video_status_id`
         WHERE v.video_id = #{videoId}
     </select>
 </mapper>

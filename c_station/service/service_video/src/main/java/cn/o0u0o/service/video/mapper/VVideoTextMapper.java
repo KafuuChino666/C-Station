@@ -1,6 +1,6 @@
 package cn.o0u0o.service.video.mapper;
 
-import cn.o0u0o.service.video.entity.VCommentSecond;
+import cn.o0u0o.service.video.entity.VVideoText;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author Caleb Chen
- * @since 2021-04-20
+ * @since 2021-05-17
  */
-public interface VCommentSecondMapper extends BaseMapper<VCommentSecond> {
+public interface VVideoTextMapper extends BaseMapper<VVideoText> {
 
 }

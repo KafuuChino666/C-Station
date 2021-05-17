@@ -19,6 +19,7 @@ import java.util.List;
  * @author Caleb Chen
  * @since 2021-04-20
  */
+
 public interface VVideoInfoService extends IService<VVideoInfo> {
 
     IPage<TableData> selectVideoByTerm(Integer page, Integer limit, Integer videoId, String videoTitle, Integer authorId, Date startTime, Date endTime, String playNub, Integer videoStatus);

@@ -15,25 +15,34 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author Caleb Chen
- * @since 2021-04-20
+ * @since 2021-05-17
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-@ApiModel(value="VCommentFirst对象", description="")
-public class VCommentFirst extends BaseEntity {
+@ApiModel(value="VVideoText对象", description="")
+public class VVideoText extends BaseEntity {
 
     private static final long serialVersionUID=1L;
 
-      @TableId(value = "comment_id", type = IdType.AUTO)
-      @ApiModelProperty(value = "评论id")
+      @TableId(value = "video_text_id", type = IdType.AUTO)
+    private Integer videoTextId;
+
+    private Integer videoInfoId;
+
+    private Integer zoneId;
+
+    private Integer imgId;
+
+    private Integer authorId;
+
     private Integer commentId;
 
-    @ApiModelProperty(value = "评论1类型")
-    private String commentType;
+    @ApiModelProperty(value = "视频标题")
+    private String videoTitle;
 
-    @ApiModelProperty(value = "评论1内容")
-    private String commentText;
+    @ApiModelProperty(value = "视频简介")
+    private String videoBrief;
 
 
 }

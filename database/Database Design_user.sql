@@ -157,3 +157,30 @@ CREATE TABLE u_sub_bangumi (
 	#FOREIGN KEY(user_id) REFERENCES u_user(user_id),
 	#FOREIGN KEY(bangumi_info_id) REFERENCES bg_bangumi_info(bangumi_info_id)
 );
+
+#记录用户点赞视频
+CREATE TABLE u_like_video(
+	post_id int unsigned primary key auto_increment,
+	user_id int unsigned not null,
+	video_id int unsigned not null,
+	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
+	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
+);
+
+#记录用户点赞评论
+CREATE TABLE u_like_comment(
+	post_id int unsigned primary key auto_increment,
+	user_id int unsigned not null,
+	comment_id int unsigned not null,
+	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
+	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
+);
+
+#记录用户点赞专栏
+CREATE TABLE u_like_column(
+	post_id int unsigned primary key auto_increment,
+	user_id int unsigned not null,
+	column_id int unsigned not null,
+	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
+	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
+);
