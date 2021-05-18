@@ -3,7 +3,7 @@
 <mapper namespace="cn.o0u0o.service.video.mapper.VVideoInfoMapper">
 
     <select id="selectVideoByTerm" resultType="cn.o0u0o.service.video.entity.vo.TableData">
-        SELECT img.img_location, text.video_title, text.author_id, zone.zone_type, info.play_nub, s.video_status
+        SELECT img.img_location, text.video_title, text.author_id, zone.zone_type, info.play_nub, s.id
         FROM v_video v
         LEFT JOIN v_video_info info ON v.`video_info_id` = info.`id`
         left join v_video_text text on v.`video_info_id` = text.`video_info_id`
