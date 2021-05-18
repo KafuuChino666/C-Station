@@ -1,7 +1,7 @@
 #小黑屋表(在用户表创建后创建)
 CREATE TABLE b_black_room(
 	id INT unsigned PRIMARY KEY AUTO_INCREMENT,
-	ban_info_id INT unsigned NOT NULL UNIQUE,
+	ban_info_id INT unsigned NOT NULL,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
 );

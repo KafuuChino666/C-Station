@@ -19,8 +19,8 @@ CREATE TABLE u_safe (
 	user_id INT unsigned,
 	email VARCHAR(20) COMMENT '邮箱',
 	phone INT unsigned COMMENT '电话号码',
-	ep_id INT unsigned NOT NULL UNIQUE,
-	rn_id INT unsigned NOT NULL UNIQUE,
+	ep_id INT unsigned NOT NULL,
+	rn_id INT unsigned NOT NULL,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
 	#FOREIGN KEY(user_id) REFERENCES u_user(user_id)
@@ -110,8 +110,8 @@ CREATE TABLE u_blacklist(
 CREATE TABLE u_facorites(
 	id INT unsigned PRIMARY KEY AUTO_INCREMENT,
 	user_id INT unsigned,
-	facorites_name VARCHAR(32) COMMENT '收藏夹名' NOT NULL UNIQUE,
-	collect_id INT unsigned UNIQUE,
+	facorites_name VARCHAR(32) COMMENT '收藏夹名' NOT NULL,
+	collect_id INT unsigned,
 	# 视频id是要计算收藏夹的总播放量
 	video_id INT unsigned,
 	facorites_status VARCHAR(16) COMMENT '收藏夹状态' NOT NULL,
@@ -138,9 +138,9 @@ CREATE TABLE u_collect(
 CREATE TABLE u_subscription (
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	user_id INT unsigned,
-	sub_sitcom_id INT unsigned NOT NULL UNIQUE,
+	sub_sitcom_id INT unsigned NOT NULL,
 	sub_bangumi_id INT unsigned,
-	label_id INT unsigned NOT NULL UNIQUE, 
+	label_id INT unsigned NOT NULL, 
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
 	#FOREIGN KEY(user_id) REFERENCES u_user(user_id),

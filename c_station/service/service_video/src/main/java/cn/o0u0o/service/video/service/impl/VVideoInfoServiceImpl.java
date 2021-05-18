@@ -65,7 +65,6 @@ public class VVideoInfoServiceImpl extends ServiceImpl<VVideoInfoMapper, VVideoI
         List<String> zoneType = videoInfoById.getZoneType();
         Integer videoStatus = videoInfoById.getVideoStatus();
 
-
         VideoInfoResult videoInfoResult
                 = new VideoInfoResult(videoId, authorId, userName, videoTitle, videoBrief, gmtCreate, playNub, videoPnumb, videoCoin, likeNumb, zoneType, videoStatus);
 

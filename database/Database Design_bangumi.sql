@@ -2,7 +2,7 @@
 CREATE TABLE bg_bangumi_indexs(
 	id INT unsigned PRIMARY KEY AUTO_INCREMENT,
 	bangumi_type VARCHAR(32) COMMENT '番剧类型' NOT NULL,
-	bangumi_info_id INT unsigned NOT NULL UNIQUE,
+	bangumi_info_id INT unsigned NOT NULL,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
 );
