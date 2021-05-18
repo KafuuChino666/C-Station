@@ -28,7 +28,7 @@ public class VideoInfoResult {
     //分享数
     private String videoPnumb;
     //投币数
-    private String videoCoin;
+    private Integer videoCoin;
     //点赞数
     private String likeNumber;
     //类型
@@ -39,7 +39,7 @@ public class VideoInfoResult {
     public VideoInfoResult() {
     }
 
-    public VideoInfoResult(Integer id, Integer authorId, String userName, String videoTitle, String videoBrief, Date gmtCreate, String playNub, String videoPnumb, String videoCoin, String likeNumber, List<String> zoneType, Integer videoStatus) {
+    public VideoInfoResult(Integer id, Integer authorId, String userName, String videoTitle, String videoBrief, Date gmtCreate, String playNub, String videoPnumb, Integer videoCoin, String likeNumber, List<String> zoneType, Integer videoStatus) {
         this.id = id;
         this.authorId = authorId;
         this.userName = userName;

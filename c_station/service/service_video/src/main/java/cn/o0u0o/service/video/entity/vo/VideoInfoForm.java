@@ -29,7 +29,7 @@ public class VideoInfoForm {
     //分享数
     private String videoPnumb;
     //投币数
-    private String videoCoin;
+    private Integer videoCoin;
     //点赞数
     private String likeNumber;
     //点踩数

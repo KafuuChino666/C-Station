@@ -44,8 +44,8 @@ CREATE TABLE v_video_text(
 #点赞表
 CREATE TABLE v_like(
 	id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	like_number VARCHAR(12) COMMENT '点赞数' NOT NULL,
-	down_number VARCHAR(12) COMMENT '点踩数',
+	like_number VARCHAR(12) COMMENT '点赞数' NOT NULL DEFAULT '0',
+	down_number VARCHAR(12) COMMENT '点踩数' not null DEFAULT '0',
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
 	#FOREIGN KEY(like_id) REFERENCES v_video_info(like_id)
@@ -114,11 +114,11 @@ drop index comment_id on v_video_text;
 
 EXPLAIN SELECT img.img_location, text.video_title, text.author_id, zone.zone_type, info.play_nub, s.video_status
 FROM v_video v 
-LEFT JOIN v_video_info info ON v.`video_info_id` = info.`video_info_id`
+LEFT JOIN v_video_info info ON v.`video_info_id` = info.`id`
 left join v_video_text text on v.`video_info_id` = text.`video_info_id`
-LEFT JOIN pub_zone zone ON text.`zone_id` = zone.`zone_id`
-LEFT JOIN pub_img img ON img.`img_id` = text.`img_id`
-left join v_video_status s on info.`video_status` = s.`video_status_id`;
+LEFT JOIN pub_zone zone ON text.`zone_id` = zone.`id`
+LEFT JOIN pub_img img ON img.`id` = text.`img_id`
+left join v_video_status s on info.`video_status` = s.`id`;
 
 
 #索引
@@ -139,15 +139,15 @@ drop index idx_info_gppcs on v_video_info;
 
 
 
-EXPLAIN SELECT v.video_id, text.author_id, u.user_name, text.video_title, text.video_brief, info.gmt_create, info.play_nub, info.video_pnumb, info.video_coin, lk.like_number, lk.down_number, zone.zone_type, s.video_status
+EXPLAIN SELECT v.id, text.author_id, u.user_name, text.video_title, text.video_brief, info.gmt_create, info.play_nub, info.video_pnumb, info.video_coin, lk.like_number, lk.down_number, zone.zone_type, s.video_status
 FROM  v_video v
-LEFT JOIN v_video_info info ON v.`video_info_id` = info.`video_info_id`
+LEFT JOIN v_video_info info ON v.`video_info_id` = info.`id`
 left join v_video_text text on v.`video_info_id` = text.`video_info_id`
-LEFT JOIN u_user u ON text.`author_id` = u.`user_id`
-LEFT JOIN v_like lk ON info.`like_id` = lk.`like_id`
-LEFT JOIN pub_zone zone ON text.`zone_id` = zone.`zone_id`
-left join v_video_status s on info.`video_status` = s.`video_status_id`
-where v.video_id=1;
+LEFT JOIN u_user u ON text.`author_id` = u.`id`
+LEFT JOIN v_like lk ON info.`like_id` = lk.`id`
+LEFT JOIN pub_zone zone ON text.`zone_id` = zone.`id`
+left join v_video_status s on info.`video_status` = s.`id`
+where v.id=1;
 
 
 show index from v_video_info;

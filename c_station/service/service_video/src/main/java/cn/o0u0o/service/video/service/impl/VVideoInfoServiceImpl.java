@@ -51,7 +51,7 @@ public class VVideoInfoServiceImpl extends ServiceImpl<VVideoInfoMapper, VVideoI
             likeNub = like - down;
         }
 
-        String likenumb = Long.toString(likeNub);
+        String likeNumb = Long.toString(likeNub);
 
         //获取信息
         Integer authorId = videoInfoById.getAuthorId();
@@ -61,13 +61,13 @@ public class VVideoInfoServiceImpl extends ServiceImpl<VVideoInfoMapper, VVideoI
         Date gmtCreate = videoInfoById.getGmtCreate();
         String playNub = videoInfoById.getPlayNub();
         String videoPnumb = videoInfoById.getVideoPnumb();
-        String videoCoin = videoInfoById.getVideoCoin();
+        Integer videoCoin = videoInfoById.getVideoCoin();
         List<String> zoneType = videoInfoById.getZoneType();
         Integer videoStatus = videoInfoById.getVideoStatus();
 
 
         VideoInfoResult videoInfoResult
-                = new VideoInfoResult(videoId, authorId, userName, videoTitle, videoBrief, gmtCreate, playNub, videoPnumb, videoCoin, likenumb, zoneType, videoStatus);
+                = new VideoInfoResult(videoId, authorId, userName, videoTitle, videoBrief, gmtCreate, playNub, videoPnumb, videoCoin, likeNumb, zoneType, videoStatus);
 
         return videoInfoResult;
     }
