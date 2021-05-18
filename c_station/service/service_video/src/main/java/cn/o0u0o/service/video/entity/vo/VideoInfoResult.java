@@ -1,5 +1,6 @@
 package cn.o0u0o.service.video.entity.vo;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 import java.util.Date;
@@ -35,11 +36,13 @@ public class VideoInfoResult {
     private List<String> zoneType;
     //视频状态
     private Integer videoStatus;
+    //视频地址
+    private String videoLocation;
 
     public VideoInfoResult() {
     }
 
-    public VideoInfoResult(Integer id, Integer authorId, String userName, String videoTitle, String videoBrief, Date gmtCreate, String playNub, String videoPnumb, Integer videoCoin, String likeNumber, List<String> zoneType, Integer videoStatus) {
+    public VideoInfoResult(Integer id, Integer authorId, String userName, String videoTitle, String videoBrief, Date gmtCreate, String playNub, String videoPnumb, Integer videoCoin, String likeNumber, List<String> zoneType, Integer videoStatus, String videoLocation) {
         this.id = id;
         this.authorId = authorId;
         this.userName = userName;
@@ -52,5 +55,6 @@ public class VideoInfoResult {
         this.likeNumber = likeNumber;
         this.zoneType = zoneType;
         this.videoStatus = videoStatus;
+        this.videoLocation = videoLocation;
     }
 }

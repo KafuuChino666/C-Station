@@ -65,9 +65,10 @@ public class VVideoInfoServiceImpl extends ServiceImpl<VVideoInfoMapper, VVideoI
         Integer videoCoin = videoInfoById.getVideoCoin();
         List<String> zoneType = videoInfoById.getZoneType();
         Integer videoStatus = videoInfoById.getVideoStatus();
+        String videoLocation = videoInfoById.getVideoLocation();
 
         VideoInfoResult videoInfoResult
-                = new VideoInfoResult(videoId, authorId, userName, videoTitle, videoBrief, gmtCreate, playNub, videoPnumb, videoCoin, likeNumb, zoneType, videoStatus);
+                = new VideoInfoResult(videoId, authorId, userName, videoTitle, videoBrief, gmtCreate, playNub, videoPnumb, videoCoin, likeNumb, zoneType, videoStatus, videoLocation);
 
         return videoInfoResult;
     }

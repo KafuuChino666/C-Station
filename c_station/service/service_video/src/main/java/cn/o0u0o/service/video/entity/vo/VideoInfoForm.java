@@ -1,8 +1,8 @@
 package cn.o0u0o.service.video.entity.vo;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -38,4 +38,6 @@ public class VideoInfoForm {
     private List<String> zoneType;
     //视频状态
     private Integer videoStatus;
+    //视频地址
+    private String videoLocation;
 }

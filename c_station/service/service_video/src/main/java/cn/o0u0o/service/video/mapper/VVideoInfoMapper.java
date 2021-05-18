@@ -29,5 +29,4 @@ public interface VVideoInfoMapper extends BaseMapper<VVideoInfo> {
     @Select("SELECT id, video_status FROM v_video_status")
     List<VVideoStatus> selectAllVideoStatus();
 
-//    Object test();
 }
