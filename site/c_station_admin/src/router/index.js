@@ -156,7 +156,7 @@ export const constantRoutes = [
       },
       {
         path: 'audit',
-        component: () => import('@/views/404'),
+        component: () => import('@/views/video/audit'),
         name: 'Audit',
         meta: { title: '视频审核', icon: 'el-icon-s-check' }
       }

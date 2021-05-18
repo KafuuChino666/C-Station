@@ -83,7 +83,6 @@ export default {
   position: relative;
   width: 100%;
   height: calc(100vh - 84px);
-  padding: 30px;
 }
 
 .low-container {

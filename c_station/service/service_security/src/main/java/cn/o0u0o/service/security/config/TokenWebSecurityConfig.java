@@ -130,7 +130,7 @@ public class TokenWebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) {
         web.ignoring().antMatchers(
-                "/api/**", "/swagger-ui.html/**", "/webjars/**", "/swagger-resources/**", "/v2/*", "/**", "/admin/**");
+                "/api/**", "/swagger-ui.html/**", "/webjars/**", "/swagger-resources/**", "/v2/*");
 //                "/**");
     }
 

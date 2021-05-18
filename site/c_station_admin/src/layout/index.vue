@@ -51,6 +51,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .app-main {
+    padding: 30px;
+  }
+
   @import "~@/styles/mixin.scss";
   @import "~@/styles/variables.scss";
 
