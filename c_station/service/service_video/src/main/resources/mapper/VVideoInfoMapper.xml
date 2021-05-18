@@ -35,7 +35,7 @@
         </where>
     </select>
     <select id="getVideoInfoById" resultType="cn.o0u0o.service.video.entity.vo.VideoInfoForm">
-        SELECT v.id, text.author_id, u.user_name, text.video_title, text.video_brief, info.gmt_create, info.play_nub, info.video_pnumb, info.video_coin, lk.like_number, lk.down_number, zone.zone_type, s.video_status
+        SELECT v.id, text.author_id, u.user_name, text.video_title, text.video_brief, info.gmt_create, info.play_nub, info.video_pnumb, info.video_coin, lk.like_number, lk.down_number, zone.zone_type, s.id
         FROM  v_video v
         LEFT JOIN v_video_info info ON v.`video_info_id` = info.`id`
         left join v_video_text text on v.`video_info_id` = text.`video_info_id`

@@ -1,6 +1,7 @@
 package cn.o0u0o.service.video.service;
 
 import cn.o0u0o.service.video.entity.VVideoInfo;
+import cn.o0u0o.service.video.entity.VVideoStatus;
 import cn.o0u0o.service.video.entity.vo.TableData;
 import cn.o0u0o.service.video.entity.vo.VideoInfoResult;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -22,5 +23,5 @@ public interface VVideoInfoService extends IService<VVideoInfo> {
 
     VideoInfoResult getVideoInfoById(Integer id);
 
-    List<VVideoInfo> selectAllVideoStatus();
+    List<VVideoStatus> selectAllVideoStatus();
 }

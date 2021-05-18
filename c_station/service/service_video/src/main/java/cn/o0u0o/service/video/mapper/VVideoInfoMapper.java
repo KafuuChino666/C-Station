@@ -1,6 +1,7 @@
 package cn.o0u0o.service.video.mapper;
 
 import cn.o0u0o.service.video.entity.VVideoInfo;
+import cn.o0u0o.service.video.entity.VVideoStatus;
 import cn.o0u0o.service.video.entity.vo.QueryForm;
 import cn.o0u0o.service.video.entity.vo.TableData;
 import cn.o0u0o.service.video.entity.vo.VideoInfoForm;
@@ -26,7 +27,7 @@ public interface VVideoInfoMapper extends BaseMapper<VVideoInfo> {
     VideoInfoForm getVideoInfoById(Integer id);
 
     @Select("SELECT id, video_status FROM v_video_status")
-    List<VVideoInfo> selectAllVideoStatus();
+    List<VVideoStatus> selectAllVideoStatus();
 
 //    Object test();
 }

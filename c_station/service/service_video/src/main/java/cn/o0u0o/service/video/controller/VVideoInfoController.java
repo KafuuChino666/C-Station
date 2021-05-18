@@ -3,6 +3,7 @@ package cn.o0u0o.service.video.controller;
 
 import cn.o0u0o.common.response.Result;
 import cn.o0u0o.service.video.entity.VVideoInfo;
+import cn.o0u0o.service.video.entity.VVideoStatus;
 import cn.o0u0o.service.video.entity.vo.TableData;
 import cn.o0u0o.service.video.entity.vo.VideoInfoResult;
 import cn.o0u0o.service.video.mapper.VVideoInfoMapper;
@@ -71,7 +72,7 @@ public class VVideoInfoController {
     @ApiOperation("获取所有视频状态")
     @GetMapping(value = "/status")
     public Result selectAllVideoStatus() {
-        List<VVideoInfo> statusList = vVideoInfoService.selectAllVideoStatus();
+        List<VVideoStatus> statusList = vVideoInfoService.selectAllVideoStatus();
         return Result.ok().data("statusList", statusList);
     }
 

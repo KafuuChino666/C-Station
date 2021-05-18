@@ -1,6 +1,7 @@
 package cn.o0u0o.service.video.service.impl;
 
 import cn.o0u0o.service.video.entity.VVideoInfo;
+import cn.o0u0o.service.video.entity.VVideoStatus;
 import cn.o0u0o.service.video.entity.vo.QueryForm;
 import cn.o0u0o.service.video.entity.vo.TableData;
 import cn.o0u0o.service.video.entity.vo.VideoInfoForm;
@@ -72,8 +73,8 @@ public class VVideoInfoServiceImpl extends ServiceImpl<VVideoInfoMapper, VVideoI
     }
 
     @Override
-    public List<VVideoInfo> selectAllVideoStatus() {
-        List<VVideoInfo> statusList = vVideoInfoMapper.selectAllVideoStatus();
+    public List<VVideoStatus> selectAllVideoStatus() {
+        List<VVideoStatus> statusList = vVideoInfoMapper.selectAllVideoStatus();
         return statusList;
     }
 }
