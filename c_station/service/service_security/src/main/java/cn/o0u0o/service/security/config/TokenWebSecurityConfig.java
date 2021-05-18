@@ -80,9 +80,6 @@ public class TokenWebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable()
                 .authorizeRequests()
-                // .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
-            .antMatchers("/admin/**")
-                .hasRole("ADMIN")
 
                 .anyRequest()
                 .authenticated()

@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface UCoinMapper extends BaseMapper<UCoin> {
 
+    void textSelect();
 }
