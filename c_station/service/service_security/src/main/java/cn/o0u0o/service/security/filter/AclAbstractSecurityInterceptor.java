@@ -46,13 +46,15 @@ public class AclAbstractSecurityInterceptor extends FilterSecurityInterceptor im
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         // 权限校验
         FilterInvocation filterInvocation = new FilterInvocation(servletRequest, servletResponse, filterChain);
-        //Collection<ConfigAttribute> attributes = urlFilterInvocationSecurityMetadataSource.getAttributes(filterInvocation);
-        //InterceptorStatusToken token = super.beforeInvocation(filterInvocation);
+        System.out.println("1111");
+        Collection<ConfigAttribute> attributes = urlFilterInvocationSecurityMetadataSource.getAttributes(filterInvocation);
+
+        InterceptorStatusToken token = super.beforeInvocation(filterInvocation);
         try {
 //            //执行下一个拦截器
             filterInvocation.getChain().doFilter(filterInvocation.getRequest(), filterInvocation.getResponse());
         } finally {
-            //super.afterInvocation(token, null);
+            super.afterInvocation(token, null);
         }
 
     }

@@ -27,7 +27,7 @@ import java.util.List;
 @Api(tags = "视频信息控制类")
 @RestController
 @CrossOrigin //跨域
-@RequestMapping("/admin/vVideoInfo")
+@RequestMapping("/admin/video")
 public class VVideoInfoController {
 
     @Autowired
