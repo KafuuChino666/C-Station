@@ -15,10 +15,10 @@
                 v.id = #{videoId}
             </if>
             <if test="videoTitle != null and videoTitle != ''">
-                and info.video_title = #{videoTitle}
+                and text.video_title = #{videoTitle}
             </if>
             <if test="authorId != null and authorId != ''">
-                and v.author_id = #{authorId}
+                and text.author_id = #{authorId}
             </if>
             <if test="startTime != null and startTime != ''">
                 and v.gmt_create &gt; #{startTime}
@@ -30,7 +30,7 @@
                 and info.play_nub = #{playNub}
             </if>
             <if test="videoStatus != null and videoStatus != ''">
-                and stat.video_status = #{videoStatus}
+                and s.id = #{videoStatus}
             </if>
         </where>
     </select>

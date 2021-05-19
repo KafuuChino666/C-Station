@@ -112,7 +112,7 @@ drop index video_info_id on v_video_text;
 drop index zone_id on v_video_text;
 drop index comment_id on v_video_text;
 
-EXPLAIN SELECT img.img_location, text.video_title, text.author_id, zone.zone_type, info.play_nub, s.video_status
+EXPLAIN SELECT img.img_location, text.video_title, text.author_id, zone.zone_type, info.play_nub, s.id
 FROM v_video v 
 LEFT JOIN v_video_info info ON v.`video_info_id` = info.`id`
 left join v_video_text text on v.`video_info_id` = text.`video_info_id`
@@ -120,6 +120,7 @@ LEFT JOIN pub_zone zone ON text.`zone_id` = zone.`id`
 LEFT JOIN pub_img img ON img.`id` = text.`img_id`
 left join v_video_status s on info.`video_status` = s.`id`;
 
+select * from v_video_text;
 
 #索引
 show index from u_user;
@@ -139,7 +140,7 @@ drop index idx_info_gppcs on v_video_info;
 
 
 
-EXPLAIN SELECT v.id, text.author_id, u.user_name, text.video_title, text.video_brief, info.gmt_create, info.play_nub, info.video_pnumb, info.video_coin, lk.like_number, lk.down_number, zone.zone_type, s.video_status
+EXPLAIN SELECT v.id, text.author_id, u.user_name, text.video_title, text.video_brief, info.gmt_create, info.play_nub, info.video_pnumb, info.video_coin, lk.like_number, lk.down_number, zone.zone_type, s.id, v.video_location
 FROM  v_video v
 LEFT JOIN v_video_info info ON v.`video_info_id` = info.`id`
 left join v_video_text text on v.`video_info_id` = text.`video_info_id`
