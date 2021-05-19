@@ -166,10 +166,24 @@ export const constantRoutes = [
   {
     path: 'users',
     component: Layout,
+    redirect: '/users/list',
+    name: 'Users',
+    meta: {
+      title: '用户管理',
+      icon: 'el-icon-film'
+    },
     children: [
       {
-        path: '@/views/404',
-        meta: { title: '用户管理', icon: 'el-icon-user-solid' }
+        path: 'list',
+        name: 'UserList',
+        component: () => import('@/views/user/list'),
+        meta: { title: '用户查询', icon: 'el-icon-user-solid' }
+      },
+      {
+        path: 'info',
+        name: 'Userinfo',
+        component: () => import('@/views/video/audit'),
+        meta: { title: '用户查询', icon: 'el-icon-user-solid' }
       }
     ]
   },
