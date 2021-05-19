@@ -4,9 +4,9 @@ import request from '@/utils/request'
 export default {
 
   // 根据查询表单查询video列表
-  selectVideoByTerm(queryForm) {
+  selectVideoByTerm(queryForm,page, limit) {
     return request({
-      url: `/admin/video/query/`,
+      url: `/admin/video/list/${page}/${limit}`,
       method: 'get',
       params: {
         queryForm

@@ -45,8 +45,4 @@
         left join v_video_status s on info.`video_status` = s.`id`
         WHERE v.id = #{id}
     </select>
-
-    <!--<select id="test" resultType="java.lang.Object">
-        select 1 from v_video
-    </select>-->
 </mapper>

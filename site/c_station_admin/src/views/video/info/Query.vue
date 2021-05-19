@@ -43,7 +43,7 @@
             </el-form-item>
           </el-col>
           <el-form-item>
-            <el-button type="primary" icon="el-icon-search" @click="query">查询</el-button>
+            <el-button type="primary" icon="el-icon-search" @click="query(1,5)">查询</el-button>
           </el-form-item>
         </el-col>
       </el-form>
@@ -121,34 +121,8 @@ export default {
         playNub: -1, // 播放量
         videoStatus: 1 // 视频状态
       },
-      videoStatus: [
-        {
-          label: '发布',
-          value: '1'
-        },
-        {
-          label: '未发布',
-          value: '0'
-        }
-      ],
-      tableData: [
-        {
-          imgLocation: 'https://mcsql-002.oss-cn-beijing.aliyuncs.com/download.jpg', // 封面
-          videoTitle: '妹子：被你看光了，这下嫁不出去了', // 视频标题
-          authorId: '覡夕莉゛', // 作者id
-          zoneType: '综合', // 视频分类类型
-          playNub: 120, // 视频播放量
-          videoStatus: 1 // 视频状态
-        },
-        {
-          imgLocation: 'https://mcsql-002.oss-cn-beijing.aliyuncs.com/wallhaven-lq7672.png', // 封面
-          videoTitle: '妹子这只是个意外，请相信我', // 视频标题
-          authorId: '覡夕莉゛', // 作者id
-          zoneType: '综合', // 视频分类类型
-          playNub: 120, // 视频播放量
-          videoStatus: 1 // 视频状态
-        }
-      ] // 表格数据
+      videoStatus: {},
+      tableData: [] // 表格数据
     }
   },
   // 页面渲染成功后获取数据
@@ -157,6 +131,7 @@ export default {
   },
   methods: {
     fetchData() {
+      this.query(1, 5)
       // 加载数据
       video.selectAllVideoStatus().then(res => {
         console.log(res.data)
@@ -165,10 +140,10 @@ export default {
         console.log(error)
       })
     },
-    query() {
+    query(page, limit) {
       // 表单校验
       // 请求查询api
-      video.selectVideoByTerm(this.queryForm).then(res => {
+      video.selectVideoByTerm(this.queryForm, page, limit).then(res => {
         console.log(res.data)
         this.tableData = res.data.rows
       }).then(error => {
