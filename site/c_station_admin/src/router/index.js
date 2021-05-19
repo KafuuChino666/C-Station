@@ -164,7 +164,7 @@ export const constantRoutes = [
   },
 
   {
-    path: 'users',
+    path: '/users',
     component: Layout,
     redirect: '/users/list',
     name: 'Users',
