@@ -12,7 +12,7 @@
         left join v_video_status s on info.`video_status` = s.`id`
         <where>
             <if test="videoId != null and videoId != ''">
-                v.video_id = #{videoId}
+                v.id = #{videoId}
             </if>
             <if test="videoTitle != null and videoTitle != ''">
                 and info.video_title = #{videoTitle}
@@ -45,8 +45,4 @@
         left join v_video_status s on info.`video_status` = s.`id`
         WHERE v.id = #{id}
     </select>
-
-    <!--<select id="test" resultType="java.lang.Object">
-        select 1 from v_video
-    </select>-->
 </mapper>
