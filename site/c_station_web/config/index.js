@@ -4,7 +4,23 @@
 
 const path = require('path')
 
+const name = 'c_station_admin' // page title
+
+function resolve(dir) {
+  return path.join(__dirname, dir)
+}
+
 module.exports = {
+
+  configureWebpack: {
+    name: name,
+    resolve: {
+      alias: {
+        '@': resolve('src')
+      }
+    }
+  },
+
   dev: {
 
     // Paths

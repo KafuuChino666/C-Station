@@ -5,7 +5,7 @@
     @open="handleOpen"
     @close="handleClose">
     <div class="upload-btn">
-      <el-button type="primary" class="but" icon="el-icon-upload">投稿</el-button>
+      <el-button @click="uploadFun()" type="primary" class="but" icon="el-icon-upload">投稿</el-button>
     </div>
     <el-menu-item index="1">
       <i class="el-icon-menu"></i>
@@ -54,7 +54,12 @@
 
 <script>
 export default {
-  name: 'index'
+  name: 'index',
+  methods: {
+    uploadFun () {
+      this.$router.push({name: 'PlatformUpload'})
+    }
+  }
 }
 </script>
 
@@ -62,18 +67,21 @@ export default {
 .side {
   height: 100%;
 }
+
 .side .el-menu-item {
   padding-left: 30px ! important;
 }
+
 .side .el-submenu__title {
   padding-left: 30px ! important;
 }
+
 .side .el-menu--inline li {
   padding-left: 64px ! important;
 }
 
 .upload-btn {
-  text-align:center;
+  text-align: center;
 }
 
 .side .but {
@@ -84,8 +92,8 @@ export default {
 }
 
 .nav-line {
-background: #f4f4f4;
-margin: 0 10px;
-height: 1.5px;
+  background: #f4f4f4;
+  margin: 0 10px;
+  height: 1.5px;
 }
 </style>
