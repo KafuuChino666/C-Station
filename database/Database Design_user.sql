@@ -5,6 +5,7 @@ CREATE TABLE u_user (
 	user_passwd VARCHAR(32) COMMENT '用户密码' NOT NULL,
 	user_name VARCHAR(64) COMMENT '昵称' NOT NULL,
 	user_sign VARCHAR(255) COMMENT '用户签名',
+	`status` varchar(12) COMMENT '用户状态',
 	gender CHAR(1) COMMENT '性别' DEFAULT'M' NOT NULL,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	birth DATE COMMENT '生日',

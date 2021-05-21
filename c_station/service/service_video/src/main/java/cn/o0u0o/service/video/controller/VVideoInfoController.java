@@ -47,8 +47,8 @@ public class VVideoInfoController {
                                       @RequestParam(required = false) Integer videoStatus) {
 
         IPage<TableData> queryFormIPage = vVideoInfoService.selectVideoByTerm(page, limit, id, videoTitle, authorId, startTime, endTime, playNub, videoStatus);
-        List<TableData> records = queryFormIPage.getRecords();
-        long total = queryFormIPage.getTotal();
+        List<TableData> records = queryFormIPage.getRecords(); // 分页记录列表
+        long total = queryFormIPage.getTotal(); // 分页总条数
         return  Result.ok().data("total", total).data("rows", records);
     }
 
