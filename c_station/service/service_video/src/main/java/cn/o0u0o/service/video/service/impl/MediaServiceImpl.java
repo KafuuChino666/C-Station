@@ -7,14 +7,11 @@ import cn.o0u0o.service.video.util.VodProperties;
 import com.aliyun.vod.upload.impl.UploadVideoImpl;
 import com.aliyun.vod.upload.req.UploadStreamRequest;
 import com.aliyun.vod.upload.resp.UploadStreamResponse;
+import com.aliyun.vod20170321.Client;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.utils.StringUtils;
-import com.aliyuncs.vod.model.v20170321.CreateUploadVideoRequest;
-import com.aliyuncs.vod.model.v20170321.CreateUploadVideoResponse;
-import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthRequest;
-import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthResponse;
-import lombok.Data;
+import com.aliyuncs.vod.model.v20170321.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -67,7 +64,6 @@ public class MediaServiceImpl implements MediaService {
     public VideoUploadAuth getUploadAuth(String uuid) {
 
         DefaultAcsClient client = AliyunVodSDKUtils.initVodClient(vodProperties.getKeyid(), vodProperties.getKeysecret());
-        CreateUploadVideoResponse response = new CreateUploadVideoResponse();
 
         CreateUploadVideoRequest request = new CreateUploadVideoRequest();
         request.setTitle(uuid + "/" + new Date()); // title = uuid + 日期
@@ -82,6 +78,21 @@ public class MediaServiceImpl implements MediaService {
             e.printStackTrace();
         }
 
+        return null;
+    }
+
+    @Override
+    public com.aliyun.vod20170321.models.GetVideoInfoResponse getVideoCove(String videoId) {
+        Client client = null;
+        try {
+            client = AliyunVodSDKUtils.createvod20170321Client(vodProperties.getKeyid(), vodProperties.getKeysecret());
+            com.aliyun.vod20170321.models.GetVideoInfoRequest getVideoInfoRequest = new com.aliyun.vod20170321.models.GetVideoInfoRequest();
+            getVideoInfoRequest.setVideoId(videoId);
+            com.aliyun.vod20170321.models.GetVideoInfoResponse videoInfo = client.getVideoInfo(getVideoInfoRequest);
+            return client.getVideoInfo(getVideoInfoRequest);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return null;
     }
 }

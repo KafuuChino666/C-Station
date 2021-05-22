@@ -1,6 +1,7 @@
 package cn.o0u0o.service.video.service;
 
 import cn.o0u0o.service.video.entity.vo.VideoUploadAuth;
+import com.aliyun.vod20170321.models.GetVideoInfoResponse;
 import com.aliyuncs.exceptions.ClientException;
 
 import java.io.InputStream;
@@ -11,4 +12,6 @@ public interface MediaService {
     String uploadVideo(InputStream inputStream, String originalFilename);
 
     VideoUploadAuth getUploadAuth(String uuid) throws ClientException;
+
+    GetVideoInfoResponse getVideoCove(String videoId);
 }

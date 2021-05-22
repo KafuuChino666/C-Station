@@ -1,9 +1,7 @@
 <template>
   <el-menu
     default-active="2"
-    class="side"
-    @open="handleOpen"
-    @close="handleClose">
+    class="side">
     <div class="upload-btn">
       <el-button @click="uploadFun()" type="primary" class="but" icon="el-icon-upload">投稿</el-button>
     </div>

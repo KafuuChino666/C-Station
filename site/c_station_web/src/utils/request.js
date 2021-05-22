@@ -36,7 +36,7 @@ service.interceptors.response.use(
         duration: 5 * 1000
       })
 
-      return Promise.reject('error')
+      return Promise.reject(new Error('error'))
     } else if (res.code === 23004) { // 获取用户信息失败
       // 清除cookie
       cookie.set('jwt_token', '', {domain: 'localhost'})

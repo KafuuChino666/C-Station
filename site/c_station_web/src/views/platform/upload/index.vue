@@ -1,6 +1,6 @@
 <template>
   <div class="upload-box">
-    <el-tabs v-model="activeName" @tab-click="handleClick">
+    <el-tabs v-model="activeName">
       <el-tab-pane label="视频投稿" name="first"><Frame /></el-tab-pane>
       <el-tab-pane label="专题投稿" name="second">2</el-tab-pane>
       <el-tab-pane label="互动视频投稿" name="third">3</el-tab-pane>

@@ -5,7 +5,9 @@ import cn.o0u0o.common.response.ResultCodeEnum;
 import cn.o0u0o.service.video.entity.vo.VideoUploadAuth;
 import cn.o0u0o.service.video.service.MediaService;
 import cn.o0u0o.service.video.service.VVideoService;
+import com.aliyun.vod20170321.models.GetVideoInfoResponse;
 import com.aliyuncs.exceptions.ClientException;
+import com.aliyuncs.vod.model.v20170321.GetVideoInfoRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -69,5 +71,16 @@ public class MediaController {
             e.printStackTrace();
         }
         return Result.err().message("获取上传凭证失败请稍后在试!");
+    }
+
+    @ApiOperation("根据阿里云视频id获取封面列表")
+    @GetMapping("get-video-cove/{videoId}")
+    public Result getVideoCoveByVideoId(@PathVariable String videoId) {
+        GetVideoInfoResponse videoCove = mediaService.getVideoCove(videoId);
+        if (videoCove != null) {
+            System.out.println(videoCove.getBody().video.snapshots.snapshot);
+            return Result.ok().data("cove", videoCove.getBody().video.snapshots.snapshot);
+        }
+        return Result.err();
     }
 }
