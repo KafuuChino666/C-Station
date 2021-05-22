@@ -176,7 +176,7 @@ export const constantRoutes = [
       {
         path: 'list',
         name: 'UserList',
-        component: () => import('@/views/user/list'),
+        component: () => import('@/views/user/components/select'),
         meta: { title: '用户查询', icon: 'el-icon-user-solid' }
       },
       {
