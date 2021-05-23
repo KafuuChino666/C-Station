@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.o0u0o.service.video.mapper.PubZoneMapper">
+
+    <select id="selectNodeByLevel" resultType="cn.o0u0o.service.video.entity.PubZone">
+        select id, title, sort from pub_zone where level = 0 and `show` = 1
+    </select>
+
+    <select id="selectChildByParentId" resultType="cn.o0u0o.service.video.entity.PubZone">
+        select id, title, notes, parent_id, sort from pub_zone where parent_id = 1 and `show` = 1
+    </select>
+    
+</mapper>
