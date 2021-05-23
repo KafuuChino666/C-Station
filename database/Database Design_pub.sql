@@ -24,6 +24,7 @@ CREATE TABLE pub_zone(
 	parent_id int comment '父级ID',
    	level int(4) comment '分区级数',
    	sort int(4) comment '分区排序',
+	show int(4) comment '是否显示',
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
 	#FOREIGN KEY(zone_id) REFERENCES v_video(zone_id)
