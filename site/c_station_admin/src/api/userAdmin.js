@@ -3,10 +3,13 @@ import request from '@/utils/request'
 
 export default {
 // 按员工编号搜索员工
-  selectUserByID(userId) {
+  selectUserByID(select) {
     return request({
-      url: `/views/user/components/select/${userId}`,
-      method: 'get'
+      url: `/views/user/components/select/${page}/${limit}`,
+      method: 'get',
+      params: {
+        select
+      }
     })
   },
 }

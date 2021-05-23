@@ -13,7 +13,7 @@
             <span>{{ props.row.userName }}</span>
           </el-form-item>
           <el-form-item label="真实姓名">
-            <span>{{ props.row.realname }}</span>
+            <span>{{ props.row.realName }}</span>
           </el-form-item>
           <el-form-item label="性别">
             <span>{{ props.row.gender }}</span>
@@ -66,25 +66,14 @@ export default {
       userData: [{
         userId: '12987122',
         userName: 'CalebCX',
-        realname: '陈芊浩',
+        realName: '陈芊浩',
         gender: '男',
         category: '大会员',
         status: '在线',
         address: '陕西省西安市',
         consumed: '12',
         IDNumber: '610111111111111111'
-      },
-        {
-          userId: '12987123',
-          userName: 'CalebCX',
-          realname: '陈芊浩',
-          gender: '男',
-          category: '大会员',
-          status: '在线',
-          address: '陕西省西安市',
-          consumed: '12',
-          IDNumber: '610111111111111111'
-        }]
+      }],
     }
   },
 
@@ -93,14 +82,12 @@ export default {
   },
 
   methods: {
-    fetchData() {
-      this.videoId = this.$route.query.id
-      if (this.videoId.length > 0) {
-        // 请求数据api
-        userAdmin.selectUserByID(this.userId).then(res => {
-          this.userData = res.data.rows
-        })
-      }
+    fetchData(selectUser, page, limit) {
+      userAdmin.selectUserByID(selectUser, page, limit).then(res => {
+        this.userData = res.data.rows
+      }).then(error => {
+        console.log(error)
+      })
     }
   }
 }

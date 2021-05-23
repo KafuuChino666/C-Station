@@ -3,10 +3,10 @@
     <!-- 搜索框开始 -->
     <div class="select" style="top: 10px ; width: 45%;">
       <el-form :inline="true" :model="select" class="demo-form-inline">
-      <el-input v-model="select.selectUser" placeholder="请输入用户ID" class="input-with-select">
+      <el-input v-model="select.selectUserID" placeholder="请输入用户ID" class="input-with-select" >
         <el-select slot="prepend" v-model="select.selectType" placeholder="请选择">
           <el-option
-            v-for="item in options"
+            v-for="item in selectType"
             :key="item.value"
             :label="item.label"
             :value="item.value">
@@ -16,10 +16,10 @@
       </el-input>
       <el-input class="input-select"
         prefix-icon="el-icon-search"
-        v-model="select.selectUser"
+        v-model="select.selectUserName"
         placeholder="请输入用户昵称关键字">
       </el-input>
-      <el-button type="primary" icon="el-icon-search" @keyup.enter="selectUserByID">搜索</el-button>
+      <el-button type="primary" icon="el-icon-search" @keyup.enter="selectUserByInfo">搜索</el-button>
       </el-form>
     </div>
           <!-- 搜索框结束 -->
@@ -51,11 +51,11 @@ export default {
   data() {
     return {
       select: {
-        selectUser: '',
-        selectType: '',
-        selectUserName: ''
+        selectUserID: '', // 用户ID
+        selectType: '', // 用户类型
+        selectUserName: '' // 用户昵称
       },
-      options: [{
+      selectType: [{
         value: '1',
         label: '普通用户'
       }, {
@@ -64,10 +64,15 @@ export default {
       }, {
         value: '3',
         label: '大会员'
-      }],
-      methods: {
-        
-      }
+      }], // 查询数据
+      page: 1,
+      limit: 6,
+    }
+  },
+  methods: {
+    //查询用户信息
+    selectUserByInfo() {
+      userList.methods.fetchData(this.select, this.page, this.limit)
     }
   }
 }
