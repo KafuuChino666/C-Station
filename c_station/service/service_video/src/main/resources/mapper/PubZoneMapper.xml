@@ -3,11 +3,11 @@
 <mapper namespace="cn.o0u0o.service.video.mapper.PubZoneMapper">
 
     <select id="selectNodeByLevel" resultType="cn.o0u0o.service.video.entity.PubZone">
-        select id, title, sort from pub_zone where level = 0 and `show` = 1
+        select id, title, sort, parent_id from pub_zone where level = 0 and `show` = 1
     </select>
 
     <select id="selectChildByParentId" resultType="cn.o0u0o.service.video.entity.PubZone">
-        select id, title, notes, parent_id, sort from pub_zone where parent_id = 1 and `show` = 1
+        select id, title, notes, parent_id, sort from pub_zone where parent_id = #{parentId} and `show` = 1
     </select>
     
 </mapper>

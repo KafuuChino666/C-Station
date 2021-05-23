@@ -14,5 +14,18 @@ export default {
       url: `/api/video/media/get-video-cove/${videoId}`,
       method: 'get'
     })
+  },
+  // 获取视频类型父节点
+  getAllRootNode () {
+    return request({
+      url: `/api/video/zone/root`,
+      method: 'get'
+    })
+  },
+  getChildByParentId (value) {
+    return request({
+      url: `/api/video/zone/child/${value}`,
+      method: 'get'
+    })
   }
 }

@@ -46,7 +46,8 @@
       </el-form-item>
       <el-form-item label="分区" prop="region">
         <el-cascader
-          :props="{ expandTrigger: 'hover' }"
+          :options="zoneRootNodes"
+          :props="props"
         ></el-cascader>
       </el-form-item>
       <el-form-item label="标签" prop="name">
@@ -121,6 +122,22 @@ export default {
     return {
       radio: '1',
       ruleForm: {},
+      zoneRootNodes: [],
+      props: {
+        lazy: true, // 开启懒加载
+        value: 'id',
+        label: 'title',
+        lazyLoad (node, resolve) {
+          if (node.value !== undefined) {
+            let nodes
+            platform.getChildByParentId(node.value).then(res => {
+              nodes = res.data.zones
+              console.log(nodes)
+              resolve(nodes)
+            })
+          }
+        }
+      },
       dynamicTags: ['标签一', '标签二', '标签三'],
       dialogVisible: false,
       imgUrl: 'https://mcsql-002.oss-cn-beijing.aliyuncs.com/wallhaven-lq7672.png',
@@ -140,10 +157,17 @@ export default {
         this.getVideoCove()
       }
     })
+    this.getZoneRootNode()
   },
   methods: {
     print () {
       alert('111')
+    },
+
+    getZoneRootNode () {
+      platform.getAllRootNode().then(res => {
+        this.zoneRootNodes = res.data.zones
+      })
     },
     // 获取视频封面this.$parent.
     getVideoCove () {
