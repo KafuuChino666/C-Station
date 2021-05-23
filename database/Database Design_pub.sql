@@ -19,7 +19,11 @@ CREATE TABLE pub_hp_message(
 #分区表(在视频表创建后创建)
 CREATE TABLE pub_zone(
 	id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	zone_type VARCHAR(20) COMMENT '分区类型' NOT NULL,
+	title VARCHAR(20) COMMENT '标题' NOT NULL,
+	notes VARCHAR(64) COMMENT '备注',
+	parent_id int comment '父级ID',
+   	level int(4) comment '分区级数',
+   	sort int(4) comment '分区排序',
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
 	#FOREIGN KEY(zone_id) REFERENCES v_video(zone_id)
