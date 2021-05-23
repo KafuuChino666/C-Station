@@ -7,13 +7,13 @@
     <h1>基本信息 </h1>
     <p style="display: inline">视频封面设置</p>
     <p class="medium-title">（格式jpeg、png，文件大小≤5MB，建议尺寸≥1146*717，最低尺寸≥960*600）</p>
-    <div style="margin-top: 20px">
+    <div class="cover">
       <div class="hoverImg">
         <div class="back">
           <div class="but" @onclick="this.print">上传封面</div>
           <div class="but" style="float: right" @click="dialogVisible = true">剪切修改</div>
         </div>
-        <el-image :src="this.coves[0]" style="width: 200px; height: 130px"></el-image>
+        <el-image :src="coveUrl" style="width: 200px; height: 130px"></el-image>
       </div>
       <el-dialog
         title="提示"
@@ -25,6 +25,14 @@
           <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
         </span>
       </el-dialog>
+      <div style="float: left">
+        <div v-for="(item, index) in 3" :key="index" :class="index !== coverIndex ? 'cover-img' : 'cover-img cover-img-active cover-img-back-active:active'" ref="cover-item" @click="clickCoverItem(index)">
+          <div :class="index !== coverIndex ? 'cover-img-back' : 'cover-img-back cover-img-back-active'">
+            <i class="el-icon-check"></i>
+          </div>
+          <el-image :src="coves[index]"  style="width: 160px; height: 100px"></el-image>
+        </div>
+      </div>
     </div>
     <el-form :model="ruleForm" ref="ruleForm" label-width="80px" style="padding-top: 10px">
       <el-form-item label="类型" prop="resource">
@@ -117,15 +125,19 @@ export default {
       dialogVisible: false,
       imgUrl: 'https://mcsql-002.oss-cn-beijing.aliyuncs.com/wallhaven-lq7672.png',
       loadedPercent: 0,
-      coves: []
+      coves: [],
+      coveUrl: this.imgUrl,
+      coverIndex: 0
     }
   },
   mounted () {
+    // 测试代码
+    this.getVideoCove()
+    // end
     Pubsub.subscribe('loadedPercent', (msg, value) => {
       this.loadedPercent = value
       if (value === 100) {
         this.getVideoCove()
-        console.log("完成" + value)
       }
     })
   },
@@ -135,12 +147,23 @@ export default {
     },
     // 获取视频封面this.$parent.
     getVideoCove () {
-      alert(this.$parent.videoId)
-      if (this.$parent.videoId) {
-        platform.getVideoCoveByVideoId(this.$parent.videoId).then(res => {
+      // this.$parent.videoId = '064bb1aed2064f44bb64d21b8b121969'
+      // if (this.$parent.videoId) {
+      //   platform.getVideoCoveByVideoId(this.$parent.videoId).then(res => {
+      //     this.coves = res.data.cove
+      //   })
+      // }
+      let videoId = '64e1fa3151ee431fa72551c70560725e'
+      if (videoId) {
+        platform.getVideoCoveByVideoId(videoId).then(res => {
           this.coves = res.data.cove
+          this.coveUrl = this.coves[0]
         })
       }
+    },
+    clickCoverItem (index) {
+      this.coverIndex = index
+      this.coveUrl = this.coves[index]
     }
   }
 }
@@ -166,10 +189,17 @@ export default {
   display: inline;
 }
 
+.cover {
+  margin-top: 20px;
+  width: 100%;
+  height: 140px;
+}
+
 .hoverImg {
   width: 200px;
   height: 130px;
   position: relative;
+  float: left;
 }
 
 .back {
@@ -191,5 +221,35 @@ export default {
   color: #fff;
   text-align: center;
   line-height: 25px;
+}
+
+.cover-img {
+  width: 160px;
+  height: 100px;
+  position: relative;
+  float: left;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+.cover-img-back {
+  height: 16px;
+  width: 16px;
+  visibility: hidden;
+  position: absolute;
+  background-color: #0070cc;
+  bottom: 0;
+  z-index: 10;
+  right: 0;
+  line-height: 16px;
+  color: white;
+}
+
+.cover-img-active {
+  border:1px solid #0070cc;
+}
+
+.cover-img-back-active {
+  visibility: visible;
 }
 </style>

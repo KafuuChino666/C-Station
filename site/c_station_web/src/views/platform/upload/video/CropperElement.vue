@@ -24,8 +24,7 @@
         :maxImgSize="option.maxImgSize"
         :enlarge="option.enlarge"
         :mode="option.mode"
-        @realTime="realTime"
-        @imgLoad="imgLoad">
+        >
       </VueCropper>
     </div>
     <div class="cr-right">
@@ -70,7 +69,9 @@ export default {
     }
   },
   mounted () {
-    this.setAvatarBase64(this.avatarUrl, (base64) => {
+    let _super = this.$parent.$parent
+    console.log(_super.coves)
+    this.setAvatarBase64(_super.coves[_super.coverIndex], (base64) => {
       this.option.img = base64
     })
   },
@@ -110,7 +111,8 @@ export default {
       let _this = this
       let image = new Image()
       // 处理缓存
-      image.src = src + '?v=' + Math.random()
+      // image.src = src + '?v=' + Math.random()
+      image.src = src
       // 支持跨域图片
       image.crossOrigin = '*'
       // image.setAttribute("crossOrigin",'anonymous')
@@ -125,7 +127,7 @@ export default {
       let canvas = document.createElement('canvas')
       canvas.width = image.width
       canvas.height = image.height
-      let ctx = canvas.getContext('d')
+      let ctx = canvas.getContext('2d')
       ctx.drawImage(image, 0, 0, image.width, image.height)
       // 可选其他值 image/jpeg
       console.log('transBase64FromImage')

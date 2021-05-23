@@ -41,7 +41,7 @@ export default {
       file: {},
       requestId: '',
       uploader: null,
-      isShow: false
+      isShow: true
     }
   },
   methods: {
@@ -58,22 +58,9 @@ export default {
       this.uploader.addFile(this.file, null, null, null, '{"Vod":{}}')
       this.uploader.startUpload() // 开始上传
     },
-    getAuth () {
-      platform.getUploadAuth('5541554').then(res => {
-        this.videoId = res.data.auth.videoId
-        this.uploadAddress = res.data.auth.uploadAddress
-        this.uploadAuth = res.data.auth.uploadAuth
-
-      }).catch(error => {
-        this.$notify({
-          title: '错误',
-          message: '服务器好像出差了~请稍后在试' + error,
-          type: 'warning'
-        })
-      })
-    },
     // 创建上传对象
     createUploader (type) {
+      let cref = this
       // eslint-disable-next-line
       var uploader = new AliyunUpload.Vod({
         // 阿里账号ID，必须有值
@@ -97,8 +84,18 @@ export default {
           } else {
             // 如果uploadInfo.videoId不存在，调用获取视频上传地址和凭证接口
             // 从视频点播服务获取的uploadAuth、uploadAddress和videoId，设置到SDK里
-            _this.getAuth()
-            uploader.setUploadAuthAndAddress(uploadInfo, _this.uploadAuth,_this.uploadAddress, _this.videoId)
+            platform.getUploadAuth('5541554').then(res => {
+              cref.videoId = res.data.auth.videoId
+              cref.uploadAddress = res.data.auth.uploadAddress
+              cref.uploadAuth = res.data.auth.uploadAuth
+              uploader.setUploadAuthAndAddress(uploadInfo, cref.uploadAuth, cref.uploadAddress, cref.videoId)
+            }).catch(error => {
+              cref.$notify({
+                title: '错误',
+                message: '服务器好像出差了~请稍后在试' + error,
+                type: 'warning'
+              })
+            })
           }
         },
         // 文件上传成功
