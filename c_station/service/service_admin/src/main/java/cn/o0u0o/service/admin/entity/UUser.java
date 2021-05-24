@@ -16,7 +16,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author Caleb Chen
- * @since 2021-04-20
+ * @since 2021-05-23
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -26,9 +26,6 @@ public class UUser extends BaseEntity {
 
     private static final long serialVersionUID=1L;
 
-      @TableId(value = "user_id", type = IdType.AUTO)
-    private Integer userId;
-
     @ApiModelProperty(value = "用户密码")
     private String userPasswd;
 
@@ -37,6 +34,9 @@ public class UUser extends BaseEntity {
 
     @ApiModelProperty(value = "用户签名")
     private String userSign;
+
+    @ApiModelProperty(value = "用户状态")
+    private String status;
 
     @ApiModelProperty(value = "性别")
     private String gender;

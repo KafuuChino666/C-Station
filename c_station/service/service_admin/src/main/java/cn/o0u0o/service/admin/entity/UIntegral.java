@@ -15,7 +15,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author Caleb Chen
- * @since 2021-04-20
+ * @since 2021-05-23
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -24,9 +24,6 @@ import lombok.experimental.Accessors;
 public class UIntegral extends BaseEntity {
 
     private static final long serialVersionUID=1L;
-
-      @TableId(value = "integral_id", type = IdType.AUTO)
-    private Integer integralId;
 
     private Integer userId;
 

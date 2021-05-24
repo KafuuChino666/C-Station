@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author Caleb Chen
- * @since 2021-04-20
+ * @since 2021-05-23
  */
 @Service
 public class UCollectServiceImpl extends ServiceImpl<UCollectMapper, UCollect> implements UCollectService {

@@ -1,7 +1,6 @@
 package cn.o0u0o.service.admin.controller;
 
 
-import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -12,9 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author Caleb Chen
- * @since 2021-04-20
+ * @since 2021-05-23
  */
-@Api(tags = "收藏控制器")
 @RestController
 @RequestMapping("/u-collect")
 public class UCollectController {
