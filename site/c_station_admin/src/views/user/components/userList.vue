@@ -33,6 +33,9 @@
           <el-form-item label="充值数">
             <span>{{ props.row.consumed }}</span>
           </el-form-item>
+          <el-form-item label="邮箱">
+            <span>{{ props.row.email }}</span>
+          </el-form-item>
         </el-form>
       </template>
     </el-table-column>
@@ -72,7 +75,8 @@ export default {
         status: '在线',
         address: '陕西省西安市',
         consumed: '12',
-        IDNumber: '610111111111111111'
+        IDNumber: '610111111111111111',
+        email: '690209522@qq.com'
       }],
       page: '1',
       limit: '6'

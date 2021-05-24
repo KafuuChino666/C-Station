@@ -1,9 +1,13 @@
 package cn.o0u0o.service.admin.service.impl;
 
 import cn.o0u0o.service.admin.entity.UUser;
+import cn.o0u0o.service.admin.entity.vo.UserData;
 import cn.o0u0o.service.admin.mapper.UUserMapper;
 import cn.o0u0o.service.admin.service.UUserService;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,4 +21,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class UUserServiceImpl extends ServiceImpl<UUserMapper, UUser> implements UUserService {
 
+    @Autowired
+    private UUserMapper uUserMapper;
+
+    @Override
+    public IPage<UserData> selectUserAll(Integer page, Integer limit) {
+        Page<UserData> pageParam = new Page<>(page, limit);
+        return uUserMapper.selectUserAll(pageParam);
+    }
 }

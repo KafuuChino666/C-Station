@@ -15,7 +15,7 @@ export default {
   // 分页获取角色
   selectUserAll(page, limit) {
     return request({
-      url: `/views/user/components/select/All`,
+      url: `/views/user/components/select/${page}/${limit}`,
       method: 'get'
     })
   },
