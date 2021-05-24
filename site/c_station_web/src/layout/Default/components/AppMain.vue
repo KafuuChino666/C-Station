@@ -1,6 +1,7 @@
 <!-- 中间内容 -->
 <template>
   <div>
+    <Menu />
     <div class="main-container">
       <Promotion />
     </div>
@@ -8,12 +9,14 @@
 </template>
 
 <script>
-import Promotion from '../../../components/Promotion'
+import Promotion from '../../../views/home/Promotion'
+import Menu from '../../../views/home/Menu'
 
 export default {
   name: 'AppMain',
   components: {
-    Promotion
+    Promotion,
+    Menu
   },
   created () {
     this.getWidth()

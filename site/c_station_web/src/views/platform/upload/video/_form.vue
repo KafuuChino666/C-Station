@@ -52,16 +52,17 @@
       </el-form-item>
       <el-form-item label="标签" prop="name">
         <el-tag
-          :key="tag"
-          v-for="tag in dynamicTags"
+          :key="index"
+          v-for="(tag, index) in dynamicTags"
           closable
           :disable-transitions="false"
+          @close="closeTag(tag, index)"
         >
-          {{tag}}
+          {{tag.name}}
         </el-tag>
       </el-form-item>
       <el-form-item label="推荐标签" prop="name">
-        <el-button size="mini" round v-for="item in 17" :key="item">标签{{item}}</el-button>
+        <el-button @click="addTag(index)" :disabled="item.status === 0" size="mini" round v-for="(item, index) in recommendTags" :key="index">{{item.name}}</el-button>
       </el-form-item>
       <el-form-item label="简介">
         <el-input placeholder="填写更全面的相关信息，让更多的人能找到你的视频吧" type="textarea"></el-input>
@@ -104,6 +105,17 @@
       <el-form-item label="即时配送">
         <el-switch></el-switch>
       </el-form-item>
+      <el-date-picker
+        type="date"
+        placeholder="选择日期">
+      </el-date-picker>
+      <el-time-picker
+        :picker-options="{
+      selectableRange: '18:30:00 - 20:30:00'
+    }"
+        placeholder="任意时间点">
+      </el-time-picker>
+
       <el-button type="primary">立即投稿</el-button>
       <el-button>保存模板</el-button>
     </el-form>
@@ -138,7 +150,40 @@ export default {
           }
         }
       },
-      dynamicTags: ['标签一', '标签二', '标签三'],
+      dynamicTags: [
+        {
+          id: 1,
+          name: '标1签1',
+          status: 1
+        },
+        {
+          id: 2,
+          name: '标1签2',
+          status: 1
+        },
+        {
+          id: 3,
+          name: '标1签3',
+          status: 1
+        }
+      ],
+      recommendTags: [
+        {
+          id: 1,
+          name: '标签1',
+          status: 1
+        },
+        {
+          id: 2,
+          name: '标签2',
+          status: 1
+        },
+        {
+          id: 3,
+          name: '标签3',
+          status: 1
+        }
+      ],
       dialogVisible: false,
       imgUrl: 'https://mcsql-002.oss-cn-beijing.aliyuncs.com/wallhaven-lq7672.png',
       loadedPercent: 0,
@@ -188,6 +233,20 @@ export default {
     clickCoverItem (index) {
       this.coverIndex = index
       this.coveUrl = this.coves[index]
+    },
+    addTag (index) {
+      if (this.recommendTags[index].status === 1) {
+        this.dynamicTags.push(this.recommendTags[index])
+        this.recommendTags[index].status = 0
+      }
+    },
+    closeTag (item, index) {
+      this.dynamicTags.splice(index, 1)
+      this.recommendTags.forEach(it => {
+        if (it.id === item.id) {
+          it.status = 1
+        }
+      })
     }
   }
 }

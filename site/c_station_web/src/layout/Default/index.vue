@@ -52,9 +52,13 @@ export default {
 }
 
 .el-main {
-  background-color: #E9EEF3;
+  background-color: #FFFFFF;
   color: #333;
   overflow: hidden;
+  padding-top: 20px;
+  padding-left: 160px;
+  padding-right: 160px;
+  width: 100%;
 }
 .el-footer {
   padding: 0px;
@@ -71,10 +75,6 @@ body > .el-container {
 
 .el-container:nth-child(7) .el-aside {
   line-height: 320px;
-}
-.el-main {
-  padding-top: 20px;
-  padding-left: 160px;
 }
 
 @media only screen and (max-width: 1150px) {
