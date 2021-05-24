@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author Caleb Chen
- * @since 2021-04-20
+ * @since 2021-05-23
  */
 public interface UCollectMapper extends BaseMapper<UCollect> {
 

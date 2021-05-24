@@ -74,14 +74,24 @@ export default {
         consumed: '12',
         IDNumber: '610111111111111111'
       }],
+      page: '1',
+      limit: '6'
     }
   },
 
   created() {
-    this.fetchData();
+    this.fetchDataAll()
   },
 
   methods: {
+    fetchDataAll() {
+      userAdmin.selectUserAll(this.page, this.limit).then(res => {
+        this.userData = res.data.rows
+      }).then(error => {
+        console.log(error)
+      })
+    },
+
     fetchData(selectUser, page, limit) {
       userAdmin.selectUserByID(selectUser, page, limit).then(res => {
         this.userData = res.data.rows

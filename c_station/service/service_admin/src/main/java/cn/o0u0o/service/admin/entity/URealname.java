@@ -16,7 +16,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author Caleb Chen
- * @since 2021-04-20
+ * @since 2021-05-23
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -25,9 +25,6 @@ import lombok.experimental.Accessors;
 public class URealname extends BaseEntity {
 
     private static final long serialVersionUID=1L;
-
-      @TableId(value = "rn_id", type = IdType.AUTO)
-    private Integer rnId;
 
     @ApiModelProperty(value = "真实姓名")
     private String realname;

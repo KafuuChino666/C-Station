@@ -1,7 +1,7 @@
 package cn.o0u0o.service.admin.controller;
 
 
-import io.swagger.annotations.Api;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -12,12 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author Caleb Chen
- * @since 2021-04-20
+ * @since 2021-05-23
  */
-@Api(tags = "用户控制类")
 @RestController
 @RequestMapping("/u-user")
 public class UUserController {
+
+    @GetMapping(value = "/")
+    public void selectUserByInfo() {
+
+    }
 
 }
 
