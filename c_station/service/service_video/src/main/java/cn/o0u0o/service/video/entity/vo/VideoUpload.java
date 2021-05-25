@@ -1,6 +1,7 @@
 package cn.o0u0o.service.video.entity.vo;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import java.util.Date;
 
@@ -10,6 +11,7 @@ import java.util.Date;
 @Data
 public class VideoUpload {
 
+    @NotEmpty(message = "非法请求")
     private String videoId;
     private Boolean isInnovate;
     private String videoTitle;
@@ -25,27 +27,27 @@ public class VideoUpload {
     private Boolean isTiming;
     private Date timingTime;
 
-    public Integer getInnovate() {
-        return isInnovate ? 1 : 0;
-    }
-
-    public Integer getDeclare() {
-        return isDeclare ? 1 : 0;
-    }
-
-    public Integer getWatermark() {
-        return isWatermark ? 1 : 0;
-    }
-
-    public Integer getCommerce() {
-        return isCommerce ? 1 : 0;
-    }
-
-    public Integer getRestsCastCaption() {
-        return restsCastCaption ? 1 : 0;
-    }
-
-    public Integer getTiming() {
-        return isTiming ? 1 : 0;
-    }
+//    public Integer getInnovate() {
+//        return isInnovate ? 1 : 0;
+//    }
+//
+//    public Integer getDeclare() {
+//        return isDeclare ? 1 : 0;
+//    }
+//
+//    public Integer getWatermark() {
+//        return isWatermark ? 1 : 0;
+//    }
+//
+//    public Integer getCommerce() {
+//        return isCommerce ? 1 : 0;
+//    }
+//
+//    public Integer getRestsCastCaption() {
+//        return restsCastCaption ? 1 : 0;
+//    }
+//
+//    public Integer getTiming() {
+//        return isTiming ? 1 : 0;
+//    }
 }

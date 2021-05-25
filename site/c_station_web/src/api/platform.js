@@ -31,11 +31,9 @@ export default {
   // 视频投稿
   videoContribute (video) {
     return request({
-      url: `/api/video/zone/child/${value}`,
+      url: `/api/video/platform/`,
       method: 'post',
-      params: {
-        video
-      }
+      data: video
     })
   }
 }

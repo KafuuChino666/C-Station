@@ -34,12 +34,12 @@
         </div>
       </div>
     </div>
-    <el-form :rules="rules.videoContributeForm" :model="video" ref="ruleForm" label-width="80px" style="padding-top: 10px">
+    <el-form :rules="rules.videoContributeForm" :model="video" ref="video" label-width="80px" style="padding-top: 10px">
 
       <el-form-item label="类型" prop="isInnovate">
         <el-radio-group v-model="video.isInnovate">
-          <el-radio label="1">自制</el-radio>
-          <el-radio label="0">转载</el-radio>
+          <el-radio label="true">自制</el-radio>
+          <el-radio label="false">转载</el-radio>
         </el-radio-group>
       </el-form-item>
 
@@ -96,8 +96,8 @@
 
           <el-form-item label="商业声明">
             <el-radio-group v-model="video.isCommerce">
-              <el-radio label="0">不含商业推广信息</el-radio>
-              <el-radio label="1">含商业推广信息</el-radio>
+              <el-radio label="false">不含商业推广信息</el-radio>
+              <el-radio label="true">含商业推广信息</el-radio>
             </el-radio-group>
           </el-form-item>
 
@@ -204,20 +204,20 @@ export default {
       coveUrl: this.imgUrl,
       coverIndex: 0,
       video: {
-        videoId: null,
-        isInnovate: 0,
+        videoId: '',
+        isInnovate: true,
         videoTitle: '',
-        zoneId: null,
-        tags: null,
+        zoneId: '',
+        tags: '',
         videoBrief: '',
-        isDeclare: 0,
-        isWatermark: 0,
+        isDeclare: true,
+        isWatermark: true,
         videoCaption: '',
-        isCommerce: 0,
-        restsCastCaption: 0,
+        isCommerce: true,
+        restsCastCaption: true,
         fanDynamic: '',
-        isTiming: 0,
-        timingTime: {}
+        isTiming: true,
+        timingTime: '2021-05-25T14:24:45.346Z'
       }
     }
   },
@@ -279,11 +279,20 @@ export default {
     },
     // 视频投稿
     videoContribute () {
-      this.refs.videoContributeForm.validate((valid) => {
+      this.$refs['video'].validate((valid) => {
         if (valid) {
-          alert('0')
+          platform.videoContribute(this.video).then(res => {
+            this.$message({
+              showClose: true,
+              message: '视频投稿成功',
+              type: 'success'
+            })
+          })
         } else {
-          alert('1')
+          this.$message({
+            message: '请检查填写信息',
+            type: 'warning'
+          })
         }
       })
       // 1. 上传视频
