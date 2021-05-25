@@ -17,4 +17,6 @@ public interface UUserService extends IService<UUser> {
 
     IPage<UserData> selectUserAll(Integer page, Integer limit);
 
+    IPage<UserData> selectUserBySelect(Integer page, Integer limit, Integer selectUserID, Integer selectType, String selectUserName);
+
 }

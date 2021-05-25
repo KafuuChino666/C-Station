@@ -7,8 +7,9 @@ CREATE TABLE u_user (
 	user_sign VARCHAR(255) COMMENT '用户签名',
 	`status` varchar(12) COMMENT '用户状态',
 	gender CHAR(1) COMMENT '性别' DEFAULT'M' NOT NULL,
-	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	birth DATE COMMENT '生日',
+	category_id int unsigned not null, 
+	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
 );
 #insert into user_tb(user_name, user_sign, gender, birth) values('qweqwe', 'qweqwe', 'W','2000-02-12');
@@ -19,12 +20,19 @@ CREATE TABLE u_safe (
 	id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	user_id INT unsigned,
 	email VARCHAR(20) COMMENT '邮箱',
-	phone INT unsigned COMMENT '电话号码',
+	phone varchar(20) COMMENT '电话号码',
 	ep_id INT unsigned NOT NULL,
 	rn_id INT unsigned NOT NULL,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
 	#FOREIGN KEY(user_id) REFERENCES u_user(user_id)
+);
+
+create table u_category (
+	id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	category varchar(12) COMMENT '会员类型' not null,
+	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
+	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
 );
 
 #密保问题表
@@ -76,6 +84,7 @@ CREATE TABLE u_coin(
 CREATE TABLE u_e_wallet(
 	id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	c_money INT unsigned COMMENT 'c币余额' NOT NULL,
+	c_total int unsigned comment 'c币总数' not null,
 	user_id INT unsigned,
 	order_id INT unsigned NOT NULL,
 	expend_type VARCHAR(32) COMMENT '消费类型',
@@ -185,3 +194,14 @@ CREATE TABLE u_like_column(
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
 );
+
+
+#查询用户所有数据
+explain select u.id userId, u.user_name,r.realname, u.gender, c.id category, s.phone, w.c_total, r.ID_number idNumber, s.email 
+from u_user u 
+left join u_e_wallet w on w.user_id = u.id
+left join u_category c on u.category_id = c.id
+left join u_safe s on u.id = s.user_id
+left join u_realname r on s.rn_id = r.id
+where userId = 1
+#根据条件查询用户数据

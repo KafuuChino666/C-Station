@@ -1,6 +1,7 @@
 package cn.o0u0o.service.admin.service.impl;
 
 import cn.o0u0o.service.admin.entity.UUser;
+import cn.o0u0o.service.admin.entity.vo.Select;
 import cn.o0u0o.service.admin.entity.vo.UserData;
 import cn.o0u0o.service.admin.mapper.UUserMapper;
 import cn.o0u0o.service.admin.service.UUserService;
@@ -28,5 +29,12 @@ public class UUserServiceImpl extends ServiceImpl<UUserMapper, UUser> implements
     public IPage<UserData> selectUserAll(Integer page, Integer limit) {
         Page<UserData> pageParam = new Page<>(page, limit);
         return uUserMapper.selectUserAll(pageParam);
+    }
+
+    @Override
+    public IPage<UserData> selectUserBySelect(Integer page, Integer limit, Integer selectUserID, Integer selectType, String selectUserName) {
+        Page<Select> pageParam = new Page<>(page, limit);
+
+        return uUserMapper.selectUserBySelect(pageParam, selectUserID, selectType, selectUserName);
     }
 }

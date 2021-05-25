@@ -127,7 +127,7 @@ drop index idx_text_ on v_video_text;
 drop index idx_info_nub on v_video_info;
 drop index idx_status on v_video_status;
 
-EXPLAIN SELECT img.img_location, text.video_title, text.author_id, zone.zone_type, info.play_nub, s.id
+EXPLAIN SELECT img.img_location, text.video_title, text.author_id, zone.id, info.play_nub, s.id
 FROM v_video v 
 LEFT JOIN v_video_info info ON v.`video_info_id` = info.`id`
 left join v_video_text text on v.`video_info_id` = text.`video_info_id`

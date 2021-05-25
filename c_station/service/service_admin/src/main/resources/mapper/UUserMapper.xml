@@ -2,8 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.o0u0o.service.admin.mapper.UUserMapper">
 
+    <!-- 查询所有用户数据 -->
     <select id="selectUserAll" resultType="cn.o0u0o.service.admin.entity.vo.UserData">
+        select u.id userId, u.user_name,r.realname, u.gender, c.id category, s.phone, w.c_total, r.ID_number idNumber, s.email
+        from u_user u
+        left join u_e_wallet w on w.user_id = u.id
+        left join u_category c on u.category_id = c.id
+        left join u_safe s on u.id = s.user_id
+        left join u_realname r on s.rn_id = r.id
+    </select>
 
+    <!-- 根据条件查询用户数据 -->
+    <select id="selectUserBySelect" resultType="cn.o0u0o.service.admin.entity.vo.UserData">
+        select u.id userId, u.user_name,r.realname, u.gender, c.id category, s.phone, w.c_total, r.ID_number idNumber, s.email
+        from u_user u
+        left join u_e_wallet w on w.user_id = u.id
+        left join u_category c on u.category_id = c.id
+        left join u_safe s on u.id = s.user_id
+        left join u_realname r on s.rn_id = r.id
+        <where>
+            <if test="selectUserID != null and selectUserID != 0">
+                userId = #{selectUserID}
+            </if>
+            <if test="selectUserName != null and selectUserName != ''">
+                and u.user_name = #{selectUserName}
+            </if>
+            <if test="selectType != null and selectType != 0">
+                and category = #{selectType}
+            </if>
+        </where>
     </select>
 
 </mapper>

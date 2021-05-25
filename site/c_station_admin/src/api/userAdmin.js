@@ -3,7 +3,7 @@ import request from '@/utils/request'
 
 export default {
 // 按员工编号搜索员工
-  selectUserByID(select, page, limit) {
+  selectUserBySelect(select, page, limit) {
     return request({
       url: `/views/user/components/select/${page}/${limit}`,
       method: 'get',
@@ -15,7 +15,7 @@ export default {
   // 分页获取角色
   selectUserAll(page, limit) {
     return request({
-      url: `/views/user/components/select/${page}/${limit}`,
+      url: `/views/user/components/${page}/${limit}`,
       method: 'get'
     })
   },
