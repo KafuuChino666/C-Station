@@ -22,16 +22,16 @@
             <span>{{ props.row.category }}</span>
           </el-form-item>
           <el-form-item label="用户地区">
-            <span>{{ props.row.address }}</span>
+            <span>{{ props.row.phone }}</span>
+          </el-form-item>
+          <el-form-item label="邮箱">
+            <span>{{ props.row.email }}</span>
           </el-form-item>
           <el-form-item label="身份证号">
             <span>{{ props.row.IDNumber }}</span>
           </el-form-item>
           <el-form-item label="充值数">
             <span>{{ props.row.consumed }}</span>
-          </el-form-item>
-          <el-form-item label="邮箱">
-            <span>{{ props.row.email }}</span>
           </el-form-item>
         </el-form>
       </template>
@@ -49,8 +49,8 @@
       prop="gender">
     </el-table-column>
     <el-table-column
-      label="用户分类"
-      prop="category">
+      label="邮箱"
+      prop="email">
     </el-table-column>
   </el-table>
   </div>
@@ -80,12 +80,12 @@ export default {
       limit: '6'
     }
   },
-
   created() {
     this.fetchDataAll()
   },
 
   methods: {
+
     fetchDataAll() {
       userAdmin.selectUserAll(this.page, this.limit).then(res => {
         this.userData = res.data.rows
