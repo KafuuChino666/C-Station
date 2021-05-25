@@ -1,5 +1,7 @@
 package cn.o0u0o.service.admin.entity.vo;
 
+import lombok.Data;
+
 /**
  * userId: '12987122',
  * userName: 'CalebCX',
@@ -14,6 +16,7 @@ package cn.o0u0o.service.admin.entity.vo;
  * @author Caleb Chen
  * @create 2021-05-24 17:25
  */
+@Data
 public class UserData {
     // 用户ID
     private Integer userId;
@@ -26,9 +29,11 @@ public class UserData {
     // 会员
     private Integer category;
     // 在线状态
-    private Integer status;
-    // 地址
-    private String address;
+//    private Integer status;
+//    // 地址
+//    private String address;
+    //电话号码
+    private String phone;
     // 充值数量
     private Integer consumed;
     // 身份证号

@@ -24,9 +24,6 @@
           <el-form-item label="用户地区">
             <span>{{ props.row.address }}</span>
           </el-form-item>
-          <el-form-item label="状态">
-            <span>{{ props.row.status }}</span>
-          </el-form-item>
           <el-form-item label="身份证号">
             <span>{{ props.row.IDNumber }}</span>
           </el-form-item>
@@ -52,8 +49,8 @@
       prop="gender">
     </el-table-column>
     <el-table-column
-      label="状态"
-      prop="status">
+      label="用户分类"
+      prop="category">
     </el-table-column>
   </el-table>
   </div>
@@ -72,8 +69,9 @@ export default {
         realName: '陈芊浩',
         gender: '男',
         category: '大会员',
-        status: '在线',
-        address: '陕西省西安市',
+        // status: '在线',
+        // address: '陕西省西安市',
+        phone: '13201512216',
         consumed: '12',
         IDNumber: '610111111111111111',
         email: '690209522@qq.com'
@@ -97,7 +95,7 @@ export default {
     },
 
     fetchData(selectUser, page, limit) {
-      userAdmin.selectUserByID(selectUser, page, limit).then(res => {
+      userAdmin.selectUserBySelect(selectUser, page, limit).then(res => {
         this.userData = res.data.rows
       }).then(error => {
         console.log(error)
