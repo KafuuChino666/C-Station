@@ -34,22 +34,27 @@
         </div>
       </div>
     </div>
-    <el-form :model="ruleForm" ref="ruleForm" label-width="80px" style="padding-top: 10px">
-      <el-form-item label="类型" prop="resource">
-        <el-radio-group v-model="ruleForm.resource">
-          <el-radio label="自制"></el-radio>
-          <el-radio label="转载"></el-radio>
+    <el-form :rules="rules.videoContributeForm" :model="video" ref="ruleForm" label-width="80px" style="padding-top: 10px">
+
+      <el-form-item label="类型" prop="isInnovate">
+        <el-radio-group v-model="video.isInnovate">
+          <el-radio label="1">自制</el-radio>
+          <el-radio label="0">转载</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="标题" prop="name">
-        <el-input v-model="ruleForm.name"></el-input>
+
+      <el-form-item label="标题" prop="videoTitle">
+        <el-input v-model="video.videoTitle"></el-input>
       </el-form-item>
-      <el-form-item label="分区" prop="region">
+
+      <el-form-item label="分区" prop="zoneId">
         <el-cascader
+          v-model="video.zoneId"
           :options="zoneRootNodes"
           :props="props"
         ></el-cascader>
       </el-form-item>
+
       <el-form-item label="标签" prop="name">
         <el-tag
           :key="index"
@@ -61,54 +66,61 @@
           {{tag.name}}
         </el-tag>
       </el-form-item>
+
       <el-form-item label="推荐标签" prop="name">
         <el-button @click="addTag(index)" :disabled="item.status === 0" size="mini" round v-for="(item, index) in recommendTags" :key="index">{{item.name}}</el-button>
       </el-form-item>
-      <el-form-item label="简介">
-        <el-input placeholder="填写更全面的相关信息，让更多的人能找到你的视频吧" type="textarea"></el-input>
+
+      <el-form-item label="简介" prop="videoBrief">
+        <el-input v-model="video.videoBrief" placeholder="填写更全面的相关信息，让更多的人能找到你的视频吧" type="textarea"></el-input>
       </el-form-item>
+
       <el-divider></el-divider>
       <el-collapse>
         <el-collapse-item title="更多选项" name="1">
 
-          <el-form ref="form" label-width="80px">
-            <el-form-item label="自制声明">
-              <el-radio-group>
-                <el-radio label="未经作者授权 禁止转载"></el-radio>
-              </el-radio-group>
-            </el-form-item>
-            <el-form-item label="开启专属水印">
-              <el-switch></el-switch>
-            </el-form-item>
-            <el-form-item label="字幕设置">
-              <el-select placeholder="请选择活动区域" value>
-                <el-option label="区域一" value="shanghai"></el-option>
-                <el-option label="区域二" value="beijing"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item label="商业声明">
-              <el-radio-group>
-                <el-radio label="不含商业推广信息"></el-radio>
-                <el-radio label="含商业推广信息"></el-radio>
-              </el-radio-group>
-            </el-form-item>
-            <el-form-item label="允许观众投稿字幕">
-              <el-switch></el-switch>
-            </el-form-item>
-          </el-form>
+          <el-form-item label="自制声明" prop="isDeclare">
+            <el-checkbox v-model="video.isDeclare">未经作者授权 禁止转载</el-checkbox>
+          </el-form-item>
+
+          <el-form-item label="开启专属水印">
+            <el-switch v-model="video.isWatermark"></el-switch>
+          </el-form-item>
+
+          <el-form-item label="字幕设置">
+            <el-select placeholder="请选择活动区域" value>
+              <el-option label="区域一" value="shanghai"></el-option>
+              <el-option label="区域二" value="beijing"></el-option>
+            </el-select>
+          </el-form-item>
+
+          <el-form-item label="商业声明">
+            <el-radio-group v-model="video.isCommerce">
+              <el-radio label="0">不含商业推广信息</el-radio>
+              <el-radio label="1">含商业推广信息</el-radio>
+            </el-radio-group>
+          </el-form-item>
+
+          <el-form-item label="允许观众投稿字幕">
+            <el-switch v-model="video.restsCastCaption"></el-switch>
+          </el-form-item>
 
         </el-collapse-item>
       </el-collapse>
       <el-divider></el-divider>
+
       <h1>粉丝动态 </h1>
-      <el-input type="textarea"></el-input>
+      <el-input v-model="video.fanDynamic" type="textarea"></el-input>
+
       <el-form-item label="即时配送">
-        <el-switch></el-switch>
+        <el-switch v-model="video.isTiming"></el-switch>
       </el-form-item>
+
       <el-date-picker
         type="date"
         placeholder="选择日期">
       </el-date-picker>
+
       <el-time-picker
         :picker-options="{
       selectableRange: '18:30:00 - 20:30:00'
@@ -116,7 +128,7 @@
         placeholder="任意时间点">
       </el-time-picker>
 
-      <el-button type="primary">立即投稿</el-button>
+      <el-button @click="videoContribute()" type="primary">立即投稿</el-button>
       <el-button>保存模板</el-button>
     </el-form>
   </div>
@@ -126,12 +138,13 @@
 import CropperElement from './CropperElement'
 import Pubsub from 'pubsub-js'
 import platform from '../../../../api/platform'
-
+import rule from '../../../../rules/rule'
 export default {
   name: 'VideoUploadForm',
   components: {CropperElement},
   data () {
     return {
+      rules: rule,
       radio: '1',
       ruleForm: {},
       zoneRootNodes: [],
@@ -189,7 +202,23 @@ export default {
       loadedPercent: 0,
       coves: [],
       coveUrl: this.imgUrl,
-      coverIndex: 0
+      coverIndex: 0,
+      video: {
+        videoId: null,
+        isInnovate: 0,
+        videoTitle: '',
+        zoneId: null,
+        tags: null,
+        videoBrief: '',
+        isDeclare: 0,
+        isWatermark: 0,
+        videoCaption: '',
+        isCommerce: 0,
+        restsCastCaption: 0,
+        fanDynamic: '',
+        isTiming: 0,
+        timingTime: {}
+      }
     }
   },
   mounted () {
@@ -247,6 +276,23 @@ export default {
           it.status = 1
         }
       })
+    },
+    // 视频投稿
+    videoContribute () {
+      this.refs.videoContributeForm.validate((valid) => {
+        if (valid) {
+          alert('0')
+        } else {
+          alert('1')
+        }
+      })
+      // 1. 上传视频
+
+      // 2. 上传视频封面
+
+      // 3. 校验表单值
+
+      // 4. 投稿完成
     }
   }
 }

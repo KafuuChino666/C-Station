@@ -27,5 +27,15 @@ export default {
       url: `/api/video/zone/child/${value}`,
       method: 'get'
     })
+  },
+  // 视频投稿
+  videoContribute (video) {
+    return request({
+      url: `/api/video/zone/child/${value}`,
+      method: 'post',
+      params: {
+        video
+      }
+    })
   }
 }
