@@ -6,8 +6,11 @@ import cn.o0u0o.service.admin.entity.vo.Select;
 import cn.o0u0o.service.admin.entity.vo.UserData;
 import cn.o0u0o.service.admin.service.UUserService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -17,6 +20,8 @@ import org.springframework.web.bind.annotation.*;
  * @author Caleb Chen
  * @since 2021-05-23
  */
+@Api(tags = "用户信息控制类")
+@CrossOrigin //跨域
 @RestController
 @RequestMapping("/views/user")
 public class UUserController {
@@ -30,7 +35,8 @@ public class UUserController {
 
         if(page > 0 && limit > 0) {
             IPage<UserData> userDataIPage = uUserService.selectUserAll(page, limit);
-            return Result.ok().data("rows", userDataIPage);
+            List<UserData> records = userDataIPage.getRecords();
+            return Result.ok().data("rows", records);
         }
         return Result.err().message("页码不符合规则!");
     }
@@ -53,7 +59,8 @@ public class UUserController {
 
         if(page > 0 && limit > 0) {
             IPage<UserData> selectIPage = uUserService.selectUserBySelect(page, limit, selectUserID, selectType, selectUserName);
-            return Result.ok().data("rows", selectIPage);
+            List<UserData> records = selectIPage.getRecords();
+            return Result.ok().data("rows", records);
         }
         return Result.err().message("页码错误！");
     }

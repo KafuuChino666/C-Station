@@ -57,10 +57,10 @@
 </template>
 
 <script>
-import userAdmin from "@/api/userAdmin";
+import userAdmin from '@/api/userAdmin'
 
 export default {
-  name: 'userList',
+  name: 'UserList',
   data() {
     return {
       userData: [{
@@ -88,8 +88,9 @@ export default {
 
     fetchDataAll() {
       userAdmin.selectUserAll(this.page, this.limit).then(res => {
+        console.log('===' + res)
         this.userData = res.data.rows
-      }).then(error => {
+      }).catch(error => {
         console.log(error)
       })
     },
@@ -97,7 +98,7 @@ export default {
     fetchData(selectUser, page, limit) {
       userAdmin.selectUserBySelect(selectUser, page, limit).then(res => {
         this.userData = res.data.rows
-      }).then(error => {
+      }).catch(error => {
         console.log(error)
       })
     }

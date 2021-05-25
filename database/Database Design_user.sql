@@ -197,6 +197,11 @@ CREATE TABLE u_like_column(
 
 
 #查询用户所有数据
-select id userId, user_name, realname, gender, id category, phone, consumed
-
+explain select u.id userId, u.user_name,r.realname, u.gender, c.id category, s.phone, w.c_total, r.ID_number idNumber, s.email 
+from u_user u 
+left join u_e_wallet w on w.user_id = u.id
+left join u_category c on u.category_id = c.id
+left join u_safe s on u.id = s.user_id
+left join u_realname r on s.rn_id = r.id
+where userId = 1
 #根据条件查询用户数据
