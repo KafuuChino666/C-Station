@@ -41,6 +41,24 @@ CREATE TABLE v_video_text(
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
 );
 
+
+#视频信息表分表字段
+CREATE TABLE v_video_extra(
+	id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	video_info_id INT unsigned NOT NULL,
+	tags VARCHAR(128) COMMENT '标签',
+	is_innovate INT(4) unsigned NOT NULL COMMENT '自制声明',
+	is_watermark INT(4) unsigned NOT NULL COMMENT '开启专属水印',
+	video_caption VARCHAR(128) COMMENT '字幕', #预留
+	is_commerce INT(4) unsigned NOT NULL COMMENT '商业声明',
+	rests_cast_caption INT(4) unsigned NOT NULL COMMENT '允许观众投稿字幕',
+	fan_dynamic varchar(200) COMMENT '粉丝动态',
+	is_timing INT(4) unsigned NOT NULL COMMENT '定时发布',
+	timing_time DATETIME COMMENT '定时时间' NOT NULL,
+	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
+	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
+)
+
 #点赞表
 CREATE TABLE v_like(
 	id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
