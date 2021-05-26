@@ -42,8 +42,9 @@
 </template>
 
 <script>
-import userList from "@/views/user/components/userList";
+import userList from '@/views/user/components/userList'
 import PubSub from 'pubsub-js'
+
 export default {
   name: 'UserList',
   components: {
@@ -71,7 +72,7 @@ export default {
     }
   },
   methods: {
-    //查询用户信息
+    // 查询用户信息
     selectUserByInfo() {
       const select = this.select
       PubSub.PubSub.publish('selectUserByInfo', select)

@@ -16,9 +16,10 @@
         <el-image :src="coveUrl" style="width: 200px; height: 130px"></el-image>
       </div>
       <el-dialog
-        title="提示"
+        title="视频封面 (建议上传高清封面尺寸≥1146*717)"
         :visible.sync="dialogVisible"
         >
+        <el-divider></el-divider>
         <CropperElement />
         <span slot="footer" class="dialog-footer">
           <el-button @click="dialogVisible = false">取 消</el-button>
@@ -128,7 +129,7 @@
         placeholder="任意时间点">
       </el-time-picker>
 
-      <el-button @click="videoContribute()" type="primary">立即投稿</el-button>
+      <el-button @click="videoContribute" type="primary">立即投稿</el-button>
       <el-button>保存模板</el-button>
     </el-form>
   </div>
@@ -204,7 +205,7 @@ export default {
       coveUrl: this.imgUrl,
       coverIndex: 0,
       video: {
-        videoId: '',
+        videoId: '25465451574',
         isInnovate: true,
         videoTitle: '',
         zoneId: '',
@@ -217,7 +218,7 @@ export default {
         restsCastCaption: true,
         fanDynamic: '',
         isTiming: true,
-        timingTime: '2021-05-25T14:24:45.346Z'
+        timingTime: '2031-05-25T14:24:45.346Z'
       }
     }
   },
@@ -281,6 +282,13 @@ export default {
     videoContribute () {
       this.$refs['video'].validate((valid) => {
         if (valid) {
+          // tags
+          const tags = []
+          this.dynamicTags.forEach(i => {
+            tags.push(i.name)
+          })
+          this.video.tags = tags.toString()
+
           platform.videoContribute(this.video).then(res => {
             this.$message({
               showClose: true,
@@ -338,6 +346,10 @@ export default {
   height: 130px;
   position: relative;
   float: left;
+}
+
+.hoverImg .el-divider--horizontal {
+  margin: 10px 0;
 }
 
 .back {
