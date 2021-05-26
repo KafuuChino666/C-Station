@@ -22,13 +22,13 @@
         left join u_realname r on s.rn_id = r.id
         <where>
             <if test="selectUserID != null and selectUserID != 0">
-                userId = #{selectUserID}
+                u.id = #{selectUserID}
             </if>
             <if test="selectUserName != null and selectUserName != ''">
                 and u.user_name = #{selectUserName}
             </if>
             <if test="selectType != null and selectType != 0">
-                and category = #{selectType}
+                and c.category = #{selectType}
             </if>
         </where>
     </select>

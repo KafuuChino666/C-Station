@@ -10,6 +10,7 @@ import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -50,15 +51,13 @@ public class UUserController {
      * @param limit
      * @return
      */
-    @GetMapping(value = "/components/select/{page}/{limit}")
+    @PostMapping(value = "/components/select/{page}/{limit}")
     public Result selectUserInfoBySelect(@PathVariable Integer page,
                                          @PathVariable Integer limit,
-                                         @RequestParam(required = false) Integer selectUserID,
-                                         @RequestParam(required = false) Integer selectType,
-                                         @RequestParam(required = false) String selectUserName) {
+                                         @RequestBody(required = false) Select select) {
 
         if(page > 0 && limit > 0) {
-            IPage<UserData> selectIPage = uUserService.selectUserBySelect(page, limit, selectUserID, selectType, selectUserName);
+            IPage<UserData> selectIPage = uUserService.selectUserBySelect(page, limit, select);
             List<UserData> records = selectIPage.getRecords();
             return Result.ok().data("rows", records);
         }

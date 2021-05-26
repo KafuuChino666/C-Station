@@ -32,9 +32,10 @@ public class UUserServiceImpl extends ServiceImpl<UUserMapper, UUser> implements
     }
 
     @Override
-    public IPage<UserData> selectUserBySelect(Integer page, Integer limit, Integer selectUserID, Integer selectType, String selectUserName) {
+    public IPage<UserData> selectUserBySelect(Integer page, Integer limit, Select select) {
         Page<Select> pageParam = new Page<>(page, limit);
 
-        return uUserMapper.selectUserBySelect(pageParam, selectUserID, selectType, selectUserName);
+        return uUserMapper.selectUserBySelect(pageParam, select.getSelectUserID(), select.getSelectType(), select.getSelectUserName());
     }
+
 }

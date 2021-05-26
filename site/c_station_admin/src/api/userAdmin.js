@@ -6,10 +6,8 @@ export default {
   selectUserBySelect(select, page, limit) {
     return request({
       url: `/views/user/components/select/${page}/${limit}`,
-      method: 'get',
-      params: {
-        select
-      }
+      method: 'post',
+      data: select
     })
   },
   // 分页获取角色

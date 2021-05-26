@@ -6,7 +6,7 @@ CREATE TABLE u_user (
 	user_name VARCHAR(64) COMMENT '昵称' NOT NULL,
 	user_sign VARCHAR(255) COMMENT '用户签名',
 	`status` varchar(12) COMMENT '用户状态',
-	gender CHAR(1) COMMENT '性别' DEFAULT'M' NOT NULL,
+	gender CHAR(1) COMMENT '性别' DEFAULT'男' NOT NULL,
 	birth DATE COMMENT '生日',
 	category_id int unsigned not null, 
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
@@ -206,7 +206,7 @@ left join u_realname r on s.rn_id = r.id
 where userId = 1
 #根据条件查询用户数据
 
-select u.id userId, u.user_name,r.realname, u.gender, c.id category, s.phone, w.c_total, r.ID_number idNumber, s.email         
+select u.id userId, u.user_name,r.realname, u.gender, c.id category, s.phone, w.c_total, r.ID_number IDNumber, s.email         
 from u_user u         
 left join u_e_wallet w on w.user_id = u.id         
 left join u_category c on u.category_id = c.id         

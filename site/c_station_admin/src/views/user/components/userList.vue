@@ -58,6 +58,7 @@
 
 <script>
 import userAdmin from '@/api/userAdmin'
+import PubSub from "pubsub-js";
 
 export default {
   name: 'UserList',
@@ -84,8 +85,13 @@ export default {
     this.fetchDataAll()
   },
 
-  methods: {
+  mounted() {
+    PubSub.PubSub.subscribe('selectUserByInfo', (msg, select) => {
+      this.fetchData(select)
+    })
+  },
 
+  methods: {
     fetchDataAll() {
       userAdmin.selectUserAll(this.page, this.limit).then(res => {
         console.log('===' + res)
@@ -95,10 +101,12 @@ export default {
       })
     },
 
-    fetchData(selectUser, page, limit) {
-      userAdmin.selectUserBySelect(selectUser, page, limit).then(res => {
+    fetchData(select) {
+      console.log('2')
+      userAdmin.selectUserBySelect(select, this.page, this.limit).then(res => {
         this.userData = res.data.rows
       }).catch(error => {
+        console.log('3')
         console.log(error)
       })
     }

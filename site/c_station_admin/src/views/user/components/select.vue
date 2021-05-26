@@ -17,7 +17,7 @@
       <el-input class="input-select"
         prefix-icon="el-icon-search"
         v-model="select.selectUserName"
-        placeholder="请输入用户昵称关键字">
+        placeholder="请输入用户昵称">
       </el-input>
       <el-button type="primary" icon="el-icon-search" @click="selectUserByInfo">搜索</el-button>
       </el-form>
@@ -43,6 +43,7 @@
 
 <script>
 import userList from "@/views/user/components/userList";
+import PubSub from 'pubsub-js'
 export default {
   name: 'UserList',
   components: {
@@ -72,7 +73,8 @@ export default {
   methods: {
     //查询用户信息
     selectUserByInfo() {
-      userList.methods.fetchData(this.select, this.page, this.limit)
+      const select = this.select
+      PubSub.PubSub.publish('selectUserByInfo', select)
     }
   }
 }
