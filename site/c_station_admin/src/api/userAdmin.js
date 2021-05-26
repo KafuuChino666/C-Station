@@ -17,4 +17,11 @@ export default {
       method: 'get'
     })
   },
+  // 查询所有状态
+  selectAllCategory() {
+    return request({
+      url: `/views/category/vip`,
+      method: 'get'
+    })
+  }
 }
