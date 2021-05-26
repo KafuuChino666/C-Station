@@ -24,13 +24,12 @@
         :maxImgSize="option.maxImgSize"
         :enlarge="option.enlarge"
         :mode="option.mode"
+        @realTime="realTime"
         >
       </VueCropper>
     </div>
-    <div class="cr-right">
+    <div v-html="previewHTML" class="cr-right">
     </div>
-    <input type="file" id="upload2"
-           accept="image/png, image/jpeg, image/gif, image/jpg" @change="uploadImg($event,2)">
   </div>
 </template>
 
@@ -42,6 +41,7 @@ export default {
   components: {VueCropper},
   data () {
     return {
+      previewHTML: '',
       option: {
         img: '', // 裁剪图片的地址
         outputSize: 1, // 裁剪生成图片的质量(可选0.1 - 1)
@@ -62,15 +62,14 @@ export default {
         height: true, // 是否按照设备的dpr 输出等比例图片
         infoTrue: false, // true为展示真实输出图片宽高，false展示看到的截图框宽高
         maxImgSize: 3000, // 限制图片最大宽度和高度
-        enlarge: 1, // 图片根据截图框输出比例倍数
-        mode: '230px 150px' // 图片默认渲染方式
+        enlarge: 1 // 图片根据截图框输出比例倍数
       },
       avatarUrl: 'https://mcsql-002.oss-cn-beijing.aliyuncs.com/wallhaven-lq7672.png'
     }
   },
   mounted () {
     let _super = this.$parent.$parent
-    console.log(_super.coves)
+    console.log(_super.coverIndex)
     this.setAvatarBase64(_super.coves[_super.coverIndex], (base64) => {
       this.option.img = base64
     })
@@ -111,11 +110,12 @@ export default {
       let _this = this
       let image = new Image()
       // 处理缓存
-      // image.src = src + '?v=' + Math.random()
-      image.src = src
+      image.src = src + '&v=' + Math.random()
+
+      // image.src = src
       // 支持跨域图片
       image.crossOrigin = '*'
-      // image.setAttribute("crossOrigin",'anonymous')
+      // image.setAttribute('crossOrigin', 'anonymous')
       image.onload = function () {
         console.log('setAvatarBase64')
         let base64 = _this.transBase64FromImage(image)
@@ -132,6 +132,9 @@ export default {
       // 可选其他值 image/jpeg
       console.log('transBase64FromImage')
       return canvas.toDataURL('image/png')
+    },
+    realTime (data) {
+      this.previewHTML = data.html
     }
   }
 }
@@ -143,9 +146,10 @@ export default {
 }
 
 .cr-left {
-  width: 460px;
-  height: 300px;
+  width: 428px;
+  height: 261px;
   background-color: #404040;
+  border-radius: 3px;
   float: left;
 }
 

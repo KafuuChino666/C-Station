@@ -42,7 +42,8 @@
 </template>
 
 <script>
-import userList from "@/views/user/components/userList";
+import userList from '@/views/user/components/userList'
+
 export default {
   name: 'UserList',
   components: {
@@ -70,7 +71,7 @@ export default {
     }
   },
   methods: {
-    //查询用户信息
+    // 查询用户信息
     selectUserByInfo() {
       userList.methods.fetchData(this.select, this.page, this.limit)
     }

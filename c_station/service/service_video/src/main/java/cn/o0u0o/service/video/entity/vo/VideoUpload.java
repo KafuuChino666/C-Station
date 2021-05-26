@@ -1,8 +1,11 @@
 package cn.o0u0o.service.video.entity.vo;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.Future;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 /**
@@ -11,10 +14,13 @@ import java.util.Date;
 @Data
 public class VideoUpload {
 
-    @NotEmpty(message = "非法请求")
+    @NotEmpty(message = "参数不能为空")
     private String videoId;
     private Boolean isInnovate;
+    @NotEmpty(message = "参数不能为空")
+    @Length(min = 3, max = 30, message = "标题过长或过短")
     private String videoTitle;
+    @Size(min = 2, max = 2)
     private Integer[] zoneId;
     private String tags;
     private String videoBrief;
@@ -25,6 +31,7 @@ public class VideoUpload {
     private Boolean restsCastCaption;
     private String fanDynamic;
     private Boolean isTiming;
+    @Future(message = "时间必须在当前之后")
     private Date timingTime;
 
 //    public Integer getInnovate() {

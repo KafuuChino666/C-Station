@@ -11,7 +11,7 @@ import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.po.TableFill;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
-import org.junit.jupiter.api.Test;
+//import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 //@SpringBootTest(classes = CStationApplication.class)
 public class CodeGenerator {
 
-    @Test
+//    @Test
     public void genCode() {
 
         String moduleName = "service_video";
@@ -92,7 +92,7 @@ public class CodeGenerator {
         mpg.execute();
     }
 
-    @Test
+//    @Test
     public void test1() {
 
     }
