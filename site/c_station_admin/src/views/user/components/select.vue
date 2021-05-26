@@ -19,7 +19,7 @@
         v-model="select.selectUserName"
         placeholder="请输入用户昵称关键字">
       </el-input>
-      <el-button type="primary" icon="el-icon-search" @keyup.enter="selectUserByInfo">搜索</el-button>
+      <el-button type="primary" icon="el-icon-search" @click="selectUserByInfo">搜索</el-button>
       </el-form>
     </div>
           <!-- 搜索框结束 -->

@@ -4,7 +4,7 @@
 
     <!-- 查询所有用户数据 -->
     <select id="selectUserAll" resultType="cn.o0u0o.service.admin.entity.vo.UserData">
-        select u.id userId, u.user_name,r.realname, u.gender, c.id category, s.phone, w.c_total, r.ID_number idNumber, s.email
+        select u.id userId, u.user_name,r.realName, u.gender, c.category, s.phone, w.c_total consumed, r.ID_number, s.email
         from u_user u
         left join u_e_wallet w on w.user_id = u.id
         left join u_category c on u.category_id = c.id
@@ -14,7 +14,7 @@
 
     <!-- 根据条件查询用户数据 -->
     <select id="selectUserBySelect" resultType="cn.o0u0o.service.admin.entity.vo.UserData">
-        select u.id userId, u.user_name,r.realname, u.gender, c.id category, s.phone, w.c_total, r.ID_number idNumber, s.email
+        select u.id userId, u.user_name,r.realName, u.gender, c.category, s.phone, w.c_total consumed, r.ID_number, s.email
         from u_user u
         left join u_e_wallet w on w.user_id = u.id
         left join u_category c on u.category_id = c.id
