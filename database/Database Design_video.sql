@@ -16,12 +16,12 @@ CREATE TABLE v_video(
 #视频信息
 CREATE TABLE v_video_info(
 	id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	like_id varchar(12) NOT NULL,
-	play_nub varchar(12) COMMENT '播放数' NOT NULL,
-	video_pnumb varchar(12) COMMENT '分享数' NOT NULL,
-	video_coin int unsigned COMMENT '投币数' NOT NULL,
-	audit_id INT unsigned NOT NULL,
-	video_status INT unsigned NOT NULL,
+	like_id varchar(12) NOT NULL DEFAULT '0',
+	play_nub varchar(12) COMMENT '播放数' NOT NULL DEFAULT '0',
+	video_pnumb varchar(12) COMMENT '分享数' NOT NULL DEFAULT '0',
+	video_coin int unsigned COMMENT '投币数' NOT NULL DEFAULT 0,
+	audit_id INT unsigned NOT NULL DEFAULT 0,
+	video_status INT unsigned NOT NULL DEFAULT 1,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
 	#FOREIGN KEY(video_info_id) REFERENCES v_video(video_info_id)
@@ -34,7 +34,7 @@ CREATE TABLE v_video_text(
 	zone_id INT unsigned NOT NULL, 										 #类型
 	img_id INT unsigned NOT NULL, 														 #图片id
 	author_id INT unsigned NOT NULL,													 #作者id
-	comment_id INT unsigned NOT NULL,									 #评论id
+	comment_id INT unsigned NOT NULL DEFAULT 0,									 #评论id
 	video_title VARCHAR(128) COMMENT '视频标题' NOT NULL,
 	video_brief varchar(200) COMMENT '视频简介' NOT NULL,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
