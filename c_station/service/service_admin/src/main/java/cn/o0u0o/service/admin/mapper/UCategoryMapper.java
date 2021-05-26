@@ -1,6 +1,6 @@
 package cn.o0u0o.service.admin.mapper;
 
-import cn.o0u0o.service.admin.entity.USafe;
+import cn.o0u0o.service.admin.entity.UCategory;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author Caleb Chen
  * @since 2021-05-26
  */
-public interface USafeMapper extends BaseMapper<USafe> {
+public interface UCategoryMapper extends BaseMapper<UCategory> {
 
 }

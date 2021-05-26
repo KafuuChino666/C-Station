@@ -213,3 +213,11 @@ left join u_category c on u.category_id = c.id
 left join u_safe s on u.id = s.user_id         
 left join u_realname r on s.rn_id = r.id
 LIMIT 0,4
+
+
+SELECT COUNT(1) FROM u_user u 
+LEFT JOIN u_e_wallet w ON w.user_id = u.id 
+LEFT JOIN u_category c ON u.category_id = c.id 
+LEFT JOIN u_safe s ON u.id = s.user_id 
+LEFT JOIN u_realname r ON s.rn_id = r.id 
+WHERE userId = 1

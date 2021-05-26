@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author Caleb Chen
- * @since 2021-05-23
+ * @since 2021-05-26
  */
 public interface USafeService extends IService<USafe> {
 

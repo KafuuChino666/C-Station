@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author Caleb Chen
- * @since 2021-05-23
+ * @since 2021-05-26
  */
 @Service
 public class UFollowServiceImpl extends ServiceImpl<UFollowMapper, UFollow> implements UFollowService {
