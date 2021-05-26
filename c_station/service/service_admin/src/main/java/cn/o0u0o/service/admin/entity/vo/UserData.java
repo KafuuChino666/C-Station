@@ -23,11 +23,11 @@ public class UserData {
     // 用户昵称
     private String userName;
     // 真实姓名
-    private String realname;
+    private String realName;
     // 性别
     private char gender;
     // 会员
-    private Integer category;
+    private String category;
     // 在线状态
 //    private Integer status;
 //    // 地址

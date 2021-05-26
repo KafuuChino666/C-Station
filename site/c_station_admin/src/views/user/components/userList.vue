@@ -21,14 +21,14 @@
           <el-form-item label="用户分类">
             <span>{{ props.row.category }}</span>
           </el-form-item>
-          <el-form-item label="用户地区">
+          <el-form-item label="用户手机号">
             <span>{{ props.row.phone }}</span>
           </el-form-item>
           <el-form-item label="邮箱">
             <span>{{ props.row.email }}</span>
           </el-form-item>
           <el-form-item label="身份证号">
-            <span>{{ props.row.IDNumber }}</span>
+            <span>{{ props.row.idNumber }}</span>
           </el-form-item>
           <el-form-item label="充值数">
             <span>{{ props.row.consumed }}</span>
@@ -73,7 +73,7 @@ export default {
         // address: '陕西省西安市',
         phone: '13201512216',
         consumed: '12',
-        IDNumber: '610111111111111111',
+        idNumber: '610111111111111111',
         email: '690209522@qq.com'
       }],
       page: '1',
