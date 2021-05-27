@@ -81,6 +81,18 @@ public class SwaggerConfig {
     }
 
     @Bean
+    public Docket web_api_userAdmin() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(apiInfo("admin-api", "用户管理相关api", "1.0"))
+                .select()
+                .apis(RequestHandlerSelectors.any())
+                .paths(PathSelectors.ant("/views/**"))
+                .build()
+                .groupName("用户管理相关api:web-admin-接口文档V1.0")
+                .pathMapping("/");
+    }
+
+    @Bean
     public Docket web_api_video() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo("video-api", "视频服务api", "1.0"))

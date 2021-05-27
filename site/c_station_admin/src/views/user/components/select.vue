@@ -7,9 +7,9 @@
         <el-select slot="prepend" v-model="select.selectType" placeholder="请选择">
           <el-option
             v-for="item in selectType"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
+            :key="item.id"
+            :label="item.category"
+            :value="item.id">
           </el-option>
         </el-select>
 <!--        <el-button slot="append" icon="el-icon-search" />-->
@@ -67,8 +67,9 @@ export default {
   },
 
   methods: {
+    // 查询下拉框内所有用户类型（未完成）
     fetchData() {
-      userAdmin.selectAllCategory().then(res => {
+      userAdmin.selectAllCategory().then(res => { 
         console.log(res.data.rows)
         this.selectType = res.data.rows
       }).then(error => {

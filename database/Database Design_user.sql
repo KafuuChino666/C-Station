@@ -203,7 +203,7 @@ left join u_e_wallet w on w.user_id = u.id
 left join u_category c on u.category_id = c.id
 left join u_safe s on u.id = s.user_id
 left join u_realname r on s.rn_id = r.id
-where userId = 1
+where u.user_name like "陈%"
 #根据条件查询用户数据
 
 select u.id userId, u.user_name,r.realname, u.gender, c.id category, s.phone, w.c_total, r.ID_number IDNumber, s.email         

@@ -25,10 +25,10 @@
                 u.id = #{selectUserID}
             </if>
             <if test="selectUserName != null and selectUserName != ''">
-                and u.user_name = #{selectUserName}
+                and u.user_name like concat(#{selectUserName}, '%')
             </if>
             <if test="selectType != null and selectType != 0">
-                and c.category = #{selectType}
+                and c.id = #{selectType}
             </if>
         </where>
     </select>

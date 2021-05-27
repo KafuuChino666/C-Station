@@ -56,6 +56,7 @@ public class UUserController {
                                          @PathVariable Integer limit,
                                          @RequestBody(required = false) Select select) {
 
+        System.out.println(select);
         if(page > 0 && limit > 0) {
             IPage<UserData> selectIPage = uUserService.selectUserBySelect(page, limit, select);
             List<UserData> records = selectIPage.getRecords();
