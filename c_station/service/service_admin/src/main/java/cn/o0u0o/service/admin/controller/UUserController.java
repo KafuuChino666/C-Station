@@ -37,7 +37,8 @@ public class UUserController {
         if(page > 0 && limit > 0) {
             IPage<UserData> userDataIPage = uUserService.selectUserAll(page, limit);
             List<UserData> records = userDataIPage.getRecords();
-            return Result.ok().data("rows", records);
+            long total = userDataIPage.getTotal();
+            return Result.ok().data("total", total).data("rows", records);
         }
         return Result.err().message("页码不符合规则!");
     }

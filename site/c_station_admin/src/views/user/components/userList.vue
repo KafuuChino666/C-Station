@@ -58,25 +58,16 @@
 
 <script>
 import userAdmin from '@/api/userAdmin'
-import PubSub from "pubsub-js";
+import PubSub from 'pubsub-js'
 
 export default {
   name: 'UserList',
+  props: {
+    userData: Array
+  },
   data() {
     return {
-      userData: [{
-        userId: '12987122',
-        userName: 'CalebCX',
-        realName: '陈芊浩',
-        gender: '男',
-        category: '大会员',
-        // status: '在线',
-        // address: '陕西省西安市',
-        phone: '13201512216',
-        consumed: '12',
-        idNumber: '610111111111111111',
-        email: '690209522@qq.com'
-      }],
+
       page: '1',
       limit: '6'
     }

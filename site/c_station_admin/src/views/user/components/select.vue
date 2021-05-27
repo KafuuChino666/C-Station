@@ -25,17 +25,14 @@
           <!-- 搜索框结束 -->
     <user-list/>
     <!--  分页  -->
-    <div style="margin: 15px auto;">
-    <el-row :gutter="20">
-      <el-col :span="12" :offset="9">
-        <el-pagination
-          background
-          layout="prev, pager, next"
-          :total="1000"
-          style="width: 100%"
-        />
-      </el-col>
-    </el-row>
+    <div class="block" :userData="userData" v-if="userData.length >= limit || page !== 1">
+      <el-pagination
+        layout="prev, pager, next"
+        :current-page="page"
+        :total="total"
+        :page-size="limit"
+        @current-change="changeCurrentPage"
+      />
     </div>
     <!--  分页 END  -->
   </div>
@@ -59,6 +56,22 @@ export default {
         selectUserName: '' // 用户昵称
       },
       selectType: {}, // 查询数据
+      total: 1,
+      page: 1,
+      limit: 6,
+      userData: [{
+        userId: '12987122',
+        userName: 'CalebCX',
+        realName: '陈芊浩',
+        gender: '男',
+        category: '大会员',
+        // status: '在线',
+        // address: '陕西省西安市',
+        phone: '13201512216',
+        consumed: '12',
+        idNumber: '610111111111111111',
+        email: '690209522@qq.com'
+      }],
     }
   },
 
@@ -69,9 +82,10 @@ export default {
   methods: {
     // 查询下拉框内所有用户类型（未完成）
     fetchData() {
-      userAdmin.selectAllCategory().then(res => { 
+      userAdmin.selectAllCategory().then(res => {
         console.log(res.data.rows)
         this.selectType = res.data.rows
+        this.total = res.data.total
       }).then(error => {
         console.log(error)
       })
@@ -81,6 +95,11 @@ export default {
     selectUserByInfo() {
       const select = this.select
       PubSub.PubSub.publish('selectUserByInfo', select)
+    },
+
+    changeCurrentPage(page) {
+      this.page = page
+      this.fetchData()
     }
   }
 }
@@ -107,5 +126,10 @@ export default {
 .input-select {
   width: 75%;
 }
-
+.block {
+  width: 300px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 10px;
+}
 </style>
