@@ -1,7 +1,9 @@
 package cn.o0u0o.service.admin.service;
 
-import cn.o0u0o.service.admin.entity.UBlacklist;
+import cn.o0u0o.service.admin.entity.UCategory;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -11,6 +13,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author Caleb Chen
  * @since 2021-05-26
  */
-public interface UBlacklistService extends IService<UBlacklist> {
+public interface UCategoryService extends IService<UCategory> {
+
+    List<UCategory> selectAllCategory();
 
 }

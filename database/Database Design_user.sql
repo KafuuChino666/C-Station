@@ -8,7 +8,7 @@ CREATE TABLE u_user (
 	`status` varchar(12) COMMENT '用户状态',
 	gender CHAR(1) COMMENT '性别' DEFAULT'男' NOT NULL,
 	birth DATE COMMENT '生日',
-	category_id int unsigned not null, 
+	category_id int unsigned not null DEFAULT 1, 
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
 );
@@ -21,8 +21,8 @@ CREATE TABLE u_safe (
 	user_id INT unsigned,
 	email VARCHAR(20) COMMENT '邮箱',
 	phone varchar(20) COMMENT '电话号码',
-	ep_id INT unsigned NOT NULL,
-	rn_id INT unsigned NOT NULL,
+	ep_id INT unsigned NOT NULL DEFAULT 0,
+	rn_id INT unsigned NOT NULL DEFAULT 0,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
 	#FOREIGN KEY(user_id) REFERENCES u_user(user_id)
@@ -213,3 +213,14 @@ left join u_category c on u.category_id = c.id
 left join u_safe s on u.id = s.user_id         
 left join u_realname r on s.rn_id = r.id
 LIMIT 0,4
+
+
+SELECT COUNT(1) FROM u_user u 
+LEFT JOIN u_e_wallet w ON w.user_id = u.id 
+LEFT JOIN u_category c ON u.category_id = c.id 
+LEFT JOIN u_safe s ON u.id = s.user_id 
+LEFT JOIN u_realname r ON s.rn_id = r.id 
+WHERE userId = 1;
+
+
+select id, category from u_category;

@@ -15,7 +15,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author Caleb Chen
- * @since 2021-05-23
+ * @since 2021-05-26
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -27,6 +27,9 @@ public class UEWallet extends BaseEntity {
 
     @ApiModelProperty(value = "c币余额")
     private Integer cMoney;
+
+    @ApiModelProperty(value = "c币总数")
+    private Integer cTotal;
 
     private Integer userId;
 

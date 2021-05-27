@@ -43,6 +43,7 @@
 
 <script>
 import userList from '@/views/user/components/userList'
+import userAdmin from '@/api/userAdmin'
 import PubSub from 'pubsub-js'
 
 export default {
@@ -57,21 +58,24 @@ export default {
         selectType: '', // 用户类型
         selectUserName: '' // 用户昵称
       },
-      selectType: [{
-        value: '1',
-        label: '普通用户'
-      }, {
-        value: '2',
-        label: '会员'
-      }, {
-        value: '3',
-        label: '大会员'
-      }], // 查询数据
-      page: 1,
-      limit: 6,
+      selectType: {}, // 查询数据
     }
   },
+
+  created() {
+    this.fetchData()
+  },
+
   methods: {
+    fetchData() {
+      userAdmin.selectAllCategory().then(res => {
+        console.log(res.data.rows)
+        this.selectType = res.data.rows
+      }).then(error => {
+        console.log(error)
+      })
+    },
+
     // 查询用户信息
     selectUserByInfo() {
       const select = this.select

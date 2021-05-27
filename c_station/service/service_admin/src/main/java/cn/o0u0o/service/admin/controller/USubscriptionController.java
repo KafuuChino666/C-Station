@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author Caleb Chen
- * @since 2021-05-23
+ * @since 2021-05-26
  */
 @RestController
 @RequestMapping("/u-subscription")
