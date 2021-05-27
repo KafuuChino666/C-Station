@@ -1,6 +1,5 @@
 package cn.o0u0o.service.video.entity.vo;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 import java.util.Date;

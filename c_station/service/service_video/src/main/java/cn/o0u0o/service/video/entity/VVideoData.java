@@ -14,18 +14,18 @@ import lombok.experimental.Accessors;
  * 
  * </p>
  *
- * @author Caleb Chen
- * @since 2021-05-17
+ * @author Guo Yangyang
+ * @since 2021-05-26
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-@ApiModel(value="VVideoInfo对象", description="")
-public class VVideoInfo extends BaseEntity {
+@ApiModel(value="VVideoData对象", description="")
+public class VVideoData extends BaseEntity {
 
     private static final long serialVersionUID=1L;
 
-    private String likeId;
+    private Integer vId;
 
     @ApiModelProperty(value = "播放数")
     private String playNub;
@@ -36,9 +36,11 @@ public class VVideoInfo extends BaseEntity {
     @ApiModelProperty(value = "投币数")
     private Integer videoCoin;
 
-    private Integer auditId;
+    @ApiModelProperty(value = "点赞数")
+    private String likeNumber;
 
-    private Integer videoStatus;
+    @ApiModelProperty(value = "点踩数")
+    private String downNumber;
 
 
 }

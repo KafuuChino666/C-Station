@@ -28,7 +28,10 @@
         >
       </VueCropper>
     </div>
-    <div v-html="previewHTML" class="cr-right">
+    <div class="cr-right">
+<!--      <div class="preview">-->
+<!--        <img :src="previews.url" :style="previews.img"/>-->
+<!--      </div>-->
     </div>
   </div>
 </template>
@@ -41,20 +44,20 @@ export default {
   components: {VueCropper},
   data () {
     return {
-      previewHTML: '',
+      previews: {},
       option: {
         img: '', // 裁剪图片的地址
         outputSize: 1, // 裁剪生成图片的质量(可选0.1 - 1)
         outputType: 'jpeg', // 裁剪生成图片的格式（jpeg || png || webp）
         info: true, // 图片大小信息
-        canScale: true, // 图片是否允许滚轮缩放
+        canScale: false, // 图片是否允许滚轮缩放
         autoCrop: true, // 是否默认生成截图框
         autoCropWidth: 230, // 默认生成截图框宽度
         autoCropHeight: 150, // 默认生成截图框高度
         fixed: true, // 是否开启截图框宽高固定比例
         fixedNumber: [1.53, 1], // 截图框的宽高比例
         full: false, // false按原比例裁切图片，不失真
-        fixedBox: true, // 固定截图框大小，不允许改变
+        fixedBox: false, // 固定截图框大小，不允许改变
         canMove: false, // 上传图片是否可以移动
         canMoveBox: true, // 截图框能否拖动
         original: false, // 上传图片按照原始比例渲染
@@ -69,7 +72,7 @@ export default {
   },
   mounted () {
     let _super = this.$parent.$parent
-    console.log(_super.coverIndex)
+    console.log(_super.coves)
     this.setAvatarBase64(_super.coves[_super.coverIndex], (base64) => {
       this.option.img = base64
     })
@@ -134,7 +137,8 @@ export default {
       return canvas.toDataURL('image/png')
     },
     realTime (data) {
-      this.previewHTML = data.html
+      this.previews = data
+      console.log(this.previews)
     }
   }
 }
@@ -156,11 +160,15 @@ export default {
 .cr-right {
   width: 230px;
   height: 300px;
-  background-color: #df5000;
   float: right;
 }
 
 .cr .el-dialog__body {
   padding: 10px 20px;
+}
+
+.preview {
+  width: 142px;
+  height: 80px;
 }
 </style>

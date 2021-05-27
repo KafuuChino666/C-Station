@@ -1,51 +1,47 @@
+
 #视频表
 CREATE TABLE v_video(
-	id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT, #视频id
+	id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	author_id INT unsigned NOT NULL,													 #作者id
+	zone_id INT unsigned NOT NULL, 										 #类型
+	img_Url VARCHAR(128) COMMENT '图片地址' NOT NULL,
+	video_title VARCHAR(128) COMMENT '视频标题' NOT NULL,
+	video_brief varchar(200) COMMENT '视频简介' NOT NULL,
+	video_status INT unsigned NOT NULL,
+	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
+	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
+)
+
+
+CREATE TABLE v_video_item(
+	id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	v_id INT unsigned NOT NULL,
 	video_sort int unsigned not null,
 	video_title varchar(32) not null,
 	video_duration varchar(16) not null,
 	video_location VARCHAR(255) COMMENT '视频信息' NOT NULL, 	 #视频地址
-	video_info_id INT unsigned NOT NULL,								 #视频信息表
-	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
-	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
-	#FOREIGN KEY(author_id) REFERENCES u_user(user_id),
-	#FOREIGN KEY(img_id) REFERENCES pub_img(img_id)
-);
-
-
-#视频信息
-CREATE TABLE v_video_info(
-	id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	like_id varchar(12) NOT NULL,
-	play_nub varchar(12) COMMENT '播放数' NOT NULL,
-	video_pnumb varchar(12) COMMENT '分享数' NOT NULL,
-	video_coin int unsigned COMMENT '投币数' NOT NULL,
 	audit_id INT unsigned NOT NULL,
 	video_status INT unsigned NOT NULL,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
-	#FOREIGN KEY(video_info_id) REFERENCES v_video(video_info_id)
-);
+)
 
-#视频信息表分表字段
-CREATE TABLE v_video_text(
+CREATE TABLE v_video_data(
 	id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	video_info_id INT unsigned NOT NULL,								 #视频信息表
-	zone_id INT unsigned NOT NULL, 										 #类型
-	img_id INT unsigned NOT NULL, 														 #图片id
-	author_id INT unsigned NOT NULL,													 #作者id
-	comment_id INT unsigned NOT NULL,									 #评论id
-	video_title VARCHAR(128) COMMENT '视频标题' NOT NULL,
-	video_brief varchar(200) COMMENT '视频简介' NOT NULL,
+	v_id INT unsigned NOT NULL,
+	play_nub varchar(12) COMMENT '播放数' NOT NULL,
+	video_pnumb varchar(12) COMMENT '分享数' NOT NULL,
+	video_coin int unsigned COMMENT '投币数' NOT NULL,
+	like_number VARCHAR(12) COMMENT '点赞数' NOT NULL DEFAULT '0',
+	down_number VARCHAR(12) COMMENT '点踩数' not null DEFAULT '0',
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
-	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
-);
+	gmt_modified DATETIME COMMENT '修改时间' NOT NULL	
+)
 
-
-#视频信息表分表字段
+	#视频信息表分表字段
 CREATE TABLE v_video_extra(
 	id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	video_info_id INT unsigned NOT NULL,
+	v_id INT unsigned NOT NULL,
 	tags VARCHAR(128) COMMENT '标签',
 	is_innovate INT(4) unsigned NOT NULL COMMENT '自制声明',
 	is_watermark INT(4) unsigned NOT NULL COMMENT '开启专属水印',
@@ -59,15 +55,6 @@ CREATE TABLE v_video_extra(
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
 )
 
-#点赞表
-CREATE TABLE v_like(
-	id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	like_number VARCHAR(12) COMMENT '点赞数' NOT NULL DEFAULT '0',
-	down_number VARCHAR(12) COMMENT '点踩数' not null DEFAULT '0',
-	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
-	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
-	#FOREIGN KEY(like_id) REFERENCES v_video_info(like_id)
-);
 
 #弹幕表
 CREATE TABLE v_barrage(

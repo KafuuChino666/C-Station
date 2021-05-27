@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author Guo Yangyang
- * @since 2021-05-19
+ * @since 2021-05-26
  */
 @Service
 public class StaffAuditorServiceImpl extends ServiceImpl<StaffAuditorMapper, StaffAuditor> implements StaffAuditorService {

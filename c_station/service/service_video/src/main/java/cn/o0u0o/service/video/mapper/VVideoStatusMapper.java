@@ -8,8 +8,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  *  Mapper 接口
  * </p>
  *
- * @author Caleb Chen
- * @since 2021-05-17
+ * @author Guo Yangyang
+ * @since 2021-05-26
  */
 public interface VVideoStatusMapper extends BaseMapper<VVideoStatus> {
 

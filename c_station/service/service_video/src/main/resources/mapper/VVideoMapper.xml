@@ -2,4 +2,43 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.o0u0o.service.video.mapper.VVideoMapper">
 
+    <select id="selectVideoByTerm" resultType="cn.o0u0o.service.video.entity.vo.TableData">
+        select v.img_Url, v.video_title, v.author_id, v.zone_id, d.play_nub, v.video_status
+        from v_video v
+        left join v_video_data d on v.id = d.v_id
+        left join v_video_status s on v.video_status = s.id
+        <where>
+            <if test="videoId != null and videoId != ''">
+                v.id = #{videoId}
+            </if>
+            <if test="videoTitle != null and videoTitle != ''">
+                and v.video_title = #{videoTitle}
+            </if>
+            <if test="authorId != null and authorId != ''">
+                and v.author_id = #{authorId}
+            </if>
+            <if test="startTime != null and startTime != ''">
+                and v.gmt_create &gt; #{startTime}
+            </if>
+            <if test="endTime != null and endTime != ''">
+                and v.gmt_create &lt; #{endTime}
+            </if>
+            <if test="playNub != null and playNub != ''">
+                and d.play_nub = #{playNub}
+            </if>
+            <if test="videoStatus != null and videoStatus != ''">
+                and v.video_status = #{videoStatus}
+            </if>
+        </where>
+    </select>
+
+    <select id="getVideoInfoById" resultType="cn.o0u0o.service.video.entity.vo.VideoInfoForm">
+        select v.id, v.author_id, u.user_name, v.video_title, v.video_brief, v.gmt_create, d.play_nub, d.video_pnumb, d.video_coin, d.like_number, d.down_number, v.zone_id, v.video_status, i.video_location
+        from v_video v
+                 left join u_user u on u.id = v.author_id
+                 left join v_video_data d on d.id = v.id
+                 left join v_video_item i on i.id = v.id
+        WHERE v.id = #{id}
+    </select>
+
 </mapper>

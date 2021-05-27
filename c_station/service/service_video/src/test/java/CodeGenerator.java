@@ -11,7 +11,8 @@ import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.po.TableFill;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
-//import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 
@@ -42,10 +43,10 @@ public class CodeGenerator {
 
         // 3、数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://8.131.121.227:3306/test3?serverTimezone=GMT%2B8");
+        dsc.setUrl("jdbc:mysql://121.5.72.32:3306/test?serverTimezone=GMT%2B8");
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
-        dsc.setPassword("YUNwei233");
+        dsc.setPassword("YUNwei2003");
         dsc.setDbType(DbType.MYSQL);
         mpg.setDataSource(dsc);
 

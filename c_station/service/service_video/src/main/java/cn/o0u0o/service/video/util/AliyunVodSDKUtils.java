@@ -1,9 +1,8 @@
 package cn.o0u0o.service.video.util;
 
+import com.aliyun.teaopenapi.models.Config;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.profile.DefaultProfile;
-import com.aliyun.vod20170321.models.*;
-import com.aliyun.teaopenapi.models.*;
 
 public class AliyunVodSDKUtils {
 

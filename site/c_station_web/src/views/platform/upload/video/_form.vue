@@ -19,7 +19,6 @@
         title="视频封面 (建议上传高清封面尺寸≥1146*717)"
         :visible.sync="dialogVisible"
         >
-        <el-divider></el-divider>
         <CropperElement />
         <span slot="footer" class="dialog-footer">
           <el-button @click="dialogVisible = false">取 消</el-button>
@@ -322,11 +321,6 @@ export default {
 
 .uploadform-box .el-tag {
   margin-right: 10px;
-}
-
-.uploadform-box .el-collapse-item__header {
-  font-weight: bold;
-  font-size: 20px;
 }
 
 .medium-title {

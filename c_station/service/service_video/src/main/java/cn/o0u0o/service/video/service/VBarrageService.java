@@ -8,8 +8,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  *  服务类
  * </p>
  *
- * @author Caleb Chen
- * @since 2021-05-17
+ * @author Guo Yangyang
+ * @since 2021-05-26
  */
 public interface VBarrageService extends IService<VBarrage> {
 

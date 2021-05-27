@@ -24,4 +24,17 @@ public class QueryForm {
     private String playNub;
     //视频状态
     private Integer videoStatus;
+
+    @Override
+    public String toString() {
+        return "QueryForm{" +
+                "id=" + id +
+                ", videoTitle='" + videoTitle + '\'' +
+                ", authorId=" + authorId +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", playNub='" + playNub + '\'' +
+                ", videoStatus=" + videoStatus +
+                '}';
+    }
 }

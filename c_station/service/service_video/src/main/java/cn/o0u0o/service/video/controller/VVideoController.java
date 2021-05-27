@@ -2,12 +2,19 @@ package cn.o0u0o.service.video.controller;
 
 
 import cn.o0u0o.common.response.Result;
-import cn.o0u0o.service.video.entity.vo.VideoUpload;
+import cn.o0u0o.service.video.entity.VVideoStatus;
+import cn.o0u0o.service.video.entity.vo.QueryForm;
+import cn.o0u0o.service.video.entity.vo.TableData;
+import cn.o0u0o.service.video.entity.vo.VideoInfoResult;
+import cn.o0u0o.service.video.service.VVideoService;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -17,17 +24,55 @@ import javax.validation.Valid;
  * @author Caleb Chen
  * @since 2021-05-17
  */
-@Api("视频相关api")
-@CrossOrigin //跨域
+@Api(tags = "视频信息控制类")
 @RestController
-@RequestMapping("/api/video")
+@CrossOrigin //跨域
+@RequestMapping("/admin/video")
 public class VVideoController {
 
-    @ApiOperation("视频投稿")
-    @PostMapping("/platform/")
-    public Result videoContribute(@RequestBody @Valid VideoUpload video) {
-        System.out.println(video);
-        return Result.err();
+    @Autowired
+    public VVideoService vVideoService;
+
+    @ApiOperation("分页查询获取视频信息")
+    @GetMapping(value = "/list/{page}/{limit}")
+    public Result pageSelectVideoList(@PathVariable Integer page,
+                                      @PathVariable Integer limit,
+                                      @RequestParam(required = false) Integer id,
+                                      @RequestParam(required = false) String videoTitle,
+                                      @RequestParam(required = false) Integer authorId,
+                                      @RequestParam(required = false) Date startTime,
+                                      @RequestParam(required = false) Date endTime,
+                                      @RequestParam(required = false) String playNub,
+                                      @RequestParam(required = false) Integer videoStatus) {
+
+        IPage<TableData> queryFormIPage = vVideoService.selectVideoByTerm(page, limit, id, videoTitle, authorId, startTime, endTime, playNub, videoStatus);
+        List<TableData> records = queryFormIPage.getRecords(); // 分页记录列表
+        long total = queryFormIPage.getTotal(); // 分页总条数
+        return  Result.ok().data("total", total).data("rows", records);
+    }
+
+    @ApiOperation("根据视频id获取视频信息")
+    @GetMapping(value = "/info/{id}")
+    public Result getVideoInfoById(@PathVariable Integer id) {
+        VideoInfoResult videoInfoById = vVideoService.getVideoInfoById(id);
+
+        Result err = Result.err();
+        if(id <= 0) {
+            return err.message("视频ID不正确");
+        }
+        if(videoInfoById == null) {
+            return err.message("未找到视频信息！");
+        }
+
+        return Result.ok().data("videoInfo", videoInfoById);
+
+    }
+
+    @ApiOperation("获取所有视频状态")
+    @GetMapping(value = "/status")
+    public Result selectAllVideoStatus() {
+        List<VVideoStatus> statusList = vVideoService.selectAllVideoStatus();
+        return Result.ok().data("statusList", statusList);
     }
 
 }

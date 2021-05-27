@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
  *  服务实现类
  * </p>
  *
- * @author Caleb Chen
- * @since 2021-05-17
+ * @author Guo Yangyang
+ * @since 2021-05-26
  */
 @Service
 public class VBarrageServiceImpl extends ServiceImpl<VBarrageMapper, VBarrage> implements VBarrageService {

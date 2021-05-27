@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author Guo Yangyang
- * @since 2021-05-19
+ * @since 2021-05-26
  */
 public interface StaffAuditorMapper extends BaseMapper<StaffAuditor> {
 

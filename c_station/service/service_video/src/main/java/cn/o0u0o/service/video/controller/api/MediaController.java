@@ -7,7 +7,6 @@ import cn.o0u0o.service.video.service.MediaService;
 import cn.o0u0o.service.video.service.VVideoService;
 import com.aliyun.vod20170321.models.GetVideoInfoResponse;
 import com.aliyuncs.exceptions.ClientException;
-import com.aliyuncs.vod.model.v20170321.GetVideoInfoRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

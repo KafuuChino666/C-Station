@@ -1,6 +1,6 @@
 package cn.o0u0o.service.video.service;
 
-import cn.o0u0o.service.video.entity.StaffAuditor;
+import cn.o0u0o.service.video.entity.VVideoItem;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author Guo Yangyang
  * @since 2021-05-26
  */
-public interface StaffAuditorService extends IService<StaffAuditor> {
+public interface VVideoItemService extends IService<VVideoItem> {
 
 }

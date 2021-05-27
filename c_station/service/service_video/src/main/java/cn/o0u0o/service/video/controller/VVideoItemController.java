@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
  *  前端控制器
  * </p>
  *
- * @author Caleb Chen
- * @since 2021-05-17
+ * @author Guo Yangyang
+ * @since 2021-05-26
  */
 @RestController
-@RequestMapping("/v-video-text")
-public class VVideoTextController {
+@RequestMapping("/v-video-item")
+public class VVideoItemController {
 
 }
 
