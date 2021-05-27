@@ -57,50 +57,41 @@
 </template>
 
 <script>
-import userAdmin from '@/api/userAdmin'
 import PubSub from 'pubsub-js'
 
 export default {
   name: 'UserList',
-  props: {
-    userData: Array
-  },
   data() {
     return {
-
-      page: '1',
-      limit: '6'
+      // page: '1',
+      // limit: '6'
+      userData: [{
+        userId: '',
+        userName: '',
+        realName: '',
+        gender: '',
+        category: '',
+        // status: '在线',
+        // address: '陕西省西安市',
+        phone: '',
+        consumed: '',
+        idNumber: '',
+        email: ''
+      }]
     }
   },
   created() {
-    this.fetchDataAll()
+    // this.fetchDataAll()
   },
 
   mounted() {
-    PubSub.PubSub.subscribe('selectUserByInfo', (msg, select) => {
-      this.fetchData(select)
+    PubSub.PubSub.subscribe('userData', (msg, data) => {
+      this.userData = data
     })
   },
 
   methods: {
-    fetchDataAll() {
-      userAdmin.selectUserAll(this.page, this.limit).then(res => {
-        console.log('===' + res)
-        this.userData = res.data.rows
-      }).catch(error => {
-        console.log(error)
-      })
-    },
 
-    fetchData(select) {
-      console.log('2')
-      userAdmin.selectUserBySelect(select, this.page, this.limit).then(res => {
-        this.userData = res.data.rows
-      }).catch(error => {
-        console.log('3')
-        console.log(error)
-      })
-    }
   }
 }
 </script>

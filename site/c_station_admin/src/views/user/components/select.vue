@@ -25,12 +25,12 @@
           <!-- 搜索框结束 -->
     <user-list/>
     <!--  分页  -->
-    <div class="block" :userData="userData" v-if="userData.length >= limit || page !== 1">
+    <div class="block" v-if="this.users.length >= this.limit || this.page !== 1">
       <el-pagination
         layout="prev, pager, next"
-        :current-page="page"
-        :total="total"
-        :page-size="limit"
+        :current-page="this.page"
+        :total="this.total"
+        :page-size="this.limit"
         @current-change="changeCurrentPage"
       />
     </div>
@@ -59,24 +59,13 @@ export default {
       total: 1,
       page: 1,
       limit: 6,
-      userData: [{
-        userId: '12987122',
-        userName: 'CalebCX',
-        realName: '陈芊浩',
-        gender: '男',
-        category: '大会员',
-        // status: '在线',
-        // address: '陕西省西安市',
-        phone: '13201512216',
-        consumed: '12',
-        idNumber: '610111111111111111',
-        email: '690209522@qq.com'
-      }],
+      users: []
     }
   },
 
   created() {
     this.fetchData()
+    this.fetchDataB()
   },
 
   methods: {
@@ -85,21 +74,31 @@ export default {
       userAdmin.selectAllCategory().then(res => {
         console.log(res.data.rows)
         this.selectType = res.data.rows
-        this.total = res.data.total
-      }).then(error => {
+      }).catch(error => {
         console.log(error)
       })
     },
 
     // 查询用户信息
     selectUserByInfo() {
-      const select = this.select
-      PubSub.PubSub.publish('selectUserByInfo', select)
+      this.fetchDataB(this.select)
     },
 
     changeCurrentPage(page) {
       this.page = page
-      this.fetchData()
+      this.fetchDataB()
+    },
+
+    fetchDataB() {
+      console.log('2')
+      userAdmin.selectUserBySelect(this.select, this.page, this.limit).then(res => {
+        this.total = res.data.total
+        this.users = res.data.rows
+        PubSub.PubSub.publish('userData', res.data.rows)
+      }).catch(error => {
+        console.log('3')
+        console.log(error)
+      })
     }
   }
 }
