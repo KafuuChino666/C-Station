@@ -35,5 +35,14 @@ export default {
       method: 'post',
       data: video
     })
+  },
+  // 上传视频封面
+  uploadVideoCover (fileDate) {
+    return request({
+      url: `/api/video/platform/cover`,
+      method: 'post',
+      config: {'Content-Type': 'multipart/form-data'},
+      data: fileDate
+    })
   }
 }

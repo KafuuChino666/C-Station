@@ -20,10 +20,6 @@
         :visible.sync="dialogVisible"
         >
         <CropperElement />
-        <span slot="footer" class="dialog-footer">
-          <el-button @click="dialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-        </span>
       </el-dialog>
       <div style="float: left">
         <div v-for="(item, index) in 3" :key="index" :class="index !== coverIndex ? 'cover-img' : 'cover-img cover-img-active cover-img-back-active:active'" ref="cover-item" @click="clickCoverItem(index)">
@@ -163,23 +159,7 @@ export default {
           }
         }
       },
-      dynamicTags: [
-        {
-          id: 1,
-          name: '标1签1',
-          status: 1
-        },
-        {
-          id: 2,
-          name: '标1签2',
-          status: 1
-        },
-        {
-          id: 3,
-          name: '标1签3',
-          status: 1
-        }
-      ],
+      dynamicTags: [],
       recommendTags: [
         {
           id: 1,
@@ -202,6 +182,7 @@ export default {
       loadedPercent: 0,
       coves: [],
       coveUrl: this.imgUrl,
+      coveFile: {},
       coverIndex: 0,
       video: {
         videoId: '25465451574',
@@ -281,6 +262,16 @@ export default {
     videoContribute () {
       this.$refs['video'].validate((valid) => {
         if (valid) {
+          // 上传图片
+          // async function f () {
+          //   await
+          // }
+          let param = new FormData()
+          param.append('file', this.coveFile)
+          platform.uploadVideoCover(param).then(res => {
+            console.log(res.data.coverTemporaryKey)
+          })
+
           // tags
           const tags = []
           this.dynamicTags.forEach(i => {

@@ -33,6 +33,10 @@
 <!--        <img :src="previews.url" :style="previews.img"/>-->
 <!--      </div>-->
     </div>
+    <span slot="footer" class="dialog-footer">
+      <el-button @click="$parent.dialogVisible = false">取 消</el-button>
+      <el-button type="primary" @click="saveImge">确 定</el-button>
+    </span>
   </div>
 </template>
 
@@ -44,7 +48,9 @@ export default {
   components: {VueCropper},
   data () {
     return {
+      super: this.$parent.$parent,
       previews: {},
+      modelSrc: '',
       option: {
         img: '', // 裁剪图片的地址
         outputSize: 1, // 裁剪生成图片的质量(可选0.1 - 1)
@@ -71,8 +77,7 @@ export default {
     }
   },
   mounted () {
-    let _super = this.$parent.$parent
-    console.log(_super.coves)
+    let _super = this.super
     this.setAvatarBase64(_super.coves[_super.coverIndex], (base64) => {
       this.option.img = base64
     })
@@ -139,6 +144,29 @@ export default {
     realTime (data) {
       this.previews = data
       console.log(this.previews)
+    },
+    // 保存图片
+    saveImge () {
+      this.$refs.cropper.getCropData((data) => {
+        this.modelSrc = data
+        let file = this.base64ImgtoFile(data)
+        this.super.coveFile = file
+        console.log(file)
+      })
+    },
+    base64ImgtoFile (dataurl, filename = 'file') {
+      let arr = dataurl.split(',')
+      let mime = arr[0].match(/:(.*?);/)[1]
+      let suffix = mime.split('/')[1]
+      let bstr = atob(arr[1])
+      let n = bstr.length
+      let u8arr = new Uint8Array(n)
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n)
+      }
+      return new File([u8arr], `${filename}.${suffix}`, {
+        type: mime
+      })
     }
   }
 }

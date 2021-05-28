@@ -56,6 +56,18 @@ CREATE TABLE v_video_extra(
 )
 
 
+#附件表
+
+CREATE TABLE pub_adjunct (
+	id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	url VARCHAR(255) COMMENT '附件地址' NOT NULL,
+	type INT unsigned NOT NULL COMMENT '附件类型',
+	status INT unsigned NOT NULL DEFAULT '0' COMMENT '附件类型',
+	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
+	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
+	#FOREIGN KEY(user_id) REFERENCES u_user(user_id)
+);
+
 #弹幕表
 CREATE TABLE v_barrage(
 	id INT PRIMARY KEY AUTO_INCREMENT,
