@@ -7,9 +7,9 @@
         <el-select slot="prepend" v-model="select.selectType" placeholder="请选择">
           <el-option
             v-for="item in selectType"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
+            :key="item.id"
+            :label="item.category"
+            :value="item.id">
           </el-option>
         </el-select>
 <!--        <el-button slot="append" icon="el-icon-search" />-->
@@ -25,17 +25,14 @@
           <!-- 搜索框结束 -->
     <user-list/>
     <!--  分页  -->
-    <div style="margin: 15px auto;">
-    <el-row :gutter="20">
-      <el-col :span="12" :offset="9">
-        <el-pagination
-          background
-          layout="prev, pager, next"
-          :total="1000"
-          style="width: 100%"
-        />
-      </el-col>
-    </el-row>
+    <div class="block" v-if="this.users.length >= this.limit || this.page !== 1">
+      <el-pagination
+        layout="prev, pager, next"
+        :current-page="this.page"
+        :total="this.total"
+        :page-size="this.limit"
+        @current-change="changeCurrentPage"
+      />
     </div>
     <!--  分页 END  -->
   </div>
@@ -59,27 +56,49 @@ export default {
         selectUserName: '' // 用户昵称
       },
       selectType: {}, // 查询数据
+      total: 1,
+      page: 1,
+      limit: 6,
+      users: []
     }
   },
 
   created() {
     this.fetchData()
+    this.fetchDataB()
   },
 
   methods: {
+    // 查询下拉框内所有用户类型（未完成）
     fetchData() {
       userAdmin.selectAllCategory().then(res => {
         console.log(res.data.rows)
         this.selectType = res.data.rows
-      }).then(error => {
+      }).catch(error => {
         console.log(error)
       })
     },
 
     // 查询用户信息
     selectUserByInfo() {
-      const select = this.select
-      PubSub.PubSub.publish('selectUserByInfo', select)
+      this.fetchDataB(this.select)
+    },
+
+    changeCurrentPage(page) {
+      this.page = page
+      this.fetchDataB()
+    },
+
+    fetchDataB() {
+      console.log('2')
+      userAdmin.selectUserBySelect(this.select, this.page, this.limit).then(res => {
+        this.total = res.data.total
+        this.users = res.data.rows
+        PubSub.PubSub.publish('userData', res.data.rows)
+      }).catch(error => {
+        console.log('3')
+        console.log(error)
+      })
     }
   }
 }
@@ -106,5 +125,10 @@ export default {
 .input-select {
   width: 75%;
 }
-
+.block {
+  width: 300px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 10px;
+}
 </style>

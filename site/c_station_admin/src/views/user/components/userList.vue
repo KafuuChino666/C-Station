@@ -57,59 +57,41 @@
 </template>
 
 <script>
-import userAdmin from '@/api/userAdmin'
-import PubSub from "pubsub-js";
+import PubSub from 'pubsub-js'
 
 export default {
   name: 'UserList',
   data() {
     return {
+      // page: '1',
+      // limit: '6'
       userData: [{
-        userId: '12987122',
-        userName: 'CalebCX',
-        realName: '陈芊浩',
-        gender: '男',
-        category: '大会员',
+        userId: '',
+        userName: '',
+        realName: '',
+        gender: '',
+        category: '',
         // status: '在线',
         // address: '陕西省西安市',
-        phone: '13201512216',
-        consumed: '12',
-        idNumber: '610111111111111111',
-        email: '690209522@qq.com'
-      }],
-      page: '1',
-      limit: '6'
+        phone: '',
+        consumed: '',
+        idNumber: '',
+        email: ''
+      }]
     }
   },
   created() {
-    this.fetchDataAll()
+    // this.fetchDataAll()
   },
 
   mounted() {
-    PubSub.PubSub.subscribe('selectUserByInfo', (msg, select) => {
-      this.fetchData(select)
+    PubSub.PubSub.subscribe('userData', (msg, data) => {
+      this.userData = data
     })
   },
 
   methods: {
-    fetchDataAll() {
-      userAdmin.selectUserAll(this.page, this.limit).then(res => {
-        console.log('===' + res)
-        this.userData = res.data.rows
-      }).catch(error => {
-        console.log(error)
-      })
-    },
 
-    fetchData(select) {
-      console.log('2')
-      userAdmin.selectUserBySelect(select, this.page, this.limit).then(res => {
-        this.userData = res.data.rows
-      }).catch(error => {
-        console.log('3')
-        console.log(error)
-      })
-    }
   }
 }
 </script>

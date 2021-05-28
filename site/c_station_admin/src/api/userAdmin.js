@@ -11,12 +11,12 @@ export default {
     })
   },
   // 分页获取角色
-  selectUserAll(page, limit) {
+  /*selectUserAll(page, limit) {
     return request({
       url: `/views/user/components/${page}/${limit}`,
       method: 'get'
     })
-  },
+  },*/
   // 查询所有状态
   selectAllCategory() {
     return request({

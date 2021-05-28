@@ -30,17 +30,18 @@ public class UUserController {
     @Autowired
     private UUserService uUserService;
 
-    @GetMapping(value = "/components/{page}/{limit}")
+   /* @GetMapping(value = "/components/{page}/{limit}")
     public Result selectUserInfoAll(@PathVariable Integer page,
                                     @PathVariable Integer limit) {
 
         if(page > 0 && limit > 0) {
             IPage<UserData> userDataIPage = uUserService.selectUserAll(page, limit);
             List<UserData> records = userDataIPage.getRecords();
-            return Result.ok().data("rows", records);
+            long total = userDataIPage.getTotal();
+            return Result.ok().data("total", total).data("rows", records);
         }
         return Result.err().message("页码不符合规则!");
-    }
+    }*/
 
     /**
      * 请求参数：
@@ -56,10 +57,22 @@ public class UUserController {
                                          @PathVariable Integer limit,
                                          @RequestBody(required = false) Select select) {
 
-        if(page > 0 && limit > 0) {
-            IPage<UserData> selectIPage = uUserService.selectUserBySelect(page, limit, select);
-            List<UserData> records = selectIPage.getRecords();
-            return Result.ok().data("rows", records);
+        if(select == null) {
+            if(page > 0 && limit > 0) {
+                IPage<UserData> userDataIPage = uUserService.selectUserAll(page, limit);
+                List<UserData> records = userDataIPage.getRecords();
+                long total = userDataIPage.getTotal();
+                System.out.println(total + " 1");
+                return Result.ok().data("total", total).data("rows", records);
+            }
+        } else {
+            if(page > 0 && limit > 0) {
+                IPage<UserData> selectIPage = uUserService.selectUserBySelect(page, limit, select);
+                List<UserData> records = selectIPage.getRecords();
+                long total = selectIPage.getTotal();
+                System.out.println(total);
+                return Result.ok().data("total", total).data("rows", records);
+            }
         }
         return Result.err().message("页码错误！");
     }
