@@ -37,20 +37,44 @@
       </template>
     </el-table-column>
     <el-table-column
+      align="center"
       label="用户ID"
       prop="userId">
     </el-table-column>
     <el-table-column
+      align="center"
       label="用户昵称"
       prop="userName">
     </el-table-column>
     <el-table-column
+      align="center"
       label="性别"
       prop="gender">
     </el-table-column>
     <el-table-column
+      align="center"
       label="邮箱"
       prop="email">
+    </el-table-column>
+    <el-table-column
+      align="center"
+      label="查看">
+      <template slot-scope="scope">
+        <el-row>
+          <el-button type="info" size="mini" @click="userMain()" round>查看主页</el-button>
+          <el-button type="warning" size="mini" @click="userViolation()" round>违规记录</el-button>
+        </el-row>
+      </template>
+    </el-table-column>
+    <el-table-column
+      align="center"
+      label="操作">
+      <template slot-scope="scope">
+        <el-row>
+          <el-button type="primary" size="mini" @click="userRedact()" round>用户编辑</el-button>
+          <el-button type="danger" size="mini" @click="userBan()" round>封禁用户</el-button>
+        </el-row>
+      </template>
     </el-table-column>
   </el-table>
   </div>
@@ -91,7 +115,25 @@ export default {
   },
 
   methods: {
+    // 用户主页跳转
+    userMain() {
+      this.$router.push('')
+    },
 
+    // 违规信息页面跳转
+    userViolation() {
+      this.$router.push('')
+    },
+
+    //用户编辑
+    userRedact() {
+      this.$router.push('')
+    },
+
+    //用户封禁
+    userBan() {
+      this.$router.push('')
+    }
   }
 }
 </script>

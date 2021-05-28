@@ -22,5 +22,6 @@ export default {
       url: `/views/category/vip`,
       method: 'get'
     })
-  }
+  },
+
 }
