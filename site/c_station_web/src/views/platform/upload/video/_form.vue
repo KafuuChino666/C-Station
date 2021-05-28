@@ -227,18 +227,19 @@ export default {
     // 获取视频封面this.$parent.
     getVideoCove () {
       // this.$parent.videoId = '064bb1aed2064f44bb64d21b8b121969'
-      // if (this.$parent.videoId) {
-      //   platform.getVideoCoveByVideoId(this.$parent.videoId).then(res => {
-      //     this.coves = res.data.cove
-      //   })
-      // }
-      let videoId = '64e1fa3151ee431fa72551c70560725e'
-      if (videoId) {
-        platform.getVideoCoveByVideoId(videoId).then(res => {
+      if (this.$parent.videoId) {
+        platform.getVideoCoveByVideoId(this.$parent.videoId).then(res => {
           this.coves = res.data.cove
           this.coveUrl = this.coves[0]
         })
       }
+      // let videoId = '64e1fa3151ee431fa72551c70560725e'
+      // if (videoId) {
+      //   platform.getVideoCoveByVideoId(videoId).then(res => {
+      //     this.coves = res.data.cove
+      //     this.coveUrl = this.coves[0]
+      //   })
+      // }
     },
     clickCoverItem (index) {
       this.coverIndex = index

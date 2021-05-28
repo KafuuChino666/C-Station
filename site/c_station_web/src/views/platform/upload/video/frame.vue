@@ -41,7 +41,7 @@ export default {
       file: {},
       requestId: '',
       uploader: null,
-      isShow: true
+      isShow: false
     }
   },
   methods: {
