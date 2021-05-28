@@ -90,13 +90,12 @@ export default {
     },
 
     fetchDataB() {
-      console.log('2')
       userAdmin.selectUserBySelect(this.select, this.page, this.limit).then(res => {
         this.total = res.data.total
         this.users = res.data.rows
+        this.page = 1
         PubSub.PubSub.publish('userData', res.data.rows)
       }).catch(error => {
-        console.log('3')
         console.log(error)
       })
     }
