@@ -182,7 +182,7 @@ export const constantRoutes = [
         children: [
           {
             path: 'user',
-            component: () => import('')
+            component: () => import('@/views/404')
           }
         ]
       },
