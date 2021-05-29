@@ -30,26 +30,13 @@ public class UUserController {
     @Autowired
     private UUserService uUserService;
 
-   /* @GetMapping(value = "/components/{page}/{limit}")
-    public Result selectUserInfoAll(@PathVariable Integer page,
-                                    @PathVariable Integer limit) {
-
-        if(page > 0 && limit > 0) {
-            IPage<UserData> userDataIPage = uUserService.selectUserAll(page, limit);
-            List<UserData> records = userDataIPage.getRecords();
-            long total = userDataIPage.getTotal();
-            return Result.ok().data("total", total).data("rows", records);
-        }
-        return Result.err().message("页码不符合规则!");
-    }*/
-
     /**
      * 请求参数：
      *     private Integer selectUserID;
      *     private Integer selectType;
      *     private String selectUserName;
-     * @param page
-     * @param limit
+     * @param page 页码
+     * @param limit 每页显示的数量
      * @return
      */
     @PostMapping(value = "/components/select/{page}/{limit}")

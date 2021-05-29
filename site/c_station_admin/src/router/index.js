@@ -178,13 +178,13 @@ export const constantRoutes = [
         path: 'list',
         name: 'UserList',
         component: () => import('@/views/user/components/select'),
-        meta: { title: '用户查询', icon: 'el-icon-user-solid' },
-        children: [
+        meta: { title: '用户查询', icon: 'el-icon-user-solid' }
+        /* children: [
           {
             path: 'user',
             component: () => import('@/views/404')
           }
-        ]
+        ]*/
       },
       {
         path: 'info',

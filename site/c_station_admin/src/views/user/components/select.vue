@@ -3,34 +3,35 @@
     <!-- 搜索框开始 -->
     <div class="select" style="top: 10px ; width: 45%;">
       <el-form :inline="true" :model="select" class="demo-form-inline">
-      <el-input v-model="select.selectUserID" placeholder="请输入用户ID" class="input-with-select" >
-        <el-select slot="prepend" v-model="select.selectType" placeholder="请选择">
-          <el-option
-            v-for="item in selectType"
-            :key="item.id"
-            :label="item.category"
-            :value="item.id">
-          </el-option>
-        </el-select>
-<!--        <el-button slot="append" icon="el-icon-search" />-->
-      </el-input>
-      <el-input class="input-select"
-        prefix-icon="el-icon-search"
-        v-model="select.selectUserName"
-        placeholder="请输入用户昵称">
-      </el-input>
-      <el-button type="primary" icon="el-icon-search" @click="selectUserByInfo">搜索</el-button>
+        <el-input v-model="select.selectUserID" placeholder="请输入用户ID" class="input-with-select">
+          <el-select slot="prepend" v-model="select.selectType" placeholder="请选择">
+            <el-option
+              v-for="item in selectType"
+              :key="item.id"
+              :label="item.category"
+              :value="item.id"
+            />
+          </el-select>
+          <!-- <el-button slot="append" icon="el-icon-search" />-->
+        </el-input>
+        <el-input
+          v-model="select.selectUserName"
+          class="input-select"
+          prefix-icon="el-icon-search"
+          placeholder="请输入用户昵称"
+        />
+        <el-button type="primary" icon="el-icon-search" @click="selectUserByInfo">搜索</el-button>
       </el-form>
     </div>
-          <!-- 搜索框结束 -->
-    <user-list/>
+    <!-- 搜索框结束 -->
+    <user-list />
     <!--  分页  -->
-    <div class="block" v-if="this.users.length >= this.limit || this.page !== 1">
+    <div v-if="users.length >= limit || page !== 1" class="block">
       <el-pagination
         layout="prev, pager, next"
-        :current-page="this.page"
-        :total="this.total"
-        :page-size="this.limit"
+        :current-page="page"
+        :total="total"
+        :page-size="limit"
         @current-change="changeCurrentPage"
       />
     </div>
@@ -82,6 +83,7 @@ export default {
     // 查询用户信息
     selectUserByInfo() {
       this.fetchDataB(this.select)
+      this.page = 1
     },
 
     changeCurrentPage(page) {
@@ -93,7 +95,6 @@ export default {
       userAdmin.selectUserBySelect(this.select, this.page, this.limit).then(res => {
         this.total = res.data.total
         this.users = res.data.rows
-        this.page = 1
         PubSub.PubSub.publish('userData', res.data.rows)
       }).catch(error => {
         console.log(error)
@@ -109,21 +110,22 @@ export default {
 }
 
 .select {
-  margin:0 auto;
+  margin: 0 auto;
 }
 
 .el-input {
-  margin:7px auto;
+  margin: 7px auto;
 }
 
 .el-button {
-  margin:10px auto;
+  margin: 10px auto;
   float: right;
 }
 
 .input-select {
   width: 75%;
 }
+
 .block {
   width: 300px;
   margin-right: auto;
