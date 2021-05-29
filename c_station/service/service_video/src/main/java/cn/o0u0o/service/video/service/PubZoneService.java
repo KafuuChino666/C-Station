@@ -18,4 +18,6 @@ public interface PubZoneService extends IService<PubZone> {
     List<PubZone> getNodeByLevel(String s);
 
     List<PubZone> getChildByParentId(Integer parentId);
+
+    Boolean isZoneIdValid(Integer integer);
 }

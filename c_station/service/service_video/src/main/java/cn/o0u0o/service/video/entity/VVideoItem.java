@@ -40,5 +40,16 @@ public class VVideoItem extends BaseEntity {
 
     private Integer videoStatus;
 
+    public VVideoItem() {
+    }
 
+    public VVideoItem(Integer vId, Integer videoSort, String videoTitle, String videoDuration, String videoLocation, Integer auditId, Integer videoStatus) {
+        this.vId = vId;
+        this.videoSort = videoSort;
+        this.videoTitle = videoTitle;
+        this.videoDuration = videoDuration;
+        this.videoLocation = videoLocation;
+        this.auditId = auditId;
+        this.videoStatus = videoStatus;
+    }
 }

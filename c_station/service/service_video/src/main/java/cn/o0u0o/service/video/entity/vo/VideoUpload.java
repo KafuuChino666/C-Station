@@ -18,6 +18,8 @@ public class VideoUpload {
     private String videoId;
     private Boolean isInnovate;
     @NotEmpty(message = "参数不能为空")
+    private String coverUrl;
+    @NotEmpty(message = "参数不能为空")
     @Length(min = 3, max = 30, message = "标题过长或过短")
     private String videoTitle;
     @Size(min = 2, max = 2)

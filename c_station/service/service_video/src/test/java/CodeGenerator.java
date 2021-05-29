@@ -20,7 +20,7 @@ import java.util.ArrayList;
 //@SpringBootTest(classes = CStationApplication.class)
 public class CodeGenerator {
 
-//    @Test
+    @Test
     public void genCode() {
 
         String moduleName = "service_video";

@@ -17,11 +17,13 @@ import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthRequest;
 import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
 import java.util.Date;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 @Service
 @Slf4j
@@ -29,6 +31,9 @@ public class MediaServiceImpl implements MediaService {
 
     @Autowired
     private VodProperties vodProperties;
+
+    @Autowired
+    private RedisTemplate<String, String> redisTemplate;
 
     @Override
     public String getPlayAuth(String videoSourceId) throws ClientException {
@@ -75,7 +80,12 @@ public class MediaServiceImpl implements MediaService {
         try {
             CreateUploadVideoResponse clientAcsResponse = client.getAcsResponse(request);
             if (clientAcsResponse != null) {
-                return new VideoUploadAuth(clientAcsResponse.getVideoId(), clientAcsResponse.getUploadAddress(), clientAcsResponse.getUploadAuth());
+                VideoUploadAuth videoUploadAuth = new VideoUploadAuth(clientAcsResponse.getVideoId(), clientAcsResponse.getUploadAddress(), clientAcsResponse.getUploadAuth());
+
+                // 添加 redis 缓存
+                redisTemplate.opsForValue().set("aliyunVideoId_" + videoUploadAuth.getVideoId(), "false", 1, TimeUnit.DAYS);
+                // redisTemplate.opsForSet().add("v_" + videoUploadAuth.getVideoId(), values)
+                return videoUploadAuth;
             }
         } catch (ClientException e) {
             e.printStackTrace();

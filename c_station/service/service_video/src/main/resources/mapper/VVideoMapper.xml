@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.o0u0o.service.video.mapper.VVideoMapper">
+    <insert id="insertOneVideo" keyProperty="id" useGeneratedKeys="true">
+        insert into v_video (author_id, zone_id, img_Url, video_title, video_brief, video_status) values (#{author_id}, #{zone_id}, #{img_Url}, #{video_title}, #{video_brief}, #{video_status})
+    </insert>
 
     <select id="selectVideoByTerm" resultType="cn.o0u0o.service.video.entity.vo.TableData">
         select v.img_Url, v.video_title, v.author_id, v.zone_id, d.play_nub, v.video_status
