@@ -12,7 +12,12 @@ aliyun:
     keysecret: dTYw1CUxOQmzf3016S4AcijtpOp2xd
     templateGroupId: null
     workflowId: null
-
+  oss:
+    endpoint: oss-cn-beijing.aliyuncs.com
+    accessKeyId: LTAI4G6VskXP7anbL6t4LCkY
+    accessKeySecret: dTYw1CUxOQmzf3016S4AcijtpOp2xd
+    #bucket可以在控制台创建，也可以使用java代码创建，注意先测试bucket是否已被占用
+    bucketname: mcsql-file
 # 顶象
 dingxiang:
   sms:

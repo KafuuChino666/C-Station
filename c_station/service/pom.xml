@@ -16,6 +16,7 @@
         <module>service_security</module>
         <module>service_video</module>
         <module>service_sms</module>
+        <module>service_oss</module>
     </modules>
 
     <properties>
@@ -28,6 +29,12 @@
         <dependency>
             <groupId>cn.o0u0o</groupId>
             <artifactId>common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.o0u0o</groupId>
+            <artifactId>service_oss</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
