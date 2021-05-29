@@ -41,34 +41,30 @@
         align="center"
         label="用户ID"
         prop="userId"
-      >
-      </el-table-column>
+      />
       <el-table-column
         align="center"
         label="用户昵称"
         prop="userName"
-      >
-      </el-table-column>
+      />
       <el-table-column
         align="center"
         label="性别"
         prop="gender"
-      >
-      </el-table-column>
+      />
       <el-table-column
         align="center"
         label="邮箱"
         prop="email"
-      >
-      </el-table-column>
+      />
       <el-table-column
         align="center"
         label="查看"
       >
-        <template slot-scope="scope">
+      <!--<template slot-scope="scope">
           <el-row>
-            <el-button type="info" size="mini" @click="userMain()" round>查看主页</el-button>
-            <el-button type="warning" size="mini" @click="userViolation()" round>违规记录</el-button>
+            <el-button type="info" size="mini" round @click="userMain()">查看主页</el-button>
+            <el-button type="warning" size="mini" round @click="userViolation()">违规记录</el-button>
           </el-row>
         </template>
       </el-table-column>
@@ -78,10 +74,10 @@
       >
         <template slot-scope="scope">
           <el-row>
-            <el-button type="primary" size="mini" @click="userRedact()" round>用户编辑</el-button>
-            <el-button type="danger" size="mini" @click="userBan()" round>封禁用户</el-button>
+            <el-button type="primary" size="mini" round @click="userRedact()">用户编辑</el-button>
+            <el-button type="danger" size="mini" round @click="userBan()">封禁用户</el-button>
           </el-row>
-        </template>
+        </template>-->
       </el-table-column>
     </el-table>
   </div>
