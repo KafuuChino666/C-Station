@@ -187,10 +187,10 @@ export const constantRoutes = [
         ]*/
       },
       {
-        path: 'info',
-        name: 'Userinfo',
-        component: () => import('@/views/video/audit'),
-        meta: { title: '用户查询', icon: 'el-icon-user-solid' }
+        path: 'stat',
+        name: 'UserStat',
+        component: () => import('@/views/user/components/userStat'),
+        meta: { title: '用户统计', icon: 'el-icon-user-solid' }
       }
     ]
   },
