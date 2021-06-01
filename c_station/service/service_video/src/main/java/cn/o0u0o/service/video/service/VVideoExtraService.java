@@ -1,6 +1,7 @@
 package cn.o0u0o.service.video.service;
 
 import cn.o0u0o.service.video.entity.VVideoExtra;
+import cn.o0u0o.service.video.entity.vo.VideoUpload;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface VVideoExtraService extends IService<VVideoExtra> {
 
+    boolean addVideo(Long videoId, VideoUpload video);
 }
