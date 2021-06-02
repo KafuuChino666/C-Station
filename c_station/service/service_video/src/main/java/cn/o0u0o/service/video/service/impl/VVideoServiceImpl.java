@@ -7,6 +7,7 @@ import cn.o0u0o.service.video.entity.VVideoStatus;
 import cn.o0u0o.service.video.entity.vo.*;
 import cn.o0u0o.service.video.mapper.VVideoMapper;
 import cn.o0u0o.service.video.service.PubZoneService;
+import cn.o0u0o.service.video.service.VVideoExtraService;
 import cn.o0u0o.service.video.service.VVideoItemService;
 import cn.o0u0o.service.video.service.VVideoService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -40,6 +41,9 @@ public class VVideoServiceImpl extends ServiceImpl<VVideoMapper, VVideo> impleme
 
     @Autowired
     private FileService fileService;
+
+    @Autowired
+    private VVideoExtraService vVideoExtraService;
 
     private static final String uploadSucceedVideoidKey = "uploadSucceedVideoID";
 
@@ -117,13 +121,18 @@ public class VVideoServiceImpl extends ServiceImpl<VVideoMapper, VVideo> impleme
                 }
 
                 // 创建 v_video_item
-                vVideoItemService.addVideo(videoId, video);
+                FileUploadComplete uploadComplete = (FileUploadComplete)is;
+                boolean b = vVideoItemService.addVideo(videoId, uploadComplete.getSize(), video);
+                if (!b) throw new RuntimeException();
                 // 创建 v_video_extra
-
+                b = vVideoExtraService.addVideo(videoId, video);
+                if (!b) throw new RuntimeException();
                 // 清除redis Hash中的值
+                redisTemplate.opsForHash().delete(uploadSucceedVideoidKey, video.getVideoId());
 
+                // 添加到审核队列
                 // 添加完毕
-
+                return true;
             }
         }
 
