@@ -16,18 +16,18 @@ import java.util.List;
 public class RequestExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Result validationBodyException(MethodArgumentNotValidException exception){
+    public Result validationBodyException(MethodArgumentNotValidException exception) {
 
         BindingResult result = exception.getBindingResult();
         if (result.hasErrors()) {
 
             List<ObjectError> errors = result.getAllErrors();
 
-            errors.forEach(p ->{
+            errors.forEach(p -> {
 
                 FieldError fieldError = (FieldError) p;
-                log.error("Data check failure : object{"+fieldError.getObjectName()+"},field{"+fieldError.getField()+
-                        "},errorMessage{"+fieldError.getDefaultMessage()+"}");
+                log.error("Data check failure : object{" + fieldError.getObjectName() + "},field{" + fieldError.getField() +
+                        "},errorMessage{" + fieldError.getDefaultMessage() + "}");
 
             });
 
