@@ -20,7 +20,7 @@ import java.util.ArrayList;
 //@SpringBootTest(classes = CStationApplication.class)
 public class CodeGenerator {
 
-    @Test
+//    @Test
     public void genCode() {
 
         String moduleName = "service_video";
@@ -43,7 +43,7 @@ public class CodeGenerator {
 
         // 3、数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://121.5.72.32:3306/test?serverTimezone=GMT%2B8");
+        dsc.setUrl("jdbc:mysql://121.5.72.32:3306/work?serverTimezone=GMT%2B8");
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("YUNwei2003");

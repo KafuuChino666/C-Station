@@ -6,16 +6,14 @@ import cn.o0u0o.service.video.entity.VVideo;
 import cn.o0u0o.service.video.entity.VVideoStatus;
 import cn.o0u0o.service.video.entity.vo.*;
 import cn.o0u0o.service.video.mapper.VVideoMapper;
-import cn.o0u0o.service.video.service.PubZoneService;
-import cn.o0u0o.service.video.service.VVideoExtraService;
-import cn.o0u0o.service.video.service.VVideoItemService;
-import cn.o0u0o.service.video.service.VVideoService;
+import cn.o0u0o.service.video.service.*;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
@@ -41,6 +39,9 @@ public class VVideoServiceImpl extends ServiceImpl<VVideoMapper, VVideo> impleme
 
     @Autowired
     private FileService fileService;
+
+    @Autowired
+    private VAuditStatusService vAuditStatusService;
 
     @Autowired
     private VVideoExtraService vVideoExtraService;
@@ -96,6 +97,7 @@ public class VVideoServiceImpl extends ServiceImpl<VVideoMapper, VVideo> impleme
     }
 
     @Override
+    @Transactional
     public boolean contribute(VideoUpload video) {
 
         // 获取 uuid
@@ -130,7 +132,9 @@ public class VVideoServiceImpl extends ServiceImpl<VVideoMapper, VVideo> impleme
                 // 清除redis Hash中的值
                 redisTemplate.opsForHash().delete(uploadSucceedVideoidKey, video.getVideoId());
 
-                // 添加到审核队列
+                // 添加视频审核
+                b = vAuditStatusService.addAudit(videoId);
+                if (!b) throw new RuntimeException();
                 // 添加完毕
                 return true;
             }
