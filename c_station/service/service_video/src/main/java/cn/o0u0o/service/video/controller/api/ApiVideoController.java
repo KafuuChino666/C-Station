@@ -37,8 +37,7 @@ public class ApiVideoController {
     @PostMapping("/platform/")
     public Result videoContribute(@RequestParam @Valid VideoUpload video) {
         boolean b = vVideoService.contribute(video);
-
-        return Result.err().message("视频投稿失败，请稍后在试");
+        return b ? Result.ok().message("视频投稿成功！") : Result.err().message("视频投稿失败，请稍后在试");
     }
 
     @ApiOperation("视频上传成功回调api")

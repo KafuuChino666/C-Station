@@ -14,7 +14,9 @@
         <i class="el-icon-box"></i>
         <span>内容管理</span>
       </template>
-      <el-menu-item index="2-1">稿件管理</el-menu-item>
+      <router-link :to="{name: 'UploadManager'}">
+        <el-menu-item index="2-1">稿件管理</el-menu-item>
+      </router-link>
       <el-menu-item index="2-2">申诉管理</el-menu-item>
       <el-menu-item index="2-3">字幕管理</el-menu-item>
     </el-submenu>

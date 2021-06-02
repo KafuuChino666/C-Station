@@ -30,6 +30,21 @@ export default new Router({
         component: () => import('@/views/platform/upload/index'),
         name: 'PlatformUpload',
         hidden: true
+      },
+      // 内容管理
+      {
+        path: 'upload-manager',
+        component: () => import('@/views/platform/upload-manager/index'),
+        name: 'UploadManager',
+        hidden: true,
+        children: [
+          {
+            path: 'article',
+            component: () => import('@/views/platform/upload-manager/article/index'),
+            name: 'article-index',
+            hidden: true
+          }
+        ]
       }
       ]
     }
