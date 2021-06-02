@@ -76,8 +76,9 @@ CREATE TABLE v_audit_status(
 		v_id INT unsigned COMMENT '视频id' NOT NULL,
 		flow_id INT unsigned COMMENT '流程号' NOT NULL,
 		current_node INT unsigned COMMENT '当前节点编号' NOT NULL,
+		auditor_id INT unsigned COMMENT '审核员id(表示当前正在操作的审核员id)',
 		discipline_info VARCHAR(200) NOT NULL COMMENT '违纪说明',
-		audit_status INT unsigned NOT NULL COMMENT '审核状态',
+		audit_status INT unsigned NOT NULL COMMENT '审核状态(0: 为审核; 1: 审核通过; 2:未通过)',
 		auditor_info VARCHAR(64) NOT NULL COMMENT '视频审核员记录',
 		gmt_create DATETIME NOT NULL COMMENT '创建时间',
 		gmt_modified DATETIME NOT NULL COMMENT '修改时间'
