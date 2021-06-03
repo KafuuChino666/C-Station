@@ -44,6 +44,6 @@ public class PubZoneServiceImpl extends ServiceImpl<PubZoneMapper, PubZone> impl
 
     @Override
     public Boolean isZoneIdValid(Integer integer) {
-        return pubZoneMapper.selectById(integer) != null;
+        return pubZoneMapper.selectCountById(integer) == 1;
     }
 }

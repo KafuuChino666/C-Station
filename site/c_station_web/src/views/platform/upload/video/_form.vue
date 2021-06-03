@@ -188,6 +188,7 @@ export default {
         videoId: '25465451574',
         isInnovate: true,
         videoTitle: '',
+        coverUrl: 'https://mcsql-002.oss-cn-beijing.aliyuncs.com/wallhaven-lq7672.png',
         zoneId: '',
         tags: '',
         videoBrief: '',
@@ -199,7 +200,8 @@ export default {
         fanDynamic: '',
         isTiming: true,
         timingTime: '2031-05-25T14:24:45.346Z'
-      }
+      },
+      getVideoCoveRequestNum: 0
     }
   },
   mounted () {
@@ -208,9 +210,13 @@ export default {
     // end
     Pubsub.subscribe('loadedPercent', (msg, value) => {
       this.loadedPercent = value
-      if (value === 100) {
-        this.getVideoCove()
-      }
+      // if (value === 100) {
+      //   this.getVideoCove()
+      // }
+    })
+    Pubsub.subscribe('onUploadEnd', (msg, value) => {
+      this.getVideoCove()
+      this.video.videoId = this.$parent.videoId
     })
     this.getZoneRootNode()
   },
@@ -228,7 +234,14 @@ export default {
     getVideoCove () {
       // this.$parent.videoId = '064bb1aed2064f44bb64d21b8b121969'
       if (this.$parent.videoId) {
+        console.log(this.$parent.videoId)
+        this.getVideoCoveRequestNum++
         platform.getVideoCoveByVideoId(this.$parent.videoId).then(res => {
+          if (res.data.cove.length === 0 && this.getVideoCoveRequestNum <= 6) {
+            setTimeout(() => {
+              this.getVideoCove()
+            }, 1500)
+          }
           this.coves = res.data.cove
           this.coveUrl = this.coves[0]
         })

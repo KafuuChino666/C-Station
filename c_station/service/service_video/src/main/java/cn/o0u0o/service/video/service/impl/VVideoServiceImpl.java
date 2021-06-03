@@ -7,9 +7,12 @@ import cn.o0u0o.service.video.entity.VVideoStatus;
 import cn.o0u0o.service.video.entity.vo.*;
 import cn.o0u0o.service.video.mapper.VVideoMapper;
 import cn.o0u0o.service.video.service.*;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -113,7 +116,8 @@ public class VVideoServiceImpl extends ServiceImpl<VVideoMapper, VVideo> impleme
 
             // 当is 不为空时说明视频上传成功，并带有回调数据
             if (is != null) {
-                FileUploadComplete object = (FileUploadComplete)is;
+                System.out.println(is.toString());
+                FileUploadComplete object = JSONObject.parseObject(is.toString(), FileUploadComplete.class);
 
                 // 向数据库中插入相关数据
                 // 创建 v_video
@@ -166,11 +170,12 @@ public class VVideoServiceImpl extends ServiceImpl<VVideoMapper, VVideo> impleme
     }
 
     @Override
-    public void uploadVideoSucceed(FileUploadComplete object) {
+    public void uploadVideoSucceed(String videoId, String data) {
 //        // 将缓存中的视频状态设置为true
 //        redisTemplate.opsForValue().set("aliyunVideoId_" + object.getVideoId(), "true");
         // 将回调数据添加到数据库
-        redisTemplate.opsForHash().put(uploadSucceedVideoidKey, object.getVideoId(), object);
+        redisTemplate.opsForHash().put(uploadSucceedVideoidKey, videoId,data);
+        System.out.println("回调数据设置成功");
     }
 
     @Override
@@ -180,7 +185,11 @@ public class VVideoServiceImpl extends ServiceImpl<VVideoMapper, VVideo> impleme
         Boolean b = pubZoneService.isZoneIdValid(video.getZoneId()[1]);
         long id = 0L;
         if (b) {
-            id = vVideoMapper.insertOneVideo(uuid, video.getZoneId()[1], video.getCoverUrl(), video.getVideoTitle(), video.getVideoBrief(), 0);
+            VVideo vVideo = new VVideo(uuid, video.getZoneId()[1], video.getCoverUrl(), video.getVideoTitle(), video.getVideoBrief(), 0);
+            this.save(vVideo);
+            System.out.println("=====>" + vVideo.getId());
+
+//            id = vVideoMapper.insertOneVideo(uuid, video.getZoneId()[1], video.getCoverUrl(), video.getVideoTitle(), video.getVideoBrief(), 0);
         }
         return id;
     }

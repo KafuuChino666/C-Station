@@ -30,7 +30,7 @@ public interface VVideoService extends IService<VVideo> {
 
     String uploadCover(MultipartFile file);
 
-    void uploadVideoSucceed(FileUploadComplete object);
+    void uploadVideoSucceed(String videoId, String data);
 
     Long addOneVideo(String uuid, VideoUpload video);
 }

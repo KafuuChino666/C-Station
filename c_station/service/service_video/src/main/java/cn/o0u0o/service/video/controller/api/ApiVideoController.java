@@ -35,7 +35,7 @@ public class ApiVideoController {
 
     @ApiOperation("视频投稿")
     @PostMapping("/platform/")
-    public Result videoContribute(@RequestParam @Valid VideoUpload video) {
+    public Result videoContribute(@RequestBody @Valid VideoUpload video) {
         boolean b = vVideoService.contribute(video);
         return b ? Result.ok().message("视频投稿成功！") : Result.err().message("视频投稿失败，请稍后在试");
     }
@@ -46,7 +46,7 @@ public class ApiVideoController {
         FileUploadComplete object = JSONObject.parseObject(data, FileUploadComplete.class);
         // redisTemplate.opsForValue().set("aliyunVideoId_" + videoUploadAuth.getVideoId(), "false", 1, TimeUnit.DAYS);
         if (object != null) {
-            vVideoService.uploadVideoSucceed(object);
+            vVideoService.uploadVideoSucceed(object.getVideoId(), data);
         } else {
             log.warn("视频回调接口uploadVideoSucceedCallbackInterface()异常: data=" + data + "json=" + object.toString());
         }

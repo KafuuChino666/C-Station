@@ -30,5 +30,4 @@ public interface VVideoMapper extends BaseMapper<VVideo> {
     @Select("SELECT id, video_status FROM v_video_status")
     List<VVideoStatus> selectAllVideoStatus();
 
-    long insertOneVideo(String author_id, Integer zone_id, String img_Url, String video_title, String video_brief, int video_status);
 }

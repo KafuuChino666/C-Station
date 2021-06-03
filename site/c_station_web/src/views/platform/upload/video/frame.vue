@@ -122,6 +122,7 @@ export default {
         // 全部文件上传结束
         'onUploadEnd': function (uploadInfo) {
           console.log('onUploadEnd: uploaded all the files')
+          Pubsub.publish('onUploadEnd', 1)
         }
       })
       return uploader

@@ -9,5 +9,8 @@
     <select id="selectChildByParentId" resultType="cn.o0u0o.service.video.entity.PubZone">
         select id, title, notes, parent_id, sort from pub_zone where parent_id = #{parentId} and `show` = 1
     </select>
-    
+    <select id="selectCountById" resultType="java.lang.Integer">
+        SELECT COUNT(id) FROM pub_zone WHERE id = #{id}
+    </select>
+
 </mapper>

@@ -25,7 +25,7 @@ public class VVideo extends BaseEntity {
 
     private static final long serialVersionUID=1L;
 
-    private Integer authorId;
+    private String authorId;
 
     private Integer zoneId;
 
@@ -39,5 +39,15 @@ public class VVideo extends BaseEntity {
 
     private Integer videoStatus;
 
+    public VVideo() {
+    }
 
+    public VVideo(String authorId, Integer zoneId, String imgUrl, String videoTitle, String videoBrief, Integer videoStatus) {
+        this.authorId = authorId;
+        this.zoneId = zoneId;
+        this.imgUrl = imgUrl;
+        this.videoTitle = videoTitle;
+        this.videoBrief = videoBrief;
+        this.videoStatus = videoStatus;
+    }
 }
