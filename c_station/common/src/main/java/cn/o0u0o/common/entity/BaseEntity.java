@@ -20,7 +20,7 @@ public class BaseEntity implements Serializable {
     private static final long serialVersionUID = 64546843545L;
 
     @ApiModelProperty(value = "主键")
-    @TableId(value = "id", type = IdType.ASSIGN_ID)
+    @TableId(value = "id", type = IdType.AUTO)
     private String id;
 
     @ApiModelProperty(value = "创建时间", example = "2019-01-01 8:00:00")

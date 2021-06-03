@@ -23,6 +23,7 @@ import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 
 @Service
@@ -104,7 +105,7 @@ public class VVideoServiceImpl extends ServiceImpl<VVideoMapper, VVideo> impleme
     public boolean contribute(VideoUpload video) {
 
         // 获取 uuid
-        String uuid = "2697287132";
+        String uuid = "269";
 
         // 在redis 中查询 videoId 阿里云id
         Object o = redisTemplate.opsForValue().get("aliyunVideoId_" + video.getVideoId());
@@ -119,16 +120,22 @@ public class VVideoServiceImpl extends ServiceImpl<VVideoMapper, VVideo> impleme
                 System.out.println(is.toString());
                 FileUploadComplete object = JSONObject.parseObject(is.toString(), FileUploadComplete.class);
 
+                // 判断视频封面
+                String video_cover_key = "video_cover" + video.getCoverKey();
+                String coverUrl = redisTemplate.opsForValue().get(video_cover_key);
+                if (coverUrl == null) {
+                    return false;
+                }
+
                 // 向数据库中插入相关数据
                 // 创建 v_video
-                Long videoId = this.addOneVideo(uuid, video);
+                Integer videoId = this.addOneVideo(uuid, coverUrl, video);
                 if (videoId == 0) {
                     return false;
                 }
 
                 // 创建 v_video_item
-                FileUploadComplete uploadComplete = (FileUploadComplete)is;
-                boolean b = vVideoItemService.addVideo(videoId, uploadComplete.getSize(), video);
+                boolean b = vVideoItemService.addVideo(videoId, object.getSize(), video);
                 if (!b) throw new RuntimeException();
                 // 创建 v_video_extra
                 b = vVideoExtraService.addVideo(videoId, video);
@@ -160,10 +167,13 @@ public class VVideoServiceImpl extends ServiceImpl<VVideoMapper, VVideo> impleme
         String filename = file.getOriginalFilename();
         String coverUrl = fileService.upload(inputStream, "videoCover", filename);
 
-        System.out.println(coverUrl);
+//        System.out.println(coverUrl);
 
         // uuid + 时间戳
-        String temporaryKey = UUID.randomUUID().toString() + "_" + new Date().getTime();
+        String temporaryKey = UUID.randomUUID().toString();
+        // 设置图片过期时间
+        String video_cover_key = "video_cover" + temporaryKey;
+        redisTemplate.opsForValue().set(video_cover_key, coverUrl, 1, TimeUnit.DAYS);
         redisTemplate.opsForHash().put(key, temporaryKey, coverUrl);
 
         return temporaryKey;
@@ -179,16 +189,15 @@ public class VVideoServiceImpl extends ServiceImpl<VVideoMapper, VVideo> impleme
     }
 
     @Override
-    public Long addOneVideo(String uuid, VideoUpload video) {
+    public Integer addOneVideo(String uuid, String coverUrl, VideoUpload video) {
 
         // 校验zone_id有效性
         Boolean b = pubZoneService.isZoneIdValid(video.getZoneId()[1]);
-        long id = 0L;
+        Integer id = 0;
         if (b) {
-            VVideo vVideo = new VVideo(uuid, video.getZoneId()[1], video.getCoverUrl(), video.getVideoTitle(), video.getVideoBrief(), 0);
+            VVideo vVideo = new VVideo(uuid, video.getZoneId()[1], coverUrl, video.getVideoTitle(), video.getVideoBrief(), 0);
             this.save(vVideo);
-            System.out.println("=====>" + vVideo.getId());
-
+            return Integer.valueOf(vVideo.getId());
 //            id = vVideoMapper.insertOneVideo(uuid, video.getZoneId()[1], video.getCoverUrl(), video.getVideoTitle(), video.getVideoBrief(), 0);
         }
         return id;

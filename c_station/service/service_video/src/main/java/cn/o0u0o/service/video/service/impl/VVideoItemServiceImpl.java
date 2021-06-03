@@ -23,7 +23,7 @@ public class VVideoItemServiceImpl extends ServiceImpl<VVideoItemMapper, VVideoI
     private VVideoItemMapper vVideoItemMapper;
 
     @Override
-    public boolean addVideo(Long videoId, Long size, VideoUpload video) {
+    public boolean addVideo(Integer videoId, Long size, VideoUpload video) {
         return this.save(new VVideoItem(videoId, 1, video.getVideoTitle(), size.toString(), video.getVideoId(), 0, 0));
     }
 }

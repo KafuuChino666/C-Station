@@ -14,5 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface VVideoExtraService extends IService<VVideoExtra> {
 
-    boolean addVideo(Long videoId, VideoUpload video);
+    boolean addVideo(Integer videoId, VideoUpload video);
 }

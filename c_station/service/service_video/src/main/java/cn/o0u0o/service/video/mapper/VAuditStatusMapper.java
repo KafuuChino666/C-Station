@@ -14,5 +14,5 @@ import org.apache.ibatis.annotations.Select;
  */
 public interface VAuditStatusMapper extends BaseMapper<VAuditStatus> {
 
-    Integer selectFlowFirstNode(Long flow_id);
+    Integer selectFlowFirstNode(Integer flow_id);
 }

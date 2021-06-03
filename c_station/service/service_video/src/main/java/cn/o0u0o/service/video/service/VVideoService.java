@@ -32,5 +32,5 @@ public interface VVideoService extends IService<VVideo> {
 
     void uploadVideoSucceed(String videoId, String data);
 
-    Long addOneVideo(String uuid, VideoUpload video);
+    Integer addOneVideo(String uuid, String coverUrl, VideoUpload video);
 }

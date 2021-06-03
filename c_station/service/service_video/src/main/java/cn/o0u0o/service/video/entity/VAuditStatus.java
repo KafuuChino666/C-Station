@@ -26,10 +26,10 @@ public class VAuditStatus extends BaseEntity {
     private static final long serialVersionUID=1L;
 
     @ApiModelProperty(value = "视频id")
-    private Long vId;
+    private Integer vId;
 
     @ApiModelProperty(value = "流程号")
-    private Long flowId;
+    private Integer flowId;
 
     @ApiModelProperty(value = "当前节点编号")
     private Integer currentNode;
@@ -49,7 +49,7 @@ public class VAuditStatus extends BaseEntity {
     public VAuditStatus() {
     }
 
-    public VAuditStatus(Long vId, Long flowId, Integer currentNode, Integer auditorId, String disciplineInfo, Integer auditStatus, String auditorInfo) {
+    public VAuditStatus(Integer vId, Integer flowId, Integer currentNode, Integer auditorId, String disciplineInfo, Integer auditStatus, String auditorInfo) {
         this.vId = vId;
         this.flowId = flowId;
         this.currentNode = currentNode;

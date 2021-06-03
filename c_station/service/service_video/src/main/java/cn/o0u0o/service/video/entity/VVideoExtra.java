@@ -26,7 +26,7 @@ public class VVideoExtra extends BaseEntity {
 
     private static final long serialVersionUID=1L;
 
-    private Long vId;
+    private Integer vId;
 
     @ApiModelProperty(value = "标签")
     private String tags;
@@ -58,7 +58,7 @@ public class VVideoExtra extends BaseEntity {
     public VVideoExtra() {
     }
 
-    public VVideoExtra(Long vId, String tags, boolean isInnovate, boolean isWatermark, String videoCaption, boolean isCommerce, boolean restsCastCaption, String fanDynamic, boolean isTiming, Date timingTime) {
+    public VVideoExtra(Integer vId, String tags, boolean isInnovate, boolean isWatermark, String videoCaption, boolean isCommerce, boolean restsCastCaption, String fanDynamic, boolean isTiming, Date timingTime) {
         this.vId = vId;
         this.tags = tags;
         this.isInnovate = isInnovate ? 1: 0;

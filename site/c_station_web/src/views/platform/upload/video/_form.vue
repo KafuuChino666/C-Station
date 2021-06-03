@@ -10,7 +10,7 @@
     <div class="cover">
       <div class="hoverImg">
         <div class="back">
-          <div class="but" @onclick="this.print">上传封面</div>
+          <div class="but">上传封面</div>
           <div class="but" style="float: right" @click="dialogVisible = true">剪切修改</div>
         </div>
         <el-image :src="coveUrl" style="width: 200px; height: 130px"></el-image>
@@ -30,7 +30,7 @@
         </div>
       </div>
     </div>
-    <el-form :rules="rules.videoContributeForm" :model="video" ref="video" label-width="80px" style="padding-top: 10px">
+    <el-form :rules="rules.videoContributeForm" label-position="top" :model="video" ref="video" label-width="80px" style="padding-top: 10px">
 
       <el-form-item label="类型" prop="isInnovate">
         <el-radio-group v-model="video.isInnovate">
@@ -108,21 +108,18 @@
       <h1>粉丝动态 </h1>
       <el-input v-model="video.fanDynamic" type="textarea"></el-input>
 
-      <el-form-item label="即时配送">
+      <el-form-item label="即时配送" style="margin-bottom: 15px">
         <el-switch v-model="video.isTiming"></el-switch>
       </el-form-item>
 
-      <el-date-picker
-        type="date"
-        placeholder="选择日期">
-      </el-date-picker>
-
-      <el-time-picker
-        :picker-options="{
-      selectableRange: '18:30:00 - 20:30:00'
-    }"
-        placeholder="任意时间点">
-      </el-time-picker>
+      <div v-if="video.isTiming === true" style="margin-bottom: 25px">
+        <el-date-picker
+          v-model="video.timingTime"
+          :picker-options="pickeroptions"
+          type="datetime"
+          placeholder="选择日期">
+        </el-date-picker>
+      </div>
 
       <el-button @click="videoContribute" type="primary">立即投稿</el-button>
       <el-button>保存模板</el-button>
@@ -188,7 +185,7 @@ export default {
         videoId: '25465451574',
         isInnovate: true,
         videoTitle: '',
-        coverUrl: 'https://mcsql-002.oss-cn-beijing.aliyuncs.com/wallhaven-lq7672.png',
+        coverKey: '',
         zoneId: '',
         tags: '',
         videoBrief: '',
@@ -198,8 +195,14 @@ export default {
         isCommerce: true,
         restsCastCaption: true,
         fanDynamic: '',
-        isTiming: true,
-        timingTime: '2031-05-25T14:24:45.346Z'
+        isTiming: false,
+        // timingTime: '2031-05-25T14:24:45.346Z'
+        timingTime: ''
+      },
+      pickeroptions: {
+        disabledDate (time) {
+          return time.getTime() < Date.now()
+        }
       },
       getVideoCoveRequestNum: 0
     }
@@ -221,10 +224,6 @@ export default {
     this.getZoneRootNode()
   },
   methods: {
-    print () {
-      alert('111')
-    },
-
     getZoneRootNode () {
       platform.getAllRootNode().then(res => {
         this.zoneRootNodes = res.data.zones
@@ -272,20 +271,18 @@ export default {
         }
       })
     },
-    // 视频投稿
-    videoContribute () {
+    // 上传视频
+    async uploadVideoCover () {
+      let param = new FormData()
+      param.append('file', this.coveFile)
+      await platform.uploadVideoCover(param).then(res => {
+        this.video.coverKey = res.data.coverTemporaryKey
+      })
+    },
+    // 提交表单
+    submitForm () {
       this.$refs['video'].validate((valid) => {
         if (valid) {
-          // 上传图片
-          // async function f () {
-          //   await
-          // }
-          let param = new FormData()
-          param.append('file', this.coveFile)
-          platform.uploadVideoCover(param).then(res => {
-            console.log(res.data.coverTemporaryKey)
-          })
-
           // tags
           const tags = []
           this.dynamicTags.forEach(i => {
@@ -307,25 +304,44 @@ export default {
           })
         }
       })
-      // 1. 上传视频
-
+    },
+    // 视频投稿
+    async videoContribute () {
+      // 1. 判断视频是否上传完成
+      if (this.loadedPercent !== 100) {
+        this.$confirm('视频还没有上传完之前不能提交表单！', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        })
+        return -1
+      }
       // 2. 上传视频封面
+      await this.uploadVideoCover()
 
       // 3. 校验表单值
-
+      this.submitForm()
       // 4. 投稿完成
     }
   }
 }
 </script>
 
-<style scoped>
+<style>
 .uploadform-box {
   padding: 0 140px;
 }
 
 .uploadform-box .el-tag {
   margin-right: 10px;
+}
+
+.uploadform-box .el-form-item {
+  margin-bottom: 0;
+}
+
+.uploadform-box .el-form-item__label {
+  padding: 0;
 }
 
 .medium-title {

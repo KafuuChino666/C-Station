@@ -25,7 +25,7 @@ public class VVideoItem extends BaseEntity {
 
     private static final long serialVersionUID=1L;
 
-    private Long vId;
+    private Integer vId;
 
     private Integer videoSort;
 
@@ -43,7 +43,7 @@ public class VVideoItem extends BaseEntity {
     public VVideoItem() {
     }
 
-    public VVideoItem(Long vId, Integer videoSort, String videoTitle, String videoDuration, String videoLocation, Integer auditId, Integer videoStatus) {
+    public VVideoItem(Integer vId, Integer videoSort, String videoTitle, String videoDuration, String videoLocation, Integer auditId, Integer videoStatus) {
         this.vId = vId;
         this.videoSort = videoSort;
         this.videoTitle = videoTitle;

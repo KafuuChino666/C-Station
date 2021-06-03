@@ -33,7 +33,7 @@ public class FileServiceImpl implements FileService {
         //构建文件路径
         String timePath = new DateTime().toString("yyyy/MM/dd");
         String objectName = module + "/" + timePath + "/" +
-                UUID.randomUUID().toString() + "." + originalFilename.substring(originalFilename.lastIndexOf("."));
+                UUID.randomUUID().toString() + originalFilename.substring(originalFilename.lastIndexOf("."));
         ossClient.putObject(ossProperties.getBucketname(), objectName, inputStream);
 
         //https://mcsql-file.oss-cn-beijing.aliyuncs.com/asas/centos.png

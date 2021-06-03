@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 public class VVideoExtraServiceImpl extends ServiceImpl<VVideoExtraMapper, VVideoExtra> implements VVideoExtraService {
 
     @Override
-    public boolean addVideo(Long videoId, VideoUpload video) {
+    public boolean addVideo(Integer videoId, VideoUpload video) {
         boolean b = this.save(new VVideoExtra(videoId, video.getTags(), video.getIsInnovate(),
                 video.getIsWatermark(), video.getVideoCaption(), video.getIsCommerce(), video.getRestsCastCaption(),
                 video.getFanDynamic(), video.getIsTiming(), video.getTimingTime()));

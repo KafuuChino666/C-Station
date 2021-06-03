@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.o0u0o.service.video.mapper.VAuditStatusMapper">
-
     <select id="selectFlowFirstNode" resultType="java.lang.Integer">
         select id from work_flow_line where flow_id = #{flow_id} and prev_node_id = 0
     </select>

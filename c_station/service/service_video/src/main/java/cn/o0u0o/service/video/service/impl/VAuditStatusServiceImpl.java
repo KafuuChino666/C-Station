@@ -22,9 +22,9 @@ public class VAuditStatusServiceImpl extends ServiceImpl<VAuditStatusMapper, VAu
     public VAuditStatusMapper vAuditStatusMapper;
 
     @Override
-    public boolean addAudit(Long videoId) {
+    public boolean addAudit(Integer videoId) {
         // 查出当前视频流程号
-        Long flow_id = 1L;
+        Integer flow_id = 1;
 
         // 查出的一个节点号
         Integer node_id = vAuditStatusMapper.selectFlowFirstNode(flow_id);

@@ -13,5 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface VAuditStatusService extends IService<VAuditStatus> {
 
-    boolean addAudit(Long videoId);
+    boolean addAudit(Integer videoId);
 }
