@@ -5,6 +5,7 @@
         <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
         <div id="main1" style="float:left;width:100%;height: 300px" />
       </div>
+
       <div id="pie2">
         <div id="main2" style="float:left;width:100%;height: 300px" />
       </div>
@@ -13,23 +14,18 @@
 </template>
 
 <script>
-const echarts = require('echarts/lib/echarts')
-// 引入饼状图组件
-require('echarts/lib/chart/pie')
-// 引入提示框和title组件
-require('echarts/lib/component/tooltip')
-require('echarts/lib/component/title')
+import * as echarts from 'echarts'
 export default {
-  name: 'UserStat',
-  mounted() {
-    this.initData();
-  },
+  name: 'PieChart',
   data() {
     return {}
   },
+  mounted() {
+    this.initData()
+  },
   methods: {
     initData() {
-      var myChart = echarts.init(document.getElementById('main1'))
+      const myChart = echarts.init(document.getElementById('main1'))
       myChart.setOption({
         title: {
           text: '某站点用户访问来源',
@@ -89,5 +85,7 @@ export default {
 </script>
 
 <style>
-
+.pie {
+  margin: 10px auto;
+}
 </style>

@@ -189,7 +189,7 @@ export const constantRoutes = [
       {
         path: 'stat',
         name: 'UserStat',
-        component: () => import('@/views/user/components/userStat'),
+        component: () => import('@/views/user/components/chart'),
         meta: { title: '用户统计', icon: 'el-icon-user-solid' }
       }
     ]
