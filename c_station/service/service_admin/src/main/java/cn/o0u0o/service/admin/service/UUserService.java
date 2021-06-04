@@ -20,6 +20,4 @@ public interface UUserService extends IService<UUser> {
 
     IPage<UserData> selectUserBySelect(Integer page, Integer limit, Select select);
 
-
-
 }

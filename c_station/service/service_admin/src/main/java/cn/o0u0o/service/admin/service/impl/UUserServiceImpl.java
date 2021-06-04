@@ -25,17 +25,28 @@ public class UUserServiceImpl extends ServiceImpl<UUserMapper, UUser> implements
     @Autowired
     private UUserMapper uUserMapper;
 
+    /**
+     * 查询方法调用mapper
+     * @param page
+     * @param limit
+     * @return
+     */
     @Override
     public IPage<UserData> selectUserAll(Integer page, Integer limit) {
         Page<UserData> pageParam = new Page<>(page, limit);
         return uUserMapper.selectUserAll(pageParam);
     }
 
+    /**
+     * 查询方法调用mapper
+     * @param page
+     * @param limit
+     * @param select
+     * @return
+     */
     @Override
     public IPage<UserData> selectUserBySelect(Integer page, Integer limit, Select select) {
         Page<Select> pageParam = new Page<>(page, limit);
-
         return uUserMapper.selectUserBySelect(pageParam, select.getSelectUserID(), select.getSelectType(), select.getSelectUserName());
     }
-
 }

@@ -44,6 +44,7 @@ public class UUserController {
                                          @PathVariable Integer limit,
                                          @RequestBody(required = false) Select select) {
 
+        // 判断是否有查询条件
         if(select == null) {
             if(page > 0 && limit > 0) {
                 IPage<UserData> userDataIPage = uUserService.selectUserAll(page, limit);
@@ -61,7 +62,7 @@ public class UUserController {
                 return Result.ok().data("total", total).data("rows", records);
             }
         }
-        return Result.err().message("页码错误！");
+        return Result.err().message("用户查询页码错误！");
     }
 }
 
