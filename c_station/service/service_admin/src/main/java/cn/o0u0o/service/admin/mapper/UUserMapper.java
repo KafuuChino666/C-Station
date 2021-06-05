@@ -17,8 +17,21 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
  */
 public interface UUserMapper extends BaseMapper<UUser> {
 
+    /**
+     * 查询所有用户
+     * @param page 页码
+     * @return
+     */
     IPage<UserData> selectUserAll(Page<UserData> page);
 
+    /**
+     * 按此条件查询用户
+     * @param page 页码
+     * @param selectUserID 要查询的用户id
+     * @param selectType 要查询的用户类型（会员）
+     * @param selectUserName 要查询的用户昵称
+     * @return
+     */
     IPage<UserData> selectUserBySelect(Page<Select> page, Integer selectUserID, Integer selectType, String selectUserName);
 
 }
