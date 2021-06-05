@@ -158,7 +158,28 @@ export const constantRoutes = [
         path: 'audit',
         component: () => import('@/views/video/audit'),
         name: 'Audit',
-        meta: { title: '视频审核', icon: 'el-icon-s-check' }
+        meta: { title: '视频审核', icon: 'el-icon-s-check' },
+        children: [
+          {
+            path: 'audit_video',
+            component: () => import('@/views/video/audit/_video'),
+            name: 'AuditVideo',
+            meta: { title: '审核视频' }
+          },
+          {
+            path: 'audit_manage',
+            component: () => import('@/views/video/audit/Word'),
+            name: 'VideoAuditWord',
+            meta: { title: '审核流程' }
+          },
+          {
+            path: 'audit_manage/:id',
+            component: () => import('@/views/video/audit/AuditManage'),
+            name: 'VideoAuditWordEdit',
+            hidden: true,
+            meta: { title: '流程管理' }
+          }
+        ]
       }
     ]
   },

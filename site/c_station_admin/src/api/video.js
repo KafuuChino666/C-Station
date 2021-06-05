@@ -33,5 +33,32 @@ export default {
       url: `/api/video/media/get-play-auth/${videoSourceId}`,
       method: 'get'
     })
+  },
+  getChildNodeByWordId(value) {
+    return request({
+      url: `/admin/video/audit`,
+      method: 'get'
+    })
+  },
+  getVideoAuditWork(page, limit) {
+    return request({
+      url: `/admin/video/audit/work/${page}/${limit}`,
+      method: 'get'
+    })
+  },
+  removeVideoAuditWork(id) {
+    return request({
+      url: '/admin/video/audit/work/',
+      method: 'delete',
+      params: {
+        id
+      }
+    })
+  },
+  getNodesByFlowId(id) {
+    return request({
+      url: `/admin/video/audit/flow/${id}`,
+      method: 'get'
+    })
   }
 }

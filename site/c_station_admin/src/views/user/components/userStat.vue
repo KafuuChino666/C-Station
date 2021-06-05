@@ -22,10 +22,9 @@ require('echarts/lib/component/title')
 export default {
   name: 'UserStat',
   mounted() {
-    this.initData();
+    this.initData()
   },
   data() {
-    return {}
   },
   methods: {
     initData() {

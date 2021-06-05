@@ -9,13 +9,13 @@ import lombok.Data;
 @Data
 public class TableData {
     //封面地址
-    private String imgLocation;
+    private String imgUrl;
     //视频标题
     private String videoTitle;
     //作者id
     private Integer authorId;
     //视频分类类型
-    private String zoneType;
+    private String zoneId;
     //视频播放量
     private String playNub;
     //视频状态

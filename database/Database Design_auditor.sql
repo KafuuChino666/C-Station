@@ -70,6 +70,15 @@ CREATE TABLE work_flow_line(
 		gmt_modified DATETIME NOT NULL COMMENT '修改时间'
 )
 
+# 角色和节点
+CREATE TABLE work_flow_node_role(
+		id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
+		node_id INT unsigned COMMENT '节点号' NOT NULL,
+		role_id INT unsigned COMMENT '角色id' NOT NULL,
+		gmt_create DATETIME NOT NULL COMMENT '创建时间',
+		gmt_modified DATETIME NOT NULL COMMENT '修改时间'
+)
+
 # 审批状态 video_audit_status
 CREATE TABLE v_audit_status(
 		id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT, # 审批编号

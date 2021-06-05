@@ -1,6 +1,7 @@
 package cn.o0u0o.service.video.service;
 
 import cn.o0u0o.service.video.entity.WorkFlow;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -13,4 +14,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface WorkFlowService extends IService<WorkFlow> {
 
+    IPage<WorkFlow> getVideoAuditWork(Integer page, Integer limit);
+
+    Boolean removeVideoAuditWork(Integer id);
 }

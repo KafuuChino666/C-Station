@@ -15,27 +15,21 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author Guo Yangyang
- * @since 2021-06-02
+ * @since 2021-06-04
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-@ApiModel(value="WorkFlow对象", description="")
-public class WorkFlow extends BaseEntity {
+@ApiModel(value="WorkFlowNodeRole对象", description="")
+public class WorkFlowNodeRole extends BaseEntity {
 
     private static final long serialVersionUID=1L;
 
-    @ApiModelProperty(value = "流程名称")
-    private String flowName;
+    @ApiModelProperty(value = "节点号")
+    private Integer nodeId;
 
-    @ApiModelProperty(value = "标记")
-    private String sign;
-
-    @ApiModelProperty(value = "状态")
-    private Integer status;
-
-    @ApiModelProperty(value = "备注")
-    private String remark;
+    @ApiModelProperty(value = "角色id")
+    private Integer roleId;
 
 
 }
