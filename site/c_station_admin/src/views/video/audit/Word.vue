@@ -3,37 +3,39 @@
     <div class="con-top">
       <el-button type="primary" icon="el-icon-plus" @click="add()">新增</el-button>
       <div style="float: right">
-        <el-input placeholder="请输入内容" style="width: 220px;margin-right: 15px "></el-input>
+        <el-input placeholder="请输入内容" style="width: 220px;margin-right: 15px " />
         <el-button type="primary">搜索</el-button>
       </div>
     </div>
     <el-table
       :data="tableData"
-      style="width: 100%">
+      style="width: 100%"
+    >
       <el-table-column
         prop="flowName"
         label="流程名"
-        width="180">
-      </el-table-column>
+        width="180"
+      />
       <el-table-column
         prop="nodeNum"
         label="节点数"
-        width="180">
-      </el-table-column>
+        width="180"
+      />
       <el-table-column
         prop="id"
-        label="流程id">
-      </el-table-column>
+        label="流程id"
+      />
       <el-table-column
         prop="gmtCreate"
-        label="创建时间">
-      </el-table-column>
+        label="创建时间"
+      />
       <el-table-column
         align="center"
-        label="操作">
+        label="操作"
+      >
         <template slot-scope="scope">
           <el-button size="mini" @click="goto(scope.row.id)">编辑</el-button>
-          <el-divider direction="vertical"></el-divider>
+          <el-divider direction="vertical" />
           <el-popconfirm title="确定删除这条绑定吗？" @onConfirm="remove(scope.row.id)">
             <el-button slot="reference" size="mini" type="danger">删除</el-button>
           </el-popconfirm>
@@ -44,8 +46,8 @@
       style="float: right; margin-top: 15px"
       background
       layout="prev, pager, next"
-      :total="total">
-    </el-pagination>
+      :total="total"
+    />
   </div>
 </template>
 

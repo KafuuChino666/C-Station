@@ -10,7 +10,7 @@
     </div>
     <div class="audit-main">
       <div class="audit-main-left">
-        <AliPlayer/>
+        <AliPlayer />
         <div class="info tb-box">
           <ul class="th">
             <li>视频标题</li>
@@ -74,15 +74,14 @@
                 justify-content: space-around"
                   layout="prev, pager, next"
                   :total="50"
-                >
-                </el-pagination>
+                />
               </div>
-              <div class="posterize-img" v-for="item in 16" :key="item">
+              <div v-for="item in 16" :key="item" class="posterize-img">
                 <el-image
                   :fit="contain"
                   :preview-src-list="srcList"
                   src="https://mcsql-002.oss-cn-beijing.aliyuncs.com/download.jpg"
-                ></el-image>
+                />
                 <span class="demonstration">00:45:15</span>
               </div>
             </li>
