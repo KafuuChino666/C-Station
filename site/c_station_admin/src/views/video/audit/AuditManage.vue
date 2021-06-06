@@ -3,37 +3,39 @@
     <div class="con-top">
       <el-button type="primary" icon="el-icon-plus" @click="add()">新增</el-button>
       <div style="float: right">
-        <el-input v-model="input" placeholder="请输入内容" style="width: 220px;margin-right: 15px "></el-input>
+        <el-input v-model="input" placeholder="请输入内容" style="width: 220px;margin-right: 15px " />
         <el-button type="primary">搜索</el-button>
       </div>
     </div>
     <el-table
       :data="tableData"
-      style="width: 100%">
+      style="width: 100%"
+    >
       <el-table-column
         prop="flowNodeName"
         label="节点名"
-        width="180">
-      </el-table-column>
+        width="180"
+      />
       <el-table-column
         prop="order"
         label="执行顺序"
-        width="180">
-      </el-table-column>
+        width="180"
+      />
       <el-table-column
         prop="id"
-        label="节点id">
-      </el-table-column>
+        label="节点id"
+      />
       <el-table-column
         prop="gmtCreate"
-        label="创建时间">
-      </el-table-column>
+        label="创建时间"
+      />
       <el-table-column
         align="center"
-        label="操作">
+        label="操作"
+      >
         <template slot-scope="scope">
           <el-button size="mini">编辑</el-button>
-          <el-divider direction="vertical"></el-divider>
+          <el-divider direction="vertical" />
           <el-popconfirm title="确定删除这条绑定吗？">
             <el-button slot="reference" size="mini" type="danger">删除</el-button>
           </el-popconfirm>
@@ -44,13 +46,14 @@
       style="float: right; margin-top: 15px"
       background
       layout="prev, pager, next"
-      :total="1000">
-    </el-pagination>
+      :total="1000"
+    />
     <el-drawer
       title="节点和角色绑定"
       :visible.sync="drawer"
       direction="rtl"
-      :before-close="handleClose">
+      :before-close="handleClose"
+    >
       <div style="padding: 0 30px">
         <el-form ref="form" :model="form" label-width="80px">
           <el-form-item label="角色">
@@ -59,15 +62,15 @@
                 v-for="item in roles"
                 :key="item.id"
                 :label="item.name"
-                :value="item.id">
-              </el-option>
+                :value="item.id"
+              />
             </el-select>
           </el-form-item>
           <el-form-item label="绑定节点">
             <el-cascader
               :options="nodes"
               :props="props"
-            ></el-cascader>
+            />
           </el-form-item>
           <el-button type="primary">添加绑定</el-button>
           <el-button @click="drawer = false">取消</el-button>
