@@ -2,6 +2,7 @@ package cn.o0u0o.service.security.acl;
 
 import cn.o0u0o.common.response.Result;
 import com.alibaba.fastjson.JSONObject;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@Slf4j
 public class StaffAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
     private TokenManager tokenManager;
@@ -30,6 +32,8 @@ public class StaffAuthenticationSuccessHandler implements AuthenticationSuccessH
         redisTemplate.opsForValue().set(authentication.getName(), authentication.getAuthorities());
 
         Result result = Result.ok().message("登陆成功").data("token", token).data("maxAge", TokenManager.tokenExpiration);
+
+        log.info("用户登陆成功");
 
         // 登陆成功设置token
         httpServletResponse.setContentType("text/json;charset=utf-8");

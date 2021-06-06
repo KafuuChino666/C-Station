@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.sun.xml.internal.messaging.saaj.packaging.mime.util.QEncoderStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +37,9 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     @Override
     public IPage<Menu> selectPage(Integer page, Integer limit) {
         QueryWrapper<Menu> queryWrapper = new QueryWrapper<>();
-        queryWrapper.orderByAsc("level"); //排序
+        queryWrapper.eq("parent_id", 0);
+        queryWrapper.eq("is_deleted", 1);
+        queryWrapper.orderByAsc("sort"); //排序
 
         Page<Menu> pageParam = new Page<>(page, limit);
         return menuMapper.selectPage(pageParam, queryWrapper);
@@ -46,7 +49,8 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     public List<Menu> getListExcludeOwn(String id) {
         QueryWrapper<Menu> queryWrapper = new QueryWrapper<>();
         queryWrapper.ne("id", id);
-        queryWrapper.select("id","title","level","name");
+//        queryWrapper.select("id","title","level","name");
+        queryWrapper.select("id","name");
 
         List<Menu> menus = menuMapper.selectList(queryWrapper);
         return menus;
@@ -55,15 +59,12 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     @Override
     public boolean add(Menu menu) {
 
+        // 没有父类id默认为0
         if(menu.getParentId() == null) {
-            menu.setParentId("1");
-            menu.setLevel(1);
+            menu.setParentId("0");
         } else {
-            QueryWrapper<Menu> queryWrapper = new QueryWrapper<>();
-            queryWrapper.select("level");
-            queryWrapper.eq("id", menu.getParentId());
-            Menu parentMenu = menuMapper.selectOne(queryWrapper);
-            menu.setLevel(parentMenu.getLevel() + 1);
+            // 有父类id
+            menuMapper.updateParentHasChildren(menu.getParentId());
         }
         boolean b = this.save(menu);
         return b;
@@ -79,7 +80,19 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
 
     @Override
     public List<MenuVo> getHierarchyMenu() {
-        return menuMapper.selectHierarchyMenuByParentId(1);
+        return menuMapper.selectHierarchyMenuByParentId(0);
+    }
+
+    @Override
+    public List<Menu> getMenuByParentId(String id) {
+        QueryWrapper<Menu> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("parent_id", id);
+        return menuMapper.selectList(queryWrapper);
+    }
+
+    @Override
+    public boolean deleted(String id) {
+        return menuMapper.logicallyDelete(id);
     }
 
 }

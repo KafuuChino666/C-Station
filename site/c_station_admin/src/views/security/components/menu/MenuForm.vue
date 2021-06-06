@@ -2,25 +2,28 @@
   <el-dialog title="添加菜单" :visible.sync="dialogFormVisible">
     <el-form :model="form">
       <el-form-item label="菜单名称:" :label-width="formLabelWidth">
-        <el-input v-model="form.title" size="small" style="width: 300px"/>
-      </el-form-item>
-      <el-form-item label="前端名称:" :label-width="formLabelWidth">
         <el-input v-model="form.name" size="small" style="width: 300px"/>
+      </el-form-item>
+      <el-form-item label="前端图标:" :label-width="formLabelWidth">
+        <icon-picker v-model="form.icon" style="width: 300px"></icon-picker>
+      </el-form-item>
+      <el-form-item label="访问路径(path):" :label-width="formLabelWidth">
+        <el-input v-model="form.path" size="small" style="width: 300px"/>
+      </el-form-item>
+      <el-form-item label="组件路径:" :label-width="formLabelWidth">
+        <el-input v-model="form.component" size="small" style="width: 300px"/>
       </el-form-item>
       <el-form-item label="父级ID:" :label-width="formLabelWidth">
         <el-select v-model="form.parentId" filterable placeholder="请选择" style="width: 300px">
           <el-option
             v-for="item in parentIdList"
             :key="item.id"
-            :label="item.title"
+            :label="item.name"
             :value="item.id">
-            <span style="float: left">{{ item.title }}</span>
+            <span style="float: left">{{ item.name }}</span>
             <span style="float: right; color: #8492a6; font-size: 13px">{{ item.id }}</span>
           </el-option>
         </el-select>
-      </el-form-item>
-      <el-form-item label="前端图标:" :label-width="formLabelWidth">
-        <el-input v-model="form.icon" size="small" style="width: 300px"/>
       </el-form-item>
       <el-form-item label="菜单排序:" :label-width="formLabelWidth">
         <el-input v-model="form.sort" size="small" style="width: 300px"/>
@@ -44,11 +47,12 @@ export default {
       dialogFormVisible: false,
       form: {
         parentId: '',
-        title: '',
+        path: '',
+        component: '',
         sort: '',
         name: '',
         icon: '',
-        level: 0
+        hasChildren: 0
       },
       formLabelWidth: '120px',
       parentIdList: [],

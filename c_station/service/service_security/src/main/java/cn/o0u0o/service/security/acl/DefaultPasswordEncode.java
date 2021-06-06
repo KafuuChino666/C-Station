@@ -35,7 +35,6 @@ public class DefaultPasswordEncode implements PasswordEncoder {
      */
     @Override
     public boolean matches(CharSequence charSequence, String encodedPassword) {
-        System.out.println("原文加密:" + MD5.encrypt(charSequence.toString()));
         return encodedPassword.equals(MD5.encrypt(charSequence.toString()));
     }
 }

@@ -30,20 +30,26 @@ public class Menu extends BaseEntity {
     @ApiModelProperty(value = "父级ID")
     private String parentId;
 
-    @ApiModelProperty(value = "菜单名称")
-    private String title;
-
-    @ApiModelProperty(value = "菜单级数")
-    private Integer level;
-
-    @ApiModelProperty(value = "菜单排序")
-    private Integer sort;
-
     @ApiModelProperty(value = "前端名称")
     private String name;
 
     @ApiModelProperty(value = "前端图标")
     private String icon;
+
+    @ApiModelProperty(value = "访问路径")
+    private String path;
+
+    @ApiModelProperty(value = "组件路径")
+    private String component;
+
+    @ApiModelProperty(value = "是否有下一级")
+    private Integer hasChildren;
+
+    @ApiModelProperty(value = "菜单排序")
+    private Integer sort;
+
+    @ApiModelProperty(value = "逻辑删除")
+    private Integer isDeleted;
 
     @ApiModelProperty(value = "前端隐藏")
     private Integer hidden;

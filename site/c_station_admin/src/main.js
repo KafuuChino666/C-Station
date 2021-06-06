@@ -19,6 +19,8 @@ import '@/permission' // permission control
 import JsEncrypt from 'jsencrypt'
 Vue.prototype.$jsEncrypt = JsEncrypt
 
+import iconPicker from 'vue-fontawesome-elementui-icon-picker';
+Vue.use(iconPicker);
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api

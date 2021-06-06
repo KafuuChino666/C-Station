@@ -1,6 +1,7 @@
 package cn.o0u0o.service.security.filter;
 
 import cn.o0u0o.service.security.acl.TokenManager;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -22,6 +23,7 @@ import java.util.Collection;
 /**
  * 授权过滤
  */
+@Slf4j
 public class TokenAuthenticationFilter extends BasicAuthenticationFilter {
 
     private RedisTemplate redisTemplate;
@@ -48,12 +50,12 @@ public class TokenAuthenticationFilter extends BasicAuthenticationFilter {
         try {
             authentication = getAuthentication(request);
         } catch (Exception e) {
-            System.out.println(e);
+            log.warn(e.getMessage());
         }
         if (authentication != null) {
             SecurityContextHolder.getContext().setAuthentication(authentication);
         } else {
-            System.out.println(authentication + "为空！");
+            log.warn("authentication: 为空！");
         }
         chain.doFilter(request, response);
     }
@@ -63,7 +65,6 @@ public class TokenAuthenticationFilter extends BasicAuthenticationFilter {
         //获取请求头中的token
         String token = request.getHeader(tokenKey);
 
-        System.out.println("获取请求头中的token()" + token);
         //判断token存在或者不为空字符串
         if (token != null && !"".equals(token.trim())) {
             String userName = tokenManager.getUserFromToken(token);

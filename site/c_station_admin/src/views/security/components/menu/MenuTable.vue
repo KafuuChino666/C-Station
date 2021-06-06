@@ -1,8 +1,13 @@
 <template>
   <el-table
     :data="tableData"
+    style="width: 100%"
+    row-key="id"
     border
-    style="width: 100%">
+    lazy
+    :load="load"
+    :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
+  >
     <el-table-column
       prop="id"
       label="ID"
@@ -18,9 +23,19 @@
       width="80">
     </el-table-column>
     <el-table-column
-      prop="title"
+      prop="name"
       align="center"
-      label="菜单名称">
+      label="菜单名称"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="icon"
+      align="center"
+      label="前端图标"
+      width="80">
+      <template slot-scope="scope">
+        <i :class="scope.row.icon" />
+      </template>
     </el-table-column>
     <el-table-column
       prop="level"
@@ -33,21 +48,6 @@
       align="center"
       label="菜单排序"
       width="80">
-    </el-table-column>
-    <el-table-column
-      prop="name"
-      align="center"
-      label="前端名称"
-      width="180">
-    </el-table-column>
-    <el-table-column
-      prop="icon"
-      align="center"
-      label="前端图标"
-      width="80">
-      <template slot-scope="scope">
-        <i :class="scope.row.icon" />
-      </template>
     </el-table-column>
     <el-table-column
       prop="hidden"
@@ -95,6 +95,11 @@ export default {
     tableData: Array
   },
   methods: {
+    load(tree, treeNode, resolve) {
+      securityAPI.getMenuByParentId(tree.id).then(res => {
+        resolve(res.data.rows)
+      })
+    },
     // 修改菜单隐藏状态
     changeHiddenStatus(id, status) {
       // 修改是否显示

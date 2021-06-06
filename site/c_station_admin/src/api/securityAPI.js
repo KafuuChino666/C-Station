@@ -286,5 +286,11 @@ export default {
         status
       }
     })
+  },
+  getMenuByParentId(id) {
+    return request({
+      url: `/admin/acl/menu/parent_id/${id}`,
+      method: 'get'
+    })
   }
 }

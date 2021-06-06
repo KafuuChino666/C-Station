@@ -77,7 +77,7 @@ public class MenuController {
     public Result reomveMenuById(@RequestBody String id) {
         Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");
         if (pattern.matcher(id.trim()).matches()) {
-            boolean b = menuService.removeById(id);
+            boolean b = menuService.deleted(id);
             return b ? Result.ok() : Result.setResultCodeEnum(ResultCodeEnum.UNKNOWN_REASON);
         }
         return Result.setResultCodeEnum(ResultCodeEnum.PARAM_ERROR);
@@ -99,6 +99,13 @@ public class MenuController {
     public Result getHierarchyMenuList() {
         List<MenuVo> menuVos = menuService.getHierarchyMenu();
         return Result.ok().data("rows", menuVos);
+    }
+
+    @ApiOperation("根据ParentId返回子集菜单")
+    @GetMapping("/parent_id/{id}")
+    public Result getMenuByParentId(@PathVariable String id) {
+        List<Menu> menus = menuService.getMenuByParentId(id);
+        return Result.ok().data("rows", menus);
     }
 }
 

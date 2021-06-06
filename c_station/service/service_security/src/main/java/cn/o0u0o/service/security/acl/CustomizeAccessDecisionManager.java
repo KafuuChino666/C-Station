@@ -25,7 +25,6 @@ public class CustomizeAccessDecisionManager implements AccessDecisionManager {
 
             Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
             for (GrantedAuthority authority :  authorities) {
-                System.out.print(authority.getAuthority());
                 if (authority.getAuthority().equals(attribute)) {
                     return;
                 }

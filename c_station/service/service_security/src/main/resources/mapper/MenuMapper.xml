@@ -5,6 +5,12 @@
     <update id="updateHidden">
         update acl_menu set hidden = #{hidden} where id = #{id}
     </update>
+    <update id="updateParentHasChildren">
+        update acl_menu set has_children = 1 where id = #{parentId}
+    </update>
+    <update id="logicallyDelete">
+        update acl_menu set is_deleted = 0 where id = #{id}
+    </update>
 
     <!-- 返回菜单层级结构 -->
     <resultMap id="hierarchyMenu" type="cn.o0u0o.service.security.entity.vo.MenuVo">

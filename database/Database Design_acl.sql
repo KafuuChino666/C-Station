@@ -37,15 +37,31 @@ create table acl_staff_role
 );
 
 
+-- create table acl_menu
+-- (
+--    id                   bigint not null auto_increment,
+--    parent_id            bigint comment '父级ID',
+--    title                varchar(100) comment '菜单名称',
+--    level                int(4) comment '菜单级数',
+--    sort                 int(4) comment '菜单排序',
+--    name                 varchar(100) comment '前端名称',
+--    icon                 varchar(200) comment '前端图标',
+--    hidden               int(1) comment '前端隐藏',
+-- 	 gmt_create           datetime comment '创建时间',
+--    gmt_modified         datetime comment '修改时间',
+--    primary key (id)
+-- );
+
 create table acl_menu
 (
    id                   bigint not null auto_increment,
    parent_id            bigint comment '父级ID',
-   title                varchar(100) comment '菜单名称',
+   name                 varchar(100) comment '前端名称',
+   icon                 varchar(50) comment '前端图标',
+	 path									varchar(100) comment '访问路径',
+	 component						varchar(100) comment '组件路径',
    level                int(4) comment '菜单级数',
    sort                 int(4) comment '菜单排序',
-   name                 varchar(100) comment '前端名称',
-   icon                 varchar(200) comment '前端图标',
    hidden               int(1) comment '前端隐藏',
 	 gmt_create           datetime comment '创建时间',
    gmt_modified         datetime comment '修改时间',

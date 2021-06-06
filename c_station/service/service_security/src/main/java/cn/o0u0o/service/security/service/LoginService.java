@@ -30,7 +30,6 @@ public class LoginService implements UserDetailsService {
 
         QueryWrapper<Staff> wrapper = new QueryWrapper<>();
         wrapper.eq("username", name);
-        System.out.println(name);
 
         Staff staff = staffMapper.selectOne(wrapper);
         if (staff == null) {
