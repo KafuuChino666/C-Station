@@ -54,7 +54,7 @@ public class MenuController {
     @ApiOperation("获取所有菜单")
     @GetMapping("/")
     public Result getList() {
-        List<Menu> list = menuService.list();
+        List<Menu> list = menuService.getIdAndName();
         return Result.ok().data("rows", list);
     }
 

@@ -90,7 +90,8 @@ export default {
             message: '菜单添加成功！',
             type: 'success'
           })
-          this.$router.push('/security/menu')
+          this.$parent.fetchData()
+          // this.$router.push('/security/menu')
         }
       })
     },

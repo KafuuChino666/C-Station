@@ -38,9 +38,15 @@
       </template>
     </el-table-column>
     <el-table-column
-      prop="level"
+      prop="path"
       align="center"
-      label="菜单级数"
+      label="访问路径"
+      width="80">
+    </el-table-column>
+    <el-table-column
+      prop="component"
+      align="center"
+      label="组件路径"
       width="80">
     </el-table-column>
     <el-table-column

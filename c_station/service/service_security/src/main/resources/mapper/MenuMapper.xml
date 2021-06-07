@@ -23,4 +23,18 @@
     <select id="selectHierarchyMenuByParentId" resultMap="hierarchyMenu">
         select id, name from acl_menu where parent_id = #{parentId}
     </select>
+    <select id="selectIdAndName" resultType="cn.o0u0o.service.security.entity.Menu">
+        select id,name from acl_menu where is_deleted = 1
+    </select>
+
+    <!-- 返回菜单层级结构,只有id -->
+    <resultMap id="hierarchyID" type="cn.o0u0o.service.security.entity.vo.MenuVo">
+        <id property="id" column="id"/>
+        <collection property="children" select="selectHierarchyMenuByParentId"
+                    ofType="cn.o0u0o.service.security.entity.vo.MenuVo" column="id"/>
+    </resultMap>
+
+    <select id="getHierarchyIdById" resultMap="hierarchyID">
+        select id from acl_menu where id = #{id}
+    </select>
 </mapper>

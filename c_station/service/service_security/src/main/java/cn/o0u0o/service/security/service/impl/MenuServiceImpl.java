@@ -12,7 +12,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sun.xml.internal.messaging.saaj.packaging.mime.util.QEncoderStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -92,7 +94,33 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
 
     @Override
     public boolean deleted(String id) {
-        return menuMapper.logicallyDelete(id);
+        List<String> ids = new ArrayList<>();
+        List<MenuVo> menuVos = this.getHierarchyIdById(id);
+        recursionReturnId(menuVos, ids);
+
+        int i = baseMapper.deleteBatchIds(ids);
+
+        return i > 0;
+    }
+
+    private List<String> recursionReturnId(List<MenuVo> menuVos, List<String> ids) {
+        menuVos.forEach(item -> {
+            ids.add(item.getId());
+            if (item.getChildren() != null) {
+                recursionReturnId(item.getChildren(), ids);
+            }
+        });
+        return ids;
+    }
+
+    @Override
+    public List<Menu> getIdAndName() {
+        return menuMapper.selectIdAndName();
+    }
+
+    @Override
+    public List<MenuVo> getHierarchyIdById(String id) {
+        return menuMapper.getHierarchyIdById(id);
     }
 
 }

@@ -32,4 +32,8 @@ public interface MenuService extends IService<Menu> {
     List<Menu> getMenuByParentId(String id);
 
     boolean deleted(String id);
+
+    List<Menu> getIdAndName();
+
+    List<MenuVo> getHierarchyIdById(String id);
 }

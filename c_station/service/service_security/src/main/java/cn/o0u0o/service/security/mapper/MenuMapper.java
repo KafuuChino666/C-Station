@@ -23,4 +23,8 @@ public interface MenuMapper extends BaseMapper<Menu> {
     Boolean updateParentHasChildren(String parentId);
 
     boolean logicallyDelete(String id);
+
+    List<Menu> selectIdAndName();
+
+    List<MenuVo> getHierarchyIdById(String id);
 }
