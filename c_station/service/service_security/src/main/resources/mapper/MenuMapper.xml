@@ -8,9 +8,6 @@
     <update id="updateParentHasChildren">
         update acl_menu set has_children = 1 where id = #{parentId}
     </update>
-    <update id="logicallyDelete">
-        update acl_menu set is_deleted = 0 where id = #{id}
-    </update>
 
     <!-- 返回菜单层级结构 -->
     <resultMap id="hierarchyMenu" type="cn.o0u0o.service.security.entity.vo.MenuVo">
@@ -24,7 +21,7 @@
         select id, name from acl_menu where parent_id = #{parentId}
     </select>
     <select id="selectIdAndName" resultType="cn.o0u0o.service.security.entity.Menu">
-        select id,name from acl_menu where is_deleted = 1
+        select id,name from acl_menu
     </select>
 
     <!-- 返回菜单层级结构,只有id -->

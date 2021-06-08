@@ -20,4 +20,6 @@ public interface RoleMenuMapper extends BaseMapper<RoleMenu> {
     List<String> getRoleById(String id);
 
     List<String> getMenuIdByRoleId(String id);
+
+    int deleteBatchMenuIds(Object[] ids);
 }

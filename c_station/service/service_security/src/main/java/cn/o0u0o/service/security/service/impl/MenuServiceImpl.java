@@ -5,6 +5,7 @@ import cn.o0u0o.service.security.entity.Resource;
 import cn.o0u0o.service.security.entity.vo.MenuVo;
 import cn.o0u0o.service.security.mapper.MenuMapper;
 import cn.o0u0o.service.security.service.MenuService;
+import cn.o0u0o.service.security.service.RoleMenuService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -31,6 +32,9 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     @Autowired
     public MenuMapper menuMapper;
 
+    @Autowired
+    public RoleMenuService roleMenuService;
+
     @Override
     public boolean updateHiddenById(String id, Boolean status) {
         return menuMapper.updateHidden(id, status ? 1 : 0);
@@ -40,7 +44,6 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     public IPage<Menu> selectPage(Integer page, Integer limit) {
         QueryWrapper<Menu> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("parent_id", 0);
-        queryWrapper.eq("is_deleted", 1);
         queryWrapper.orderByAsc("sort"); //排序
 
         Page<Menu> pageParam = new Page<>(page, limit);
@@ -92,15 +95,26 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
         return menuMapper.selectList(queryWrapper);
     }
 
+    @Transactional
     @Override
     public boolean deleted(String id) {
-        List<String> ids = new ArrayList<>();
-        List<MenuVo> menuVos = this.getHierarchyIdById(id);
-        recursionReturnId(menuVos, ids);
+        List<String> ids = this.getChildrenIds(id);
 
+        // 批量删除 菜单表
         int i = baseMapper.deleteBatchIds(ids);
 
+        // 删除 角色-菜单RoleMenu
+        roleMenuService.deleteBatchMenuIds(ids.toArray());
+
         return i > 0;
+    }
+
+    @Override
+    public List<String> getChildrenIds(String parentId) {
+        List<String> ids = new ArrayList<>();
+        List<MenuVo> menuVos = this.getHierarchyIdById(parentId);
+        recursionReturnId(menuVos, ids);
+        return ids;
     }
 
     private List<String> recursionReturnId(List<MenuVo> menuVos, List<String> ids) {
@@ -122,5 +136,4 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     public List<MenuVo> getHierarchyIdById(String id) {
         return menuMapper.getHierarchyIdById(id);
     }
-
 }

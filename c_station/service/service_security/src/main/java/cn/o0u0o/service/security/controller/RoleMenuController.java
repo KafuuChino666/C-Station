@@ -44,10 +44,10 @@ public class RoleMenuController {
 
     @ApiOperation("修改菜单角色")
     @PutMapping("/")
-    public Result updataMenuRole(@RequestParam String id, @RequestBody List<String> roles) {
+    public Result updataMenuRole(@RequestParam String id, @RequestParam Boolean batch, @RequestBody List<String> roles) {
         Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");
         if (pattern.matcher(id.trim()).matches()) {
-            Boolean b = roleMenuService.updataRoleByMenuId(id, roles);
+            Boolean b = roleMenuService.updataRoleByMenuId(id, roles, batch);
             return b ? Result.ok() : Result.setResultCodeEnum(ResultCodeEnum.UNKNOWN_REASON);
         }
 

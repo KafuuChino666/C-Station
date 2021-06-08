@@ -6,6 +6,10 @@
       <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
         <el-checkbox v-for="city in cities" :key="city.id" :label="city.id">{{ city.name }}</el-checkbox>
       </el-checkbox-group>
+      <el-switch
+        v-model="batch"
+        active-text="(本菜单和子菜单批量绑定角色)">
+      </el-switch>
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button @click="dialogFormVisible = false">取 消</el-button>
@@ -30,36 +34,9 @@ export default {
       checkedCities: [1, 2],
       menuId: 0,
       // 所有角色
-      cities: [{
-        id: 1,
-        name: '超管'
-      },
-      {
-        id: 2,
-        name: '视频审核'
-      },
-      {
-        id: 3,
-        name: '内容审核'
-      },
-      {
-        id: 4,
-        name: '番剧管理'
-      },
-      {
-        id: 5,
-        name: '漫画管理'
-      },
-      {
-        id: 6,
-        name: '频道管理'
-      },
-      {
-        id: 7,
-        name: '动画管理'
-      }
-      ],
-      isIndeterminate: true
+      cities: [],
+      isIndeterminate: true,
+      batch: false
     }
   },
   mounted() {
@@ -98,7 +75,7 @@ export default {
     },
     // 确定函数
     confirmFun() {
-      securityAPI.updataMenuRole(this.menuId, this.checkedCities).then(response => {
+      securityAPI.updataMenuRole(this.menuId, this.checkedCities, this.batch).then(response => {
         if (response.status) {
           this.dialogFormVisible = false
           this.$notify({

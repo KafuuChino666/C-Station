@@ -27,4 +27,6 @@ public interface RoleService extends IService<Role> {
     Boolean createRoleCoverMenuResource(AddRoleVo addRoleForm);
 
     Boolean updateStatusById(String id, boolean status);
+
+    boolean removeRoleById(String id);
 }

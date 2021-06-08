@@ -5,7 +5,6 @@ import cn.o0u0o.service.security.mapper.RoleResourceMapper;
 import cn.o0u0o.service.security.service.RoleResourceService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import lombok.experimental.Accessors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,5 +42,13 @@ public class RoleResourceServiceImpl extends ServiceImpl<RoleResourceMapper, Rol
     @Override
     public List<String> getRoleByResourceId(String id) {
         return roleResourceMapper.getRoleByResourceId(id);
+    }
+
+    @Override
+    public boolean deleteBatchRoleId(String id) {
+        QueryWrapper<RoleResource> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("role_id", id);
+
+        return this.remove(queryWrapper);
     }
 }

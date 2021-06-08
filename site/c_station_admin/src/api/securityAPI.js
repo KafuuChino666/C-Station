@@ -135,13 +135,14 @@ export default {
     })
   },
   // 修改菜单角色
-  updataMenuRole(id, roles) {
+  updataMenuRole(id, roles, batch) {
     return request({
       url: '/admin/acl/role_menu/',
       method: 'put',
       data: roles,
       params: {
-        id
+        id,
+        batch
       }
     })
   },

@@ -78,7 +78,7 @@ public class RoleController {
     @ApiOperation("根据id删除")
     @DeleteMapping("/")
     public Result removeById(@RequestBody String id) {
-        boolean b = roleService.removeById(id);
+        boolean b = roleService.removeRoleById(id);
         return b ? Result.ok() : Result.err();
     }
 

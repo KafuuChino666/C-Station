@@ -20,4 +20,6 @@ public interface RoleResourceService extends IService<RoleResource> {
     List<String> getResourceIdByRoleId(String roleId);
 
     List<String> getRoleByResourceId(String id);
+
+    boolean deleteBatchRoleId(String id);
 }

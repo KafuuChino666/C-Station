@@ -48,9 +48,6 @@ public class Menu extends BaseEntity {
     @ApiModelProperty(value = "菜单排序")
     private Integer sort;
 
-    @ApiModelProperty(value = "逻辑删除")
-    private Integer isDeleted;
-
     @ApiModelProperty(value = "前端隐藏")
     private Integer hidden;
 

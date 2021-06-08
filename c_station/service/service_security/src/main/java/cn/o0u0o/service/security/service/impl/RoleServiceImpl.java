@@ -86,4 +86,21 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
     public Boolean updateStatusById(String id, boolean status) {
         return roleMapper.updateStatusById(id, status);
     }
+
+    @Transactional
+    @Override
+    public boolean removeRoleById(String id) {
+        // id 角色id
+        boolean b;
+        // 1. 删除RoleMenu关系表数据
+        b = roleMenuService.deleteBatchRoleId(id);
+
+        // 2. 删除RoleResource关系表中的数据
+        b = roleResourceServicer.deleteBatchRoleId(id);
+
+        // 3. 删除角色
+        b = this.removeById(id);
+
+        return b;
+    }
 }
