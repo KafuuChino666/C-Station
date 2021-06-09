@@ -8,6 +8,13 @@
 import * as echarts from 'echarts'
 
 export default {
+  data() {
+    return {
+      id: '',
+      number: '',
+      type: []
+    }
+  },
   name: 'RGraph',
   mounted() {
     this.lineChart()
@@ -19,8 +26,7 @@ export default {
       // 绘制图表
       myChart.setOption({
         title: {
-          text: '某站点用户访问来源',
-          subtext: '纯属虚构',
+          text: '用户的视频分区',
           x: 'center'
         },
         legend: {
@@ -43,14 +49,14 @@ export default {
               borderRadius: 8
             },
             data: [
-              { value: 40, name: 'rose 1' },
-              { value: 38, name: 'rose 2' },
-              { value: 32, name: 'rose 3' },
-              { value: 30, name: 'rose 4' },
-              { value: 28, name: 'rose 5' },
-              { value: 26, name: 'rose 6' },
-              { value: 22, name: 'rose 7' },
-              { value: 18, name: 'rose 8' }
+              {
+                value: 30,
+                name: 'rose 1'
+              },
+              {
+                value: 20,
+                name: 'rose 2'
+              }
             ]
           }
         ]

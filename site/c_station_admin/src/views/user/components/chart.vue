@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <h3></h3>
+      <h3>用户：{{ name }}的统计数据</h3>
     </div>
     <el-row :gutter="40">
       <el-col :span="12">
@@ -36,6 +36,19 @@ export default {
     PieChart,
     LChart,
     FChart
+  },
+  data() {
+    return {
+      name: 'CalebCX'
+    }
+  },
+
+  created: {
+
+  },
+
+  methods: {
+
   }
 }
 </script>
