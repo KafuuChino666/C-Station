@@ -1,3 +1,5 @@
+import securityAPI from '@/api/securityAPI'
+
 export default {
 
   StaffAddFrom: {
@@ -12,6 +14,21 @@ export default {
         max: 10,
         message: '长度在3~20字符',
         trigger: 'blur'
+      },
+      {
+        validator: function(rule, value, callback) {
+          securityAPI.validateUserName(value).then(res => {
+            if (!res.data.validate) {
+              callback(new Error('用户名不可用！'))
+            } else {
+              callback()
+            }
+          }).catch(error => {
+            console.log(error)
+            callback(new Error('用户名不可用！'))
+          })
+        },
+        trigger: 'blur'
       }
     ],
     password: [
@@ -24,6 +41,18 @@ export default {
         min: 6,
         max: 20,
         message: '密码长度在3~20字符',
+        trigger: 'blur'
+      }
+    ],
+    mobile: [
+      {
+        required: true,
+        message: '请输入手机号',
+        trigger: 'blur'
+      },
+      {
+        pattern: /^[1](([3][0-9])|([4][5-9])|([5][0-3,5-9])|([6][5,6])|([7][0-8])|([8][0-9])|([9][1,8,9]))[0-9]{8}$/,
+        message: '请输入正确的手机号',
         trigger: 'blur'
       }
     ],
@@ -46,7 +75,7 @@ export default {
         trigger: 'blur'
       },
       {
-        min: 3,
+        min: 1,
         max: 20,
         message: '长度在3~20字符',
         trigger: 'blur'

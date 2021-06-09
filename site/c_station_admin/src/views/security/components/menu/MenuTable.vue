@@ -23,7 +23,7 @@
       width="80">
     </el-table-column>
     <el-table-column
-      prop="name"
+      prop="title"
       align="center"
       label="菜单名称"
       width="180">
@@ -150,7 +150,7 @@ export default {
             message: '菜单删除成功！',
             type: 'success'
           })
-          this.$router.push('/security/menu')
+          this.$parent.fetchData()
         }
       })
     },

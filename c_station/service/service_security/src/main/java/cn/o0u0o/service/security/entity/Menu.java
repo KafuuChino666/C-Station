@@ -30,14 +30,20 @@ public class Menu extends BaseEntity {
     @ApiModelProperty(value = "父级ID")
     private String parentId;
 
-    @ApiModelProperty(value = "前端名称")
+    @ApiModelProperty(value = "组件名称")
     private String name;
+
+    @ApiModelProperty(value = "前端名称")
+    private String title;
 
     @ApiModelProperty(value = "前端图标")
     private String icon;
 
     @ApiModelProperty(value = "访问路径")
     private String path;
+
+    @ApiModelProperty(value = "重定向")
+    private String redirect;
 
     @ApiModelProperty(value = "组件路径")
     private String component;

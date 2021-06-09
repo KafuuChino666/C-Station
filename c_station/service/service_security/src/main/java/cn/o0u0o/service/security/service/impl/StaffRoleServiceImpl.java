@@ -66,4 +66,24 @@ public class StaffRoleServiceImpl extends ServiceImpl<StaffRoleMapper, StaffRole
     public List<String> selectResourceByStaffId(String id) {
         return staffRoleMapper.getResourceByStaffId(id);
     }
+
+    @Override
+    public boolean batchBindRole(String id, List<Integer> roles) {
+        List<StaffRole> staffRoles = new ArrayList<>();
+        roles.forEach(role -> {
+            staffRoles.add(new StaffRole(id, role.toString()));
+        });
+
+        return this.saveBatch(staffRoles);
+    }
+
+    @Override
+    public boolean staffCancelRoles(String id, List<Integer> roles) {
+
+        QueryWrapper<StaffRole> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("staff_id", id);
+        queryWrapper.in("role_id", roles);
+
+        return this.remove(queryWrapper);
+    }
 }

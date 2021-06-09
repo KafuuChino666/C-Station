@@ -1,14 +1,20 @@
 <template>
   <el-dialog title="添加菜单" :visible.sync="dialogFormVisible">
     <el-form :model="form">
-      <el-form-item label="菜单名称:" :label-width="formLabelWidth">
+      <el-form-item label="组件名称:" :label-width="formLabelWidth">
         <el-input v-model="form.name" size="small" style="width: 300px"/>
+      </el-form-item>
+      <el-form-item label="前端名称:" :label-width="formLabelWidth">
+        <el-input v-model="form.title" size="small" style="width: 300px"/>
       </el-form-item>
       <el-form-item label="前端图标:" :label-width="formLabelWidth">
         <icon-picker v-model="form.icon" style="width: 300px"></icon-picker>
       </el-form-item>
       <el-form-item label="访问路径(path):" :label-width="formLabelWidth">
         <el-input v-model="form.path" size="small" style="width: 300px"/>
+      </el-form-item>
+      <el-form-item label="redirect:" :label-width="formLabelWidth">
+        <el-input v-model="form.redirect" size="small" style="width: 300px"/>
       </el-form-item>
       <el-form-item label="组件路径:" :label-width="formLabelWidth">
         <el-input v-model="form.component" size="small" style="width: 300px"/>
@@ -18,9 +24,9 @@
           <el-option
             v-for="item in parentIdList"
             :key="item.id"
-            :label="item.name"
+            :label="item.title"
             :value="item.id">
-            <span style="float: left">{{ item.name }}</span>
+            <span style="float: left">{{ item.title }}</span>
             <span style="float: right; color: #8492a6; font-size: 13px">{{ item.id }}</span>
           </el-option>
         </el-select>
@@ -48,9 +54,11 @@ export default {
       form: {
         parentId: '',
         path: '',
+        redirect: '',
         component: '',
         sort: '',
         name: '',
+        title: '',
         icon: '',
         hasChildren: 0
       },

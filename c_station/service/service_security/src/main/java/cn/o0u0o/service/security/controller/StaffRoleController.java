@@ -32,7 +32,7 @@ public class StaffRoleController {
     @GetMapping("/{id}")
     public Result getRoleIdStatusById(@PathVariable String id) {
         // 问题！ 后面处理
-        if (id.isEmpty()) {
+        if (!id.isEmpty()) {
             List<String> roles = staffRoleService.getByStatusId(id);
             return Result.ok().data("roles", roles);
         }
@@ -48,5 +48,22 @@ public class StaffRoleController {
         }
         return Result.setResultCodeEnum(ResultCodeEnum.UNKNOWN_REASON);
     }
+
+    @ApiOperation("员工绑定新角色")
+    @PutMapping("/bind")
+    public Result staffBindRoles(@RequestParam String id, @RequestBody List<Integer> roles) {
+        if (roles.size() == 0) return Result.err().message("恶意请求");
+        boolean b = staffRoleService.batchBindRole(id, roles);
+        return b ? Result.ok().message("绑定成功!") : Result.err().message("绑定失败!");
+    }
+
+    @ApiOperation("角色解绑")
+    @DeleteMapping("/cancel")
+    public Result staffCancelRoles(@RequestParam String id, @RequestBody List<Integer> roles) {
+        if (roles.size() == 0) return Result.err().message("恶意请求");
+        boolean b = staffRoleService.staffCancelRoles(id, roles);
+        return b ? Result.ok().message("解绑成功!") : Result.err().message("解绑失败!");
+    }
+
 }
 

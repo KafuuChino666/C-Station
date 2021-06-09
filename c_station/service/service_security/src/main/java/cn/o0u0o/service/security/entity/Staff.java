@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import cn.o0u0o.common.entity.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.models.auth.In;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -51,11 +52,22 @@ public class Staff extends BaseEntity {
     @ApiModelProperty(value = "帐号启用状态：0：禁用；1：启用")
     private Boolean status;
 
+
     public void setStatus(Integer status) {
-        if (status == 1) {
-            this.status = true;
-        } else {
-            this.status = false;
-        }
+        this.status = status == 1 ;
+    }
+
+    public Staff() {
+    }
+
+    public Staff(String username, String password, String icon, String email, String mobile, String nickName, String remark, Boolean status) {
+        this.username = username;
+        this.password = password;
+        this.icon = icon;
+        this.email = email;
+        this.mobile = mobile;
+        this.nickName = nickName;
+        this.remark = remark;
+        this.status = status;
     }
 }

@@ -21,7 +21,7 @@
         select id, name from acl_menu where parent_id = #{parentId}
     </select>
     <select id="selectIdAndName" resultType="cn.o0u0o.service.security.entity.Menu">
-        select id,name from acl_menu
+        select id,title from acl_menu
     </select>
 
     <!-- 返回菜单层级结构,只有id -->

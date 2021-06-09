@@ -21,6 +21,7 @@
 <script>
 import PubSub from 'pubsub-js'
 import securityAPI from '@/api/securityAPI'
+import router from '@/router'
 
 export default {
   name: 'MenuRoleForm',

@@ -7,6 +7,9 @@
       <el-form-item label="密码" prop="password">
         <el-input placeholder="请输入密码" v-model="form.password" show-password></el-input>
       </el-form-item>
+      <el-form-item label="手机号" prop="mobile">
+        <el-input v-model="form.mobile"></el-input>
+      </el-form-item>
       <el-form-item label="邮箱" prop="email">
         <el-input v-model="form.email"></el-input>
       </el-form-item>
@@ -49,6 +52,7 @@ export default {
         username: '',
         password: '',
         email: '',
+        mobile: '',
         nickName: '',
         remark: '',
         status: false
@@ -68,8 +72,16 @@ export default {
       })
     },
     onSubmit() {
-      console.log('submit!')
       this.$refs['form'].validate((valid) => {
+        if (valid) {
+          this.form.roles = this.checkedRoles
+          securityAPI.addStaff(this.form).then(res => {
+            this.$message({
+              message: res.data.message,
+              type: 'success'
+            })
+          })
+        }
       })
     },
     handleCheckAllChange(val) {

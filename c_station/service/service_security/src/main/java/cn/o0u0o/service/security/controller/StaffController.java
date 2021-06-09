@@ -4,6 +4,7 @@ package cn.o0u0o.service.security.controller;
 import cn.o0u0o.common.response.Result;
 import cn.o0u0o.common.response.ResultCodeEnum;
 import cn.o0u0o.service.security.entity.Staff;
+import cn.o0u0o.service.security.entity.vo.StaffVo;
 import cn.o0u0o.service.security.service.StaffService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.annotations.ApiOperation;
@@ -75,6 +76,20 @@ public class StaffController {
             @RequestParam("id") Integer id, @RequestParam("status") Boolean status) {
         staffService.updateStatusById(id,status);
         return Result.ok();
+    }
+
+    @ApiOperation("添加新员工")
+    @PutMapping("/")
+    public Result add(@RequestBody StaffVo staff) {
+        boolean b = staffService.createStaff(staff);
+        return b ? Result.ok().message("员工添加成功！") : Result.err().message("员工添加失败！");
+    }
+
+    @ApiOperation("校验用户名")
+    @GetMapping("/validate/{username}")
+    public Result validateUserName(@PathVariable String username) {
+        Boolean b = staffService.validateUserName(username);
+        return Result.ok().data("validate", b);
     }
 }
 

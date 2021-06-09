@@ -3,6 +3,7 @@
     <el-transfer
       v-model="value"
       filterable
+      @change="roleChange"
       :titles="['可选角色', '已有角色']"
       filter-placeholder="搜索"
       :props="{
@@ -11,10 +12,6 @@
       }"
       :data="data">
     </el-transfer>
-    <div slot="footer" class="dialog-footer">
-      <el-button @click="dialogFormVisible = false">取 消</el-button>
-      <el-button type="primary" @click="upData">确 定</el-button>
-    </div>
   </el-dialog>
 </template>
 
@@ -47,18 +44,30 @@ export default {
       this.id = data.id
       // 获取当前用户拥有的角色
       securityAPI.getRolesStatusById(this.id).then(response => {
-        if (response.status) { // 请求成功
-          // 加载数据
-          this.value = response.data.roles
-        } else {
-          this.dialogFormVisible = false // 关闭弹窗
-        }
+        this.value = response.data.roles
+      }).catch(error => {
+        console.log(error)
+        this.dialogFormVisible = false // 关闭弹窗
       })
     })
   },
   methods: {
-    filterMethod(query, item) {
-      return item.pinyin.indexOf(query) > -1
+    roleChange(old, direction, keys) {
+      if (direction === 'right') { // 添加角色
+        securityAPI.staffBindRoles(this.id, keys).then(res => {
+          this.$message({
+            message: res.message,
+            type: 'success'
+          })
+        })
+      } else {
+        securityAPI.staffCancelRoles(this.id, keys).then(res => {
+          this.$message({
+            message: res.message,
+            type: 'success'
+          })
+        })
+      }
     },
     upData() {
       securityAPI.updateRole(this.id, this.value).then(response => {

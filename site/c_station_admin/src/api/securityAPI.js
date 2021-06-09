@@ -293,5 +293,40 @@ export default {
       url: `/admin/acl/menu/parent_id/${id}`,
       method: 'get'
     })
+  },
+  // 添加用户
+  addStaff(staff) {
+    return request({
+      url: '/admin/acl/staff/',
+      method: 'put',
+      data: staff
+    })
+  },
+  // 验证用户名
+  validateUserName(value) {
+    return request({
+      url: `/admin/acl/staff/validate/${value}`,
+      method: 'get'
+    })
+  },
+  staffBindRoles(id, roles) {
+    return request({
+      url: '/admin/acl/staff-role/bind',
+      method: 'put',
+      params: {
+        id
+      },
+      data: roles
+    })
+  },
+  staffCancelRoles(id, roles) {
+    return request({
+      url: '/admin/acl/staff-role/cancel',
+      method: 'delete',
+      params: {
+        id
+      },
+      data: roles
+    })
   }
 }

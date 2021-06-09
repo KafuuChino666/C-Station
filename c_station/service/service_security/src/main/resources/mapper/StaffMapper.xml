@@ -5,4 +5,7 @@
     <update id="updateStatus">
         update acl_staff set status = #{status} where id = #{id}
     </update>
+    <select id="validateByUserName" resultType="java.lang.Integer">
+        select COUNT(*) from acl_staff where username = #{username}
+    </select>
 </mapper>
