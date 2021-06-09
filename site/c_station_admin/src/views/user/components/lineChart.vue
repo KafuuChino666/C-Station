@@ -8,6 +8,13 @@
 import * as echarts from 'echarts'
 
 export default {
+  data() {
+    return {
+      id: '',
+      number: '',
+      type: []
+    }
+  },
   name: 'LChart',
   mounted() {
     this.lineChart()
@@ -28,7 +35,13 @@ export default {
         },
         legend: {
           bottom: 'bottom',
-          data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎']
+          data: [
+            '邮件营销',
+            '联盟广告',
+            '视频广告',
+            '直接访问',
+            '搜索引擎'
+          ]
         },
         grid: {
           left: '0%',

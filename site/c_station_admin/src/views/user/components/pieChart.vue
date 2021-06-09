@@ -23,12 +23,18 @@ export default {
     this.initData()
   },
   methods: {
+    data() {
+      return {
+        id: '',
+        number: '',
+        type: []
+      }
+    },
     initData() {
       const myChart = echarts.init(document.getElementById('main1'))
       myChart.setOption({
         title: {
-          text: '某站点用户访问来源',
-          subtext: '纯属虚构',
+          text: '用户访问视频偏好',
           x: 'center'
         },
         tooltip: {
@@ -38,7 +44,13 @@ export default {
         legend: {
           orient: 'vertical',
           bottom: 'bottom',
-          data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+          data: [
+            '直接访问',
+            '邮件营销',
+            '联盟广告',
+            '视频广告',
+            '搜索引擎'
+            ]
         },
         series: [
           {
@@ -56,7 +68,7 @@ export default {
                 name: '邮件营销'
               },
               {
-                value: 234,
+                value: 20,
                 name: '联盟广告'
               },
               {
@@ -64,7 +76,7 @@ export default {
                 name: '视频广告'
               },
               {
-                value: 1548,
+                value: 100,
                 name: '搜索引擎'
               }
             ],

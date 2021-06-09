@@ -4,7 +4,7 @@ import request from '@/utils/request'
 export default {
 
   // 根据查询表单查询video列表
-  selectVideoByTerm(queryForm,page, limit) {
+  selectVideoByTerm(queryForm, page, limit) {
     return request({
       url: `/admin/video/list/${page}/${limit}`,
       method: 'get',
