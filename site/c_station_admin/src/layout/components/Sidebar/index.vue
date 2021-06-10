@@ -31,7 +31,9 @@ export default {
       'sidebar'
     ]),
     routes() {
-      return this.$router.options.routes
+      // return this.$router.options.routes
+      console.log('数据加载' + this.$store.getters.menusRoutes)
+      return this.$store.getters.menusRoutes
     },
     activeMenu() {
       const route = this.$route

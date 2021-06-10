@@ -44,3 +44,11 @@ export function sendCode(username, token) {
     }
   })
 }
+
+// 获取菜单
+export function fetchUserMenuList() {
+  return request({
+    url: '/admin/acl/staff/menu',
+    method: 'get'
+  })
+}

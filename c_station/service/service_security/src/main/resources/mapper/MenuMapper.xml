@@ -34,4 +34,11 @@
     <select id="getHierarchyIdById" resultMap="hierarchyID">
         select id from acl_menu where id = #{id}
     </select>
+    <select id="selectMenusByUserName" resultType="cn.o0u0o.service.security.entity.Menu">
+        select distinct me.id, parent_id, name, title, me.icon, path, redirect, component, has_children, sort, hidden
+        from acl_staff s
+        left join acl_staff_role sr on s.id = sr.staff_id
+        left join acl_role_menu rm on sr.role_id = rm.role_id
+        left join acl_menu me on rm.menu_id = me.id where s.username = #{username}
+    </select>
 </mapper>

@@ -1,9 +1,8 @@
 import { login, logout, getInfo } from '@/api/user'
 // import { logout, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
-import { resetRouter } from '@/router'
+import router, { resetRouter } from '@/router'
 // import axios from 'axios'
-// import { error } from 'echarts/types/src/util/log'
 
 const getDefaultState = () => {
   return {
@@ -40,7 +39,12 @@ const actions = {
           const { data } = response
           commit('SET_TOKEN', data.token)
           setToken(data.token, data.maxAge)
+
+          this.$store.dispatch('permission/generateRoutes', data, { root: true }).then((accessRoutes) => {
+            router.addRoutes(accessRoutes)
+          })
         }
+
         resolve()
       }).catch(error => {
         reject(error)
@@ -92,6 +96,7 @@ const actions = {
 
         commit('SET_NAME', name)
         commit('SET_AVATAR', avatar)
+
         resolve(data)
       }).catch(error => {
         reject(error)

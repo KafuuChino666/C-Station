@@ -1,8 +1,10 @@
 package cn.o0u0o.service.security.service.impl;
 
+import cn.o0u0o.service.security.entity.Menu;
 import cn.o0u0o.service.security.entity.Staff;
 import cn.o0u0o.service.security.entity.vo.StaffVo;
 import cn.o0u0o.service.security.mapper.StaffMapper;
+import cn.o0u0o.service.security.service.MenuService;
 import cn.o0u0o.service.security.service.StaffRoleService;
 import cn.o0u0o.service.security.service.StaffService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -13,7 +15,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -33,6 +34,9 @@ public class StaffServiceImpl extends ServiceImpl<StaffMapper, Staff> implements
 
     @Autowired
     public StaffRoleService staffRoleService;
+
+    @Autowired
+    public MenuService menuService;
 
     @Override
     public Staff getById(Integer staffId) {
@@ -79,6 +83,12 @@ public class StaffServiceImpl extends ServiceImpl<StaffMapper, Staff> implements
         // 绑定角色
         staffRoleService.batchBindRole(st.getId(), staff.getRoles());
         return insert == 1;
+    }
+
+    @Override
+    public List<Menu> getMenusByUserName(String username) {
+
+        return menuService.getMenusByUserName(username);
     }
 
 }

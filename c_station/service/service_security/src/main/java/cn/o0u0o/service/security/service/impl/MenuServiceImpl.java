@@ -1,7 +1,6 @@
 package cn.o0u0o.service.security.service.impl;
 
 import cn.o0u0o.service.security.entity.Menu;
-import cn.o0u0o.service.security.entity.Resource;
 import cn.o0u0o.service.security.entity.vo.MenuVo;
 import cn.o0u0o.service.security.mapper.MenuMapper;
 import cn.o0u0o.service.security.service.MenuService;
@@ -10,7 +9,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.sun.xml.internal.messaging.saaj.packaging.mime.util.QEncoderStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -115,6 +113,11 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
         List<MenuVo> menuVos = this.getHierarchyIdById(parentId);
         recursionReturnId(menuVos, ids);
         return ids;
+    }
+
+    @Override
+    public List<Menu> getMenusByUserName(String username) {
+        return baseMapper.selectMenusByUserName(username);
     }
 
     private List<String> recursionReturnId(List<MenuVo> menuVos, List<String> ids) {

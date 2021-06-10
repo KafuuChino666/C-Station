@@ -25,4 +25,6 @@ public interface MenuMapper extends BaseMapper<Menu> {
     List<Menu> selectIdAndName();
 
     List<MenuVo> getHierarchyIdById(String id);
+
+    List<Menu> selectMenusByUserName(String username);
 }

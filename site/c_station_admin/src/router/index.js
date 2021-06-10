@@ -42,8 +42,23 @@ export const constantRoutes = [
     component: () => import('@/views/404'),
     hidden: true
   },
-// ]
-// export const asyncRoutes = [
+  {
+    path: '/',
+    component: Layout,
+    redirect: '/dashboard',
+    children: [{
+      path: 'dashboard',
+      name: 'Dashboard',
+      component: () => import('@/views/dashboard/index'),
+      meta: { title: '概览', icon: 'dashboard' }
+    }]
+  }
+]
+
+export const asyncRoutes = [
+  { path: '*', redirect: '/404', hidden: true }
+]
+export const asyncRoutes1 = [
   {
     path: '/',
     component: Layout,

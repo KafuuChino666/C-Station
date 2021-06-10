@@ -61,4 +61,8 @@ public class Menu extends BaseEntity {
         if (hidden == null) return false;
         return hidden == 1;
     }
+
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden ? 1 : 0;
+    }
 }

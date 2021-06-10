@@ -1,37 +1,49 @@
 import { asyncRoutes, constantRoutes } from '@/router'
+import { fetchUserMenuList } from '@/api/user'
+import Layout from '@/layout'
 
 /**
- * Use meta.role to determine if the current user has permission
- * @param roles
- * @param route
+ * 静态路由懒加载
+ * @param view  格式必须为 xxx/xxx 开头不要加斜杠
+ * @returns
  */
-function hasPermission(roles, route) {
-  if (route.meta && route.meta.roles) {
-    return roles.some(role => route.meta.roles.includes(role))
-  } else {
-    return true
-  }
+export const loadView = (view) => {
+  return (resolve) => require([`@/views/${view}.vue`], resolve)
+}
+
+export function buildMenuTree(menuList, pid) {
+  const menus = []
+  menuList.forEach(item => {
+    // eslint-disable-next-line eqeqeq
+    if (pid == item.parentId) {
+      const menu = {
+        path: item.path,
+        component: item.component === 'Layout' ? Layout : loadView(item.component),
+        hidden: item.hidden == 1, // 状态为0的隐藏
+        redirect: item.redirect,
+        children: [],
+        name: item.name,
+        meta: { title: item.title, icon: item.icon }
+      }
+      // eslint-disable-next-line eqeqeq
+      if (item.hasChildren == 1) {
+        menu.children = buildMenuTree(menuList, item.id)
+      }
+      menus.push(menu)
+    }
+  })
+  return menus
 }
 
 /**
- * Filter asynchronous routing tables by recursion
- * @param routes asyncRoutes
- * @param roles
+ * 把从后端查询的菜单数据拼装成路由格式的数据
+ * @param routes
+ * @param data 后端返回的菜单数据
  */
-export function filterAsyncRoutes(routes, roles) {
-  const res = []
-
-  routes.forEach(route => {
-    const tmp = { ...route }
-    if (hasPermission(roles, tmp)) {
-      if (tmp.children) {
-        tmp.children = filterAsyncRoutes(tmp.children, roles)
-      }
-      res.push(tmp)
-    }
-  })
-
-  return res
+export function generaMenu(routes, data) {
+  const menuTree = buildMenuTree(data, 0)
+  Object.assign(routes, menuTree)
+  return routes
 }
 
 const state = {
@@ -42,23 +54,27 @@ const state = {
 const mutations = {
   SET_ROUTES: (state, routes) => {
     state.addRoutes = routes
+    // 拼接静态路由和动态路由
     state.routes = constantRoutes.concat(routes)
   }
 }
 
 const actions = {
-  generateRoutes({ commit }, roles) {
+  generateRoutes({ commit }, token) {
     return new Promise(resolve => {
-      let accessedRoutes
-      if (roles.includes('admin')) {
-        // 路由是否有admin,有直接全部显示
-        accessedRoutes = asyncRoutes || []
-      } else {
-        // accessedRoutes这个就是当前角色可见的动态路由
-        accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
-      }
-      commit('SET_ROUTES', accessedRoutes)
-      resolve(accessedRoutes)
+      // 通过token从后端获取用户菜单，并加入全局状态
+      fetchUserMenuList(token).then(res => {
+        const menuData = Object.assign([], res.data.menus)
+        const tempAsyncRoutes = Object.assign([], asyncRoutes)
+        console.log(menuData)
+        const accessedRoutes = generaMenu(tempAsyncRoutes, menuData)
+
+        commit('SET_ROUTES', accessedRoutes)
+        console.log(accessedRoutes)
+        resolve(accessedRoutes)
+      }).catch(error => {
+        console.log(error)
+      })
     })
   }
 }

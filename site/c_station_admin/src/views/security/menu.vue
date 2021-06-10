@@ -82,7 +82,7 @@ export default {
 .pater-container{
   position: relative;
   width: 100%;
-  height: calc(100vh - 84px);
+  /*height: calc(100vh - 84px);*/
 }
 
 .low-container {

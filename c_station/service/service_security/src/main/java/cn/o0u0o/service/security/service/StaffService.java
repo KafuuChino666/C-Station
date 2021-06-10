@@ -1,10 +1,12 @@
 package cn.o0u0o.service.security.service;
 
+import cn.o0u0o.service.security.entity.Menu;
 import cn.o0u0o.service.security.entity.Staff;
 import cn.o0u0o.service.security.entity.vo.StaffVo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.List;
 
 /**
  * <p>
@@ -26,4 +28,6 @@ public interface StaffService extends IService<Staff> {
     Boolean validateUserName(String username);
 
     boolean createStaff(StaffVo staff);
+
+    List<Menu> getMenusByUserName(String userFromToken);
 }

@@ -2,10 +2,10 @@
   <div>
     <!-- 阿里云视频播放器样式 -->
     <link rel="stylesheet" href="https://g.alicdn.com/de/prismplayer/2.8.2/skins/default/aliplayer-min.css" >
-    <!-- 启用私有加密的防调式：生产环境使用 -->
-    <script src="https://g.alicdn.com/de/prismplayer/2.8.0/hls/aliplayer-vod-anti-min.js" />
-    <!-- 阿里云视频播放器脚本 -->
-    <script charset="utf-8" type="text/javascript" src="https://g.alicdn.com/de/prismplayer/2.8.2/aliplayer-min.js" />
+<!--    &lt;!&ndash; 启用私有加密的防调式：生产环境使用 &ndash;&gt;-->
+<!--    <script src="https://g.alicdn.com/de/prismplayer/2.8.0/hls/aliplayer-vod-anti-min.js" />-->
+<!--    &lt;!&ndash; 阿里云视频播放器脚本 &ndash;&gt;-->
+<!--    <script charset="utf-8" type="text/javascript" src="https://g.alicdn.com/de/prismplayer/2.8.2/aliplayer-min.js" />-->
     <!-- 定义播放器dom -->
     <div id="J_prismPlayer" class="prism-player container"/>
 
@@ -13,12 +13,12 @@
 </template>
 
 <script>
-import courseApi from '~/api/course'
+import video from '@/api/video'
 
 export default {
   async asyncData(page) {
     const vid = page.route.params.vid // 获取视频id
-    const response = await courseApi.getPlayAuth(vid) // 请求vod微服务获取视频播放凭证
+    const response = await video.getPlayAuth(vid) // 请求vod微服务获取视频播放凭证
     return {
       vid: vid, // 视频id
       playAuth: response.data.playAuth
@@ -41,7 +41,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 .container{
   margin-top: 20px;
   margin-bottom: 20px;
