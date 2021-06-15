@@ -30,4 +30,6 @@ public interface StaffService extends IService<Staff> {
     boolean createStaff(StaffVo staff);
 
     List<Menu> getMenusByUserName(String userFromToken);
+
+    Staff getByUserName(String username);
 }

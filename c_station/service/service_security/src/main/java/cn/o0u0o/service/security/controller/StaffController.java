@@ -56,12 +56,17 @@ public class StaffController {
     }
 
     @GetMapping("/info")
-    public Result info() {
+    public Result info(HttpServletRequest request) {
+
+        String token = request.getHeader(tokenKey);
+        if (token == null || token.isEmpty()) return Result.err();
+        String username = tokenManager.getUserFromToken(token);
+        Staff staff = staffService.getByUserName(username);
 
         return Result.ok()
                 .data("roles","[admin]")
-                .data("name","admin")
-                .data("avatar","https://mcsql-002.oss-cn-beijing.aliyuncs.com/www.png");
+                .data("name",staff.getNickName())
+                .data("avatar",staff.getIcon());
     }
 
     @ApiOperation("根据id查找员工")

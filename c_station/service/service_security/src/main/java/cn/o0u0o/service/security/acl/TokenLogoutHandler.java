@@ -1,5 +1,9 @@
 package cn.o0u0o.service.security.acl;
 
+import cn.o0u0o.common.response.Result;
+import cn.o0u0o.common.response.ResultCodeEnum;
+import com.alibaba.fastjson.JSONObject;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -9,10 +13,12 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * 注销处理器
  */
+@Slf4j
 public class TokenLogoutHandler implements LogoutHandler {
 
     private TokenManager tokenManager;
@@ -35,6 +41,14 @@ public class TokenLogoutHandler implements LogoutHandler {
             tokenManager.removeToken(token);
             //清除redis缓存服务器中的token信息
             redisTemplate.delete(tokenManager.getUserFromToken(token));
+        }
+        log.info("用户");
+        // 返回200状态
+        try {
+            response.setContentType("text/json;charset=utf-8");
+            response.getWriter().write(JSONObject.toJSONString(Result.ok()));
+        } catch (IOException e) {
+            log.error(e.getMessage());
         }
     }
 }

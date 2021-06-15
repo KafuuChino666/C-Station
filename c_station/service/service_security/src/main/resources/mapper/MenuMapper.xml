@@ -39,6 +39,6 @@
         from acl_staff s
         left join acl_staff_role sr on s.id = sr.staff_id
         left join acl_role_menu rm on sr.role_id = rm.role_id
-        left join acl_menu me on rm.menu_id = me.id where s.username = #{username}
+        right join acl_menu me on rm.menu_id = me.id where s.username = #{username}
     </select>
 </mapper>

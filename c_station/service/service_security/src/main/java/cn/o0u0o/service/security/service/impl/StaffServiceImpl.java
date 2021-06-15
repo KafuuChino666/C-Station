@@ -7,6 +7,7 @@ import cn.o0u0o.service.security.mapper.StaffMapper;
 import cn.o0u0o.service.security.service.MenuService;
 import cn.o0u0o.service.security.service.StaffRoleService;
 import cn.o0u0o.service.security.service.StaffService;
+import cn.o0u0o.service.security.util.MD5;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -77,6 +78,11 @@ public class StaffServiceImpl extends ServiceImpl<StaffMapper, Staff> implements
     public boolean createStaff(StaffVo staff) {
         Staff st = new Staff();
         BeanUtils.copyProperties(staff, st);
+
+        // 密码加密到md5
+        st.setPassword( MD5.encrypt(st.getPassword()));
+        st.setIcon("#");
+
         // 添加员工
         int insert = staffMapper.insert(st);
 
@@ -89,6 +95,16 @@ public class StaffServiceImpl extends ServiceImpl<StaffMapper, Staff> implements
     public List<Menu> getMenusByUserName(String username) {
 
         return menuService.getMenusByUserName(username);
+    }
+
+    @Override
+    public Staff getByUserName(String username) {
+
+        QueryWrapper<Staff> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("username", username);
+        queryWrapper.select("id", "username", "icon", "nick_name");
+
+        return this.getOne(queryWrapper);
     }
 
 }
