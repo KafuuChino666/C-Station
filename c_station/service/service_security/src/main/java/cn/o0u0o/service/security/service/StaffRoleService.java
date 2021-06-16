@@ -25,7 +25,9 @@ public interface StaffRoleService extends IService<StaffRole> {
 
     List<String> selectResourceByStaffId(String id);
 
-    boolean batchBindRole(String id, List<Integer> roles);
+    boolean batchBindRole(String id, List<String> roles);
 
     boolean staffCancelRoles(String id, List<Integer> roles);
+
+    Integer removeByStaffId(String staffId);
 }

@@ -54,6 +54,7 @@ export default {
   width: 100%;
   height: 150px;
   padding: 20px;
+  background-color: white;
 }
 .text-con {
   width: 100%;

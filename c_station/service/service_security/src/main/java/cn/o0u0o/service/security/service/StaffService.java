@@ -32,4 +32,8 @@ public interface StaffService extends IService<Staff> {
     List<Menu> getMenusByUserName(String userFromToken);
 
     Staff getByUserName(String username);
+
+    Boolean removeStaffById(String staffId);
+
+    StaffVo getEchoDataByStaffId(String id);
 }

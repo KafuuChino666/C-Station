@@ -9,7 +9,7 @@ import getPageTitle from '@/utils/get-page-title'
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 const whiteList = ['/login'] // no redirect whitelist
-var accessRoutes
+var routes
 router.beforeEach(async(to, from, next) => {
   // start progress bar
   NProgress.start()
@@ -33,14 +33,14 @@ router.beforeEach(async(to, from, next) => {
         try {
           // get user info
           await store.dispatch('user/getInfo')
-          if (accessRoutes) {
+          if (!routes) {
             next()
           }
-          accessRoutes = await store.dispatch('permission/generateRoutes', store.getters.token)
+          const accessRoutes = await store.dispatch('permission/generateRoutes', store.getters.token)
           router.addRoutes(accessRoutes)
-          next({ path: '/' })
+          // next({ path: '/' })
           // next({ ...to, replace: true })
-          // next()
+          next()
         } catch (error) {
           // remove token and go to login page to re-login
           await store.dispatch('user/resetToken')

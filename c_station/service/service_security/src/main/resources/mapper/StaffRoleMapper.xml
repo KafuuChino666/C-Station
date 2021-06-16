@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.o0u0o.service.security.mapper.StaffRoleMapper">
+    <delete id="deleteByStaffId">
+        delete from acl_staff_role where staff_id = #{staffId}
+    </delete>
 
     <select id="getByStatusId" resultType="java.lang.String">
         select role_id from acl_staff_role where staff_id = #{id}

@@ -12,6 +12,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -105,6 +106,32 @@ public class StaffServiceImpl extends ServiceImpl<StaffMapper, Staff> implements
         queryWrapper.select("id", "username", "icon", "nick_name");
 
         return this.getOne(queryWrapper);
+    }
+
+    @Transactional
+    @Override
+    public Boolean removeStaffById(String staffId) {
+
+        // 删除角色绑定信息
+        staffRoleService.removeByStaffId(staffId);
+        // 删除员工
+        boolean b = this.removeById(staffId);
+        return b;
+    }
+
+    @Override
+    public StaffVo getEchoDataByStaffId(String staffId) {
+
+        StaffVo staffVo = new StaffVo();
+        // 获取员工基础信息
+        Staff staff = this.getById(staffId);
+        BeanUtils.copyProperties(staff, staffVo);
+        staffVo.setPassword("系统默认过滤敏感字段");
+        
+        // 获取角色
+        staffVo.setRoles(staffRoleService.getByStatusId(staffId));
+
+        return staffVo;
     }
 
 }

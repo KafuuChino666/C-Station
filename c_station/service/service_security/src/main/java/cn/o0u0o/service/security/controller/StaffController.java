@@ -112,5 +112,20 @@ public class StaffController {
         Boolean b = staffService.validateUserName(username);
         return Result.ok().data("validate", b);
     }
+
+    @ApiOperation("根据id删除员工")
+    @DeleteMapping("")
+    public Result removeStaffById(@RequestBody String id) {
+        Boolean b = staffService.removeStaffById(id);
+        return b ? Result.ok().message("员工删除成功！") : Result.err().message("员工删除失败！");
+    }
+
+    @ApiOperation("根据StaffId获取表单回显数据")
+    @GetMapping("/echo-data/{id}")
+    public Result getEchoDataByStaffId(@PathVariable String id) {
+
+        StaffVo staffVo = staffService.getEchoDataByStaffId(id);
+        return Result.ok().data("staff", staffVo);
+    }
 }
 

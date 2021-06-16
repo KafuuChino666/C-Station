@@ -12,13 +12,13 @@
     <!-- 返回菜单层级结构 -->
     <resultMap id="hierarchyMenu" type="cn.o0u0o.service.security.entity.vo.MenuVo">
         <id property="id" column="id"/>
-        <result property="name" column="name"/>
+        <result property="name" column="title"/>
         <collection property="children" select="selectHierarchyMenuByParentId"
                     ofType="cn.o0u0o.service.security.entity.vo.MenuVo" column="id"/>
     </resultMap>
 
     <select id="selectHierarchyMenuByParentId" resultMap="hierarchyMenu">
-        select id, name from acl_menu where parent_id = #{parentId}
+        select id, title from acl_menu where parent_id = #{parentId}
     </select>
     <select id="selectIdAndName" resultType="cn.o0u0o.service.security.entity.Menu">
         select id,title from acl_menu

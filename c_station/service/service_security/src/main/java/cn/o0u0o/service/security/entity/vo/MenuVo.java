@@ -10,4 +10,12 @@ public class MenuVo {
     private String id;
     private String name;
     private List<MenuVo> children = new ArrayList<>();
+
+    public void setChildren(List<MenuVo> children) {
+        this.children = children;
+    }
+
+    public List<MenuVo> getChildren() {
+        return children.size() == 0 ? null : children;
+    }
 }

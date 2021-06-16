@@ -79,6 +79,8 @@ export default {
   width: 100%;
   padding: 20px;
   margin-top: 30px;
+  background-color: white;
+
 }
 .block {
   width: 300px;

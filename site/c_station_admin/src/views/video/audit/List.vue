@@ -29,28 +29,23 @@
       </el-table-column>
       <el-table-column
         prop="name"
-        label="姓名"
+        label="作者"
         width="120">
       </el-table-column>
       <el-table-column
         prop="province"
-        label="省份"
+        label="视频标题"
         width="120">
       </el-table-column>
       <el-table-column
         prop="city"
-        label="市区"
+        label="类型"
         width="120">
       </el-table-column>
       <el-table-column
         prop="address"
-        label="地址"
+        label="状态"
         width="300">
-      </el-table-column>
-      <el-table-column
-        prop="zip"
-        label="邮编"
-        width="120">
       </el-table-column>
       <el-table-column
         fixed="right"
@@ -66,11 +61,21 @@
 </template>
 
 <script>
+import video from '@/api/video'
+
 export default {
   name: 'AuditList',
   data() {
     return {
       searchData: {}
+    }
+  },
+  created() {
+    this.fetchData()
+  },
+  methods: {
+    fetchData() {
+      video.getAuditListByStaff()
     }
   }
 }

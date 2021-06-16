@@ -52,9 +52,9 @@
       label="操作"
     >
       <template slot-scope="scope">
-        <el-button type="text" size="small">查看</el-button>
+        <el-button type="text" size="small" @click="edit(scope.row.id)">查看</el-button>
         <el-button type="text" size="small" @click="handleClick(scope.row.id)">修改角色</el-button>
-        <el-button type="text" size="small">删除</el-button>
+        <el-button type="text" size="small" @click="del(scope.row.id)">删除</el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -98,6 +98,19 @@ export default {
         return ''
       }
       return moment(date).format('YYYY-MM-DD HH:mm:ss')
+    },
+    del(id) {
+      securityAPI.removeStaffById(id).then(res => {
+        this.$message({
+          message: '员工删除成功',
+          type: 'success'
+        })
+      })
+      // 刷新表格数据
+      this.$parent.fetchData()
+    },
+    edit(id) {
+      this.$router.push({ name: 'StaffAdd', query: { id: id }})
     }
   }
 }

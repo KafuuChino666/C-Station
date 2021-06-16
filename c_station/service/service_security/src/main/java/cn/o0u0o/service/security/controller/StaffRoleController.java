@@ -51,7 +51,7 @@ public class StaffRoleController {
 
     @ApiOperation("员工绑定新角色")
     @PutMapping("/bind")
-    public Result staffBindRoles(@RequestParam String id, @RequestBody List<Integer> roles) {
+    public Result staffBindRoles(@RequestParam String id, @RequestBody List<String> roles) {
         if (roles.size() == 0) return Result.err().message("恶意请求");
         boolean b = staffRoleService.batchBindRole(id, roles);
         return b ? Result.ok().message("绑定成功!") : Result.err().message("绑定失败!");

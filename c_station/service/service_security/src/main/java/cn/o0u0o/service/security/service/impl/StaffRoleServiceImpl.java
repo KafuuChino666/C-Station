@@ -68,7 +68,7 @@ public class StaffRoleServiceImpl extends ServiceImpl<StaffRoleMapper, StaffRole
     }
 
     @Override
-    public boolean batchBindRole(String id, List<Integer> roles) {
+    public boolean batchBindRole(String id, List<String> roles) {
         List<StaffRole> staffRoles = new ArrayList<>();
         roles.forEach(role -> {
             staffRoles.add(new StaffRole(id, role.toString()));
@@ -85,5 +85,10 @@ public class StaffRoleServiceImpl extends ServiceImpl<StaffRoleMapper, StaffRole
         queryWrapper.in("role_id", roles);
 
         return this.remove(queryWrapper);
+    }
+
+    @Override
+    public Integer removeByStaffId(String staffId) {
+        return staffRoleMapper.deleteByStaffId(staffId);
     }
 }

@@ -20,19 +20,19 @@
         <el-input v-model="form.component" size="small" style="width: 300px"/>
       </el-form-item>
       <el-form-item label="父级ID:" :label-width="formLabelWidth">
-        <el-select v-model="form.parentId" filterable placeholder="请选择" style="width: 300px">
-          <el-option
-            v-for="item in parentIdList"
-            :key="item.id"
-            :label="item.title"
-            :value="item.id">
-            <span style="float: left">{{ item.title }}</span>
-            <span style="float: right; color: #8492a6; font-size: 13px">{{ item.id }}</span>
-          </el-option>
-        </el-select>
+        <el-cascader
+          v-model="parentId"
+          :options="menuList"
+          placeholder="不选默认为0(跟组件)"
+          :props="{
+            expandTrigger: 'hover',
+            value: 'id',
+            label: 'name',
+            children: 'children',
+          }" ></el-cascader>
       </el-form-item>
       <el-form-item label="菜单排序:" :label-width="formLabelWidth">
-        <el-input v-model="form.sort" size="small" style="width: 300px"/>
+        <el-input v-model="form.sort" size="small" style="width: 300px" />
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -51,6 +51,7 @@ export default {
   data() {
     return {
       dialogFormVisible: false,
+      parentId: [0, 0],
       form: {
         parentId: '',
         path: '',
@@ -65,7 +66,8 @@ export default {
       formLabelWidth: '120px',
       parentIdList: [],
       value: '',
-      formType: 'add'
+      formType: 'add',
+      menuList: []
     }
   },
   mounted() {
@@ -84,11 +86,17 @@ export default {
         }
         this.parentIdList = response.data.rows
       })
+      securityAPI.getHierarchyMenu().then(response => {
+        if (response.status) {
+          this.menuList = response.data.rows
+        }
+      })
     })
   },
   methods: {
     add() {
       // 添加
+      this.form.parentId = this.parentId[1]
       securityAPI.addMrnu(this.form).then(response => {
         this.dialogFormVisible = false
         if (response.status) {

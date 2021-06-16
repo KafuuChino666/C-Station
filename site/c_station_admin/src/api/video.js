@@ -60,5 +60,11 @@ export default {
       url: `/admin/video/audit/flow/${id}`,
       method: 'get'
     })
+  },
+  getAuditListByStaff() {
+    return request({
+      url: `/admin/video/audit/`,
+      method: 'get'
+    })
   }
 }

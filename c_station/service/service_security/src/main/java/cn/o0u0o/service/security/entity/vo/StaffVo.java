@@ -34,5 +34,5 @@ public class StaffVo {
     @Length(min = 1, max = 50, message = "备注过长或过短")
     private String remark;
     private Boolean status;
-    private List<Integer> roles;
+    private List<String> roles;
 }

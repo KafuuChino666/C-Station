@@ -328,5 +328,21 @@ export default {
       },
       data: roles
     })
+  },
+
+  // 根据id删除角色
+  removeStaffById(id) {
+    return request({
+      url: '/admin/acl/staff/',
+      method: 'delete',
+      data: id
+    })
+  },
+  // 回显数据
+  getEchoData(staffId) {
+    return request({
+      url: `/admin/acl/staff/echo-data/${staffId}`,
+      method: 'get'
+    })
   }
 }

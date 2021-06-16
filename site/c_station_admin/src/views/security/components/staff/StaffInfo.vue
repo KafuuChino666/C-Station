@@ -2,10 +2,10 @@
   <div class="pater-container">
     <el-form :rules="rules.StaffAddFrom" ref="form" :model="form" label-width="80px" style="width: 500px">
       <el-form-item label="用户名" prop="username">
-        <el-input v-model="form.username"></el-input>
+        <el-input :disabled="isEcho" v-model="form.username"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="password">
-        <el-input placeholder="请输入密码" v-model="form.password" show-password></el-input>
+        <el-input :disabled="isEcho" placeholder="请输入密码" v-model="form.password" show-password></el-input>
       </el-form-item>
       <el-form-item label="手机号" prop="mobile">
         <el-input v-model="form.mobile"></el-input>
@@ -30,8 +30,8 @@
         <el-switch v-model="form.status"></el-switch>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">立即创建</el-button>
-        <el-button>取消</el-button>
+        <el-button type="primary" @click="onSubmit">{{ !isEcho ? '立即创建' : '修改信息' }}</el-button>
+        <el-button v-if="!isEcho">取消</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -47,6 +47,8 @@ export default {
       rules: rule,
       isIndeterminate: true,
       checkAll: false,
+      staffId: this.$route.query.id, // 如果是表单回显，有值
+      isEcho: false,
       form: {
         id: '',
         username: '',
@@ -64,6 +66,12 @@ export default {
   mounted() {
     // 加载数据
     this.loadData()
+    if (this.staffId) {
+      // 如果是表单回显
+      this.isEcho = true
+      // 获取回显数据
+      this.getEchoData(this.staffId)
+    }
   },
   methods: {
     loadData() {
@@ -100,16 +108,24 @@ export default {
       const checkedCount = value.length // 选定值个数
       this.checkAll = checkedCount === this.roles.length
       this.isIndeterminate = checkedCount > 0 && checkedCount < this.roles.length
+    },
+    // 根据id获取回显数据
+    getEchoData(staffId) {
+      securityAPI.getEchoData(staffId).then(res => {
+        this.form = res.data.staff
+        // 修改角色
+        this.checkedRoles = res.data.staff.roles
+      })
     }
   }
 }
 </script>
 
-<style scoped>
+<style>
 .pater-container{
   position: relative;
   width: 100%;
   height: calc(100vh - 84px);
-  padding: 30px;
+  /*padding: 30px;*/
 }
 </style>
