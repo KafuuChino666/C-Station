@@ -61,9 +61,9 @@
         align="center"
         label="查看"
       >
-      <!--<template slot-scope="scope">
+        <template slot-scope="scope">
           <el-row>
-            <el-button type="info" size="mini" round @click="userMain()">查看主页</el-button>
+            <el-button type="info" size="mini" round @click="userInfo()">查看信息</el-button>
             <el-button type="warning" size="mini" round @click="userViolation()">违规记录</el-button>
           </el-row>
         </template>
@@ -77,7 +77,7 @@
             <el-button type="primary" size="mini" round @click="userRedact()">用户编辑</el-button>
             <el-button type="danger" size="mini" round @click="userBan()">封禁用户</el-button>
           </el-row>
-        </template>-->
+        </template>
       </el-table-column>
     </el-table>
   </div>
@@ -118,9 +118,9 @@ export default {
   },
 
   methods: {
-    // 用户主页跳转
-    userMain() {
-      this.$router.push('')
+    // 用户信息跳转
+    userInfo() {
+      this.$router.push({ name: 'UserStat', id: this.userData.userId })
     },
 
     // 违规信息页面跳转

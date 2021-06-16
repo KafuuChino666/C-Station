@@ -2,31 +2,35 @@
   <el-table
     :data="tableData"
     stripe
-    style="width: 100%; margin-top: 20px">
+    style="width: 100%; margin-top: 20px"
+  >
     <el-table-column
       prop="date"
       label="日期"
-      width="180">
-    </el-table-column>
+      width="180"
+    />
     <el-table-column
       prop="name"
       label="姓名"
-      width="180">
-    </el-table-column>
+      width="180"
+    />
     <el-table-column
       prop="address"
-      label="地址">
-    </el-table-column>
+      label="地址"
+    />
     <el-table-column
-      align="right">
+      align="right"
+    >
       <template slot-scope="scope">
         <el-button
           size="mini"
-          @click="employeeEdit(scope.$index, scope.row)">编辑</el-button>
+          @click="employeeEdit(scope.$index, scope.row)"
+        >编辑</el-button>
         <el-button
           size="mini"
           type="danger"
-          @click="employeeDelete(scope.$index, scope.row)">删除</el-button>
+          @click="employeeDelete(scope.$index, scope.row)"
+        >删除</el-button>
       </template>
     </el-table-column>
   </el-table>

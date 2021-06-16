@@ -19,7 +19,7 @@ export function buildMenuTree(menuList, pid) {
       const menu = {
         path: item.path,
         component: item.component === 'Layout' ? Layout : loadView(item.component),
-        hidden: item.hidden == 1, // 状态为0的隐藏
+        hidden: item.hidden === 1, // 状态为0的隐藏
         redirect: item.redirect,
         children: [],
         name: item.name,

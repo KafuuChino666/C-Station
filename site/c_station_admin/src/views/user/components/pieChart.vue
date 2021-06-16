@@ -26,15 +26,15 @@ export default {
     data() {
       return {
         id: '',
-        number: '',
-        type: []
+        value: '',
+        userLike: []
       }
     },
     initData() {
       const myChart = echarts.init(document.getElementById('main1'))
       myChart.setOption({
         title: {
-          text: '用户访问视频偏好',
+          text: '用户访问偏好',
           x: 'center'
         },
         tooltip: {
@@ -45,39 +45,34 @@ export default {
           orient: 'vertical',
           bottom: 'bottom',
           data: [
-            '直接访问',
-            '邮件营销',
-            '联盟广告',
-            '视频广告',
-            '搜索引擎'
-            ]
+            '追番类型',
+            '订阅类型',
+            '视频分区',
+            '专栏类型'
+          ]
         },
         series: [
           {
-            name: '访问来源',
+            name: '访问统计',
             type: 'pie',
-            radius: '55%',
+            radius: 60,
             center: ['50%', '60%'],
             data: [
               {
                 value: 335,
-                name: '直接访问'
+                name: '追番类型'
               },
               {
                 value: 310,
-                name: '邮件营销'
+                name: '订阅类型'
               },
               {
-                value: 20,
-                name: '联盟广告'
+                value: 200,
+                name: '视频分区'
               },
               {
                 value: 135,
-                name: '视频广告'
-              },
-              {
-                value: 100,
-                name: '搜索引擎'
+                name: '专栏类型'
               }
             ],
             itemStyle: {
