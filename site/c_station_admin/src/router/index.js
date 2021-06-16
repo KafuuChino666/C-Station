@@ -224,11 +224,20 @@ export const asyncRoutes1 = [
         ]*/
       },
       {
-        path: 'stat',
+        path: 'stat/:id',
         name: 'UserStat',
         component: () => import('@/views/user/components/chart'),
+        hidden: true,
         meta: { title: '用户统计', icon: 'el-icon-user-solid' }
       }
+      /*,
+      {
+        path: 'videoInfo/:id',
+        component: () => import('@/views/video/info/VideoInfo'),
+        name: 'VideoInfo',
+        hidden: true,
+        meta: { title: '用户统计' }
+      }*/
     ]
   },
 
