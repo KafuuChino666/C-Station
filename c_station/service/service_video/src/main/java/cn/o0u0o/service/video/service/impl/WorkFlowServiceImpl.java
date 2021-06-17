@@ -48,4 +48,27 @@ public class WorkFlowServiceImpl extends ServiceImpl<WorkFlowMapper, WorkFlow> i
         }
         return false;
     }
+
+    /**
+     * 根据id修改视频默认审核工作流
+     *
+     * 注意：因为更新默认工作流会导致现有视频审核数据不一致，
+     * 当更换默认工作流将默认未完成上一审核工作流的任务节点重新设置为当前要设置的默认工作流的第一个节点
+     * @param id
+     * @return
+     */
+    @Override
+    public boolean upDateWordUsableById(Integer id) {
+
+        // 修改默认工作流
+        vVideoStatusMapper.updateUsable();
+        vVideoStatusMapper.updateUsableById(1, id);
+        // 将未完成的任务节点重置
+
+        // 查询第一个节点
+//        vVideoStatusMapp
+
+        return false;
+    }
+
 }

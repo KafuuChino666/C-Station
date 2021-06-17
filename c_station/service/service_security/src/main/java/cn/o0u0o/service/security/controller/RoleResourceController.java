@@ -26,8 +26,8 @@ public class RoleResourceController {
     public RoleResourceService roleResourceService;
 
     @ApiOperation("更新角色资源")
-    @PutMapping("/")
-    public Result updateRoleResourceByRoleId(@RequestParam String roleId, @RequestBody List<String> resource) {
+    @PutMapping("/{roleId}")
+    public Result updateRoleResourceByRoleId(@PathVariable String roleId, @RequestBody List<String> resource) {
         Boolean b = roleResourceService.updateByRoleId(roleId, resource);
         return b ? Result.ok() : Result.err();
     }

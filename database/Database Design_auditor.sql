@@ -92,3 +92,10 @@ CREATE TABLE v_audit_status(
 		gmt_create DATETIME NOT NULL COMMENT '创建时间',
 		gmt_modified DATETIME NOT NULL COMMENT '修改时间'
 )
+
+gmt_create
+author_id
+video_title
+zone_id
+audit_status
+

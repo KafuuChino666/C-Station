@@ -247,11 +247,8 @@ export default {
   // 更新角色资源
   updateRoleResourceByRoleId(roleId, resources) {
     return request({
-      url: '/admin/acl/role-resource',
+      url: `/admin/acl/role-resource/${roleId}`,
       method: 'put',
-      params: {
-        roleId
-      },
       data: resources
     })
   },

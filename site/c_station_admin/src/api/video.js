@@ -66,5 +66,11 @@ export default {
       url: `/admin/video/audit/`,
       method: 'get'
     })
+  },
+  upDateWordUsable(id) {
+    return request({
+      url: `/admin/video/audit/work/${id}`,
+      method: 'put'
+    })
   }
 }

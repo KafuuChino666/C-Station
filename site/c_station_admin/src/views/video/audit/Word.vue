@@ -17,10 +17,18 @@
         width="180"
       />
       <el-table-column
-        prop="nodeNum"
-        label="节点数"
         width="180"
-      />
+      >
+        <template slot-scope="scope">
+          <el-tag
+            @click="upDateUsable(scope.row)"
+            :type="scope.row.usable == 1 ? 'success' : 'info'"
+            size="mini"
+            effect="plain">
+            {{ scope.row.usable == 1 ? '默认' : '设为默认' }}
+          </el-tag>
+        </template>
+      </el-table-column>
       <el-table-column
         prop="id"
         label="流程id"
@@ -59,12 +67,7 @@ export default {
   data() {
     return {
       drawer: false,
-      tableData: [{
-        flowName: '1',
-        nodeNum: '视频审核',
-        id: '1',
-        gmtCreate: '2012-02-13 15:00:00'
-      }],
+      tableData: [],
       form: {},
       value: '',
       page: 1,
@@ -102,6 +105,13 @@ export default {
           done()
         })
         .catch(_ => {})
+    },
+    upDateUsable(row) {
+      // eslint-disable-next-line eqeqeq
+      if (row.usable == 0) {
+        // 改变默认
+        video.upDateWordUsable(row.id)
+      }
     }
   }
 }

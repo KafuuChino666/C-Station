@@ -44,5 +44,12 @@ public class WorkFlowController {
         return b ? Result.ok().message("删除成功!") : Result.err().message("删除失败,请检查该流程下是否有未审核完任务！");
 
     }
+
+    @ApiOperation("根据id更新默认视频审核工作流")
+    @PutMapping("/video/audit/work/{id}")
+    public Result upDateWordUsable(@PathVariable Integer id) {
+        boolean b = workFlowService.upDateWordUsableById(id);
+        return b ? Result.ok().message("更新成功!") : Result.err().message("删除失败,请检查该流程下是否有未审核完任务！");
+    }
 }
 

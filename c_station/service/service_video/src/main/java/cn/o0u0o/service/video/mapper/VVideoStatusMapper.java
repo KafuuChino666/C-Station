@@ -14,4 +14,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 public interface VVideoStatusMapper extends BaseMapper<VVideoStatus> {
 
     Integer getLineNumByFlowId(Integer id);
+
+    Integer updateUsableById(Integer usable, Integer id);
+
+    void updateUsable();
 }

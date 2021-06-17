@@ -28,6 +28,9 @@ public class WorkFlow extends BaseEntity {
     @ApiModelProperty(value = "流程名称")
     private String flowName;
 
+    @ApiModelProperty(value = "默认")
+    private Integer usable;
+
     @ApiModelProperty(value = "标记")
     private String sign;
 

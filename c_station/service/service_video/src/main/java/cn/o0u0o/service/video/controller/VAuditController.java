@@ -44,7 +44,7 @@ public class VAuditController {
         // 要根据角色/id确定该审核员所在节点 ---》 需要将角色/id和节点进行绑定（可能需要新表支撑）
         String token = httpServletRequest.getHeader(tokenKey);
 
-//        vAuditService.getOneVideoAudit(token)
+//        vAuditService.getOneVideoAudit(token);
         // 确定是否有 该审核员 锁定审核视频，但未审核完成
         // 如果有 则继续将其返回给该审核员
 
