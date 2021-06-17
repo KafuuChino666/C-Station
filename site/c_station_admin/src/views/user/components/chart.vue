@@ -1,6 +1,7 @@
 <template>
   <div>
     <div>
+      <el-button size="mini" round @click="backInfo">返回</el-button>
       <h3>用户：{{ name }}的统计数据</h3>
     </div>
     <el-row :gutter="40">
@@ -48,7 +49,9 @@ export default {
   },
 
   methods: {
-
+    backInfo() {
+      this.$router.push({ name: 'UserList' })
+    }
   }
 }
 </script>

@@ -64,7 +64,17 @@
         <template slot-scope="scope">
           <el-row>
             <el-button type="info" size="mini" round @click="userInfo()">查看信息</el-button>
-            <el-button type="warning" size="mini" round @click="userViolation()">违规记录</el-button>
+            <el-popover
+              placement="right"
+              width="400"
+              trigger="click">
+              <el-table :data="gridData">
+                <el-table-column width="150" property="date" label="日期"></el-table-column>
+                <el-table-column width="100" property="name" label="姓名"></el-table-column>
+                <el-table-column width="300" property="address" label="地址"></el-table-column>
+              </el-table>
+              <el-button slot="reference" type="warning" size="mini" round>违规记录</el-button>
+            </el-popover>
           </el-row>
         </template>
       </el-table-column>
@@ -104,6 +114,23 @@ export default {
         consumed: '',
         idNumber: '',
         email: ''
+      }],
+      gridData: [{
+        date: '2016-05-02',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄'
+      }, {
+        date: '2016-05-04',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄'
+      }, {
+        date: '2016-05-01',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄'
+      }, {
+        date: '2016-05-03',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄'
       }]
     }
   },
@@ -120,7 +147,7 @@ export default {
   methods: {
     // 用户信息跳转
     userInfo() {
-      this.$router.push({ name: 'UserStat', id: this.userData.userId })
+      this.$router.push({ name: 'UserStat', query: { id: 1 }})
     },
 
     // 违规信息页面跳转
@@ -141,7 +168,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .demo-table-expand {
   font-size: 0;
 }

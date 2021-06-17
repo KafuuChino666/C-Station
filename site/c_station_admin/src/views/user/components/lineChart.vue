@@ -10,7 +10,7 @@ import * as echarts from 'echarts'
 export default {
   data() {
     return {
-      id: '',
+      id: this.$route.query.id,
       number: '',
       type: []
     }

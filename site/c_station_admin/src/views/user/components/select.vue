@@ -20,7 +20,8 @@
           prefix-icon="el-icon-search"
           placeholder="请输入用户昵称"
         />
-        <el-button type="primary" icon="el-icon-search" @click="selectUserByInfo">搜索</el-button>
+        <el-button class="el-btn" type="primary" icon="el-icon-search" @click="selectUserByInfo">搜索</el-button>
+        <el-button class="el-btn" type="success" icon="el-icon-search" @click="insertUser">新增用户</el-button>
       </el-form>
     </div>
     <!-- 搜索框结束 -->
@@ -86,6 +87,11 @@ export default {
       this.page = 1
     },
 
+    // 新增用户信息
+    insertUser() {
+
+    },
+
     changeCurrentPage(page) {
       this.page = page
       this.fetchDataB()
@@ -118,12 +124,11 @@ export default {
 }
 
 .el-button {
-  margin: 10px auto;
-  float: right;
+  margin: 8px 0px 5px 10px;
 }
 
 .input-select {
-  width: 75%;
+  width: 60%;
 }
 
 .block {
