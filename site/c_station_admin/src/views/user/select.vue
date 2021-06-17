@@ -21,7 +21,7 @@
           placeholder="请输入用户昵称"
         />
         <el-button class="el-btn" type="primary" icon="el-icon-search" @click="selectUserByInfo">搜索</el-button>
-        <el-button class="el-btn" type="success" icon="el-icon-search" @click="insertUser">新增用户</el-button>
+        <el-button class="el-btn" type="success" icon="el-icon-plus" @click="insertUser">新增用户</el-button>
       </el-form>
     </div>
     <!-- 搜索框结束 -->
@@ -110,7 +110,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .el-select {
   width: 110px;
 }
@@ -124,7 +124,7 @@ export default {
 }
 
 .el-button {
-  margin: 8px 0px 5px 10px;
+  margin: 8px 20px 5px 20px;
 }
 
 .input-select {

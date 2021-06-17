@@ -8,6 +8,7 @@
 import * as echarts from 'echarts'
 
 export default {
+  name: 'FChart',
   data() {
     return {
       id: '',
@@ -15,7 +16,6 @@ export default {
       type: []
     }
   },
-  name: 'RGraph',
   mounted() {
     this.lineChart()
   },

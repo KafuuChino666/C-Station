@@ -8,6 +8,7 @@
 import * as echarts from 'echarts'
 
 export default {
+  name: 'LineChart',
   data() {
     return {
       id: this.$route.query.id,
@@ -15,7 +16,6 @@ export default {
       type: []
     }
   },
-  name: 'LChart',
   mounted() {
     this.lineChart()
   },

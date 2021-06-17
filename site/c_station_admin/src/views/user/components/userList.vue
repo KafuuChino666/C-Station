@@ -67,11 +67,12 @@
             <el-popover
               placement="right"
               width="400"
-              trigger="click">
+              trigger="click"
+            >
               <el-table :data="gridData">
-                <el-table-column width="150" property="date" label="日期"></el-table-column>
-                <el-table-column width="100" property="name" label="姓名"></el-table-column>
-                <el-table-column width="300" property="address" label="地址"></el-table-column>
+                <el-table-column width="150" property="date" label="日期" />
+                <el-table-column width="100" property="name" label="姓名" />
+                <el-table-column width="300" property="address" label="地址" />
               </el-table>
               <el-button slot="reference" type="warning" size="mini" round>违规记录</el-button>
             </el-popover>
@@ -84,8 +85,8 @@
       >
         <template slot-scope="scope">
           <el-row>
-            <el-button type="primary" size="mini" round @click="userRedact()">用户编辑</el-button>
-            <el-button type="danger" size="mini" round @click="userBan()">封禁用户</el-button>
+            <Edit />
+            <Delete />
           </el-row>
         </template>
       </el-table-column>
@@ -95,9 +96,15 @@
 
 <script>
 import PubSub from 'pubsub-js'
+import Edit from '@/views/user/components/edit'
+import Delete from '@/views/user/components/delete'
 
 export default {
   name: 'UserList',
+  components: {
+    Edit,
+    Delete
+  },
   data() {
     return {
       // page: '1',
@@ -171,6 +178,10 @@ export default {
 <style scoped>
 .demo-table-expand {
   font-size: 0;
+}
+
+.el-button {
+  margin: 8px 20px 5px 20px;
 }
 
 .demo-table-expand label {

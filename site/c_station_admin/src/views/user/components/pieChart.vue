@@ -18,18 +18,17 @@ import * as echarts from 'echarts'
 export default {
   name: 'PieChart',
   data() {
+    return {
+      id: '',
+      value: '',
+      userLike: []
+    }
   },
   mounted() {
     this.initData()
   },
   methods: {
-    data() {
-      return {
-        id: '',
-        value: '',
-        userLike: []
-      }
-    },
+
     initData() {
       const myChart = echarts.init(document.getElementById('main1'))
       myChart.setOption({
@@ -90,7 +89,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .pie {
   margin: 10px auto;
 }

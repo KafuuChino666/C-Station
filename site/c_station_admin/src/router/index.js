@@ -214,7 +214,7 @@ export const asyncRoutes1 = [
       {
         path: 'list',
         name: 'UserList',
-        component: () => import('@/views/user/components/select'),
+        component: () => import('@/views/user/select'),
         meta: { title: '用户查询', icon: 'el-icon-user-solid' }
         /* children: [
           {
@@ -226,7 +226,7 @@ export const asyncRoutes1 = [
       {
         path: 'stat/:id',
         name: 'UserStat',
-        component: () => import('@/views/user/components/chart'),
+        component: () => import('@/views/user/chart'),
         hidden: true,
         meta: { title: '用户统计', icon: 'el-icon-user-solid' }
       }

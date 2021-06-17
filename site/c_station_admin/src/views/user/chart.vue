@@ -51,12 +51,13 @@ export default {
   methods: {
     backInfo() {
       this.$router.push({ name: 'UserList' })
+      // this.$router.go(-1)
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
 .bg-pr {
   background: #ffffff;
 }
