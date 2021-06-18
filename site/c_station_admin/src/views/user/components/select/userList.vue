@@ -3,6 +3,8 @@
     <el-table
       :data="userData"
       style="width: 100%"
+      border
+      @cell-mouse-enter = 'handleMouseEnter'
     >
       <el-table-column type="expand">
         <template slot-scope="props">
@@ -96,8 +98,8 @@
 
 <script>
 import PubSub from 'pubsub-js'
-import Edit from '@/views/user/components/edit'
-import Delete from '@/views/user/components/delete'
+import Edit from '@/views/user/components/select/edit'
+import Delete from '@/views/user/components/select/delete'
 
 export default {
   name: 'UserList',
@@ -122,27 +124,13 @@ export default {
         idNumber: '',
         email: ''
       }],
+      id: '',
       gridData: [{
         date: '2016-05-02',
         name: '王小虎',
         address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
       }]
     }
-  },
-  created() {
-    // this.fetchDataAll()
   },
 
   mounted() {
@@ -156,20 +144,13 @@ export default {
     userInfo() {
       this.$router.push({ name: 'UserStat', query: { id: 1 }})
     },
-
-    // 违规信息页面跳转
-    userViolation() {
-      this.$router.push('')
-    },
-
     // 用户编辑
     userRedact() {
       this.$router.push('')
     },
-
-    // 用户封禁
-    userBan() {
-      this.$router.push('')
+    handleMouseEnter(row) {
+      this.id = row.userId
+      console.log(this.id)
     }
   }
 }
@@ -181,7 +162,7 @@ export default {
 }
 
 .el-button {
-  margin: 8px 20px 5px 20px;
+  margin: 8px 15px 5px 15px;
 }
 
 .demo-table-expand label {

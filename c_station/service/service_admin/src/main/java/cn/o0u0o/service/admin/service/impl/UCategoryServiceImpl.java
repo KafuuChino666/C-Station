@@ -28,4 +28,13 @@ public class UCategoryServiceImpl extends ServiceImpl<UCategoryMapper, UCategory
         List<UCategory> uCategories = uCategoryMapper.selectAllCategory();
         return uCategories;
     }
+
+    @Override
+    public Boolean removeUserCategoryByID(Integer id) {
+        if(true) {
+            uCategoryMapper.updateCategoryByID(id);
+            return true;
+        }
+        return false;
+    }
 }
