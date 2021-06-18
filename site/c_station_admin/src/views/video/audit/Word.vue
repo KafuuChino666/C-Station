@@ -21,10 +21,11 @@
       >
         <template slot-scope="scope">
           <el-tag
-            @click="upDateUsable(scope.row)"
             :type="scope.row.usable == 1 ? 'success' : 'info'"
             size="mini"
-            effect="plain">
+            effect="plain"
+            @click="upDateUsable(scope.row)"
+          >
             {{ scope.row.usable == 1 ? '默认' : '设为默认' }}
           </el-tag>
         </template>

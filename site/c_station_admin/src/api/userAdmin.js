@@ -22,6 +22,14 @@ export default {
       url: `/views/category/vip`,
       method: 'get'
     })
+  },
+
+  //删除用户
+  updateUserById(id) {
+    return request({
+      url: `/views/user/remove/${id}`,
+      method: 'post',
+    })
   }
 
 }

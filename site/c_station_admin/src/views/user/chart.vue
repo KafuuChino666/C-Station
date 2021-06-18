@@ -27,9 +27,9 @@
 </template>
 
 <script>
-import LChart from '@/views/user/components/lineChart'
-import PieChart from '@/views/user/components/pieChart'
-import FChart from '@/views/user/components/fChart'
+import LChart from '@/views/user/components/chart/lineChart'
+import PieChart from '@/views/user/components/chart/pieChart'
+import FChart from '@/views/user/components/chart/fChart'
 
 export default {
   name: 'UserStat',

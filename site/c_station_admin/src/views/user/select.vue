@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import userList from '@/views/user/components/userList'
+import userList from '@/views/user/components/select/userList'
 import userAdmin from '@/api/userAdmin'
 import PubSub from 'pubsub-js'
 
@@ -88,8 +88,8 @@ export default {
     },
 
     // 新增用户信息
-    insertUser() {
-
+    insertUser(id) {
+      console.log(id)
     },
 
     changeCurrentPage(page) {
@@ -124,7 +124,7 @@ export default {
 }
 
 .el-button {
-  margin: 8px 20px 5px 20px;
+  margin: 8px 10px 5px 10px;
 }
 
 .input-select {

@@ -3,16 +3,27 @@
 </template>
 
 <script>
+import PubSub from 'pubsub-js'
+import userAdmin from '@/api/userAdmin'
+
 export default {
   name: 'Edit',
+  data() {
+    return {
+      userId: ''
+    }
+  },
+  mounted() {
+
+  },
   methods: {
     open() {
       this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
-        type: 'warning',
-        center: true
+        type: 'warning'
       }).then(() => {
+        this.deleteUserById()
         this.$message({
           type: 'success',
           message: '删除成功!'
@@ -23,6 +34,18 @@ export default {
           message: '已取消删除'
         })
       })
+    },
+    deleteUserById() {
+      // userAdmin.selectAllCategory().then(res => {
+      //   console.log(res.data.rows)
+      //   this.selectType = res.data.rows
+      // }).catch(error => {
+      //   console.log(error)
+      // })
+      console.log(this.userInfo.userId)
+      /*userAdmin.updateUserById(this.userInfo.userId).then(res => {
+        console.log(this.userInfo.userId)
+      })*/
     }
   }
 }
