@@ -19,4 +19,6 @@ public interface WorkFlowService extends IService<WorkFlow> {
     Boolean removeVideoAuditWork(Integer id);
 
     boolean upDateWordUsableById(Integer id);
+
+    boolean validateWorkFlowName(String workFlowName);
 }

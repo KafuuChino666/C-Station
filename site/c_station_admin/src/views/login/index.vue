@@ -61,7 +61,6 @@
 </template>
 
 <script>
-import { validUsername } from '@/utils/validate'
 import { getPublicKey, sendCode } from '@/api/user'
 import { JSEncrypt } from 'jsencrypt'
 import { getToken } from '@/utils/auth'

@@ -11,4 +11,7 @@
     <select id="getLineNumByFlowId" resultType="java.lang.Integer">
         select COUNT(id) from v_audit_status where flow_id = #{id}
     </select>
+    <select id="selectByWorkFlowName" resultType="java.lang.Integer">
+        select COUNT(*) from work_flow where flow_name = #{workFlowName}
+    </select>
 </mapper>

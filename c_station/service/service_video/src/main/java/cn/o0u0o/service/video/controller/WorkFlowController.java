@@ -2,11 +2,13 @@ package cn.o0u0o.service.video.controller;
 
 
 import cn.o0u0o.common.response.Result;
+import cn.o0u0o.common.response.ResultCodeEnum;
 import cn.o0u0o.service.video.entity.WorkFlow;
 import cn.o0u0o.service.video.service.WorkFlowService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -50,6 +52,28 @@ public class WorkFlowController {
     public Result upDateWordUsable(@PathVariable Integer id) {
         boolean b = workFlowService.upDateWordUsableById(id);
         return b ? Result.ok().message("更新成功!") : Result.err().message("删除失败,请检查该流程下是否有未审核完任务！");
+    }
+
+    @ApiOperation("校验流程名")
+    @GetMapping("/acl/work/validate/{workFlowName}")
+    public Result validateWorkFlowName(@PathVariable String workFlowName) {
+        if (StringUtils.isEmpty(workFlowName)) {
+            return Result.setResultCodeEnum(ResultCodeEnum.PARAM_ERROR);
+        }
+        boolean b = workFlowService.validateWorkFlowName(workFlowName);
+        return b ? Result.ok().data("validate", true) : Result.ok().data("validate", false);
+    }
+
+    @ApiOperation("添加新流程")
+    @PostMapping("/acl/work/")
+    public Result addWorkFlow(@RequestBody WorkFlow workFlow) {
+        boolean b = workFlowService.validateWorkFlowName(workFlow.getFlowName());
+        if (b) {
+            workFlow.setUsable(0);
+            boolean save = workFlowService.save(workFlow);
+            return save ? Result.ok() : Result.err().message("添加失败请稍后在试~");
+        }
+        return Result.err().message("流程名重复，请重新添加");
     }
 }
 

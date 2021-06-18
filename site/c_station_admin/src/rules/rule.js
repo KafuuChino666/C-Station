@@ -1,4 +1,5 @@
 import securityAPI from '@/api/securityAPI'
+import video from '@/api/video'
 
 export default {
 
@@ -78,6 +79,43 @@ export default {
         min: 1,
         max: 20,
         message: '长度在3~20字符',
+        trigger: 'blur'
+      }
+    ]
+  },
+  WorkFlowAddFrom: {
+    flowName: [
+      {
+        required: true,
+        message: '请输入流程名',
+        trigger: 'blur'
+      },
+      {
+        min: 3,
+        max: 10,
+        message: '长度在3~20字符',
+        trigger: 'blur'
+      },
+      {
+        validator: function(rule, value, callback) {
+          video.validateWorkFlowName(value).then(res => {
+            if (!res.data.validate) {
+              callback(new Error('流程名不可用！'))
+            } else {
+              callback()
+            }
+          }).catch(error => {
+            console.log(error)
+            callback(new Error('流程名不可用！'))
+          })
+        },
+        trigger: 'blur'
+      }
+    ],
+    remark: [
+      {
+        required: true,
+        message: '请稍微写一点点备注吧！',
         trigger: 'blur'
       }
     ]

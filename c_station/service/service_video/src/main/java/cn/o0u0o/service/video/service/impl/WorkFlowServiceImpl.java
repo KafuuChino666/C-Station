@@ -32,7 +32,7 @@ public class WorkFlowServiceImpl extends ServiceImpl<WorkFlowMapper, WorkFlow> i
     public IPage<WorkFlow> getVideoAuditWork(Integer page, Integer limit) {
         Page<WorkFlow> flowPage = new Page<>(page, limit);
         QueryWrapper<WorkFlow> workFlowQueryWrapper = new QueryWrapper<>();
-        workFlowQueryWrapper.eq("status",1);
+        workFlowQueryWrapper.eq("is_delete",0);
         workFlowQueryWrapper.eq("sign", "video_audit_flow");
 
         return workFlowMapper.selectPage(flowPage, workFlowQueryWrapper);
@@ -69,6 +69,12 @@ public class WorkFlowServiceImpl extends ServiceImpl<WorkFlowMapper, WorkFlow> i
 //        vVideoStatusMapp
 
         return false;
+    }
+
+    @Override
+    public boolean validateWorkFlowName(String workFlowName) {
+        Integer line = vVideoStatusMapper.selectByWorkFlowName(workFlowName);
+        return line == 0;
     }
 
 }

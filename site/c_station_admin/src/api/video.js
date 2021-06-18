@@ -72,5 +72,18 @@ export default {
       url: `/admin/video/audit/work/${id}`,
       method: 'put'
     })
+  },
+  validateWorkFlowName(value) {
+    return request({
+      url: `/admin/acl/work/validate/${value}`,
+      method: 'get'
+    })
+  },
+  addWorkFlow(form) {
+    return request({
+      url: `/admin/acl/work/`,
+      method: 'post',
+      data: form
+    })
   }
 }

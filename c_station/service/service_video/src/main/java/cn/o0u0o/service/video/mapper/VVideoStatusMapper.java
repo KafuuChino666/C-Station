@@ -18,4 +18,6 @@ public interface VVideoStatusMapper extends BaseMapper<VVideoStatus> {
     Integer updateUsableById(Integer usable, Integer id);
 
     void updateUsable();
+
+    Integer selectByWorkFlowName(String workFlowName);
 }

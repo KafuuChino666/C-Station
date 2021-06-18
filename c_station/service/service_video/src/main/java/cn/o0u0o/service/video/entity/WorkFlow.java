@@ -34,8 +34,8 @@ public class WorkFlow extends BaseEntity {
     @ApiModelProperty(value = "标记")
     private String sign;
 
-    @ApiModelProperty(value = "状态")
-    private Integer status;
+    @ApiModelProperty(value = "逻辑删除")
+    private Integer isDelete;
 
     @ApiModelProperty(value = "备注")
     private String remark;
