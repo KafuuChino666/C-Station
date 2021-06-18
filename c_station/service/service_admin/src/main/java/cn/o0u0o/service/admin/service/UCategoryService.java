@@ -17,4 +17,6 @@ public interface UCategoryService extends IService<UCategory> {
 
     List<UCategory> selectAllCategory();
 
+    Boolean removeUserCategoryByID(Integer id);
+
 }

@@ -3,7 +3,6 @@
 </template>
 
 <script>
-import PubSub from 'pubsub-js'
 import userAdmin from '@/api/userAdmin'
 
 export default {
@@ -12,9 +11,6 @@ export default {
     return {
       userId: ''
     }
-  },
-  mounted() {
-
   },
   methods: {
     open() {
@@ -28,11 +24,6 @@ export default {
           type: 'success',
           message: '删除成功!'
         })
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: '已取消删除'
-        })
       })
     },
     deleteUserById() {
@@ -42,10 +33,10 @@ export default {
       // }).catch(error => {
       //   console.log(error)
       // })
-      console.log(this.userInfo.userId)
-      /*userAdmin.updateUserById(this.userInfo.userId).then(res => {
-        console.log(this.userInfo.userId)
-      })*/
+      this.userId = this.$parent.$parent.$parent.$parent.id
+      userAdmin.updateUserById(this.userId).then(res => {
+        console.log('已发送' + this.userInfo.userId)
+      })
     }
   }
 }

@@ -3,6 +3,8 @@
     <el-table
       :data="userData"
       style="width: 100%"
+      border
+      @cell-mouse-enter = 'handleMouseEnter'
     >
       <el-table-column type="expand">
         <template slot-scope="props">
@@ -122,6 +124,7 @@ export default {
         idNumber: '',
         email: ''
       }],
+      id: '',
       gridData: [{
         date: '2016-05-02',
         name: '王小虎',
@@ -145,6 +148,10 @@ export default {
     userRedact() {
       this.$router.push('')
     },
+    handleMouseEnter(row) {
+      this.id = row.userId
+      console.log(this.id)
+    }
   }
 }
 </script>
