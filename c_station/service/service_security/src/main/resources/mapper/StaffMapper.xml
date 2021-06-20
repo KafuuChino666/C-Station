@@ -8,4 +8,7 @@
     <select id="validateByUserName" resultType="java.lang.Integer">
         select COUNT(*) from acl_staff where username = #{username}
     </select>
+    <select id="selectAuthInfo" resultType="cn.o0u0o.service.security.entity.vo.StaffAuthInfo">
+        select id, email, mobile from acl_staff where username = #{username}
+    </select>
 </mapper>
