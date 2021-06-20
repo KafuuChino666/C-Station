@@ -27,12 +27,6 @@ export default {
       })
     },
     deleteUserById() {
-      // userAdmin.selectAllCategory().then(res => {
-      //   console.log(res.data.rows)
-      //   this.selectType = res.data.rows
-      // }).catch(error => {
-      //   console.log(error)
-      // })
       this.userId = this.$parent.$parent.$parent.$parent.id
       userAdmin.updateUserById(this.userId).then(res => {
         console.log('已发送' + this.userInfo.userId)

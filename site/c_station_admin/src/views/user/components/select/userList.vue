@@ -65,7 +65,7 @@
       >
         <template slot-scope="scope">
           <el-row>
-            <el-button type="info" size="mini" round @click="userInfo()">查看信息</el-button>
+            <el-button type="info" size="mini" round @click="userInfo">查看信息</el-button>
             <el-popover
               placement="right"
               width="400"
@@ -76,7 +76,7 @@
                 <el-table-column width="100" property="name" label="姓名" />
                 <el-table-column width="300" property="address" label="地址" />
               </el-table>
-              <el-button slot="reference" type="warning" size="mini" round>违规记录</el-button>
+              <el-button slot="reference" type="warning" size="mini" round @click="showViolation">违规记录</el-button>
             </el-popover>
           </el-row>
         </template>
@@ -100,6 +100,7 @@
 import PubSub from 'pubsub-js'
 import Edit from '@/views/user/components/select/edit'
 import Delete from '@/views/user/components/select/delete'
+import userAdmin from "@/api/userAdmin";
 
 export default {
   name: 'UserList',
@@ -151,6 +152,12 @@ export default {
     handleMouseEnter(row) {
       this.id = row.userId
       console.log(this.id)
+    },
+    showViolation() {
+      this.userId = this.$parent.$parent.$parent.$parent.id
+      userAdmin.selectUserViolationByID(this.userId).then(res => {
+        console.log('已发送' + this.userInfo.userId)
+      })
     }
   }
 }
@@ -174,6 +181,6 @@ export default {
   margin-right: 0;
   margin-bottom: 0;
   width: 50%;
-  
+
 }
 </style>
