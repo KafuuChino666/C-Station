@@ -341,5 +341,17 @@ export default {
       url: `/admin/acl/staff/echo-data/${staffId}`,
       method: 'get'
     })
+  },
+  getStaffAuthInfo() {
+    return request({
+      url: `/admin/acl/staff/auth/info/`,
+      method: 'get'
+    })
+  },
+  sendAuthCode(authType) {
+    return request({
+      url: `/admin/acl/staff/auth/code/${authType}`,
+      method: 'get'
+    })
   }
 }
