@@ -6,8 +6,10 @@ import cn.o0u0o.common.response.ResultCodeEnum;
 import cn.o0u0o.service.security.acl.TokenManager;
 import cn.o0u0o.service.security.entity.Menu;
 import cn.o0u0o.service.security.entity.Staff;
+import cn.o0u0o.service.security.entity.vo.StaffAuthInfo;
 import cn.o0u0o.service.security.entity.vo.StaffVo;
 import cn.o0u0o.service.security.service.StaffService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -126,6 +128,35 @@ public class StaffController {
 
         StaffVo staffVo = staffService.getEchoDataByStaffId(id);
         return Result.ok().data("staff", staffVo);
+    }
+
+    @ApiOperation("获取员工安全验证信息")
+    @GetMapping("/auth/info/")
+    public Result getStaffAuthInfo(HttpServletRequest request) {
+
+        String token = request.getHeader(tokenKey);
+        if (token == null || token.isEmpty()) return Result.err();
+        String username = tokenManager.getUserFromToken(token);
+
+        StaffAuthInfo staffAuthInfo = staffService.getAuthInfo(username);
+        if (staffAuthInfo != null) return Result.ok().data("auth", staffAuthInfo);
+        return Result.setResultCodeEnum(ResultCodeEnum.FETCH_USERINFO_ERROR);
+    }
+
+    @ApiOperation("发送验证码")
+    @GetMapping("/auth/code/{authTyoe}")
+    public Result sendAuthCode(@PathVariable String authTyoe, HttpServletRequest request) {
+
+        String token = request.getHeader(tokenKey);
+        if (token == null || token.isEmpty()) return Result.err();
+        String username = tokenManager.getUserFromToken(token);
+
+        if ("email".equals(authTyoe)) {
+            boolean b = staffService.sendEmailAuthCode(username);
+        } else if ("mobile".equals(authTyoe)) {
+
+        }
+        return Result.setResultCodeEnum(ResultCodeEnum.PARAM_ERROR);
     }
 }
 

@@ -2,6 +2,7 @@ package cn.o0u0o.service.security.service;
 
 import cn.o0u0o.service.security.entity.Menu;
 import cn.o0u0o.service.security.entity.Staff;
+import cn.o0u0o.service.security.entity.vo.StaffAuthInfo;
 import cn.o0u0o.service.security.entity.vo.StaffVo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -36,4 +37,8 @@ public interface StaffService extends IService<Staff> {
     Boolean removeStaffById(String staffId);
 
     StaffVo getEchoDataByStaffId(String id);
+
+    StaffAuthInfo getAuthInfo(String username);
+
+    boolean sendEmailAuthCode(String username);
 }

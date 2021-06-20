@@ -2,6 +2,7 @@ package cn.o0u0o.service.security.service.impl;
 
 import cn.o0u0o.service.security.entity.Menu;
 import cn.o0u0o.service.security.entity.Staff;
+import cn.o0u0o.service.security.entity.vo.StaffAuthInfo;
 import cn.o0u0o.service.security.entity.vo.StaffVo;
 import cn.o0u0o.service.security.mapper.StaffMapper;
 import cn.o0u0o.service.security.service.MenuService;
@@ -15,6 +16,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -132,6 +134,34 @@ public class StaffServiceImpl extends ServiceImpl<StaffMapper, Staff> implements
         staffVo.setRoles(staffRoleService.getByStatusId(staffId));
 
         return staffVo;
+    }
+
+    @Override
+    public StaffAuthInfo getAuthInfo(String username) {
+        StaffAuthInfo authInfo = staffMapper.selectAuthInfo(username);
+        if (authInfo.getMobile() != null) {
+            authInfo.setMobile(authInfo.getMobile().replaceAll("(\\d{3})\\d{4}(\\d{4})","$1****$2"));
+        }
+        if (authInfo.getEmail() != null) {
+            authInfo.setEmail(authInfo.getEmail().replaceAll("(\\w?)(\\w+)(\\w)(@\\w+\\.[a-z]+(\\.[a-z]+)?)", "$1****$3$4"));
+        }
+        return authInfo;
+    }
+
+    @Override
+    public boolean sendEmailAuthCode(String username) {
+
+        QueryWrapper<Staff> staffQueryWrapper = new QueryWrapper<>();
+        staffQueryWrapper.eq("username", username);
+        staffQueryWrapper.select("email");
+
+        Staff staff = staffMapper.selectOne(staffQueryWrapper);
+        if (staff.getEmail().isEmpty()) {
+            return false;
+        }
+        // 发送邮箱验证码
+
+        return false;
     }
 
 }
