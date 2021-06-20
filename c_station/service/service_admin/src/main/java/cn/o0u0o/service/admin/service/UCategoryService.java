@@ -4,6 +4,7 @@ import cn.o0u0o.service.admin.entity.UCategory;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -18,5 +19,4 @@ public interface UCategoryService extends IService<UCategory> {
     List<UCategory> selectAllCategory();
 
     Boolean removeUserCategoryByID(Integer id);
-
 }
