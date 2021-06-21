@@ -3,11 +3,13 @@ package cn.o0u0o.service.admin.service.impl;
 import cn.o0u0o.service.admin.entity.UCategory;
 import cn.o0u0o.service.admin.mapper.UCategoryMapper;
 import cn.o0u0o.service.admin.service.UCategoryService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -29,9 +31,15 @@ public class UCategoryServiceImpl extends ServiceImpl<UCategoryMapper, UCategory
         return uCategories;
     }
 
+
+    /**
+     * 根据id删除用户
+     * @param id
+     * @return
+     */
     @Override
     public Boolean removeUserCategoryByID(Integer id) {
-        if(true) {
+        if(id != null && id > 0) {
             uCategoryMapper.updateCategoryByID(id);
             return true;
         }

@@ -5,11 +5,14 @@ import cn.o0u0o.common.response.Result;
 import cn.o0u0o.common.response.ResultCodeEnum;
 import cn.o0u0o.service.admin.entity.UCategory;
 import cn.o0u0o.service.admin.service.UCategoryService;
+import cn.o0u0o.service.admin.service.UUserService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -28,6 +31,8 @@ public class UCategoryController {
 
     @Autowired
     private UCategoryService uCategoryService;
+    @Autowired
+    private UUserService uUserService;
 
     /**
      * 查询所有用户类别
@@ -47,7 +52,9 @@ public class UCategoryController {
      */
     @PostMapping("/remove/{id}")
     public Result removeUserById(@PathVariable Integer id) {
-        if(true) {
+        Map<String, Integer> typeMap = new HashMap<>();
+        typeMap.put("category_id", null);
+        if(id != null && id <= uUserService.selectUserCount(typeMap)) {
             Boolean b = uCategoryService.removeUserCategoryByID(id);
             return b ? Result.ok() : Result.setResultCodeEnum(ResultCodeEnum.UNKNOWN_REASON);
         }

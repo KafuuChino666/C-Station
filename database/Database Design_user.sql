@@ -28,9 +28,21 @@ CREATE TABLE u_safe (
 	#FOREIGN KEY(user_id) REFERENCES u_user(user_id)
 );
 
+#用户类型
 create table u_category (
 	id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	category varchar(12) COMMENT '会员类型' not null,
+	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
+	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
+);
+
+#用户违规记录:注意以后或许会创建违规视频表所以字段名为vio_video_id
+create table u_violation(
+	id int unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	user_id int UNSIGNED,
+	vio_describe varchar(255) COMMENT '违规描述' not null,
+	vio_type int UNSIGNED COMMENT '违规类型' not null,
+	vio_video_id int UNSIGNED COMMENT '违规视频id',
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
 );
