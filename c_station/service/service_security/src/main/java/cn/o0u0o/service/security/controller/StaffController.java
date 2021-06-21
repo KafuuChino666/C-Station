@@ -153,6 +153,7 @@ public class StaffController {
 
         if ("email".equals(authTyoe)) {
             boolean b = staffService.sendEmailAuthCode(username);
+            return b ? Result.ok() : Result.err().message("邮件发送失败!");
         } else if ("mobile".equals(authTyoe)) {
 
         }

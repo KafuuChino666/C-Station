@@ -2,6 +2,7 @@ package cn.o0u0o.service.security.service.impl;
 
 import cn.o0u0o.service.security.entity.Menu;
 import cn.o0u0o.service.security.entity.Staff;
+import cn.o0u0o.service.security.entity.vo.AuthCode;
 import cn.o0u0o.service.security.entity.vo.StaffAuthInfo;
 import cn.o0u0o.service.security.entity.vo.StaffVo;
 import cn.o0u0o.service.security.mapper.StaffMapper;
@@ -9,17 +10,25 @@ import cn.o0u0o.service.security.service.MenuService;
 import cn.o0u0o.service.security.service.StaffRoleService;
 import cn.o0u0o.service.security.service.StaffService;
 import cn.o0u0o.service.security.util.MD5;
+import cn.o0u0o.service.sms.util.JavaMailSenderUtil;
+import cn.o0u0o.service.sms.util.RandomUtils;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import freemarker.template.Configuration;
+import freemarker.template.TemplateException;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.mail.MessagingException;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -31,6 +40,7 @@ import java.util.List;
  * @since 2021-04-08
  */
 @Service
+@Slf4j
 public class StaffServiceImpl extends ServiceImpl<StaffMapper, Staff> implements StaffService {
 
     @Autowired
@@ -41,6 +51,15 @@ public class StaffServiceImpl extends ServiceImpl<StaffMapper, Staff> implements
 
     @Autowired
     public MenuService menuService;
+
+    @Autowired
+    private JavaMailSender mailSender;
+
+    @Autowired
+    private Configuration configuration;
+
+    @Value("${spring.mail.username}")
+    private String fromMail;
 
     @Override
     public Staff getById(Integer staffId) {
@@ -160,8 +179,15 @@ public class StaffServiceImpl extends ServiceImpl<StaffMapper, Staff> implements
             return false;
         }
         // 发送邮箱验证码
+//        JavaMailSenderUtil.sendGeneralMail(mailSender, "2674644958@qq.com", staff.getEmail(), "账号安全校验", "255651");
+        try {
+            JavaMailSenderUtil.sendTemplateMail(configuration, mailSender, "2674644958@qq.com", staff.getEmail(), "账号安全校验", new AuthCode(username, RandomUtils.getFourBitRandom()));
+        } catch (Exception e) {
+            log.warn(e.getMessage());
+            return false;
+        }
 
-        return false;
+        return true;
     }
 
 }
