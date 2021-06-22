@@ -71,7 +71,7 @@ export default {
   },
 
   methods: {
-    // 查询下拉框内所有用户类型（未完成）
+    // 查询下拉框内所有用户类型
     fetchData() {
       userAdmin.selectAllCategory().then(res => {
         console.log(res.data.rows)

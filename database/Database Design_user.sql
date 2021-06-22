@@ -40,8 +40,7 @@ create table u_category (
 create table u_violation (
 	id int unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	user_id int UNSIGNED,
-	vio_describe varchar(255) COMMENT '违规描述' not null,
-	vio_type int UNSIGNED COMMENT '违规类型' not null,
+	vio_type int UNSIGNED COMMENT '违规类型id' not null,
 	vio_video_id int UNSIGNED COMMENT '违规视频id',
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
@@ -50,6 +49,7 @@ create table u_violation (
 create table u_vio_type (
 	id int unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	vio_type varchar(32) not null comment '违规类型',
+	vio_describe varchar(255) COMMENT '违规描述' not null,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
 );

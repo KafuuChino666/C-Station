@@ -36,7 +36,7 @@ export default {
   selectUserViolationByID(id) {
     return request({
       url: `/views/violation/marker/${id}`,
-      method: 'post'
+      method: 'get'
     })
   }
 

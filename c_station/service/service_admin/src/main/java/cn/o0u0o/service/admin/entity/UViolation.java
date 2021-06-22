@@ -32,11 +32,8 @@ public class UViolation extends BaseEntity {
     @ApiModelProperty(value = "用户ID")
     private Integer userId;
 
-    @ApiModelProperty(value = "违规描述")
-    private String vioDescribe;
-
     @ApiModelProperty(value = "违规类型ID")
-    private Integer vioType;
+    private Integer vioTypeId;
 
     @ApiModelProperty(value = "违规视频ID")
     private Integer vioVideoId;

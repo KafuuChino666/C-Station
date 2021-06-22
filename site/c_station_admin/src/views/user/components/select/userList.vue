@@ -72,9 +72,8 @@
               trigger="click"
             >
               <el-table :data="vioData">
-                <el-table-column width="150" property="date" label="日期" />
-                <el-table-column width="100" property="id" label="用户id" />
-                <el-table-column width="300" property="describe" label="违规描述" />
+                <el-table-column width="150" property="gmtCreate" :formatter="dateFormat" label="日期" />
+                <el-table-column width="300" property="vioDescribe" label="违规描述" />
                 <el-table-column width="100" property="videoId" label="视频id" />
                 <el-table-column width="150" property="vioType" label="违规类型" />
               </el-table>
@@ -103,6 +102,7 @@ import PubSub from 'pubsub-js'
 import Edit from '@/views/user/components/select/edit'
 import Delete from '@/views/user/components/select/delete'
 import userAdmin from "@/api/userAdmin";
+import moment from "moment";
 
 export default {
   name: 'UserList',
@@ -129,11 +129,10 @@ export default {
       }],
       id: '',
       vioData: [{
-        date: '2016-05-02',
-        id: '王小虎',
-        describe: '上海市普陀区金沙江路 1518 弄',
-        videoId: '001',
-        vioType: '低俗内容'
+        gmtCreate: '',
+        vioDescribe: '',
+        videoId: '',
+        vioType: ''
       }]
     }
   },
@@ -159,8 +158,15 @@ export default {
     },
     showViolation() {
       userAdmin.selectUserViolationByID(this.id).then(res => {
-        console.log(this.id)
+        this.vioData = res.data.rows
       })
+    },
+    dateFormat(row, column) {
+      const date = row[column.property]
+      if (date === undefined) {
+        return ''
+      }
+      return moment(date).format('YYYY-MM-DD HH:mm:ss')
     }
   }
 }

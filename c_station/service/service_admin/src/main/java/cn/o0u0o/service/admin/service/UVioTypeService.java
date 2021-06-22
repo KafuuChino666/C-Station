@@ -1,6 +1,7 @@
 package cn.o0u0o.service.admin.service;
 
 import cn.o0u0o.service.admin.entity.UVioType;
+import cn.o0u0o.service.admin.entity.UViolation;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -8,4 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @create 2021-06-22 10:01
  */
 public interface UVioTypeService extends IService<UVioType> {
+
+    UVioType queryVioTypeById(Integer vioTypeId);
+
 }

@@ -22,4 +22,7 @@ public class UVioType extends BaseEntity {
     @ApiModelProperty(value = "违规类型")
     private String vioType;
 
+    @ApiModelProperty(value = "违规描述")
+    private String vioDescribe;
+
 }

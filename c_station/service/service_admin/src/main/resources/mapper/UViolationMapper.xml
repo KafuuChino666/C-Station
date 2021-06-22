@@ -3,6 +3,6 @@
 <mapper namespace="cn.o0u0o.service.admin.mapper.UViolationMapper">
 
     <select id="selectUserViolationByID" resultType="cn.o0u0o.service.admin.entity.UViolation">
-
+        select gmt_create, vio_type_id, vio_video_id from u_violation where user_id = #{userId}
     </select>
 </mapper>

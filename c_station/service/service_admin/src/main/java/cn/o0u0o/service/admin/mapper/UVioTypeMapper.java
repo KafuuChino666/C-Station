@@ -10,4 +10,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface UVioTypeMapper extends BaseMapper<UVioType> {
 
+    UVioType selectDescribeByID(Integer vioTypeId);
+
 }

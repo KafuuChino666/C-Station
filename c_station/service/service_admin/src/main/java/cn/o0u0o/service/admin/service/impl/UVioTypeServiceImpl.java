@@ -17,4 +17,16 @@ public class UVioTypeServiceImpl extends ServiceImpl<UVioTypeMapper, UVioType> i
     @Autowired
     private UVioTypeMapper uVioTypeMapper;
 
+    /**
+     * 根据违规类型id查询
+     *
+     * 暂未实现
+     *
+     * @param vioTypeId
+     * @return
+     */
+    @Override
+    public UVioType queryVioTypeById(Integer vioTypeId) {
+        return null;
+    }
 }
