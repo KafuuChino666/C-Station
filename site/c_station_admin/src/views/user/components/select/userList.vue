@@ -71,10 +71,12 @@
               width="400"
               trigger="click"
             >
-              <el-table :data="gridData">
+              <el-table :data="vioData">
                 <el-table-column width="150" property="date" label="日期" />
-                <el-table-column width="100" property="name" label="姓名" />
-                <el-table-column width="300" property="address" label="地址" />
+                <el-table-column width="100" property="id" label="用户id" />
+                <el-table-column width="300" property="describe" label="违规描述" />
+                <el-table-column width="100" property="videoId" label="视频id" />
+                <el-table-column width="150" property="vioType" label="违规类型" />
               </el-table>
               <el-button slot="reference" type="warning" size="mini" round @click="showViolation">违规记录</el-button>
             </el-popover>
@@ -126,10 +128,12 @@ export default {
         email: ''
       }],
       id: '',
-      gridData: [{
+      vioData: [{
         date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
+        id: '王小虎',
+        describe: '上海市普陀区金沙江路 1518 弄',
+        videoId: '001',
+        vioType: '低俗内容'
       }]
     }
   },
@@ -154,9 +158,8 @@ export default {
       console.log(this.id)
     },
     showViolation() {
-      this.userId = this.$parent.$parent.$parent.$parent.id
-      userAdmin.selectUserViolationByID(this.userId).then(res => {
-        console.log('已发送' + this.userInfo.userId)
+      userAdmin.selectUserViolationByID(this.id).then(res => {
+        console.log(this.id)
       })
     }
   }

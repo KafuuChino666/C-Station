@@ -35,7 +35,7 @@ export default {
   // 查询用户违规记录
   selectUserViolationByID(id) {
     return request({
-      url: `/views/category/Violation/${id}`,
+      url: `/views/violation/marker/${id}`,
       method: 'post'
     })
   }
