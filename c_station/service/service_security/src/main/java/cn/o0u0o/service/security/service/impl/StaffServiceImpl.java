@@ -17,19 +17,18 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import freemarker.template.Configuration;
-import freemarker.template.TemplateException;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.BoundValueOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.mail.MessagingException;
-import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
@@ -57,6 +56,9 @@ public class StaffServiceImpl extends ServiceImpl<StaffMapper, Staff> implements
 
     @Autowired
     private Configuration configuration;
+
+    @Autowired
+    private RedisTemplate<String, Object> redisCacheTemplate;
 
     @Value("${spring.mail.username}")
     private String fromMail;
@@ -181,13 +183,25 @@ public class StaffServiceImpl extends ServiceImpl<StaffMapper, Staff> implements
         // 发送邮箱验证码
 //        JavaMailSenderUtil.sendGeneralMail(mailSender, "2674644958@qq.com", staff.getEmail(), "账号安全校验", "255651");
         try {
-            JavaMailSenderUtil.sendTemplateMail(configuration, mailSender, "2674644958@qq.com", staff.getEmail(), "账号安全校验", new AuthCode(username, RandomUtils.getFourBitRandom()));
+            String code = RandomUtils.getFourBitRandom();
+            JavaMailSenderUtil.sendTemplateMail(configuration, mailSender, "2674644958@qq.com", staff.getEmail(), "账号安全校验", new AuthCode(username, code));
+            cacheAuthCode(username, code); // 缓存code 过期时间为5分钟
         } catch (Exception e) {
             log.warn(e.getMessage());
             return false;
         }
 
         return true;
+    }
+
+    public void cacheAuthCode(String username, String code) {
+        try {
+            redisCacheTemplate.boundValueOps("authCode_" + username).set(Integer.valueOf(code),5, TimeUnit.MINUTES);
+            // 发送次数+1
+            redisCacheTemplate.boundValueOps("sendAuthCount_" + username).increment(1L);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
     }
 
 }

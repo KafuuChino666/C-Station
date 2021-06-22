@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface WorkFlowNodeRoleService extends IService<WorkFlowNodeRole> {
 
+    Integer getNodeIdByUserName(String username);
 }

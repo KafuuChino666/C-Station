@@ -1,11 +1,15 @@
 package cn.o0u0o.service.video.service.impl;
 
 import cn.o0u0o.service.video.entity.VAuditStatus;
+import cn.o0u0o.service.video.entity.vo.VideoAuditListItem;
 import cn.o0u0o.service.video.mapper.VAuditStatusMapper;
 import cn.o0u0o.service.video.service.VAuditStatusService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -30,5 +34,10 @@ public class VAuditStatusServiceImpl extends ServiceImpl<VAuditStatusMapper, VAu
         Integer node_id = vAuditStatusMapper.selectFlowFirstNode(flow_id);
 
         return this.save(new VAuditStatus(videoId, flow_id, node_id, 0, "无", 0, "0"));
+    }
+
+    @Override
+    public List<VideoAuditListItem> getListByNodeId(Integer nodeId) {
+        return vAuditStatusMapper.selectListByNodeId(nodeId);
     }
 }

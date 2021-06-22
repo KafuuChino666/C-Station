@@ -1,15 +1,13 @@
 package cn.o0u0o.service.security.acl;
 
 import cn.o0u0o.common.response.Result;
-import cn.o0u0o.common.response.ResultCodeEnum;
+import cn.o0u0o.common.util.TokenManager;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

@@ -1,8 +1,11 @@
 package cn.o0u0o.service.video.mapper;
 
 import cn.o0u0o.service.video.entity.VAuditStatus;
+import cn.o0u0o.service.video.entity.vo.VideoAuditListItem;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * <p>
@@ -15,4 +18,6 @@ import org.apache.ibatis.annotations.Select;
 public interface VAuditStatusMapper extends BaseMapper<VAuditStatus> {
 
     Integer selectFlowFirstNode(Integer flow_id);
+
+    List<VideoAuditListItem> selectListByNodeId(Integer nodeId);
 }

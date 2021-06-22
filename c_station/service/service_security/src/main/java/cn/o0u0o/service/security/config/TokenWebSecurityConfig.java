@@ -1,8 +1,8 @@
 package cn.o0u0o.service.security.config;
 
+import cn.o0u0o.common.util.TokenManager;
 import cn.o0u0o.service.security.acl.*;
 import cn.o0u0o.service.security.filter.TokenAuthenticationFilter;
-import cn.o0u0o.service.security.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -19,9 +19,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.CorsUtils;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 
 
 /**

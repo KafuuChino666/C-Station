@@ -10,6 +10,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
+
 /**
  * <p>
  * 
@@ -23,7 +25,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("acl_role")
 @ApiModel(value="Role对象", description="")
-public class Role extends BaseEntity {
+public class Role extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID=1L;
 

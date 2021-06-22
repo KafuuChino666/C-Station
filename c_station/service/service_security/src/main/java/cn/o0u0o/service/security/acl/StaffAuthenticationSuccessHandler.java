@@ -1,20 +1,17 @@
 package cn.o0u0o.service.security.acl;
 
 import cn.o0u0o.common.response.Result;
+import cn.o0u0o.common.util.TokenManager;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Collection;
 
 @Slf4j
 public class StaffAuthenticationSuccessHandler implements AuthenticationSuccessHandler {

@@ -2,4 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.o0u0o.service.video.mapper.WorkFlowNodeMapper">
 
+    <select id="selectNodeIdByUserName" resultType="java.lang.Integer">
+        select wfnr.node_id from work_flow_node_role wfnr
+                                     left join acl_staff_role asr on asr.role_id = wfnr.role_id
+                                     left join acl_staff s on s.id = asr.staff_id
+        where s.username = #{username}
+    </select>
 </mapper>

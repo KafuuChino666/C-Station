@@ -18,10 +18,10 @@
           {{ authType == 'email' ? authInfo.email : authInfo.mobile }}
         </el-form-item>
         <el-form-item class="auth_code" label="短信验证码">
-          <el-input></el-input>
-          <el-button @click="getAuthCode()" type="primary" plain>获取验证码</el-button>
+          <el-input v-model="authInfo.code"></el-input>
+          <el-button :disabled="disabled" @click="getAuthCode()" type="primary" plain>{{captchaButText}}</el-button>
         </el-form-item>
-        <el-button size="small" type="primary">确定</el-button>
+        <el-button @click="affirmFun(authInfo.code)" size="small" type="primary">确定</el-button>
         <el-button size="small">取消</el-button>
       </el-form>
     </div>
@@ -30,7 +30,6 @@
 
 <script>
 import securityAPI from '@/api/securityAPI'
-import audit from '@/views/video/audit'
 
 export default {
   name: 'VerificationFrame',
@@ -46,12 +45,20 @@ export default {
       type: Boolean,
       required: false,
       default: false
+    },
+    affirmFun: {
+      type: Function,
+      required: false,
+      default: function() {}
     }
   },
   data() {
     return {
       authInfo: {},
-      authType: 'mobile'
+      authType: 'mobile',
+      disabled: false,
+      captchaButText: '发送验证码',
+      second: 60
     }
   },
   created() {
@@ -68,7 +75,32 @@ export default {
     },
     // 获取验证码
     getAuthCode() {
-      securityAPI.sendAuthCode(this.authType)
+      this.disabled = true // 禁用按钮
+      this.timeDown()
+      securityAPI.sendAuthCode(this.authType).then(res => {
+        // eslint-disable-next-line eqeqeq
+        if (res.code == 28007) {
+          this.$message({
+            showClose: true,
+            message: res.message,
+            type: 'warning'
+          })
+          this.disabled = true
+        }
+      })
+    },
+    // 倒计时
+    timeDown() {
+      const result = setInterval(() => {
+        this.second--
+        this.captchaButText = '等待短信 ' + this.second + ' s'
+        if (this.second < 0 || !this.disabled) {
+          clearInterval(result)
+          this.disabled = false
+          this.second = 60
+          this.captchaButText = '获取验证码'
+        }
+      }, 1000)
     }
   }
 }

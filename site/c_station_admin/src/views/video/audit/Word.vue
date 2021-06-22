@@ -1,10 +1,15 @@
 <template>
-  <div class="container">
+  <div
+    v-loading="fullscreenLoading"
+    element-loading-text="拼命加载中"
+    element-loading-spinner="el-icon-loading"
+    class="container"
+  >
     <div class="con-top">
       <el-button type="primary" icon="el-icon-plus" @click="add()">新增</el-button>
       <div style="float: right">
-        <el-input placeholder="请输入内容" style="width: 220px;margin-right: 15px " />
-        <el-button type="primary">搜索</el-button>
+        <el-input v-model="searchStr" placeholder="请输入流程名" style="width: 220px;margin-right: 15px " />
+        <el-button @click="search" type="primary">搜索</el-button>
       </div>
     </div>
     <el-table
@@ -90,7 +95,7 @@
         </el-alert>
       </el-form>
     </el-drawer>
-    <VerificationFrame :dialog-visible="verificationVisible" />
+    <VerificationFrame :dialog-visible="verificationVisible" :affirm-fun="getCode" />
   </div>
 </template>
 
@@ -104,26 +109,40 @@ export default {
   components: { VerificationFrame },
   data() {
     return {
+      searchStr: '',
       verificationVisible: false,
       formValidate: rule.WorkFlowAddFrom,
       drawer: false,
       tableData: [],
       loading: false,
+      fullscreenLoading: false,
       form: {
         flowName: '',
         sign: 'video_audit_flow',
         remark: ''
       },
+      pitchOnRow: {},
       value: '',
       page: 1,
       limit: 7,
-      total: 0
+      total: 0,
+      code: 0
     }
   },
   created() {
     this.fetchData()
   },
   methods: {
+    search() {
+      // eslint-disable-next-line eqeqeq
+      if (this.searchStr != '') {
+        this.page = 1
+        this.limit = 7
+        video.searchWorkFlowByName(this.searchStr, this.page, this.limit).then(res => {
+          this.tableData = res.data.rows
+        })
+      }
+    },
     add() {
       // 打开右侧抽屉
       this.drawer = true
@@ -159,9 +178,9 @@ export default {
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
+          // 弹出验证框
           this.verificationVisible = true
-          // 改变默认
-          video.upDateWordUsable(row.id)
+          this.pitchOnRow = row
         }).catch(() => {
           this.$message({
             type: 'info',
@@ -186,6 +205,17 @@ export default {
           })
         }
       })
+    },
+    getCode(code) {
+      console.log(code)
+      this.code = code
+      this.fullscreenLoading = true
+      video.upDateWordUsable(this.pitchOnRow.id, code).then(res => {
+        this.fetchData()
+        this.fullscreenLoading = false
+      })
+      this.verificationVisible = false
+      this.code = 0
     }
   }
 }
