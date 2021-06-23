@@ -75,7 +75,7 @@ export default {
     fetchData() {
       userAdmin.selectAllCategory().then(res => {
         console.log(res.data.rows)
-        this.selectType = res.data.rows
+        this.selectType = res.data.category
       })
     },
 

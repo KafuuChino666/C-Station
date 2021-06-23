@@ -26,7 +26,7 @@ export default {
 
   selectAllGender() {
     return request({
-      url: `/views/category/gender`,
+      url: `/views/gender/sex`,
       method: 'get'
     })
   },

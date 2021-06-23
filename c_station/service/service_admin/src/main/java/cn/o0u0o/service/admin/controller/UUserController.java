@@ -67,12 +67,5 @@ public class UUserController {
         return Result.err().message("用户查询页码错误！");
     }
 
-    @GetMapping("/gender")
-    public Result selectAllCategory() {
-        List<UUser> uUsers = uUserService.selectAllGender();
-
-        return Result.ok().data("rows", uUsers);
-    }
-
 }
 

@@ -42,7 +42,7 @@ public class UCategoryController {
     public Result selectAllCategory() {
         List<UCategory> uCategories = uCategoryService.selectAllCategory();
 
-        return Result.ok().data("rows", uCategories);
+        return Result.ok().data("category", uCategories);
     }
 
     /**

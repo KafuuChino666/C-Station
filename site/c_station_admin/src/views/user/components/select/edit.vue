@@ -13,7 +13,7 @@
           <el-input v-model="form.userName" style="float: left" />
         </el-form-item>
         <el-form-item label="性别">
-          <el-select v-model="form.gender" placeholder="性别" style="float: left">
+          <el-select v-model="form.gender" placeholder="请选择性别" style="float: left">
             <el-option
               v-for="item in selectGender"
               :key="item.id"
@@ -61,6 +61,7 @@ export default {
 
   created() {
     this.categoryData()
+    this.genderData()
   },
 
   methods: {
@@ -76,12 +77,12 @@ export default {
     },
     categoryData() {
       userAdmin.selectAllCategory().then(res => {
-        this.selectType = res.data.rows
+        this.selectType = res.data.category
       })
     },
     genderData() {
       userAdmin.selectAllGender().then(res => {
-        this.selectGender = res.data.rows
+        this.selectGender = res.data.gender
       })
     }
   }
