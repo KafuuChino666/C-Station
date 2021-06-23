@@ -76,8 +76,6 @@ export default {
       userAdmin.selectAllCategory().then(res => {
         console.log(res.data.rows)
         this.selectType = res.data.rows
-      }).catch(error => {
-        console.log(error)
       })
     },
 

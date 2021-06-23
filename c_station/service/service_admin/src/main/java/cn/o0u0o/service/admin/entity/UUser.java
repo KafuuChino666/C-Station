@@ -38,8 +38,8 @@ public class UUser extends BaseEntity {
     @ApiModelProperty(value = "用户状态")
     private String status;
 
-    @ApiModelProperty(value = "性别")
-    private String gender;
+    @ApiModelProperty(value = "性别id")
+    private String genderId;
 
     @ApiModelProperty(value = "生日")
     private Date birth;

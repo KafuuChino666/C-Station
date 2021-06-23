@@ -4,7 +4,7 @@
       :data="userData"
       style="width: 100%"
       border
-      @cell-mouse-enter = 'handleMouseEnter'
+      @cell-mouse-enter="handleMouseEnter"
     >
       <el-table-column type="expand">
         <template slot-scope="props">
@@ -101,8 +101,8 @@
 import PubSub from 'pubsub-js'
 import Edit from '@/views/user/components/select/edit'
 import Delete from '@/views/user/components/select/delete'
-import userAdmin from "@/api/userAdmin";
-import moment from "moment";
+import userAdmin from '@/api/userAdmin'
+import moment from 'moment'
 
 export default {
   name: 'UserList',

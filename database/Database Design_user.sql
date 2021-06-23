@@ -6,7 +6,7 @@ CREATE TABLE u_user (
 	user_name VARCHAR(64) COMMENT '昵称' NOT NULL,
 	user_sign VARCHAR(255) COMMENT '用户签名',
 	`status` varchar(12) COMMENT '用户状态',
-	gender CHAR(1) COMMENT '性别' DEFAULT'男' NOT NULL,
+	gender_id int unsigned not null DEFAULT 1,
 	birth DATE COMMENT '生日',
 	category_id int unsigned not null DEFAULT 1, 
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
@@ -32,6 +32,14 @@ CREATE TABLE u_safe (
 create table u_category (
 	id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	category varchar(12) COMMENT '会员类型' not null,
+	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
+	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
+);
+
+#用户性别信息
+create table u_gender (
+	id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	gender CHAR(1) COMMENT '性别' NOT NULL,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
 );

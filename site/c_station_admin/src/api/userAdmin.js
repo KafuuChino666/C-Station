@@ -24,6 +24,13 @@ export default {
     })
   },
 
+  selectAllGender() {
+    return request({
+      url: `/views/category/gender`,
+      method: 'get'
+    })
+  },
+
   // 删除用户
   updateUserById(id) {
     return request({
