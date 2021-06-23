@@ -9,38 +9,27 @@ export default {
   name: 'AliPlayer',
   data() {
     return {
-      videoId: -1,
-      vid: '30ac017200af4214ab82c02b6644662f',
-      playAuth: ''
+      videoId: this.$route.query.videoId,
+      vid: '30ac017200af4214ab82c02b6644662f', // 阿里云视频id
+      playAuth: '' // 播放凭证
     }
   },
   // 页面渲染成功后获取数据
-  created() {
+  // created() {
+  //   // this.fetchData()
+  // },
+  mounted() {
     this.fetchData()
   },
-  mounted() {
-    this.d()
-  },
   methods: {
-    async d() {
+    async fetchData() {
       await this.asyncData() // 获取凭证
       this.aliPlayer() // 渲染视频播放器
     },
     async asyncData() {
-      console.log('asyncData')
-      // const vid = this.$route.query.id
-      const vid = '30ac017200af4214ab82c02b6644662f'
-      const res = await video.getPlayAuth(vid)
+      const res = await video.getPlayAuth(this.videoId)
       this.playAuth = res.data.playAuth
-    },
-    fetchData() {
-      this.videoId = this.$route.query.id
-      if (this.videoId.length > 0) {
-        // 请求数据api
-        video.getVideoInfoById(this.videoId).then(res => {
-          this.videoInfoForm = res.data.rows
-        })
-      }
+      this.vid = res.data.vid
     },
     aliPlayer() {
       console.log('aliPlayer')

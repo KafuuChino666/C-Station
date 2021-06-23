@@ -13,9 +13,10 @@ import java.util.Date;
 public class VideoAuditListItem {
 
     private Integer id;
+    private Integer videoId;
     private Date gmtModified;
     private String authorId;
-    private String auditorId;
+    private String auditor;
     private String videoTitle;
     private String zoneTitle;
     private String disciplineInfo;

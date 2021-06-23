@@ -4,6 +4,7 @@ import cn.o0u0o.common.response.Result;
 import cn.o0u0o.common.response.ResultCodeEnum;
 import cn.o0u0o.service.video.entity.vo.VideoUploadAuth;
 import cn.o0u0o.service.video.service.MediaService;
+import cn.o0u0o.service.video.service.VVideoItemService;
 import cn.o0u0o.service.video.service.VVideoService;
 import com.aliyun.vod20170321.models.GetVideoInfoResponse;
 import com.aliyuncs.exceptions.ClientException;
@@ -30,15 +31,20 @@ public class MediaController {
     private MediaService mediaService;
 
     @Autowired
-    private VVideoService vVideoService;
+    private VVideoItemService vVideoItemService;
 
     @ApiOperation("获取视频播放凭证")
-    @GetMapping("get-play-auth/{videoSourceId}")
-    public Result getPlayAuth(@ApiParam("阿里云视频文件的id") @PathVariable String videoSourceId) {
+    @GetMapping("get-play-auth/{videoId}")
+    public Result getPlayAuthByVideoId(@ApiParam("阿里云视频文件的id") @PathVariable Integer videoId) {
 
         try{
+            // 查出videoSourceId aliyun ID
+            String videoSourceId = vVideoItemService.getLocationById(videoId);
+            if(videoSourceId.isEmpty()) {
+                return Result.err().message("无此视频！");
+            }
             String playAuth = mediaService.getPlayAuth(videoSourceId);
-            return  Result.ok().message("获取播放凭证成功").data("playAuth", playAuth);
+            return  Result.ok().message("获取播放凭证成功").data("playAuth", playAuth).data("vid", videoSourceId);
         } catch (Exception e) {
             log.error(ExceptionUtils.getMessage(e));
             throw new RuntimeException(String.valueOf(ResultCodeEnum.FETCH_PLAYAUTH_ERROR));

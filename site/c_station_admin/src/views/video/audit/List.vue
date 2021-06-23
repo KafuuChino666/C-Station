@@ -11,7 +11,7 @@
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">查询</el-button>
+        <el-button type="primary">查询</el-button>
       </el-form-item>
       <el-form-item>
         <el-button>重置</el-button>
@@ -19,6 +19,8 @@
     </el-form>
     <el-table
       :data="tableData"
+      :row-class-name="tableRowClassName"
+      :row-style="selectedHighlight"
       border
       style="width: 100%">
       <el-table-column
@@ -43,7 +45,7 @@
         width="120">
       </el-table-column>
       <el-table-column
-        prop="auditorId"
+        prop="auditor"
         label="审核员ID"
         width="100">
       </el-table-column>
@@ -62,14 +64,18 @@
         label="操作"
         width="100">
         <template slot-scope="scope">
-          <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-          <el-button type="text" size="small">编辑</el-button>
+          <el-button @click="auditVideo(scope.row)" type="text" size="small">审核</el-button>
+          <el-button type="text" size="small">详细</el-button>
         </template>
       </el-table-column>
     </el-table>
   </div>
 </template>
-
+<style>
+.lock-row {
+  background-color: #b4fa8e;
+}
+</style>
 <script>
 import video from '@/api/video'
 
@@ -78,16 +84,51 @@ export default {
   data() {
     return {
       searchData: {},
-      tableData: []
+      tableData: [],
+      lockRow: '0',
+      lockId: 0
     }
   },
   created() {
     this.fetchData()
   },
   methods: {
-    fetchData() {
-      video.getAuditListByStaff().then(res => {
+    async fetchData() {
+      await video.getAuditListByStaff().then(res => {
         this.tableData = res.data.rows
+      })
+      video.getUnfinishedAudit().then(res => {
+        this.lockId = res.data.id
+        this.tableData.forEach((item, key) => {
+          if (item.id === this.lockId) {
+            this.lockRow = key
+          }
+        })
+      })
+    },
+    tableRowClassName({ row, rowIndex }) {
+      row.index = rowIndex
+    },
+    selectedHighlight({ row, rowIndex }) {
+      if ((this.lockRow) === rowIndex) {
+        return {
+          'background-color': '#CAE1FF'
+        }
+      }
+    },
+    // 审核视频
+    auditVideo(row) {
+      // 判断是否有未完成的审核
+      if (this.lockId === row.id) {
+        this.$router.push({ name: 'AuditVideo', query: { id: row.id, videoId: row.videoId }})
+        return null
+      }
+      // 请求后台
+      video.lockAuditVideo(row.id).then(res => {
+        // 锁定成功！
+        console.log('锁定成功！')
+        this.$router.push({ name: 'AuditVideo', query: { id: row.id, videoId: row.videoId }})
+        // 跳转到审核页面
       })
     }
   }

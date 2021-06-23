@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface VVideoItemMapper extends BaseMapper<VVideoItem> {
 
+    String getLocationById(Integer videoId);
 }

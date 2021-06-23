@@ -20,4 +20,8 @@ public interface VAuditStatusMapper extends BaseMapper<VAuditStatus> {
     Integer selectFlowFirstNode(Integer flow_id);
 
     List<VideoAuditListItem> selectListByNodeId(Integer nodeId);
+
+    int selectUnfinishedByAuditor(String username);
+
+    Boolean lockAudit(String username, Integer id);
 }
