@@ -35,7 +35,7 @@ public class VAuditStatus extends BaseEntity {
     private Integer currentNode;
 
     @ApiModelProperty(value = "审核员id(表示当前正在操作的审核员id)")
-    private Integer auditorId;
+    private String auditor;
 
     @ApiModelProperty(value = "违纪说明")
     private String disciplineInfo;
@@ -49,11 +49,11 @@ public class VAuditStatus extends BaseEntity {
     public VAuditStatus() {
     }
 
-    public VAuditStatus(Integer vId, Integer flowId, Integer currentNode, Integer auditorId, String disciplineInfo, Integer auditStatus, String auditorInfo) {
+    public VAuditStatus(Integer vId, Integer flowId, Integer currentNode, String auditor, String disciplineInfo, Integer auditStatus, String auditorInfo) {
         this.vId = vId;
         this.flowId = flowId;
         this.currentNode = currentNode;
-        this.auditorId = auditorId;
+        this.auditor = auditor;
         this.disciplineInfo = disciplineInfo;
         this.auditStatus = auditStatus;
         this.auditorInfo = auditorInfo;

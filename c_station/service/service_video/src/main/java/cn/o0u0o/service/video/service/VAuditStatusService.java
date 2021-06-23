@@ -19,4 +19,10 @@ public interface VAuditStatusService extends IService<VAuditStatus> {
     boolean addAudit(Integer videoId);
 
     List<VideoAuditListItem> getListByNodeId(Integer nodeId);
+
+    Boolean isUnfinished(String username);
+
+    Boolean lockAuditVideo(String username, Integer id);
+
+    Integer getUnfinishedAudit(String username);
 }

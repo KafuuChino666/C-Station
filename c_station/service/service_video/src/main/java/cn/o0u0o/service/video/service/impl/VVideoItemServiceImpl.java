@@ -4,6 +4,7 @@ import cn.o0u0o.service.video.entity.VVideoItem;
 import cn.o0u0o.service.video.entity.vo.VideoUpload;
 import cn.o0u0o.service.video.mapper.VVideoItemMapper;
 import cn.o0u0o.service.video.service.VVideoItemService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,5 +26,10 @@ public class VVideoItemServiceImpl extends ServiceImpl<VVideoItemMapper, VVideoI
     @Override
     public boolean addVideo(Integer videoId, Long size, VideoUpload video) {
         return this.save(new VVideoItem(videoId, 1, video.getVideoTitle(), size.toString(), video.getVideoId(), 0, 0));
+    }
+
+    @Override
+    public String getLocationById(Integer videoId) {
+        return vVideoItemMapper.getLocationById(videoId);
     }
 }

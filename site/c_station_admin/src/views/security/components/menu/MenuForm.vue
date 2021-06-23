@@ -22,6 +22,7 @@
       <el-form-item label="父级ID:" :label-width="formLabelWidth">
         <el-cascader
           v-model="parentId"
+          clearable
           :options="menuList"
           placeholder="不选默认为0(跟组件)"
           :props="{
@@ -29,6 +30,7 @@
             value: 'id',
             label: 'name',
             children: 'children',
+            checkStrictly: true
           }" ></el-cascader>
       </el-form-item>
       <el-form-item label="菜单排序:" :label-width="formLabelWidth">
@@ -51,7 +53,7 @@ export default {
   data() {
     return {
       dialogFormVisible: false,
-      parentId: [0, 0],
+      parentId: [],
       form: {
         parentId: '',
         path: '',
@@ -96,7 +98,12 @@ export default {
   methods: {
     add() {
       // 添加
-      this.form.parentId = this.parentId[1]
+      if (this.parentId.length === 1) {
+        this.form.parentId = this.parentId[0]
+      } else {
+        this.form.parentId = this.parentId[1]
+      }
+
       securityAPI.addMrnu(this.form).then(response => {
         this.dialogFormVisible = false
         if (response.status) {

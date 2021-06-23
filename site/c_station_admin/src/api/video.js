@@ -28,9 +28,9 @@ export default {
     })
   },
   // 获取播放凭证
-  getPlayAuth(videoSourceId) {
+  getPlayAuth(videoId) {
     return request({
-      url: `/api/video/media/get-play-auth/${videoSourceId}`,
+      url: `/api/video/media/get-play-auth/${videoId}`,
       method: 'get'
     })
   },
@@ -90,6 +90,18 @@ export default {
   searchWorkFlowByName(name, page, limit) {
     return request({
       url: `/admin/work/search/${name}/${page}/${limit}`,
+      method: 'get'
+    })
+  },
+  lockAuditVideo(id) {
+    return request({
+      url: `/admin/video/audit/status/lock/${id}`,
+      method: 'get'
+    })
+  },
+  getUnfinishedAudit() {
+    return request({
+      url: `/admin/video/audit/status/unfinished`,
       method: 'get'
     })
   }
