@@ -10,19 +10,26 @@
       <!-- 表单开始 -->
       <el-form ref="form" :model="form" label-width="80px">
         <el-form-item label="昵称">
-          <el-input v-model="form.name" style="float: left" />
+          <el-input v-model="form.userName" style="float: left" />
         </el-form-item>
         <el-form-item label="性别">
-          <el-select v-model="form.sex" placeholder="性别" style="float: left">
-            <el-option label="男" value="m" />
-            <el-option label="女" value="w" />
+          <el-select v-model="form.gender" placeholder="性别" style="float: left">
+            <el-option
+              v-for="item in selectGender"
+              :key="item.id"
+              :label="item.gender"
+              :value="item.id"
+            />
           </el-select>
         </el-form-item>
         <el-form-item label="用户分类">
           <el-select v-model="form.selectType" placeholder="请选择类型" style="float: left">
-            <el-option label="普通用户" value="common" />
-            <el-option label="会员" value="vip" />
-            <el-option label="大会员" value="b_vip" />
+            <el-option
+              v-for="item in selectType"
+              :key="item.id"
+              :label="item.category"
+              :value="item.id"
+            />
           </el-select>
         </el-form-item>
       </el-form>
@@ -36,18 +43,26 @@
 </template>
 
 <script>
+import userAdmin from '@/api/userAdmin'
+
 export default {
   data() {
     return {
       dialogVisible: false,
       form: {
-        name: '',
+        userName: '',
         selectType: '',
-        sex: ''
+        selectGender: ''
       },
-      selectType: {}
+      selectType: {},
+      selectGender: {}
     }
   },
+
+  created() {
+    this.categoryData()
+  },
+
   methods: {
     handleClose(done) {
       this.$confirm('确认关闭？')
@@ -58,6 +73,16 @@ export default {
     },
     onSubmit() {
       console.log('submit!')
+    },
+    categoryData() {
+      userAdmin.selectAllCategory().then(res => {
+        this.selectType = res.data.rows
+      })
+    },
+    genderData() {
+      userAdmin.selectAllGender().then(res => {
+        this.selectGender = res.data.rows
+      })
     }
   }
 }

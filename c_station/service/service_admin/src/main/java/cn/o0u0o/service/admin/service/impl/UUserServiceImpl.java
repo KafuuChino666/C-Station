@@ -13,6 +13,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -63,5 +64,15 @@ public class UUserServiceImpl extends ServiceImpl<UUserMapper, UUser> implements
         QueryWrapper<UUser> wrapper = new QueryWrapper<>();
         wrapper.allEq(userType, false);
         return uUserMapper.selectCount(wrapper);
+    }
+
+    /**
+     * 查询所有性别信息
+     * @return
+     */
+    @Override
+    public List<UUser> selectAllGender() {
+        List<UUser> uUsers = uUserMapper.selectAllGender();
+        return uUsers;
     }
 }
