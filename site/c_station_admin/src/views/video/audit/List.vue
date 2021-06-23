@@ -23,29 +23,39 @@
       style="width: 100%">
       <el-table-column
         fixed
-        prop="date"
+        prop="gmtModified"
         label="日期"
-        width="150">
+        width="230">
       </el-table-column>
       <el-table-column
-        prop="name"
+        prop="authorId"
         label="作者"
         width="120">
       </el-table-column>
       <el-table-column
-        prop="province"
+        prop="videoTitle"
         label="视频标题"
-        width="120">
+        width="300">
       </el-table-column>
       <el-table-column
-        prop="city"
+        prop="zoneTitle"
         label="类型"
         width="120">
       </el-table-column>
       <el-table-column
-        prop="address"
-        label="状态"
-        width="300">
+        prop="auditorId"
+        label="审核员ID"
+        width="100">
+      </el-table-column>
+      <el-table-column
+        prop="disciplineInfo"
+        label="违纪信息"
+        width="200">
+      </el-table-column>
+      <el-table-column
+        prop="auditorInfo"
+        label="审核员列表"
+        width="200">
       </el-table-column>
       <el-table-column
         fixed="right"
@@ -67,7 +77,8 @@ export default {
   name: 'AuditList',
   data() {
     return {
-      searchData: {}
+      searchData: {},
+      tableData: []
     }
   },
   created() {
@@ -75,7 +86,9 @@ export default {
   },
   methods: {
     fetchData() {
-      video.getAuditListByStaff()
+      video.getAuditListByStaff().then(res => {
+        this.tableData = res.data.rows
+      })
     }
   }
 }

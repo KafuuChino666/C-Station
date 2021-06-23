@@ -77,4 +77,15 @@ public class WorkFlowServiceImpl extends ServiceImpl<WorkFlowMapper, WorkFlow> i
         return line == 0;
     }
 
+    @Override
+    public IPage<WorkFlow> getWorkFlowByName(String name, Integer page, Integer limit) {
+        Page<WorkFlow> flowPage = new Page<>(page, limit);
+        QueryWrapper<WorkFlow> workFlowQueryWrapper = new QueryWrapper<>();
+        workFlowQueryWrapper.eq("is_delete",0);
+        workFlowQueryWrapper.like("flow_name", "%" + name + "%");
+        workFlowQueryWrapper.eq("sign", "video_audit_flow");
+
+        return workFlowMapper.selectPage(flowPage, workFlowQueryWrapper);
+    }
+
 }

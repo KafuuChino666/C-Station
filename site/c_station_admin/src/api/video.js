@@ -63,13 +63,13 @@ export default {
   },
   getAuditListByStaff() {
     return request({
-      url: `/admin/video/audit/`,
+      url: `/admin/video/audit/list`,
       method: 'get'
     })
   },
-  upDateWordUsable(id) {
+  upDateWordUsable(id, code) {
     return request({
-      url: `/admin/video/audit/work/${id}`,
+      url: `/admin/video/audit/work/${id}/${code}`,
       method: 'put'
     })
   },
@@ -84,6 +84,13 @@ export default {
       url: `/admin/acl/work/`,
       method: 'post',
       data: form
+    })
+  },
+  // 根据名称搜索WorkFlow
+  searchWorkFlowByName(name, page, limit) {
+    return request({
+      url: `/admin/work/search/${name}/${page}/${limit}`,
+      method: 'get'
     })
   }
 }

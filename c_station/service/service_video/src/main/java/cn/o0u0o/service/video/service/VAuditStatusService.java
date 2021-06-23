@@ -1,7 +1,10 @@
 package cn.o0u0o.service.video.service;
 
 import cn.o0u0o.service.video.entity.VAuditStatus;
+import cn.o0u0o.service.video.entity.vo.VideoAuditListItem;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,4 +17,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface VAuditStatusService extends IService<VAuditStatus> {
 
     boolean addAudit(Integer videoId);
+
+    List<VideoAuditListItem> getListByNodeId(Integer nodeId);
 }

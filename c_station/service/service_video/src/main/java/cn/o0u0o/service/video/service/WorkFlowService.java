@@ -21,4 +21,6 @@ public interface WorkFlowService extends IService<WorkFlow> {
     boolean upDateWordUsableById(Integer id);
 
     boolean validateWorkFlowName(String workFlowName);
+
+    IPage<WorkFlow> getWorkFlowByName(String name, Integer page, Integer limit);
 }

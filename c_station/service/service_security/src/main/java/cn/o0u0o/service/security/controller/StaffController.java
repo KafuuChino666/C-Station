@@ -3,22 +3,24 @@ package cn.o0u0o.service.security.controller;
 
 import cn.o0u0o.common.response.Result;
 import cn.o0u0o.common.response.ResultCodeEnum;
-import cn.o0u0o.service.security.acl.TokenManager;
+import cn.o0u0o.common.util.TokenManager;
 import cn.o0u0o.service.security.entity.Menu;
 import cn.o0u0o.service.security.entity.Staff;
 import cn.o0u0o.service.security.entity.vo.StaffAuthInfo;
 import cn.o0u0o.service.security.entity.vo.StaffVo;
 import cn.o0u0o.service.security.service.StaffService;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.BoundValueOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
@@ -41,6 +43,9 @@ public class StaffController {
 
     @Autowired
     public TokenManager tokenManager;
+
+    @Autowired
+    public RedisTemplate<String, Object> redisCacheTemplate;
 
     @ApiOperation("员工登陆")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -150,6 +155,18 @@ public class StaffController {
         String token = request.getHeader(tokenKey);
         if (token == null || token.isEmpty()) return Result.err();
         String username = tokenManager.getUserFromToken(token);
+
+        // 判断authCode_
+        // 增加发送次数
+        BoundValueOperations<String, Object> sendAuthCount = redisCacheTemplate.boundValueOps("sendAuthCount_" + username);
+        Integer count = (Integer) sendAuthCount.get();
+        if (count != null) {
+            if (count > 10) {
+                return Result.setResultCodeEnum(ResultCodeEnum.SMS_SEND_ERROR_BUSINESS_LIMIT_CONTROL);
+            }
+        } else {
+            redisCacheTemplate.boundValueOps("sendAuthCount_" + username).set(0,5, TimeUnit.MINUTES);
+        }
 
         if ("email".equals(authTyoe)) {
             boolean b = staffService.sendEmailAuthCode(username);
