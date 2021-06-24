@@ -32,10 +32,17 @@ export default {
   },
 
   // 删除用户
-  updateUserById(id) {
+  deleteUserById(id) {
     return request({
       url: `/views/category/remove/${id}`,
-      method: 'post'
+      method: 'put'
+    })
+  },
+
+  unDeleteUserById() {
+    return request({
+      url: `/views/category/unRemove/${id}`,
+      method: 'put'
     })
   },
 
@@ -44,6 +51,14 @@ export default {
     return request({
       url: `/views/violation/marker/${id}`,
       method: 'get'
+    })
+  },
+
+  //编辑用户
+  updateUserById(id) {
+    return request({
+      url: `/views/category/update/${id}`,
+      method: 'put'
     })
   }
 

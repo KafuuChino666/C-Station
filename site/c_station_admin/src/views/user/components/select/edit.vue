@@ -36,7 +36,7 @@
       <!-- 表单结束 -->
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+        <el-button type="primary" @click="confirmEdit">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -46,9 +46,11 @@
 import userAdmin from '@/api/userAdmin'
 
 export default {
+  name: 'Edit',
   data() {
     return {
       dialogVisible: false,
+      userId: null,
       form: {
         userName: '',
         selectType: '',
@@ -83,6 +85,12 @@ export default {
     genderData() {
       userAdmin.selectAllGender().then(res => {
         this.selectGender = res.data.gender
+      })
+    },
+    confirmEdit() {
+      this.userId = this.$parent.$parent.$parent.$parent.id
+      userAdmin.updateUserById(this.userId).then(res => {
+        console.log('已发送' + this.userInfo.userId)
       })
     }
   }
