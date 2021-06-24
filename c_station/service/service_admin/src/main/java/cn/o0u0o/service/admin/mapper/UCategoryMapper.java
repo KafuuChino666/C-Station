@@ -19,6 +19,8 @@ public interface UCategoryMapper extends BaseMapper<UCategory> {
     @Select("select id, category, gmt_Create, gmt_Modified from u_category")
     List<UCategory> selectAllCategory();
 
-    Boolean updateCategoryByID(Integer id);
+    Boolean deleteCategoryByID(Integer id);
+
+    Boolean unDeleteCategoryByID(Integer id);
 
 }

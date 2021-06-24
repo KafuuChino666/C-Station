@@ -89,7 +89,8 @@
         <template slot-scope="scope">
           <el-row>
             <Edit />
-            <Delete />
+            <Delete ref="delete" v-if="deleteType !== 4" />
+            <UnDelete ref="unDelete" v-else/>
           </el-row>
         </template>
       </el-table-column>
@@ -101,6 +102,7 @@
 import PubSub from 'pubsub-js'
 import Edit from '@/views/user/components/select/edit'
 import Delete from '@/views/user/components/select/delete'
+import unDelete from '@/views/user/components/select/unDelete'
 import userAdmin from '@/api/userAdmin'
 import moment from 'moment'
 
@@ -108,10 +110,12 @@ export default {
   name: 'UserList',
   components: {
     Edit,
-    Delete
+    Delete,
+    unDelete
   },
   data() {
     return {
+      deleteType: null,
       // page: '1',
       // limit: '6'
       userData: [{

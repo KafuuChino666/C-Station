@@ -40,7 +40,21 @@ public class UCategoryServiceImpl extends ServiceImpl<UCategoryMapper, UCategory
     @Override
     public Boolean removeUserCategoryByID(Integer id) {
         if(id != null && id > 0) {
-            uCategoryMapper.updateCategoryByID(id);
+            uCategoryMapper.deleteCategoryByID(id);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 根据id解除删除用户
+     * @param id
+     * @return
+     */
+    @Override
+    public Boolean unRemoveUserCategoryByID(Integer id) {
+        if(id != null && id > 0) {
+            uCategoryMapper.unDeleteCategoryByID(id);
             return true;
         }
         return false;

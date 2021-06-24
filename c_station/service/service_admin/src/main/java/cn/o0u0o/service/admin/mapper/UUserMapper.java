@@ -37,7 +37,4 @@ public interface UUserMapper extends BaseMapper<UUser> {
      */
     IPage<UserData> selectUserBySelect(Page<Select> page, Integer selectUserID, Integer selectType, String selectUserName);
 
-    @org.apache.ibatis.annotations.Select("select id, gender, gmt_Create, gmt_Modified from u_gender")
-    List<UUser> selectAllGender();
-
 }

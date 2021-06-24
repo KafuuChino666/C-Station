@@ -66,13 +66,4 @@ public class UUserServiceImpl extends ServiceImpl<UUserMapper, UUser> implements
         return uUserMapper.selectCount(wrapper);
     }
 
-    /**
-     * 查询所有性别信息
-     * @return
-     */
-    @Override
-    public List<UUser> selectAllGender() {
-        List<UUser> uUsers = uUserMapper.selectAllGender();
-        return uUsers;
-    }
 }

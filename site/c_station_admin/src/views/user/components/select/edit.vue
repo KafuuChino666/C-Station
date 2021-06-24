@@ -13,7 +13,7 @@
           <el-input v-model="form.userName" style="float: left" />
         </el-form-item>
         <el-form-item label="性别">
-          <el-select v-model="form.gender" placeholder="性别" style="float: left">
+          <el-select v-model="form.gender" placeholder="请选择性别" style="float: left">
             <el-option
               v-for="item in selectGender"
               :key="item.id"
@@ -36,7 +36,7 @@
       <!-- 表单结束 -->
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+        <el-button type="primary" @click="confirmEdit">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -46,9 +46,11 @@
 import userAdmin from '@/api/userAdmin'
 
 export default {
+  name: 'Edit',
   data() {
     return {
       dialogVisible: false,
+      userId: null,
       form: {
         userName: '',
         selectType: '',
@@ -61,6 +63,7 @@ export default {
 
   created() {
     this.categoryData()
+    this.genderData()
   },
 
   methods: {
@@ -76,12 +79,18 @@ export default {
     },
     categoryData() {
       userAdmin.selectAllCategory().then(res => {
-        this.selectType = res.data.rows
+        this.selectType = res.data.category
       })
     },
     genderData() {
       userAdmin.selectAllGender().then(res => {
-        this.selectGender = res.data.rows
+        this.selectGender = res.data.gender
+      })
+    },
+    confirmEdit() {
+      this.userId = this.$parent.$parent.$parent.$parent.id
+      userAdmin.updateUserById(this.userId).then(res => {
+        console.log('已发送' + this.userInfo.userId)
       })
     }
   }

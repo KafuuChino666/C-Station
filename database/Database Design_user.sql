@@ -39,7 +39,7 @@ create table u_category (
 #用户性别信息
 create table u_gender (
 	id INT unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	gender CHAR(1) COMMENT '性别' NOT NULL,
+	gender varchar(16) COMMENT '性别' NOT NULL,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
 );
@@ -250,3 +250,5 @@ WHERE userId = 1;
 
 
 select id, category from u_category;
+
+select id, gender, gmt_Create, gmt_Modified from u_gender;

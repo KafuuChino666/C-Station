@@ -42,7 +42,7 @@ public class UCategoryController {
     public Result selectAllCategory() {
         List<UCategory> uCategories = uCategoryService.selectAllCategory();
 
-        return Result.ok().data("rows", uCategories);
+        return Result.ok().data("category", uCategories);
     }
 
     /**
@@ -50,12 +50,28 @@ public class UCategoryController {
      * @param id
      * @return
      */
-    @PostMapping("/remove/{id}")
+    @PutMapping("/remove/{id}")
     public Result removeUserById(@PathVariable Integer id) {
         Map<String, Integer> typeMap = new HashMap<>();
         typeMap.put("category_id", null);
         if(id != null && id <= uUserService.selectUserCount(typeMap)) {
             Boolean b = uCategoryService.removeUserCategoryByID(id);
+            return b ? Result.ok() : Result.setResultCodeEnum(ResultCodeEnum.UNKNOWN_REASON);
+        }
+        return Result.err().message("用户类别号错误！");
+    }
+
+    /**
+     * 解除注销用户
+     * @param id
+     * @return
+     */
+    @PutMapping("/unRemove/{id}")
+    public Result unRemoveUserById(@PathVariable Integer id) {
+        Map<String, Integer> typeMap = new HashMap<>();
+        typeMap.put("category_id", null);
+        if(id != null && id <= uUserService.selectUserCount(typeMap)) {
+            Boolean b = uCategoryService.unRemoveUserCategoryByID(id);
             return b ? Result.ok() : Result.setResultCodeEnum(ResultCodeEnum.UNKNOWN_REASON);
         }
         return Result.err().message("用户类别号错误！");
