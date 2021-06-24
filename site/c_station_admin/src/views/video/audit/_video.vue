@@ -71,18 +71,21 @@
               <div class="page-box">
                 <el-pagination
                   style="display: flex;
-                justify-content: space-around"
+                  justify-content: space-around"
                   layout="prev, pager, next"
-                  :total="50"
+                  :current-page="page"
+                  :total="total"
+                  :page-size="limit"
+                  @current-change="changeCurrentPage"
                 />
               </div>
-              <div v-for="item in 16" :key="item" class="posterize-img">
+              <div v-for="item in snapshotList" :key="item.Index" class="posterize-img">
                 <el-image
-                  :fit="contain"
+                  fit="contain"
                   :preview-src-list="srcList"
-                  src="https://mcsql-002.oss-cn-beijing.aliyuncs.com/download.jpg"
+                  :src="item.url"
                 />
-                <span class="demonstration">00:45:15</span>
+                <span class="demonstration" v-text="formatedDate(item.index * 5)">00:45:15</span>
               </div>
             </li>
           </ul>
@@ -95,16 +98,18 @@
 
 <script>
 import AliPlayer from '@/views/video/components/AliPlayer'
+import video from '@/api/video'
 
 export default {
   name: 'AuditVideo',
   components: { AliPlayer },
   data() {
     return {
-      srcList: [
-        'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
-        'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg'
-      ],
+      snapshotList: [],
+      srcList: [],
+      page: 1,
+      limit: 16,
+      total: 0,
       videoInfo: {
         // 视频标题谁能拒绝这么可爱的萝莉呢！
         videoTitle: '',
@@ -126,6 +131,38 @@ export default {
         userName: ''
       }
     }
+  },
+  mounted() {
+    // 获取页面数据
+    this.getSpriteOriginSnapshot(this.page, this.limit, 'eb18d02fd8ca4e30a0b4869ea52cee1b')
+  },
+  methods: {
+    getSpriteOriginSnapshot(page, limit, videoId) {
+      video.spriteOriginSnapshot(page, limit, videoId).then(res => {
+        if (res.code === 20000) {
+          const mediaSnapshot = res.data.mediaSnapshot
+          this.total = mediaSnapshot.total
+          console.log(mediaSnapshot)
+          this.snapshotList = mediaSnapshot.snapshots.snapshot
+          this.snapshotList.forEach(res => {
+            this.srcList.push(res.url)
+          })
+        }
+      })
+    },
+    changeCurrentPage(page) {
+      this.page = page
+      this.getSpriteOriginSnapshot(this.page, this.limit, 'eb18d02fd8ca4e30a0b4869ea52cee1b')
+    },
+    formatedDate(s) {
+      // const h = '00'
+      // const m = '00'
+      // const s = '00'
+      // if (Math.floor(s / 3600) < 10) {
+      //
+      // }
+      return Math.floor(s / 3600) + ':' + Math.floor(s / 60) + ':' + s % 60
+    }
   }
 }
 </script>
@@ -138,11 +175,14 @@ export default {
   height: 50px;
 }
 
+.audit-title ul {
+  margin: 0;
+}
+
 .audit-title li {
   list-style: none;
   float: left;
-  padding: 0 10px;
-  padding-top: 16px;
+  padding: 16px 10px 0;
   margin: 0;
 }
 

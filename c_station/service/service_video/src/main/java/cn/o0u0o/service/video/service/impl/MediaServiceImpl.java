@@ -8,6 +8,8 @@ import com.aliyun.vod.upload.impl.UploadVideoImpl;
 import com.aliyun.vod.upload.req.UploadStreamRequest;
 import com.aliyun.vod.upload.resp.UploadStreamResponse;
 import com.aliyun.vod20170321.Client;
+import com.aliyun.vod20170321.models.ListSnapshotsRequest;
+import com.aliyun.vod20170321.models.ListSnapshotsResponse;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.utils.StringUtils;
@@ -105,6 +107,25 @@ public class MediaServiceImpl implements MediaService {
             return client.getVideoInfo(getVideoInfoRequest);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public ListSnapshotsResponse spriteOriginSnapshot(Integer pageSize, Integer pageNo, String videoId) {
+        Client client = null;
+        try {
+            client = AliyunVodSDKUtils.createvod20170321Client(vodProperties.getKeyid(), vodProperties.getKeysecret());
+
+            ListSnapshotsRequest listSnapshotsRequest = new ListSnapshotsRequest()
+                    .setVideoId(videoId)
+                    .setSnapshotType("SpriteOriginSnapshot")
+                    .setPageSize(String.valueOf(pageSize))
+                    .setPageNo(String.valueOf(pageNo));
+            // 复制代码运行请自行打印 API 的返回值
+            return client.listSnapshots(listSnapshotsRequest);
+        } catch (Exception e) {
+            log.error(e.getMessage());
         }
         return null;
     }

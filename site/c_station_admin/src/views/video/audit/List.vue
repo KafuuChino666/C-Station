@@ -125,10 +125,12 @@ export default {
       }
       // 请求后台
       video.lockAuditVideo(row.id).then(res => {
-        // 锁定成功！
-        console.log('锁定成功！')
-        this.$router.push({ name: 'AuditVideo', query: { id: row.id, videoId: row.videoId }})
-        // 跳转到审核页面
+        if (res.code === 2000) {
+          // 锁定成功！
+          console.log('锁定成功！')
+          this.$router.push({ name: 'AuditVideo', query: { id: row.id, videoId: row.videoId }})
+          // 跳转到审核页面
+        }
       })
     }
   }

@@ -7,6 +7,7 @@ import cn.o0u0o.service.video.service.MediaService;
 import cn.o0u0o.service.video.service.VVideoItemService;
 import cn.o0u0o.service.video.service.VVideoService;
 import com.aliyun.vod20170321.models.GetVideoInfoResponse;
+import com.aliyun.vod20170321.models.ListSnapshotsResponse;
 import com.aliyuncs.exceptions.ClientException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -87,5 +88,16 @@ public class MediaController {
             return Result.ok().data("cove", videoCove.getBody().video.snapshots.snapshot);
         }
         return Result.err();
+    }
+
+    @ApiOperation("获取视频的雪碧图原始图")
+    @GetMapping("/get-sprite-origin-snapshot/{videoId}/{pageSize}/{pageNo}")
+    public Result getSpriteOriginSnapshot(@PathVariable Integer pageSize, @PathVariable Integer pageNo, @PathVariable String videoId) {
+
+        if (pageSize > 0 && pageNo > 0) {
+            ListSnapshotsResponse listSnapshotsResponse = mediaService.spriteOriginSnapshot(pageSize, pageNo, videoId);
+            return Result.ok().data("mediaSnapshot", listSnapshotsResponse.getBody().mediaSnapshot);
+        }
+        return Result.setResultCodeEnum(ResultCodeEnum.PARAM_ERROR);
     }
 }

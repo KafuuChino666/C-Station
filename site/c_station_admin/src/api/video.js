@@ -104,5 +104,11 @@ export default {
       url: `/admin/video/audit/status/unfinished`,
       method: 'get'
     })
+  },
+  spriteOriginSnapshot(page, limit, videoId) {
+    return request({
+      url: `/api/video/media/get-sprite-origin-snapshot/${videoId}/${limit}/${page}`,
+      method: 'get'
+    })
   }
 }
