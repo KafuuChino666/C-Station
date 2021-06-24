@@ -23,4 +23,7 @@ public interface UCategoryMapper extends BaseMapper<UCategory> {
 
     Boolean unDeleteCategoryByID(Integer id);
 
+    @Select("select category_id from u_user where id = #{id}")
+    Integer selectCategoryByID(Integer id);
+
 }

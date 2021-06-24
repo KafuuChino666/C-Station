@@ -24,6 +24,15 @@ export default {
     })
   },
 
+  // 根据用户id查询状态id
+  selectCategoryById(id) {
+    return request({
+      url: `/views/category/select/categoryId/${id}`,
+      method: 'get'
+    })
+
+  },
+
   selectAllGender() {
     return request({
       url: `/views/gender/sex`,
@@ -39,7 +48,7 @@ export default {
     })
   },
 
-  unDeleteUserById() {
+  unDeleteUserById(id) {
     return request({
       url: `/views/category/unRemove/${id}`,
       method: 'put'

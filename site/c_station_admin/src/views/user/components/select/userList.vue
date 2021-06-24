@@ -36,6 +36,16 @@
             <el-form-item label="充值数">
               <span>{{ props.row.consumed }}</span>
             </el-form-item>
+            <el-form-item
+              label="操作"
+            >
+              <template slot-scope="scope">
+                <el-row>
+                  <Edit />
+                  <Delete :id="id" :stat="stat" ref="delete"/>
+                </el-row>
+              </template>
+            </el-form-item>
           </el-form>
         </template>
       </el-table-column>
@@ -82,18 +92,6 @@
           </el-row>
         </template>
       </el-table-column>
-      <el-table-column
-        align="center"
-        label="操作"
-      >
-        <template slot-scope="scope">
-          <el-row>
-            <Edit />
-            <Delete ref="delete" v-if="deleteType !== 4" />
-            <UnDelete ref="unDelete" v-else/>
-          </el-row>
-        </template>
-      </el-table-column>
     </el-table>
   </div>
 </template>
@@ -102,7 +100,6 @@
 import PubSub from 'pubsub-js'
 import Edit from '@/views/user/components/select/edit'
 import Delete from '@/views/user/components/select/delete'
-import unDelete from '@/views/user/components/select/unDelete'
 import userAdmin from '@/api/userAdmin'
 import moment from 'moment'
 
@@ -110,8 +107,7 @@ export default {
   name: 'UserList',
   components: {
     Edit,
-    Delete,
-    unDelete
+    Delete
   },
   data() {
     return {
@@ -131,7 +127,8 @@ export default {
         idNumber: '',
         email: ''
       }],
-      id: '',
+      id: 0,
+      stat: 0,
       vioData: [{
         gmtCreate: '',
         vioDescribe: '',
@@ -158,12 +155,19 @@ export default {
     },
     handleMouseEnter(row) {
       this.id = row.userId
+      this.selectCategoryById()
       console.log(this.id)
     },
     showViolation() {
       userAdmin.selectUserViolationByID(this.id).then(res => {
         this.vioData = res.data.rows
       })
+    },
+    selectCategoryById() {
+      userAdmin.selectCategoryById(this.id).then(res => {
+        this.stat = res.data.cateId
+      })
+      console.log('状态' + this.stat)
     },
     dateFormat(row, column) {
       const date = row[column.property]
@@ -182,7 +186,7 @@ export default {
 }
 
 .el-button {
-  margin: 8px 15px 5px 15px;
+  margin: 8px 30px 5px 0px;
 }
 
 .demo-table-expand label {

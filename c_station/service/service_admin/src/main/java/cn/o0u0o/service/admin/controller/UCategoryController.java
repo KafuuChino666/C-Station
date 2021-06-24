@@ -77,5 +77,14 @@ public class UCategoryController {
         return Result.err().message("用户类别号错误！");
     }
 
+    @GetMapping("/select/categoryId/{id}")
+    public Result selectCategoryIdByID(@PathVariable Integer id) {
+        Integer categoryId = uCategoryService.queryCategoryByID(id);
+        if(categoryId > 0) {
+            return Result.ok().data("cateId", categoryId);
+        }
+        return Result.setResultCodeEnum(ResultCodeEnum.FETCH_USERINFO_ERROR);
+    }
+
 }
 

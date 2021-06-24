@@ -1,6 +1,6 @@
 <template>
-  <el-button type="danger" size="mini" round @click="openDelete">注销用户</el-button>
-  <el-button type="danger" size="mini" round @click="openUnDelete">解除注销</el-button>
+  <el-button type="danger" size="mini" round v-if="this.stat !== 4" @click="openDelete">注销用户</el-button>
+  <el-button type="danger" size="mini" round v-else @click="openUnDelete">解除注销</el-button>
 </template>
 
 <script>
@@ -8,10 +8,10 @@ import userAdmin from '@/api/userAdmin'
 
 export default {
   name: 'Delete',
+  props: ['id', 'stat'],
   data() {
     return {
-      userId: '',
-      stat: null,
+      userId: ''
     }
   },
   methods: {
@@ -42,16 +42,13 @@ export default {
       })
     },
     deleteUserById() {
-      this.userId = this.$parent.$parent.$parent.$parent.id
-      this.stat = 1
-      userAdmin.deleteUserById(this.userId).then(res => {
-        console.log('已发送' + this.userInfo.userId)
+      userAdmin.deleteUserById(this.id).then(res => {
       })
     },
     unDeleteUserById() {
       this.userId = this.$parent.$parent.$parent.$parent.id
-      userAdmin.unDeleteUserById(this.userId).then(res => {
-        console.log('已发送' + this.userInfo.userId)
+      console.log(this.userId)
+      userAdmin.unDeleteUserById(this.id).then(res => {
       })
     }
   }

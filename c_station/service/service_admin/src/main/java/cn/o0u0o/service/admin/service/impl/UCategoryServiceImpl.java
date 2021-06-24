@@ -25,12 +25,15 @@ public class UCategoryServiceImpl extends ServiceImpl<UCategoryMapper, UCategory
     @Autowired
     private UCategoryMapper uCategoryMapper;
 
+    /**
+     * 查询所有状态
+     * @return
+     */
     @Override
     public List<UCategory> selectAllCategory() {
         List<UCategory> uCategories = uCategoryMapper.selectAllCategory();
         return uCategories;
     }
-
 
     /**
      * 根据id删除用户
@@ -58,5 +61,14 @@ public class UCategoryServiceImpl extends ServiceImpl<UCategoryMapper, UCategory
             return true;
         }
         return false;
+    }
+
+    @Override
+    public Integer queryCategoryByID(Integer id) {
+        Integer categoryId = uCategoryMapper.selectCategoryByID(id);
+        if(categoryId != null && categoryId > 0) {
+            return categoryId;
+        }
+        return 0;
     }
 }
