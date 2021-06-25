@@ -1,6 +1,6 @@
 <template>
-  <el-button type="danger" size="mini" round @click="openDelete">注销用户</el-button>
-  <el-button type="danger" size="mini" round @click="openUnDelete">解除注销</el-button>
+  <el-button type="danger" size="mini" round v-if="this.stat !== 4" @click="openDelete">注销用户</el-button>
+  <el-button type="danger" size="mini" round v-else @click="openUnDelete">解除注销</el-button>
 </template>
 
 <script>
@@ -8,15 +8,15 @@ import userAdmin from '@/api/userAdmin'
 
 export default {
   name: 'Delete',
+  props: ['id', 'stat'],
   data() {
     return {
-      userId: '',
-      stat: null,
+      userId: ''
     }
   },
   methods: {
     openDelete() {
-      this.$confirm('此操作将永久封禁该用户, 是否继续?', '提示', {
+      this.$confirm('此操作将注销该用户, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
@@ -42,16 +42,11 @@ export default {
       })
     },
     deleteUserById() {
-      this.userId = this.$parent.$parent.$parent.$parent.id
-      this.stat = 1
-      userAdmin.deleteUserById(this.userId).then(res => {
-        console.log('已发送' + this.userInfo.userId)
+      userAdmin.deleteUserById(this.id).then(res => {
       })
     },
     unDeleteUserById() {
-      this.userId = this.$parent.$parent.$parent.$parent.id
-      userAdmin.unDeleteUserById(this.userId).then(res => {
-        console.log('已发送' + this.userInfo.userId)
+      userAdmin.unDeleteUserById(this.id).then(res => {
       })
     }
   }

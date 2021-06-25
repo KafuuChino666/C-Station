@@ -24,6 +24,14 @@ export default {
     })
   },
 
+  // 根据用户id查询状态id
+  selectCategoryById(id) {
+    return request({
+      url: `/views/category/select/categoryId/${id}`,
+      method: 'get'
+    })
+  },
+
   selectAllGender() {
     return request({
       url: `/views/gender/sex`,
@@ -39,7 +47,7 @@ export default {
     })
   },
 
-  unDeleteUserById() {
+  unDeleteUserById(id) {
     return request({
       url: `/views/category/unRemove/${id}`,
       method: 'put'
@@ -54,10 +62,18 @@ export default {
     })
   },
 
-  //编辑用户
+  // 回显要编辑的用户数据
+  showEditUserById(id) {
+    return request({
+      url: `/views/user/show/${id}`,
+      method: 'put'
+    })
+  },
+
+  // 编辑用户
   updateUserById(id) {
     return request({
-      url: `/views/category/update/${id}`,
+      url: `/views/user/update/${id}`,
       method: 'put'
     })
   }

@@ -2,6 +2,7 @@ package cn.o0u0o.service.admin.mapper;
 
 import cn.o0u0o.service.admin.entity.UCategory;
 import cn.o0u0o.service.admin.entity.UUser;
+import cn.o0u0o.service.admin.entity.vo.EditUserData;
 import cn.o0u0o.service.admin.entity.vo.Select;
 import cn.o0u0o.service.admin.entity.vo.UserData;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -36,5 +37,13 @@ public interface UUserMapper extends BaseMapper<UUser> {
      * @return
      */
     IPage<UserData> selectUserBySelect(Page<Select> page, Integer selectUserID, Integer selectType, String selectUserName);
+
+    /**
+     * 按照用户ID查询editData数据
+     * @param userId
+     * @return
+     */
+    @org.apache.ibatis.annotations.Select("select user_name, category_id category, gender_id gender from u_user where id = #{userId}")
+    EditUserData selectEditUserDataByID(Integer userId);
 
 }

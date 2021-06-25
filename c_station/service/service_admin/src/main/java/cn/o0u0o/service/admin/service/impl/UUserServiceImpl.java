@@ -2,6 +2,7 @@ package cn.o0u0o.service.admin.service.impl;
 
 import cn.o0u0o.service.admin.entity.UCategory;
 import cn.o0u0o.service.admin.entity.UUser;
+import cn.o0u0o.service.admin.entity.vo.EditUserData;
 import cn.o0u0o.service.admin.entity.vo.Select;
 import cn.o0u0o.service.admin.entity.vo.UserData;
 import cn.o0u0o.service.admin.mapper.UUserMapper;
@@ -64,6 +65,12 @@ public class UUserServiceImpl extends ServiceImpl<UUserMapper, UUser> implements
         QueryWrapper<UUser> wrapper = new QueryWrapper<>();
         wrapper.allEq(userType, false);
         return uUserMapper.selectCount(wrapper);
+    }
+
+    @Override
+    public EditUserData queryUserDataByID(Integer userId) {
+        EditUserData editUserData = uUserMapper.selectEditUserDataByID(userId);
+        return editUserData;
     }
 
 }

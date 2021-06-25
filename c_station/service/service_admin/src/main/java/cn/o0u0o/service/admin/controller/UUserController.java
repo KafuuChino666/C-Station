@@ -4,8 +4,11 @@ package cn.o0u0o.service.admin.controller;
 import cn.o0u0o.common.response.Result;
 import cn.o0u0o.service.admin.entity.UCategory;
 import cn.o0u0o.service.admin.entity.UUser;
+import cn.o0u0o.service.admin.entity.vo.EditUserData;
 import cn.o0u0o.service.admin.entity.vo.Select;
 import cn.o0u0o.service.admin.entity.vo.UserData;
+import cn.o0u0o.service.admin.service.UCategoryService;
+import cn.o0u0o.service.admin.service.UGenderService;
 import cn.o0u0o.service.admin.service.UUserService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.annotations.Api;
@@ -30,7 +33,11 @@ import java.util.List;
 public class UUserController {
 
     @Autowired
+    private UCategoryService uCategoryService;
+    @Autowired
     private UUserService uUserService;
+    @Autowired
+    private UGenderService uGenderService;
 
     /**
      * 请求参数：
@@ -65,6 +72,21 @@ public class UUserController {
             }
         }
         return Result.err().message("用户查询页码错误！");
+    }
+
+    /**
+     * 根据用户ID查询需要编辑的数据
+     * @return
+     */
+    @PutMapping(value = "/show/{id}")
+    public Result editUserByID(@PathVariable Integer id) {
+        if(id > 0) {
+            EditUserData editUserDataID = uUserService.queryUserDataByID(id);
+            if(editUserDataID != null && editUserDataID.getCategory() != null && editUserDataID.getGender() != null) {
+                return Result.ok().data("editData", editUserDataID);
+            }
+        }
+        return Result.err().message("用户id错误！");
     }
 
 }

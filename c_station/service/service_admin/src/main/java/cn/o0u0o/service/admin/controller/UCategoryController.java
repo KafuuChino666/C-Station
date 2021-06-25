@@ -5,6 +5,7 @@ import cn.o0u0o.common.response.Result;
 import cn.o0u0o.common.response.ResultCodeEnum;
 import cn.o0u0o.service.admin.entity.UCategory;
 import cn.o0u0o.service.admin.service.UCategoryService;
+import cn.o0u0o.service.admin.service.UGenderService;
 import cn.o0u0o.service.admin.service.UUserService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +76,37 @@ public class UCategoryController {
             return b ? Result.ok() : Result.setResultCodeEnum(ResultCodeEnum.UNKNOWN_REASON);
         }
         return Result.err().message("用户类别号错误！");
+    }
+
+    /**
+     * 根据用户ID查询类型编号
+     * @param id
+     * @return
+     */
+    @GetMapping("/select/categoryId/{id}")
+    public Result selectCategoryIdByID(@PathVariable Integer id) {
+        if(id > 0){
+            Integer categoryId = uCategoryService.queryCategoryByID(id);
+            if(categoryId != 0) {
+                return Result.ok().data("cateId", categoryId);
+            }
+        }
+        return Result.setResultCodeEnum(ResultCodeEnum.FETCH_USERINFO_ERROR);
+    }
+
+    /**
+     * 根据用户类型ID查询类型
+     * @return
+     */
+    @GetMapping("/select/category/{categoryId}")
+    public Result selectCategoryByCategoryID(@PathVariable Integer categoryId) {
+        if(categoryId > 0) {
+            String category = uCategoryService.queryCategoryByCategoryID(categoryId);
+            if(category != null) {
+                return Result.ok().data("category", category);
+            }
+        }
+        return Result.setResultCodeEnum(ResultCodeEnum.FETCH_USERINFO_ERROR);
     }
 
 }

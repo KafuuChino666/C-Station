@@ -21,4 +21,8 @@ public interface UCategoryService extends IService<UCategory> {
     Boolean removeUserCategoryByID(Integer id);
 
     Boolean unRemoveUserCategoryByID(Integer id);
+
+    Integer queryCategoryByID(Integer id);
+
+    String queryCategoryByCategoryID(Integer id);
 }
