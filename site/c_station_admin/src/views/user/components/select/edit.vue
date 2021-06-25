@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-button type="primary" size="mini" round @click="dialogVisible = true">用户编辑</el-button>
+    <el-button type="primary" size="mini" round @click="this.userEdit">用户编辑</el-button>
     <el-dialog
       title="提示"
       :visible.sync="dialogVisible"
@@ -23,7 +23,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="用户分类">
-          <el-select v-model="form.selectType" placeholder="请选择类型" style="float: left">
+          <el-select v-model="form.category" placeholder="请选择类型" style="float: left">
             <el-option
               v-for="item in selectType"
               :key="item.id"
@@ -86,6 +86,13 @@ export default {
     genderData() {
       userAdmin.selectAllGender().then(res => {
         this.selectGender = res.data.gender
+      })
+    },
+    userEdit() {
+      this.userId = this.id
+      userAdmin.showEditUserById(this.userId).then(res => {
+        this.dialogVisible = true
+        this.form = this.data.editData
       })
     },
     confirmEdit() {

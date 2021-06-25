@@ -16,4 +16,7 @@ public interface UGenderMapper extends BaseMapper<UGender> {
     @Select("select id, gender, gmt_Create, gmt_Modified from u_gender")
     List<UGender> selectAllGender();
 
+    @Select("select gender from u_gender where id = #{id}")
+    String selectGenderByGenderID(Integer id);
+
 }

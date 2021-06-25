@@ -43,7 +43,7 @@ public interface UUserMapper extends BaseMapper<UUser> {
      * @param userId
      * @return
      */
-    @org.apache.ibatis.annotations.Select("select user_name, category_id, gender_id from u_user where id = #{userId}")
+    @org.apache.ibatis.annotations.Select("select user_name, category_id category, gender_id gender from u_user where id = #{userId}")
     EditUserData selectEditUserDataByID(Integer userId);
 
 }

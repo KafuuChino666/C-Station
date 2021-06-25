@@ -64,7 +64,7 @@ public class UCategoryServiceImpl extends ServiceImpl<UCategoryMapper, UCategory
     }
 
     /**
-     * 根据Id查询用户状态
+     * 根据用户Id查询用户类型
      * @param id
      * @return
      */
@@ -76,4 +76,19 @@ public class UCategoryServiceImpl extends ServiceImpl<UCategoryMapper, UCategory
         }
         return 0;
     }
+
+    /**
+     * 根据用户类型id查询用户类型
+     * @param id
+     * @return
+     */
+    @Override
+    public String queryCategoryByCategoryID(Integer id) {
+        String category = uCategoryMapper.selectCategoryByCategoryID(id);
+        if(category != null && category != "") {
+            return category;
+        }
+        return null;
+    }
+
 }

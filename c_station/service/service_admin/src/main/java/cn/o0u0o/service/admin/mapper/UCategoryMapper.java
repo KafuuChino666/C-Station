@@ -26,4 +26,7 @@ public interface UCategoryMapper extends BaseMapper<UCategory> {
     @Select("select category_id from u_user where id = #{id}")
     Integer selectCategoryByID(Integer id);
 
+    @Select("select category from u_category where id = #{id}")
+    String selectCategoryByCategoryID(Integer id);
+
 }

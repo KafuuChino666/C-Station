@@ -28,4 +28,13 @@ public class UGenderServiceImpl extends ServiceImpl<UGenderMapper, UGender> impl
         List<UGender> uGenders = uGenderMapper.selectAllGender();
         return uGenders;
     }
+
+    @Override
+    public String selectGenderByGenderID(Integer id) {
+        String gender = uGenderMapper.selectGenderByGenderID(id);
+        if(gender != null && gender != "") {
+            return gender;
+        }
+        return null;
+    }
 }

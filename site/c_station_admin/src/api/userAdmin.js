@@ -62,10 +62,18 @@ export default {
     })
   },
 
-  //编辑用户
+  // 回显要编辑的用户数据
+  showEditUserById(id) {
+    return request({
+      url: `/views/user/show/${id}`,
+      method: 'put'
+    })
+  },
+
+  // 编辑用户
   updateUserById(id) {
     return request({
-      url: `/views/category/update/${id}`,
+      url: `/views/user/update/${id}`,
       method: 'put'
     })
   }
