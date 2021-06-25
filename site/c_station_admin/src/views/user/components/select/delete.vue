@@ -16,7 +16,7 @@ export default {
   },
   methods: {
     openDelete() {
-      this.$confirm('此操作将永久封禁该用户, 是否继续?', '提示', {
+      this.$confirm('此操作将注销该用户, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
@@ -46,8 +46,6 @@ export default {
       })
     },
     unDeleteUserById() {
-      this.userId = this.$parent.$parent.$parent.$parent.id
-      console.log(this.userId)
       userAdmin.unDeleteUserById(this.id).then(res => {
       })
     }

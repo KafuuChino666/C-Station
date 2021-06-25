@@ -63,6 +63,11 @@ public class UCategoryServiceImpl extends ServiceImpl<UCategoryMapper, UCategory
         return false;
     }
 
+    /**
+     * 根据Id查询用户状态
+     * @param id
+     * @return
+     */
     @Override
     public Integer queryCategoryByID(Integer id) {
         Integer categoryId = uCategoryMapper.selectCategoryByID(id);

@@ -47,6 +47,7 @@ import userAdmin from '@/api/userAdmin'
 
 export default {
   name: 'Edit',
+  props: ['id'],
   data() {
     return {
       dialogVisible: false,
@@ -57,7 +58,7 @@ export default {
         selectGender: ''
       },
       selectType: {},
-      selectGender: {}
+      selectGender: {},
     }
   },
 
@@ -88,7 +89,7 @@ export default {
       })
     },
     confirmEdit() {
-      this.userId = this.$parent.$parent.$parent.$parent.id
+      this.userId = this.id
       userAdmin.updateUserById(this.userId).then(res => {
         console.log('已发送' + this.userInfo.userId)
       })

@@ -2,6 +2,7 @@ package cn.o0u0o.service.admin.service;
 
 import cn.o0u0o.service.admin.entity.UCategory;
 import cn.o0u0o.service.admin.entity.UUser;
+import cn.o0u0o.service.admin.entity.vo.EditUserData;
 import cn.o0u0o.service.admin.entity.vo.Select;
 import cn.o0u0o.service.admin.entity.vo.UserData;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -25,4 +26,6 @@ public interface UUserService extends IService<UUser> {
     IPage<UserData> selectUserBySelect(Integer page, Integer limit, Select select);
 
     Integer selectUserCount(Map<String, Integer> userType);
+
+    EditUserData queryUserDataByID(Integer userId);
 }

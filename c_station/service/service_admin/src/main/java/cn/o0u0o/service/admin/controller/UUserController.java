@@ -4,6 +4,7 @@ package cn.o0u0o.service.admin.controller;
 import cn.o0u0o.common.response.Result;
 import cn.o0u0o.service.admin.entity.UCategory;
 import cn.o0u0o.service.admin.entity.UUser;
+import cn.o0u0o.service.admin.entity.vo.EditUserData;
 import cn.o0u0o.service.admin.entity.vo.Select;
 import cn.o0u0o.service.admin.entity.vo.UserData;
 import cn.o0u0o.service.admin.service.UUserService;
@@ -65,6 +66,19 @@ public class UUserController {
             }
         }
         return Result.err().message("用户查询页码错误！");
+    }
+
+    /**
+     * 根据用户ID查询需要编辑的数据（未完成）
+     * @return
+     */
+    @PutMapping()
+    public Result editUserByID(Integer id) {
+        if(id > 0) {
+            EditUserData editUserData = uUserService.queryUserDataByID(id);
+            return Result.ok().data("editData", editUserData);
+        }
+        return Result.err().message("用户id错误！");
     }
 
 }

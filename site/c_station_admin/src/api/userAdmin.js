@@ -30,7 +30,6 @@ export default {
       url: `/views/category/select/categoryId/${id}`,
       method: 'get'
     })
-
   },
 
   selectAllGender() {

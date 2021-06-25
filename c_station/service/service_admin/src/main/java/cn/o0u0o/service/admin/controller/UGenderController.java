@@ -26,6 +26,10 @@ public class UGenderController {
     @Autowired
     private UGenderService uGenderService;
 
+    /**
+     * 查询所有性别
+     * @return
+     */
     @GetMapping("/sex")
     public Result selectAllGender() {
         List<UGender> uGenders = uGenderService.selectAllGender();

@@ -41,7 +41,7 @@
             >
               <template slot-scope="scope">
                 <el-row>
-                  <Edit />
+                  <Edit :id="id" />
                   <Delete :id="id" :stat="stat" ref="delete"/>
                 </el-row>
               </template>

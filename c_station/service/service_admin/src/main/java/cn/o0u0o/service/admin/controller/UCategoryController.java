@@ -77,6 +77,11 @@ public class UCategoryController {
         return Result.err().message("用户类别号错误！");
     }
 
+    /**
+     * 根据用户ID查询类型编号
+     * @param id
+     * @return
+     */
     @GetMapping("/select/categoryId/{id}")
     public Result selectCategoryIdByID(@PathVariable Integer id) {
         Integer categoryId = uCategoryService.queryCategoryByID(id);
