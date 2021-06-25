@@ -11,6 +11,8 @@ export default {
 </script>
 
 <style>
+@import "assets/css/index.css";
+@import "assets/css/layout.css";
 #app {
   height: 100%;
 }
