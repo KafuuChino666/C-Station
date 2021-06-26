@@ -1,8 +1,14 @@
 <template>
   <div>
+    <!--  公共头  -->
     <Header id="header" />
     <Nav />
     <Promotion />
+    <Recommend />
+    <!--  广告组件  -->
+    <Advertising />
+    <Column />
+    <Advertising />
   </div>
 </template>
 
@@ -10,9 +16,12 @@
 import Header from './components/header'
 import Nav from './components/nav'
 import Promotion from './components/promotion'
+import Advertising from './components/advertising'
+import Recommend from './components/recommend'
+import Column from './components/column'
 export default {
   name: 'DefaultLayout',
-  components: {Nav, Header, Promotion}
+  components: {Column, Recommend, Advertising, Nav, Header, Promotion}
 }
 </script>
 

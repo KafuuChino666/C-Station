@@ -18,7 +18,7 @@
           <span></span>
           <span></span>
         </div>
-        <a href="#" class="slider-more">More</a>
+        <a href="#" class="slider-more">详细</a>
       </div>
       <div id="video-recommend">
         <div class="box">
@@ -28,12 +28,101 @@
                 <img alt="爷 的 女 友 真 可 爱~" src="https://mcsql-002.oss-cn-beijing.aliyuncs.com/web/e84cf4d5ee0930d8c13e72970d20c98286d72d1c.jpg%40412w_232h_1c.jpg">
                 <div class="info">
                   <p title="爷 的 女 友 真 可 爱~" class="title">【爷 的 女 友 真 可 爱~</p>
-                  <p class="up"></p>
+                  <p class="up">
+                    <i class="el-icon-user-solid"></i>
+                    可莉
+                  </p>
                   <p class="play">13.6万播放</p>
                 </div>
               </a>
             </div>
-            <div class="watch-later-video"></div>
+            <div class="watch-later-video van-watchlater">
+            </div>
+          </div>
+          <div class="video-card-reco">
+            <div class="info-box">
+              <a href="#">
+                <img alt="「干物妹！可莉」♪ 爆肝一个月的可莉体操" src="https://mcsql-002.oss-cn-beijing.aliyuncs.com/web/cb80b81e25d03385f1fd0cbc9bd697a4a883d36d.jpg%40412w_232h_1c.jpg">
+                <div class="info">
+                  <p title="「干物妹！可莉」♪ 爆肝一个月的可莉体操" class="title">「干物妹！可莉」♪ 爆肝一个月的可莉体操</p>
+                  <p class="up">
+                    <i class="el-icon-user-solid"></i>
+                    可莉
+                  </p>
+                  <p class="play">13.6万播放</p>
+                </div>
+              </a>
+            </div>
+            <div class="watch-later-video van-watchlater">
+            </div>
+          </div>
+          <div class="video-card-reco">
+            <div class="info-box">
+              <a href="#">
+                <img alt="热爱105度的小鸟游六花" src="https://mcsql-002.oss-cn-beijing.aliyuncs.com/web/48e11d4c4bcfc7ed9c3a59129013adbbcc5be180.jpg%40412w_232h_1c.jpg">
+                <div class="info">
+                  <p title="热爱105度的小鸟游六花" class="title">热爱105度的小鸟游六花</p>
+                  <p class="up">
+                    <i class="el-icon-user-solid"></i>
+                    可莉
+                  </p>
+                  <p class="play">13.6万播放</p>
+                </div>
+              </a>
+            </div>
+            <div class="watch-later-video van-watchlater">
+            </div>
+          </div>
+          <div class="video-card-reco">
+            <div class="info-box">
+              <a href="#">
+                <img alt="开始拔刀!这可能会是你看过最爽的视频!" src="https://mcsql-002.oss-cn-beijing.aliyuncs.com/web/6deba3fa63e7a0d376e22c0277470e210647f442.jpg%40412w_232h_1c.jpg">
+                <div class="info">
+                  <p title="开始拔刀!这可能会是你看过最爽的视频!" class="title">开始拔刀!这可能会是你看过最爽的视频!</p>
+                  <p class="up">
+                    <i class="el-icon-user-solid"></i>
+                    可莉
+                  </p>
+                  <p class="play">13.6万播放</p>
+                </div>
+              </a>
+            </div>
+            <div class="watch-later-video van-watchlater">
+            </div>
+          </div>
+          <div class="video-card-reco">
+            <div class="info-box">
+              <a href="#">
+                <img alt="✤原神•可莉✤ 刑！太刑了！" src="https://mcsql-002.oss-cn-beijing.aliyuncs.com/web/b6ba76532110f4556142eda0dbfe4a5ccb9f50fe.jpg%40412w_232h_1c.jpg">
+                <div class="info">
+                  <p title="✤原神•可莉✤ 刑！太刑了！" class="title">【✤原神•可莉✤ 刑！太刑了！</p>
+                  <p class="up">
+                    <i class="el-icon-user-solid"></i>
+                    可莉
+                  </p>
+                  <p class="play">13.6万播放</p>
+                </div>
+              </a>
+            </div>
+            <div class="watch-later-video van-watchlater">
+            </div>
+          </div>
+          <div class="video-card-reco">
+            <div class="info-box">
+              <a href="#">
+                <img alt="“ 龙 王 的 邀 请 ”" src="https://mcsql-002.oss-cn-beijing.aliyuncs.com/web/6540ac1bd4d6d28be4cb8f5aad7dae79ff9e8cc1.jpg%40412w_232h_1c.jpg">
+                <div class="info">
+                  <p title="“ 龙 王 的 邀 请 ”" class="title">“ 龙 王 的 邀 请 ”</p>
+                  <p class="up">
+                    <i class="el-icon-user-solid"></i>
+                    可莉
+                  </p>
+                  <p class="play">13.6万播放</p>
+                </div>
+              </a>
+            </div>
+            <div class="watch-later-video van-watchlater">
+            </div>
           </div>
         </div>
       </div>
@@ -48,6 +137,13 @@ export default {
 </script>
 
 <style scoped>
+#banner {
+  margin-bottom: 40px;
+}
+#banner .page-width{
+  display: flex;
+  justify-content: space-between;
+}
 #banner .slider {
   overflow: hidden;
   position: relative;
@@ -147,7 +243,7 @@ export default {
 
 #video-recommend {
   position: relative;
-  float: left;
+  float: right;
 }
 #video-recommend .box {
   display: -ms-flexbox;
@@ -187,8 +283,7 @@ export default {
 .video-card-reco .info-box {
   position: relative;
   overflow: hidden;
-  background-image: url(data:image/png;
-  base64,iVBORw0KGgoAAAANSUhEUgAAAEsAAABHCAMAAAB4UkqjAAAAh1BMVEUAAADd3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d0UCIZXAAAALHRSTlMAoJDx4OYL/DcGF+6+JNi4ycSIT2k6LPeWfRzTVPXPszEQrV0hpo12cEZAZFpRNIQAAAJVSURBVFjD7dbZcpswGIbhHwwSi81q8Ib33fnu//oatRIpmliDhQ/aaZ+TKInnjVgkhb4RJMhP9Fzo8PiD+vEA+JPnqS0+1dRHBJhibAzh2HNeekxP9Z8XBSMZM6SmRBYx65QeM6XsY3rKPqanLGMWqeDmOh0b/Io9+YHi3gKtdExgLznSlyjFMGnUphIMlcgY22C4DSPBxTu4IrXDe+yI6IDWbPSqGVoHoohDyip6XZVB4hFN1TgPyUaYQ5rSWQ0nZGcC6UyJukKypa4yIXX3HLLlqCdHX++HLRfS/9bbWvvHLSLNR3N6tRXdFwdxejekiYF4fDnWYa/WqSm2PqRCSy0hrbP5RxAaW8141N17tVbZ+S1fFYbWFF2+1lqg62BoBdAsqWOLroWhxTh+M8vmWuuaxp1WaWjRSn43yl35sHTLUjxiaWlqnYE4LZoJme3v13MibqepFZRL6otV5V+/Hv+xVvi+FsvZG1qh/LQ7uFXnF/HlwcEfYlDktW2r5EARUiXWc1xRWAC8tGwxsdJ9dcRnYrddMdtrjDZyAy3kXrSJ7O89u8zEZAIKxBRnFzbonWD3ZkfCrrmzP+6979nicjAnW3NZ4OS1R6GtVBa8drTek539up3NAgMvcv51WNZQitCiFBZQaqIMSrx1XrWNoWTy/w1r+hk+xjuMSVjGGC6WZ3S1xlDriqTKxzB+Ra3I4bDHne62drqmied57QR9z0D94dHnOEmvJ/pWAMm4ovL2TTcJ5cRyMlHrbkdG5c/5r82fYqt+K/iR89m2JrP9PEZyI80PsPxVT0P3FAEAAAAASUVORK5CYII=);background-repeat: no-repeat;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEsAAABHCAMAAAB4UkqjAAAAh1BMVEUAAADd3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d3d0UCIZXAAAALHRSTlMAoJDx4OYL/DcGF+6+JNi4ycSIT2k6LPeWfRzTVPXPszEQrV0hpo12cEZAZFpRNIQAAAJVSURBVFjD7dbZcpswGIbhHwwSi81q8Ib33fnu//oatRIpmliDhQ/aaZ+TKInnjVgkhb4RJMhP9Fzo8PiD+vEA+JPnqS0+1dRHBJhibAzh2HNeekxP9Z8XBSMZM6SmRBYx65QeM6XsY3rKPqanLGMWqeDmOh0b/Io9+YHi3gKtdExgLznSlyjFMGnUphIMlcgY22C4DSPBxTu4IrXDe+yI6IDWbPSqGVoHoohDyip6XZVB4hFN1TgPyUaYQ5rSWQ0nZGcC6UyJukKypa4yIXX3HLLlqCdHX++HLRfS/9bbWvvHLSLNR3N6tRXdFwdxejekiYF4fDnWYa/WqSm2PqRCSy0hrbP5RxAaW8141N17tVbZ+S1fFYbWFF2+1lqg62BoBdAsqWOLroWhxTh+M8vmWuuaxp1WaWjRSn43yl35sHTLUjxiaWlqnYE4LZoJme3v13MibqepFZRL6otV5V+/Hv+xVvi+FsvZG1qh/LQ7uFXnF/HlwcEfYlDktW2r5EARUiXWc1xRWAC8tGwxsdJ9dcRnYrddMdtrjDZyAy3kXrSJ7O89u8zEZAIKxBRnFzbonWD3ZkfCrrmzP+6979nicjAnW3NZ4OS1R6GtVBa8drTek539up3NAgMvcv51WNZQitCiFBZQaqIMSrx1XrWNoWTy/w1r+hk+xjuMSVjGGC6WZ3S1xlDriqTKxzB+Ra3I4bDHne62drqmied57QR9z0D94dHnOEmvJ/pWAMm4ovL2TTcJ5cRyMlHrbkdG5c/5r82fYqt+K/iR89m2JrP9PEZyI80PsPxVT0P3FAEAAAAASUVORK5CYII=);background-repeat: no-repeat;
   background-position: 50%
 }
 .video-card-reco .info-box,.video-card-reco .info-box:before,.video-card-reco .info-box img {
@@ -247,8 +342,7 @@ export default {
   left: 0;
   width: 100%;
   height: 48px;
-  background-image: url(data:image/png;
-  base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAwCAYAAAGnNCAXAAAABGdBTUEAALGPC/xhBQAAAENJREFUCB1jYGBgYGICEpIgQgqNBRRi4MMmARYDyXKAWLwgggfOAnMJiIH0soJ0sMEJdlQWWBYshpAAK0ZwwSzS1AEAes8Ckyqvlc0AAAAASUVORK5CYII=);background-size: contain;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAwCAYAAAGnNCAXAAAABGdBTUEAALGPC/xhBQAAAENJREFUCB1jYGBgYGICEpIgQgqNBRRi4MMmARYDyXKAWLwgggfOAnMJiIH0soJ0sMEJdlQWWBYshpAAK0ZwwSzS1AEAes8Ckyqvlc0AAAAASUVORK5CYII=);background-size: contain;
   background-repeat: repeat-x;
   border-radius: 0 0 2px 2px
 }
@@ -265,6 +359,26 @@ export default {
 .video-card-reco:hover .info-box .info .title {
   height: 36px;
   white-space: normal
+}
+.video-card-reco .watch-later-video {
+  transition: opacity .2s;
+  opacity: 0;
+}
+.van-watchlater.black {
+  width: 28px;
+  height: 28px;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAMAAACfWMssAAAAwFBMVEUAAAAGBgavr69EREQUFBQ1NTUODg7t7e3FxcV0dHRbW1sAAAAAAAAAAAD+/v77+/v4+Pj09PTj4+P8/PzV1dWpqamSkpIhISH19fXX19fLy8ulpaWdnZ1kZGRVVVUsLCz6+vrm5uba2tq9vb20tLSsrKyXl5eMjIx+fn54eHhsbGxpaWk+Pj4AAAAAAADv7+/e3t7AwMC3t7ehoaFLS0vo6OjR0dHOzs7CwsKCgoKCgoJiYmLp6enMzMywsLD////DVMIGAAAAP3RSTlOZmtOrnqec8927sopkEf38+ffu/eXPxqH45+DOyrWwpPvv6NnV0cjEv724t6qPAPTr2tbNru/j4tvAv7Tw4dTgAD9iAAABpElEQVRIx+ST13KCUBiEDyCCBRBQsaHGHrvp/Xv/twpDTBgRonjr3u0w38zu8h+xNsolkVGlsrEWxkpcoJUhyuISBVjpIi7Arli9bmE6mb0rUhZI6tZu2KuxK+TO5RYOB2pM8udgShWASlOXa8MnDYDN7DRX6AOVkf/bTemEqe9OdW0DluwdNH7VgKZ3knNUEVN+CGz/K3oLtJJGrJugp3MPFrSSy7wBnVRwAE7aTxuDq6YNCpaaehRN2KV8eoRaNMh8GesBKIlgEewoaAtTPoytw0gIXz4KJYMcORfQ5n/Wy4kuaMKHzzioQTFyhNJ7P27ZMNuSDb4Noxingi3FQSpTab8bWx0+YOMdV6yKIxAGSuCkZ6Dv9sEsJlzNSxKIex/ejgUkXkEdxokgLMJn4gBUpcygyH+BHYyVMWo4w/eMwXFIfOCgAVKiAxMQTgCYAH+S44MkOXRAOJGbYyRyHXU24rIVWgjqCNgbkZWRRYA+JrfoYKaksKK8eKS8QCZcBVBe6VBezRGuWGlalSMaD2KQxsMooCMgu6FLdtOa7MY82d0HAP3jZ1lFdjimAAAAAElFTkSuQmCC);
+}
+.van-watchlater {
+   position: absolute;
+   z-index: 20;
+   width: 22px;
+   height: 22px;
+   right: 8px;
+   bottom: 8px;
+   cursor: pointer;
+   background-size: contain;
+   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAMAAACfWMssAAAAwFBMVEUAAAAGBgavr69EREQUFBQ1NTUODg7t7e3FxcV0dHRbW1sAAAAAAAAAAAD+/v77+/v4+Pj09PTj4+P8/PzV1dWpqamSkpIhISH19fXX19fLy8ulpaWdnZ1kZGRVVVUsLCz6+vrm5uba2tq9vb20tLSsrKyXl5eMjIx+fn54eHhsbGxpaWk+Pj4AAAAAAADv7+/e3t7AwMC3t7ehoaFLS0vo6OjR0dHOzs7CwsKCgoKCgoJiYmLp6enMzMywsLD////DVMIGAAAAP3RSTlOZmtOrnqec8927sopkEf38+ffu/eXPxqH45+DOyrWwpPvv6NnV0cjEv724t6qPAPTr2tbNru/j4tvAv7Tw4dTgAD9iAAABpElEQVRIx+ST13KCUBiEDyCCBRBQsaHGHrvp/Xv/twpDTBgRonjr3u0w38zu8h+xNsolkVGlsrEWxkpcoJUhyuISBVjpIi7Arli9bmE6mb0rUhZI6tZu2KuxK+TO5RYOB2pM8udgShWASlOXa8MnDYDN7DRX6AOVkf/bTemEqe9OdW0DluwdNH7VgKZ3knNUEVN+CGz/K3oLtJJGrJugp3MPFrSSy7wBnVRwAE7aTxuDq6YNCpaaehRN2KV8eoRaNMh8GesBKIlgEewoaAtTPoytw0gIXz4KJYMcORfQ5n/Wy4kuaMKHzzioQTFyhNJ7P27ZMNuSDb4Noxingi3FQSpTab8bWx0+YOMdV6yKIxAGSuCkZ6Dv9sEsJlzNSxKIex/ejgUkXkEdxokgLMJn4gBUpcygyH+BHYyVMWo4w/eMwXFIfOCgAVKiAxMQTgCYAH+S44MkOXRAOJGbYyRyHXU24rIVWgjqCNgbkZWRRYA+JrfoYKaksKK8eKS8QCZcBVBe6VBezRGuWGlalSMaD2KQxsMooCMgu6FLdtOa7MY82d0HAP3jZ1lFdjimAAAAAElFTkSuQmCC)
 }
 </style>
 
