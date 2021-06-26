@@ -106,6 +106,7 @@ export default {
 }
 .page-tab .con li {
   cursor: pointer;
+  height: 68px;
   text-align: center;
   font-size: 14px;
   white-space: nowrap;
