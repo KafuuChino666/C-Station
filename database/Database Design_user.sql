@@ -149,8 +149,6 @@ CREATE TABLE u_facorites(
 	user_id INT unsigned,
 	facorites_name VARCHAR(32) COMMENT '收藏夹名' NOT NULL,
 	collect_id INT unsigned,
-	# 视频id是要计算收藏夹的总播放量
-	video_id INT unsigned,
 	facorites_status VARCHAR(16) COMMENT '收藏夹状态' NOT NULL,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
@@ -161,6 +159,7 @@ CREATE TABLE u_facorites(
 #收藏表
 CREATE TABLE u_collect(
 	id INT unsigned PRIMARY KEY AUTO_INCREMENT,
+	# 视频id是要计算收藏夹的总播放量
 	video_id INT unsigned,
 	facorites_id INT unsigned,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
@@ -175,9 +174,9 @@ CREATE TABLE u_collect(
 CREATE TABLE u_subscription (
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	user_id INT unsigned,
-	sub_sitcom_id INT unsigned NOT NULL,
-	sub_bangumi_id INT unsigned,
-	label_id INT unsigned NOT NULL, 
+	sub_sitcom_id INT unsigned,
+	bangumi_info_id INT unsigned,
+	label_id INT unsigned, 
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
 	#FOREIGN KEY(user_id) REFERENCES u_user(user_id),
@@ -185,15 +184,15 @@ CREATE TABLE u_subscription (
 );
 
 #追番表
-CREATE TABLE u_sub_bangumi (
-	id INT unsigned PRIMARY KEY AUTO_INCREMENT,
-	user_id INT unsigned,
-	bangumi_info_id INT unsigned,
-	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
-	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
-	#FOREIGN KEY(user_id) REFERENCES u_user(user_id),
-	#FOREIGN KEY(bangumi_info_id) REFERENCES bg_bangumi_info(bangumi_info_id)
-);
+-- CREATE TABLE u_sub_bangumi (
+-- 	id INT unsigned PRIMARY KEY AUTO_INCREMENT,
+-- 	user_id INT unsigned,
+-- 	bangumi_info_id INT unsigned,
+-- 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
+-- 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
+-- 	#FOREIGN KEY(user_id) REFERENCES u_user(user_id),
+-- 	#FOREIGN KEY(bangumi_info_id) REFERENCES bg_bangumi_info(bangumi_info_id)
+-- );
 
 #记录用户点赞视频
 CREATE TABLE u_like_video(
@@ -221,34 +220,3 @@ CREATE TABLE u_like_column(
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL
 );
-
-
-#查询用户所有数据
-explain SELECT COUNT(1) FROM u_user u 
-LEFT JOIN u_e_wallet w ON w.user_id = u.id 
-LEFT JOIN u_category c ON u.category_id = c.id 
-LEFT JOIN u_safe s ON u.id = s.user_id 
-LEFT JOIN u_realname r ON s.rn_id = r.id 
-WHERE u.user_name LIKE "1%"
-#根据条件查询用户数据
-
-select u.id userId, u.user_name,r.realname, u.gender, c.id category, s.phone, w.c_total, r.ID_number IDNumber, s.email         
-from u_user u         
-left join u_e_wallet w on w.user_id = u.id         
-left join u_category c on u.category_id = c.id         
-left join u_safe s on u.id = s.user_id         
-left join u_realname r on s.rn_id = r.id
-LIMIT 0,4
-
-
-SELECT COUNT(1) FROM u_user u 
-LEFT JOIN u_e_wallet w ON w.user_id = u.id 
-LEFT JOIN u_category c ON u.category_id = c.id 
-LEFT JOIN u_safe s ON u.id = s.user_id 
-LEFT JOIN u_realname r ON s.rn_id = r.id 
-WHERE userId = 1;
-
-
-select id, category from u_category;
-
-select id, gender, gmt_Create, gmt_Modified from u_gender;

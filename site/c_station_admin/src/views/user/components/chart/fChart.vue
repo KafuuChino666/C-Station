@@ -26,7 +26,7 @@ export default {
       // 绘制图表
       myChart.setOption({
         title: {
-          text: '用户的视频分区',
+          text: '用户的收藏分区统计',
           x: 'center'
         },
         legend: {
@@ -52,10 +52,6 @@ export default {
               {
                 value: 30,
                 name: 'rose 1'
-              },
-              {
-                value: 20,
-                name: 'rose 2'
               }
             ]
           }

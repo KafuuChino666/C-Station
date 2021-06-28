@@ -147,7 +147,12 @@ export default {
   methods: {
     // 用户信息跳转
     userInfo() {
-      this.$router.push({ name: 'UserStat', query: { id: 1 }})
+      this.$router.push({
+        name: 'UserStat',
+        query: {
+          id: this.id
+        }
+      })
     },
     // 用户编辑
     userRedact() {
