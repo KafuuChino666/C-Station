@@ -33,6 +33,7 @@ import FChart from '@/views/user/components/chart/fChart'
 
 export default {
   name: 'UserStat',
+  props: ['id'],
   components: {
     PieChart,
     LChart,
@@ -40,7 +41,8 @@ export default {
   },
   data() {
     return {
-      name: 'CalebCX'
+      userId: null,
+      name: ''
     }
   },
 

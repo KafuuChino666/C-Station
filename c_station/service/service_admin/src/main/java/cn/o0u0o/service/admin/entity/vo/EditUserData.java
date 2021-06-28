@@ -19,8 +19,8 @@ public class EditUserData {
 
     String userName;
 
-    Integer category;
+    Integer selectType;
 
-    Integer gender;
+    Integer selectGender;
 
 }

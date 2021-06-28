@@ -62,11 +62,6 @@ export default {
     }
   },
 
-  created() {
-    this.categoryData()
-    this.genderData()
-  },
-
   methods: {
     handleClose(done) {
       this.$confirm('确认关闭？')
@@ -88,11 +83,13 @@ export default {
         this.selectGender = res.data.gender
       })
     },
-    userEdit() {
+    async userEdit() {
       this.userId = this.id
+      await this.categoryData()
+      await this.genderData()
       userAdmin.showEditUserById(this.userId).then(res => {
         this.dialogVisible = true
-        this.form = this.data.editData
+        this.form = res.data.editData
       })
     },
     confirmEdit() {
