@@ -1,10 +1,16 @@
 <template>
   <div>
-    <div class="header-top">
+<!--   style="background-color: #b3d4fc; height: 49px"   -->
+    <div class="header-top" id="header-top">
       <div class="header-nav clearfix">
-        <div class="header-top__nav">
+        <div class="header-top_nav">
           <ul>
-            <li class="item item-home"><a href="#">主站</a></li>
+            <li class="item item-home">
+              <a href="#">
+                <i class="iconfont icon-bilibilidonghua"></i>
+                主站
+              </a>
+            </li>
             <li class="item"><a href="#">番剧</a></li>
             <li class="item"><a href="#">游戏中心</a></li>
             <li class="item"><a href="#">直播</a></li>
@@ -17,35 +23,23 @@
             </li>
           </ul>
         </div>
-        <div id="search" class="clearfix">
-          <div class="search-box">
-            <input type="text" class="text" placeholder="男子高校生の日常">
-            <a href="#" class="btn"><i></i></a>
-            <div class="search-history">
-              <div class="title">历史搜索</div>
-              <div class="list">
-                <a href="#">努巴尼欢乐秀<i></i></a>
-                <a href="#">主播真会玩守望篇<i></i></a>
-                <a href="#">主播真会玩女神篇<i></i></a>
-                <a href="#">暴暴勺暴暴<i></i></a>
-                <a href="#">OverWatch<i></i></a>
-              </div>
+        <div class="search-box">
+          <input type="text" class="text" placeholder="男子高校生の日常">
+          <a href="#" class="btn"><i></i></a>
+          <div class="search-history">
+            <div class="title">历史搜索</div>
+            <div class="list">
+              <a href="#">努巴尼欢乐秀<i></i></a>
+              <a href="#">主播真会玩守望篇<i></i></a>
+              <a href="#">主播真会玩女神篇<i></i></a>
+              <a href="#">暴暴勺暴暴<i></i></a>
+              <a href="#">OverWatch<i></i></a>
             </div>
           </div>
         </div>
-        <div class="header-top__user">
-          <div class="login-box">
-            <a href="#">登录</a>
+        <div class="header-top_user">
+          <div class="user_c">
             <span></span>
-            <a href="#">注册</a>
-          </div>
-          <div class="user-post">
-            <a href="#" class="link">投 稿</a>
-            <div class="user-post__hover header-hover">
-              <a href="#" class="post">视频投稿</a>
-              <a href="#" class="manage">投稿管理</a>
-              <a href="#" class="create">创作中心</a>
-            </div>
           </div>
         </div>
       </div>
@@ -64,24 +58,55 @@ export default {
 }
 </script>
 
+<script type="text/javascript">
+import $ from 'jquery'
+
+$(window).scroll(function () {
+  if ($(this).scrollTop() >= 90) {
+    $('#header-top').addClass('on')
+  } else {
+    $('#header-top').removeClass('on')
+  }
+});
+
+</script>
+
+
 <style scoped>
+
+.header-top_user {
+  background-color: #212121;
+  height: 100%;
+  float: left;
+  margin-left: 10px;
+}
+.user_c {
+  display: flex;
+  align-items: center;
+  line-height: 30px;
+}
+
+
+
+
 .header-top {
   position: relative;
   z-index: 2;
+  width: 100%;
 }
 .header-nav {
   padding: 3px 24px;
 }
-.header-top__nav {
+.header-top_nav {
   float: left;
   margin-left: -10px;
   font-size: 0;
 }
-.header-top__nav .item {
+.header-top_nav .item {
   display: inline-block;
   position: relative;
 }
-.header-top__nav .item > a {
+.header-top_nav .item > a {
   height: 42px;
   line-height: 42px;
   text-align: center;
@@ -89,65 +114,17 @@ export default {
   color: #fff;
   font-size: 14px;
 }
-/*.header-top__nav .item > a:hover {*/
+/*.header-top_nav .item > a:hover {*/
 /*  background-color: rgba(255, 255, 255, .2);*/
 /*}*/
-.header-top__nav .item-home {}
-.header-top__nav .item-home a {
-
-  width: 50px;
+.header-top_nav .item-home {}
+.header-top_nav .item-home a {
+  width: 53px;
   padding: 0 0 0 20px;
-  background: url('https://mcsql-002.oss-cn-beijing.aliyuncs.com/web/page_icons.png') no-repeat -845px -74px;
+  /*background: url('https://mcsql-002.oss-cn-beijing.aliyuncs.com/web/page_icons.png') no-repeat -845px -74px;*/
 }
-.header-top__user {
-  float: right;
-}
-.header-top__user .login-box {
-  float: left;
-  margin-right: 10px;
-  font-size: 0;
-}
-.header-top__user .login-box a,
-.header-top__user .login-box span {
-  display: inline-block;
-}
-.header-top__user .login-box a {
-  display: inline-block;
-  padding: 0 10px;
-  height: 42px;
-  line-height: 42px;
-  color: #fff;
-  font-size: 12px;
-}
-.header-top__user .login-box span {
-  height: 12px;
-  margin-top: 16px;
-  border-left: 1px solid #fff;
-  vertical-align: top;
-}
-.header-top__user .login-box a:hover {
-  background-color: rgba(255, 255, 255, .2);
-}
-.header-top__user .user-post {
-  position: relative;
-  float: left;
-}
-.header-top__user .user-post .link {
-  width: 58px;
-  height: 48px;
-  text-align: center;
-  line-height: 42px;
-  color: #fff;
-  /*background: url(../images/user_post.png) no-repeat;*/
-}
-.header-top__user .user-post .link:hover {
-  /*background: url(../images/user_post_hover.png) no-repeat;*/
-}
-.header-hover {
-  display: none;
-}
-.header-top__nav .item:hover .header-hover,
-.header-top__user .user-post:hover .header-hover {
+
+.header-top_nav .item:hover .header-hover {
   display: block;
 }
 
@@ -255,5 +232,32 @@ export default {
   width: 220px;
   height: 50%;
   min-height: 60px;
+}
+
+.header-top.on {
+  position: fixed;
+  top: 0;
+  background-color: #FFFFFF;
+  color: #212121;
+  height: 49px;
+  box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.1)
+  /*width: 100%;*/
+}
+.header-top.on .header-top_nav .item > a {
+  color: #212121;
+}
+.header-top.on .item .iconfont {
+  color: rgb(0, 161, 214);
+}
+.header-top .item .iconfont {
+  position: relative;
+  line-height: 42px;
+  font-size: 18px;
+  color: white;
+  top: 2px;
+}
+.header-top.on .search-box .text {
+  background: rgb(244, 244, 244);
+  border: 1px solid rgb(231, 231, 231);
 }
 </style>

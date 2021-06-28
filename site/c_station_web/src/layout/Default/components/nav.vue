@@ -72,7 +72,66 @@
       </div>
       <span class="tab-line"></span>
       <div class="fast-link">
-        <span></span>
+        <span>
+          <div class="item">
+            <a href="#" class="name">
+              <svg aria-hidden="true" class="svg-icon">
+                <use xlink:href="#icon-zhuanlan2"></use>
+              </svg>
+              <span>专栏</span>
+            </a>
+          </div>
+        </span>
+        <span>
+          <div class="item">
+            <a href="#" class="name">
+              <svg aria-hidden="true" class="svg-icon">
+                <use xlink:href="#icon-ziyuan"></use>
+              </svg>
+              <span>活动</span>
+            </a>
+          </div>
+        </span>
+        <span>
+          <div class="item">
+            <a href="#" class="name">
+              <svg aria-hidden="true" class="svg-icon">
+                <use xlink:href="#icon-kongjianzhan"></use>
+              </svg>
+              <span>空间</span>
+            </a>
+          </div>
+        </span>
+        <span>
+          <div class="item">
+            <a href="#" class="name">
+              <svg aria-hidden="true" class="svg-icon">
+                <use xlink:href="#icon-fanju"></use>
+              </svg>
+              <span>番剧</span>
+            </a>
+          </div>
+        </span>
+        <span>
+          <div class="item">
+            <a href="#" class="name">
+              <svg aria-hidden="true" class="svg-icon">
+                <use xlink:href="#icon-huodong2"></use>
+              </svg>
+              <span>收藏</span>
+            </a>
+          </div>
+        </span>
+        <span>
+          <div class="item">
+            <a href="#" class="name">
+              <svg aria-hidden="true" class="svg-icon">
+                <use xlink:href="#icon-kongjian3"></use>
+              </svg>
+              <span>创意</span>
+            </a>
+          </div>
+        </span>
       </div>
     </div>
   </div>
@@ -268,5 +327,46 @@ export default {
   .fast-link {
     width: 242px;
   }
+}
+
+.fast-link{
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  height: 68px;
+  width: 289px;
+}
+@media screen and (max-width: 1654px) {
+  .nav-primary-menu .fast-link {
+    width: 220px;
+  }
+}
+@media screen and (max-width: 1870px) {
+  .nav-primary-menu .fast-link {
+    width: 242px;
+  }
+}
+.fast-link .item{
+  height: 34px;
+  display: -ms-flexbox;
+  display: flex;
+}
+.fast-link .item .name{
+  font-size: 14px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  white-space: nowrap;
+}
+.fast-link .item .svg-icon{
+  width: 1.6em;
+  height: 1.6em;
+  vertical-align: middle;
+  fill: currentColor;
+  overflow: hidden;
 }
 </style>

@@ -283,7 +283,7 @@
       </div>
     </div>
     <div class="lump-right">
-      <div class="title">
+      <div class="lump-right-title">
         <span class="name">排行榜</span>
         <a href="#" class="but-more btn">
           更多
@@ -292,9 +292,9 @@
       </div>
       <ul>
         <li>
-          <span class="num highlight">1</span>
-          <div class="info">
-            <div class="cover">
+          <span class="num hig">1</span>
+          <div class="content">
+            <div class="pic">
               <a href="#" class="link">
                 <img src="https://mcsql-002.oss-cn-beijing.aliyuncs.com/web/6540ac1bd4d6d28be4cb8f5aad7dae79ff9e8cc1.jpg%40412w_232h_1c.jpg">
               </a>
@@ -308,9 +308,9 @@
           </div>
         </li>
         <li v-for="item in 9" :key="item">
-          <span :class="(item+1) <= 3 ? 'num highlight' : 'num'">{{item+1}}</span>
+          <span :class="(item+1) <= 3 ? 'num hig' : 'num'">{{item+1}}</span>
           <a href="#" class="link">
-            <p title="课堂请勿&quot;读恶评&quot; ！【UP TALK】">课堂请勿"读恶评" ！【UP TALK】</p>
+            <p title="课堂请勿&quot;读恶评&quot; ！【UP TALK】" class="title">课堂请勿"读恶评" ！【UP TALK】</p>
           </a>
         </li>
       </ul>
