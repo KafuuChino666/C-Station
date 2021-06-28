@@ -9,6 +9,8 @@
     <Advertising />
     <Column />
     <Advertising />
+    <Footer />
+    <RightNav />
   </div>
 </template>
 
@@ -19,9 +21,11 @@ import Promotion from './components/promotion'
 import Advertising from './components/advertising'
 import Recommend from './components/recommend'
 import Column from './components/column'
+import Footer from './components/footer'
+import RightNav from './components/right-nav'
 export default {
   name: 'DefaultLayout',
-  components: {Column, Recommend, Advertising, Nav, Header, Promotion}
+  components: {RightNav, Footer, Column, Recommend, Advertising, Nav, Header, Promotion}
 }
 </script>
 
