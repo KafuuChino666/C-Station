@@ -73,4 +73,13 @@ public class UUserServiceImpl extends ServiceImpl<UUserMapper, UUser> implements
         return editUserData;
     }
 
+    @Override
+    public Integer editUserByID(EditUserData editUserData, Integer id) {
+        String userName = editUserData.getUserName();
+        Integer selectType = editUserData.getSelectType();
+        Integer selectGender = editUserData.getSelectGender();
+        Integer result = uUserMapper.updateUserByID(userName, selectType, selectGender, id);
+        return result;
+    }
+
 }

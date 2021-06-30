@@ -5,9 +5,11 @@ import cn.o0u0o.service.admin.entity.UUser;
 import cn.o0u0o.service.admin.entity.vo.EditUserData;
 import cn.o0u0o.service.admin.entity.vo.Select;
 import cn.o0u0o.service.admin.entity.vo.UserData;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -43,7 +45,10 @@ public interface UUserMapper extends BaseMapper<UUser> {
      * @param userId
      * @return
      */
-    @org.apache.ibatis.annotations.Select("select user_name, category_id selectType, gender_id selectGender from u_user where id = #{userId}")
+    @org.apache.ibatis.annotations.Select("select user_name, category_id, gender_id from u_user where id = #{userId}")
     EditUserData selectEditUserDataByID(Integer userId);
+
+    @Update("update u_user set user_name = #{userName}, category_id = #{categoryId}, gender_id = #{genderId} where id = #{userId}")
+    Integer updateUserByID(String userName, Integer categoryId, Integer genderId, Integer userId);
 
 }

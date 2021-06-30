@@ -33,7 +33,7 @@ export default {
       const myChart = echarts.init(document.getElementById('main1'))
       myChart.setOption({
         title: {
-          text: '用户访问偏好',
+          text: '用户30天点击视频分区统计',
           x: 'center'
         },
         tooltip: {
@@ -52,7 +52,6 @@ export default {
         },
         series: [
           {
-            name: '访问统计',
             type: 'pie',
             radius: 60,
             center: ['50%', '60%'],

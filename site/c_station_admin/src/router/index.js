@@ -224,7 +224,7 @@ export const asyncRoutes1 = [
         ]*/
       },
       {
-        path: 'stat/:id',
+        path: 'stat:id',
         name: 'UserStat',
         component: () => import('@/views/user/chart'),
         hidden: true,

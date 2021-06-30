@@ -32,6 +32,7 @@ export default {
     })
   },
 
+  // 查询所有性别类型
   selectAllGender() {
     return request({
       url: `/views/gender/sex`,
@@ -47,6 +48,7 @@ export default {
     })
   },
 
+  // 取消封禁
   unDeleteUserById(id) {
     return request({
       url: `/views/category/unRemove/${id}`,
@@ -66,14 +68,14 @@ export default {
   showEditUserById(id) {
     return request({
       url: `/views/user/show/${id}`,
-      method: 'put'
+      method: 'get'
     })
   },
 
   // 编辑用户
   updateUserById(id) {
     return request({
-      url: `/views/user/update/${id}`,
+      url: `/views/user/update`,
       method: 'put'
     })
   }

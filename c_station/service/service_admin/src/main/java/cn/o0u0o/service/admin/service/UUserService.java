@@ -28,4 +28,6 @@ public interface UUserService extends IService<UUser> {
     Integer selectUserCount(Map<String, Integer> userType);
 
     EditUserData queryUserDataByID(Integer userId);
+
+    Integer editUserByID(EditUserData editUserData, Integer id);
 }
