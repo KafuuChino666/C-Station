@@ -4,6 +4,7 @@ import Router from 'vue-router'
 // 引入layout
 import DefaultLayout from '../layout/Default'
 import PlatformLayout from '../layout/Platform'
+import CommonLayout from '../layout/Default/CommonLayout'
 
 Vue.use(Router)
 
@@ -13,6 +14,15 @@ export default new Router({
       path: '/',
       name: 'index',
       component: DefaultLayout
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: CommonLayout,
+      children: [{
+        path: '',
+        component: () => import('@/views/login/index')
+      }]
     },
     {
       path: '/platform',
