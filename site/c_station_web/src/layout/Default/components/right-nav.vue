@@ -94,9 +94,11 @@ $(window).scroll(function () {
   oldSite = $(this).scrollTop()
   // console.log(oldSite)
   // console.log($(this).scrollTop())
-  if ((360 - oldSite) >= 20) {
+  if ((360 - oldSite) >= 45) {
     // $rightNav.css({top: $rightNav.offset().top + index})
     $rightNav.css({top: 360 - oldSite})
+  } else {
+    $rightNav.css({top: 75})
   }
 
 });

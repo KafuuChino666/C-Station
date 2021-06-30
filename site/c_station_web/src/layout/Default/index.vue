@@ -1,8 +1,11 @@
 <template>
   <div>
     <!--  公共头  -->
-    <Header id="header" />
-    <Nav />
+    <div id="header">
+      <Nav genre="" />
+      <Header/>
+    </div>
+    <link-nav />
     <Promotion />
     <Recommend />
     <!--  广告组件  -->
@@ -23,9 +26,10 @@ import Recommend from './components/recommend'
 import Column from './components/column'
 import Footer from './components/footer'
 import RightNav from './components/right-nav'
+import LinkNav from './components/link-nav'
 export default {
   name: 'DefaultLayout',
-  components: {RightNav, Footer, Column, Recommend, Advertising, Nav, Header, Promotion}
+  components: {LinkNav, RightNav, Footer, Column, Recommend, Advertising, Nav, Header, Promotion}
 }
 </script>
 
