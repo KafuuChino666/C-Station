@@ -83,9 +83,7 @@ public class UUserController {
     public Result editShowUserByID(@PathVariable Integer id) {
         if(id > 0) {
             EditUserData editUserDataID = uUserService.queryUserDataByID(id);
-            if(editUserDataID != null && editUserDataID.getSelectType() != null && editUserDataID.getSelectGender() != null) {
-                return Result.ok().data("editData", editUserDataID);
-            }
+            return Result.ok().data("editData", editUserDataID);
         }
         return Result.err().message("用户id错误！");
     }

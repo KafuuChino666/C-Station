@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-button type="primary" size="mini" round @click="this.userEdit">用户编辑</el-button>
+    <el-button type="primary" size="mini" round @click="this.showEditData">用户编辑</el-button>
     <el-dialog
       title="提示"
       :visible.sync="dialogVisible"
@@ -76,27 +76,26 @@ export default {
     categoryData() {
       userAdmin.selectAllCategory().then(res => {
         this.selectType = res.data.category
+        this.selectType.id = this.form.selectType
       })
     },
     genderData() {
       userAdmin.selectAllGender().then(res => {
         this.selectGender = res.data.gender
+        this.selectGender.id = this.form.selectGender
       })
     },
-
-    // 数据回显bug
-    async userEdit() {
+    showEditData() {
       this.userId = this.id
-      await this.categoryData()
-      await this.genderData()
       userAdmin.showEditUserById(this.userId).then(res => {
         this.dialogVisible = true
         this.form = res.data.editData
+        this.genderData()
+        this.categoryData()
       })
     },
     confirmEdit() {
-      this.userId = this.id
-      userAdmin.updateUserById(this.userId).then(res => {
+      userAdmin.updateUserById(this.form, this.id).then(res => {
         console.log('已发送' + this.userInfo.userId)
       })
     }

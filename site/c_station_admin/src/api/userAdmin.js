@@ -73,10 +73,11 @@ export default {
   },
 
   // 编辑用户
-  updateUserById(id) {
+  updateUserById(editUserData, id) {
     return request({
-      url: `/views/user/update`,
-      method: 'put'
+      url: `/views/user/update/${id}`,
+      method: 'put',
+      data: editUserData
     })
   }
 
