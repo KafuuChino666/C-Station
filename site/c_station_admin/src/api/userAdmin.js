@@ -68,14 +68,14 @@ export default {
   showEditUserById(id) {
     return request({
       url: `/views/user/show/${id}`,
-      method: 'put'
+      method: 'get'
     })
   },
 
   // 编辑用户
   updateUserById(id) {
     return request({
-      url: `/views/user/update/${id}`,
+      url: `/views/user/update`,
       method: 'put'
     })
   }

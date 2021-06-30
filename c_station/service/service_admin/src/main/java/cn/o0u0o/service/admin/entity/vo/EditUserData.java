@@ -1,5 +1,6 @@
 package cn.o0u0o.service.admin.entity.vo;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,10 +18,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class EditUserData {
 
+    @TableField(value = "user_name")
     String userName;
 
+    @TableField(value = "category_id")
     Integer selectType;
 
+    @TableField(value = "gender_id")
     Integer selectGender;
 
 }

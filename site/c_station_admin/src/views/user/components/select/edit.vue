@@ -83,6 +83,8 @@ export default {
         this.selectGender = res.data.gender
       })
     },
+
+    // 数据回显bug
     async userEdit() {
       this.userId = this.id
       await this.categoryData()
