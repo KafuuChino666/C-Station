@@ -34,16 +34,15 @@ public class UGenderController {
         return Result.ok().data("gender", uGenders);
     }
 
-
     @GetMapping("/select/sex/{id}")
     public Result selectGenderByGenderID(@PathVariable Integer id) {
         if(id > 0) {
-            String gender = uGenderService.selectGenderByGenderID(id);
+            Integer genderID = uGenderService.selectGenderIDByID(id);
+            String gender = uGenderService.selectGenderByGenderID(genderID);
             if(gender != null) {
                 return Result.ok().data("genderByID", gender);
             }
         }
         return Result.setResultCodeEnum(ResultCodeEnum.FETCH_USERINFO_ERROR);
     }
-
 }

@@ -37,4 +37,13 @@ public class UGenderServiceImpl extends ServiceImpl<UGenderMapper, UGender> impl
         }
         return null;
     }
+
+    @Override
+    public Integer selectGenderIDByID(Integer id) {
+        Integer genderID = uGenderMapper.selectGenderIDByID(id);
+        if(genderID > 0) {
+            return genderID;
+        }
+        return null;
+    }
 }

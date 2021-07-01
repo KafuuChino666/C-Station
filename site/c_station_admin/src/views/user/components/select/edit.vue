@@ -54,8 +54,8 @@ export default {
       userId: null,
       form: {
         userName: '',
-        selectType: null,
-        selectGender: {}
+        selectType: '',
+        selectGender: ''
       },
       selectType: {},
       selectGender: {}
@@ -69,7 +69,8 @@ export default {
       })
     },
     selectGenderByID() {
-      userAdmin.selectGenderByID(this.id).then(res => {
+      this.userId = this.id
+      userAdmin.selectGenderByID(this.userId).then(res => {
         this.form.selectGender = res.data.genderByID
       })
     },
@@ -86,7 +87,6 @@ export default {
     categoryData() {
       userAdmin.selectAllCategory().then(res => {
         this.selectType = res.data.category
-        this.selectType = 1
       })
     },
     genderData() {
@@ -107,9 +107,8 @@ export default {
       })
     },
     confirmEdit() {
-      console.log(this.selectGender)
       userAdmin.updateUserById(this.form, this.id).then(res => {
-
+        this.dialogVisible = false
       })
     }
   }

@@ -98,9 +98,10 @@ public class UCategoryController {
      * 根据用户类型ID查询类型
      * @return
      */
-    @GetMapping("/select/category/{categoryId}")
-    public Result selectCategoryByCategoryID(@PathVariable Integer categoryId) {
-        if(categoryId > 0) {
+    @GetMapping("/select/category/{id}")
+    public Result selectCategoryByCategoryID(@PathVariable Integer id) {
+        if(id > 0) {
+            Integer categoryId = uCategoryService.queryCategoryByID(id);
             String category = uCategoryService.queryCategoryByCategoryID(categoryId);
             if(category != null) {
                 return Result.ok().data("categoryByID", category);

@@ -15,4 +15,6 @@ public interface UGenderService extends IService<UGender> {
 
     String selectGenderByGenderID(Integer id);
 
+    Integer selectGenderIDByID(Integer id);
+
 }

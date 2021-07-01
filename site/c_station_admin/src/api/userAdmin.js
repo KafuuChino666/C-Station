@@ -48,6 +48,13 @@ export default {
     })
   },
 
+  selectGenderIDById(id) {
+    return request({
+      url: `/views/gender/select/sexID/${id}`,
+      method: 'get'
+    })
+  },
+
   // 根据用户id查询性别
   selectGenderByID(id) {
     return request({
