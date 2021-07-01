@@ -34,6 +34,7 @@ public class UGenderController {
         return Result.ok().data("gender", uGenders);
     }
 
+
     @GetMapping("/select/sex/{id}")
     public Result selectGenderByGenderID(@PathVariable Integer id) {
         if(id > 0) {

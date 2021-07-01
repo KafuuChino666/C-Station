@@ -103,7 +103,7 @@ public class UCategoryController {
         if(categoryId > 0) {
             String category = uCategoryService.queryCategoryByCategoryID(categoryId);
             if(category != null) {
-                return Result.ok().data("category", category);
+                return Result.ok().data("categoryByID", category);
             }
         }
         return Result.setResultCodeEnum(ResultCodeEnum.FETCH_USERINFO_ERROR);
