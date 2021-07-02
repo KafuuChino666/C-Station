@@ -96,7 +96,7 @@ public class UUserController {
      */
     @PutMapping(value = "update/{id}")
     public Result editUserByID(@RequestBody EditUserData editUserData, @PathVariable Integer id) {
-        if(editUserData != null && id > 1) {
+        if(editUserData != null && id > 0) {
             Integer result = uUserService.editUserByID(editUserData, id);
             return Result.ok().data("result", result);
         }

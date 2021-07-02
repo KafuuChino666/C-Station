@@ -19,4 +19,7 @@ public interface UGenderMapper extends BaseMapper<UGender> {
     @Select("select gender from u_gender where id = #{id}")
     String selectGenderByGenderID(Integer id);
 
+    @Select("select gender_id from u_user where id = #{id}")
+    Integer selectGenderIDByID(Integer id);
+
 }

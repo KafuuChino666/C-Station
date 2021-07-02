@@ -13,7 +13,7 @@
           <el-input v-model="form.userName" style="float: left" />
         </el-form-item>
         <el-form-item label="性别">
-          <el-select v-model="form.gender" placeholder="请选择性别" style="float: left">
+          <el-select v-model="form.selectGender" placeholder="请选择性别" style="float: left">
             <el-option
               v-for="item in selectGender"
               :key="item.id"
@@ -23,7 +23,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="用户分类">
-          <el-select v-model="form.category" placeholder="请选择类型" style="float: left">
+          <el-select v-model="form.selectType" placeholder="请选择类型" style="float: left">
             <el-option
               v-for="item in selectType"
               :key="item.id"
@@ -58,11 +58,22 @@ export default {
         selectGender: ''
       },
       selectType: {},
-      selectGender: {},
+      selectGender: {}
     }
   },
 
   methods: {
+    selectCategoryByID() {
+      userAdmin.selectCategoryByID(this.id).then(res => {
+        this.form.selectType = res.data.categoryByID
+      })
+    },
+    selectGenderByID() {
+      this.userId = this.id
+      userAdmin.selectGenderByID(this.userId).then(res => {
+        this.form.selectGender = res.data.genderByID
+      })
+    },
     handleClose(done) {
       this.$confirm('确认关闭？')
         .then(_ => {
@@ -76,15 +87,14 @@ export default {
     categoryData() {
       userAdmin.selectAllCategory().then(res => {
         this.selectType = res.data.category
-        this.selectType.id = this.form.selectType
       })
     },
     genderData() {
       userAdmin.selectAllGender().then(res => {
         this.selectGender = res.data.gender
-        this.selectGender.id = this.form.selectGender
       })
     },
+
     showEditData() {
       this.userId = this.id
       userAdmin.showEditUserById(this.userId).then(res => {
@@ -92,11 +102,13 @@ export default {
         this.form = res.data.editData
         this.genderData()
         this.categoryData()
+        this.selectCategoryByID()
+        this.selectGenderByID()
       })
     },
     confirmEdit() {
       userAdmin.updateUserById(this.form, this.id).then(res => {
-        console.log('已发送' + this.userInfo.userId)
+        this.dialogVisible = false
       })
     }
   }

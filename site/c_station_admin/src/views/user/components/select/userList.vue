@@ -160,7 +160,7 @@ export default {
     },
     handleMouseEnter(row) {
       this.id = row.userId
-      this.selectCategoryById()
+      this.selectCategoryIDById()
       console.log(this.id)
     },
     showViolation() {
@@ -168,8 +168,8 @@ export default {
         this.vioData = res.data.rows
       })
     },
-    selectCategoryById() {
-      userAdmin.selectCategoryById(this.id).then(res => {
+    selectCategoryIDById() {
+      userAdmin.selectCategoryIDById(this.id).then(res => {
         this.stat = res.data.cateId
       })
       console.log('状态' + this.stat)

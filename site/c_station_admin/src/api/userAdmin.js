@@ -25,9 +25,17 @@ export default {
   },
 
   // 根据用户id查询状态id
-  selectCategoryById(id) {
+  selectCategoryIDById(id) {
     return request({
       url: `/views/category/select/categoryId/${id}`,
+      method: 'get'
+    })
+  },
+
+  // 根据用户id查询状态
+  selectCategoryByID(id) {
+    return request({
+      url: `/views/category/select/category/${id}`,
       method: 'get'
     })
   },
@@ -36,6 +44,21 @@ export default {
   selectAllGender() {
     return request({
       url: `/views/gender/sex`,
+      method: 'get'
+    })
+  },
+
+  selectGenderIDById(id) {
+    return request({
+      url: `/views/gender/select/sexID/${id}`,
+      method: 'get'
+    })
+  },
+
+  // 根据用户id查询性别
+  selectGenderByID(id) {
+    return request({
+      url: `/views/gender/select/sex/${id}`,
       method: 'get'
     })
   },
