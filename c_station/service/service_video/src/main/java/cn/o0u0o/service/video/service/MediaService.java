@@ -16,5 +16,5 @@ public interface MediaService {
 
     GetVideoInfoResponse getVideoCove(String videoId);
 
-    ListSnapshotsResponse spriteOriginSnapshot(Integer pageSize, Integer pageNo, String videoId);
+    ListSnapshotsResponse spriteOriginSnapshot(Integer pageSize, Integer pageNo, Integer videoItemId);
 }

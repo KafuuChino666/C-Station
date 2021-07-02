@@ -9,9 +9,11 @@
         select id from work_flow_line where flow_id = #{flow_id} and prev_node_id = 0
     </select>
     <select id="selectListByNodeId" resultType="cn.o0u0o.service.video.entity.vo.VideoAuditListItem">
-        select vas.gmt_modified, vas.auditor, discipline_info, auditor_info, vas.id, v.id 'videoId', v.author_id, v.video_title, z.title 'zoneTitle' from v_audit_status vas
-             left join v_video v on vas.v_id = v.id
-             left join pub_zone z on z.id = v.zone_id
+        select vas.gmt_modified, vas.auditor, discipline_info, auditor_info, vas.id, vas.v_item_id 'videoItemId', v.author_id, v.video_title, z.title 'zoneTitle'
+        from v_audit_status vas
+                 left join v_video_item vvi on vas.v_item_id = vvi.id
+                 left join v_video v on vvi.v_id = v.id
+                 left join pub_zone z on z.id = v.zone_id
         where vas.current_node = #{nodeId}
     </select>
     <select id="selectUnfinishedByAuditor" resultType="java.lang.Integer">

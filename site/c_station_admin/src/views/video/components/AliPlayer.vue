@@ -9,7 +9,7 @@ export default {
   name: 'AliPlayer',
   data() {
     return {
-      videoId: this.$route.query.videoId,
+      videoItemId: this.$route.query.videoItemId,
       vid: '30ac017200af4214ab82c02b6644662f', // 阿里云视频id
       playAuth: '' // 播放凭证
     }
@@ -27,7 +27,7 @@ export default {
       this.aliPlayer() // 渲染视频播放器
     },
     async asyncData() {
-      const res = await video.getPlayAuth(this.videoId)
+      const res = await video.getPlayAuth(this.videoItemId)
       this.playAuth = res.data.playAuth
       this.vid = res.data.vid
     },

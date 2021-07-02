@@ -2,6 +2,7 @@ package cn.o0u0o.service.video.service.impl;
 
 import cn.o0u0o.service.video.entity.vo.VideoUploadAuth;
 import cn.o0u0o.service.video.service.MediaService;
+import cn.o0u0o.service.video.service.VVideoItemService;
 import cn.o0u0o.service.video.util.AliyunVodSDKUtils;
 import cn.o0u0o.service.video.util.VodProperties;
 import com.aliyun.vod.upload.impl.UploadVideoImpl;
@@ -36,6 +37,9 @@ public class MediaServiceImpl implements MediaService {
 
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
+
+    @Autowired
+    private VVideoItemService vVideoItemService;
 
     @Override
     public String getPlayAuth(String videoSourceId) throws ClientException {
@@ -112,13 +116,17 @@ public class MediaServiceImpl implements MediaService {
     }
 
     @Override
-    public ListSnapshotsResponse spriteOriginSnapshot(Integer pageSize, Integer pageNo, String videoId) {
+    public ListSnapshotsResponse spriteOriginSnapshot(Integer pageSize, Integer pageNo, Integer videoItemId) {
+
+        // 查询阿里云id
+        String vodId = vVideoItemService.getLocationById(videoItemId);
+        log.debug("vodId:" + vodId);
         Client client = null;
         try {
             client = AliyunVodSDKUtils.createvod20170321Client(vodProperties.getKeyid(), vodProperties.getKeysecret());
 
             ListSnapshotsRequest listSnapshotsRequest = new ListSnapshotsRequest()
-                    .setVideoId(videoId)
+                    .setVideoId(vodId)
                     .setSnapshotType("SpriteOriginSnapshot")
                     .setPageSize(String.valueOf(pageSize))
                     .setPageNo(String.valueOf(pageNo));

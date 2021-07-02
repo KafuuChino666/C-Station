@@ -134,9 +134,11 @@ public class VVideoServiceImpl extends ServiceImpl<VVideoMapper, VVideo> impleme
                     return false;
                 }
 
+                boolean b = false;
+
                 // 创建 v_video_item
-                boolean b = vVideoItemService.addVideo(videoId, object.getSize(), video);
-                if (!b) throw new RuntimeException();
+                Integer item_id = vVideoItemService.addVideo(videoId, object.getSize(), video);
+                if (item_id == 0) throw new RuntimeException();
                 // 创建 v_video_extra
                 b = vVideoExtraService.addVideo(videoId, video);
                 if (!b) throw new RuntimeException();
@@ -144,7 +146,7 @@ public class VVideoServiceImpl extends ServiceImpl<VVideoMapper, VVideo> impleme
                 redisTemplate.opsForHash().delete(uploadSucceedVideoidKey, video.getVideoId());
 
                 // 添加视频审核
-                b = vAuditStatusService.addAudit(videoId);
+                b = vAuditStatusService.addAudit(item_id);
                 if (!b) throw new RuntimeException();
                 // 添加完毕
                 return true;

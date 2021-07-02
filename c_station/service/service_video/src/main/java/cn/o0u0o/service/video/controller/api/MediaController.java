@@ -35,12 +35,12 @@ public class MediaController {
     private VVideoItemService vVideoItemService;
 
     @ApiOperation("获取视频播放凭证")
-    @GetMapping("get-play-auth/{videoId}")
-    public Result getPlayAuthByVideoId(@ApiParam("阿里云视频文件的id") @PathVariable Integer videoId) {
+    @GetMapping("get-play-auth/{videoItemId}")
+    public Result getPlayAuthByVideoId(@ApiParam("阿里云视频文件的id") @PathVariable Integer videoItemId) {
 
         try{
             // 查出videoSourceId aliyun ID
-            String videoSourceId = vVideoItemService.getLocationById(videoId);
+            String videoSourceId = vVideoItemService.getLocationById(videoItemId);
             if(videoSourceId.isEmpty()) {
                 return Result.err().message("无此视频！");
             }
@@ -91,11 +91,11 @@ public class MediaController {
     }
 
     @ApiOperation("获取视频的雪碧图原始图")
-    @GetMapping("/get-sprite-origin-snapshot/{videoId}/{pageSize}/{pageNo}")
-    public Result getSpriteOriginSnapshot(@PathVariable Integer pageSize, @PathVariable Integer pageNo, @PathVariable String videoId) {
+    @GetMapping("/get-sprite-origin-snapshot/{videoItemId}/{pageSize}/{pageNo}")
+    public Result getSpriteOriginSnapshot(@PathVariable Integer pageSize, @PathVariable Integer pageNo, @PathVariable Integer videoItemId) {
 
         if (pageSize > 0 && pageNo > 0) {
-            ListSnapshotsResponse listSnapshotsResponse = mediaService.spriteOriginSnapshot(pageSize, pageNo, videoId);
+            ListSnapshotsResponse listSnapshotsResponse = mediaService.spriteOriginSnapshot(pageSize, pageNo, videoItemId);
             return Result.ok().data("mediaSnapshot", listSnapshotsResponse.getBody().mediaSnapshot);
         }
         return Result.setResultCodeEnum(ResultCodeEnum.PARAM_ERROR);

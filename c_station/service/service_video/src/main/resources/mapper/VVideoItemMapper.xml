@@ -3,6 +3,6 @@
 <mapper namespace="cn.o0u0o.service.video.mapper.VVideoItemMapper">
 
     <select id="getLocationById" resultType="java.lang.String">
-        select video_location from v_video_item where v_id = #{videoId}
+        select video_location from v_video_item where id = #{videoItemId}
     </select>
 </mapper>

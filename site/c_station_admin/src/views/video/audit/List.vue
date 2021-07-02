@@ -120,7 +120,7 @@ export default {
     auditVideo(row) {
       // 判断是否有未完成的审核
       if (this.lockId === row.id) {
-        this.$router.push({ name: 'AuditVideo', query: { id: row.id, videoId: row.videoId }})
+        this.$router.push({ name: 'AuditVideo', query: { id: row.id, videoItemId: row.videoItemId }})
         return null
       }
       // 请求后台
@@ -128,7 +128,7 @@ export default {
         if (res.code === 2000) {
           // 锁定成功！
           console.log('锁定成功！')
-          this.$router.push({ name: 'AuditVideo', query: { id: row.id, videoId: row.videoId }})
+          this.$router.push({ name: 'AuditVideo', query: { id: row.id, videoItemId: row.videoItemId }})
           // 跳转到审核页面
         }
       })

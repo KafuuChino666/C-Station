@@ -24,12 +24,17 @@ public class VVideoItemServiceImpl extends ServiceImpl<VVideoItemMapper, VVideoI
     private VVideoItemMapper vVideoItemMapper;
 
     @Override
-    public boolean addVideo(Integer videoId, Long size, VideoUpload video) {
-        return this.save(new VVideoItem(videoId, 1, video.getVideoTitle(), size.toString(), video.getVideoId(), 0, 0));
+    public Integer addVideo(Integer videoId, Long size, VideoUpload video) {
+        VVideoItem item = new VVideoItem(videoId, 1, video.getVideoTitle(), size.toString(), video.getVideoId(), 0, 0);
+        boolean b = this.save(item);
+        if (b) {
+            return Integer.valueOf(item.getId());
+        }
+        return 0;
     }
 
     @Override
-    public String getLocationById(Integer videoId) {
-        return vVideoItemMapper.getLocationById(videoId);
+    public String getLocationById(Integer videoItemId) {
+        return vVideoItemMapper.getLocationById(videoItemId);
     }
 }

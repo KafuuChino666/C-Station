@@ -105,6 +105,7 @@ export default {
   components: { AliPlayer },
   data() {
     return {
+      videoItemId: this.$route.query.videoItemId,
       snapshotList: [],
       srcList: [],
       page: 1,
@@ -134,7 +135,7 @@ export default {
   },
   mounted() {
     // 获取页面数据
-    this.getSpriteOriginSnapshot(this.page, this.limit, 'eb18d02fd8ca4e30a0b4869ea52cee1b')
+    this.getSpriteOriginSnapshot(this.page, this.limit, this.videoItemId)
   },
   methods: {
     getSpriteOriginSnapshot(page, limit, videoId) {
@@ -152,15 +153,9 @@ export default {
     },
     changeCurrentPage(page) {
       this.page = page
-      this.getSpriteOriginSnapshot(this.page, this.limit, 'eb18d02fd8ca4e30a0b4869ea52cee1b')
+      this.getSpriteOriginSnapshot(this.page, this.limit, this.videoItemId)
     },
     formatedDate(s) {
-      // const h = '00'
-      // const m = '00'
-      // const s = '00'
-      // if (Math.floor(s / 3600) < 10) {
-      //
-      // }
       return Math.floor(s / 3600) + ':' + Math.floor(s / 60) + ':' + s % 60
     }
   }

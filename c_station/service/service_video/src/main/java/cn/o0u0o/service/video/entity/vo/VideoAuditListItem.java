@@ -13,7 +13,7 @@ import java.util.Date;
 public class VideoAuditListItem {
 
     private Integer id;
-    private Integer videoId;
+    private Integer videoItemId;
     private Date gmtModified;
     private String authorId;
     private String auditor;
