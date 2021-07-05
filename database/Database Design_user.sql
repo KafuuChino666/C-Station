@@ -148,7 +148,6 @@ CREATE TABLE u_facorites(
 	id INT unsigned PRIMARY KEY AUTO_INCREMENT,
 	user_id INT unsigned,
 	facorites_name VARCHAR(32) COMMENT '收藏夹名' NOT NULL,
-	collect_id INT unsigned,
 	facorites_status VARCHAR(16) COMMENT '收藏夹状态' NOT NULL,
 	gmt_create DATETIME COMMENT '创建时间' NOT NULL,
 	gmt_modified DATETIME COMMENT '修改时间' NOT NULL

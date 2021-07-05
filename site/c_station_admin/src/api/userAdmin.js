@@ -1,6 +1,19 @@
 import request from '@/utils/request'
 
 export default {
+  // 查询个人收藏分区
+  selectCollectZone(id) {
+    return request({
+      url: `/views/user/components/selectCollectZone/${id}`,
+      method: 'post',
+    })
+  },
+  selectCollectNumber() {
+    return request({
+      url: `/views/user/components/selectNumber`,
+      method: 'post',
+    })
+  },
 // 按员工编号搜索员工
   selectUserBySelect(select, page, limit) {
     return request({

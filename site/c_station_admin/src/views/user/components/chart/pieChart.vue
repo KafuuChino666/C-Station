@@ -28,12 +28,14 @@ export default {
     this.initData()
   },
   methods: {
+    queryAWeekClickZone() {
 
+    },
     initData() {
       const myChart = echarts.init(document.getElementById('main1'))
       myChart.setOption({
         title: {
-          text: '用户30天点击视频分区统计',
+          text: '用户7天点击视频分区统计',
           x: 'center'
         },
         tooltip: {

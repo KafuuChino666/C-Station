@@ -6,20 +6,35 @@
 
 <script>
 import * as echarts from 'echarts'
+import userAdmin from "@/api/userAdmin";
 
 export default {
   name: 'FChart',
+  props: ['id'],
   data() {
     return {
-      id: '',
-      number: '',
+      userId: '',
+      number: null,
       type: []
     }
   },
   mounted() {
+    this.queryCollectZone()
+    this.queryCollect()
     this.lineChart()
   },
   methods: {
+    // 查询个人收藏分区
+    queryCollectZone() {
+      userAdmin.selectCollectZone(this.id).then(res => {
+        this.type = res.data.collectZone
+      })
+    },
+    queryCollect() {
+      userAdmin.selectCollectNumber(this.id).then(res => {
+        this.number = res.data.Number
+      })
+    },
     lineChart() {
       // 基于准备好的dom，初始化echarts实例
       const myChart = echarts.init(document.getElementById('roseChart'))
@@ -51,7 +66,7 @@ export default {
             data: [
               {
                 value: 30,
-                name: 'rose 1'
+                zone: 'rose 1'
               }
             ]
           }
