@@ -4,6 +4,12 @@
     <update id="lockAudit">
         update v_audit_status set auditor = #{username}, audit_status = 1 where id = #{id} and auditor = '#'
     </update>
+    <update id="auditPassAndMobileNode">
+        update v_audit_status set current_node = #{nextNodeId}, auditor_info = CONCAT(auditor_info, ',',#{username}), auditor = '#' where auditor = #{username} and v_item_id = #{itemId}
+    </update>
+    <update id="notPassUpdateStart">
+        update v_audit_status set discipline_info = #{disciplineInfo}, audit_status = 3 where v_item_id = #{itemId} and auditor = #{username}
+    </update>
 
     <select id="selectFlowFirstNode" resultType="java.lang.Integer">
         select id from work_flow_line where flow_id = #{flow_id} and prev_node_id = 0
@@ -14,9 +20,17 @@
                  left join v_video_item vvi on vas.v_item_id = vvi.id
                  left join v_video v on vvi.v_id = v.id
                  left join pub_zone z on z.id = v.zone_id
-        where vas.current_node = #{nodeId}
+        where vas.current_node = #{nodeId} and vas.audit_status != 3
     </select>
     <select id="selectUnfinishedByAuditor" resultType="java.lang.Integer">
-        select COUNT(*) from v_audit_status where auditor = #{username}
+        select COUNT(*) from v_audit_status where auditor = #{username} and audit_status != 3
+    </select>
+    <select id="VideoInfoByItemId" resultType="cn.o0u0o.service.video.entity.vo.VideoAuditInfo">
+        select vv.video_title, vv.video_brief, vv.id 'videoId', vv.gmt_modified, vas.discipline_info, vas.audit_status, vas.gmt_modified 'auditTime', vas.auditor_info, uu.user_name
+        from v_video_item vvi
+                  left join v_video vv on vv.id = vvi.v_id
+                  left join v_audit_status vas on vas.v_item_id = vvi.id
+                  left join u_user uu on uu.id = vv.author_id
+        where vvi.id = #{itemId}
     </select>
 </mapper>

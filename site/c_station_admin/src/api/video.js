@@ -110,5 +110,23 @@ export default {
       url: `/api/video/media/get-sprite-origin-snapshot/${videoId}/${limit}/${page}`,
       method: 'get'
     })
+  },
+  getVideoInfoByItemId(videoItemId) {
+    return request({
+      url: `/admin/video/audit/info/${videoItemId}`,
+      method: 'get'
+    })
+  },
+  videoAuditPass(videoItemId) {
+    return request({
+      url: `/admin/video/audit/pass/${videoItemId}`,
+      method: 'put'
+    })
+  },
+  videoAuditNotPass(disciplineInfo, videoItemId) {
+    return request({
+      url: `/admin/video/audit/notPass/${videoItemId}/${disciplineInfo}`,
+      method: 'put'
+    })
   }
 }

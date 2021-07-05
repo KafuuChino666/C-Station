@@ -8,4 +8,11 @@
                                      left join acl_staff s on s.id = asr.staff_id
         where s.username = #{username}
     </select>
+    <select id="selectNextNodeIdByUserName" resultType="java.lang.Integer">
+        select wfl.next_node_id from work_flow_node_role wfnr
+                                         left join acl_staff_role asr on asr.role_id = wfnr.role_id
+                                         left join acl_staff s on s.id = asr.staff_id
+                                         left join work_flow_line wfl on wfnr.node_id = wfl.prev_node_id
+        where s.username = #{username}
+    </select>
 </mapper>

@@ -1,6 +1,7 @@
 package cn.o0u0o.service.video.mapper;
 
 import cn.o0u0o.service.video.entity.VAuditStatus;
+import cn.o0u0o.service.video.entity.vo.VideoAuditInfo;
 import cn.o0u0o.service.video.entity.vo.VideoAuditListItem;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Select;
@@ -24,4 +25,10 @@ public interface VAuditStatusMapper extends BaseMapper<VAuditStatus> {
     int selectUnfinishedByAuditor(String username);
 
     Boolean lockAudit(String username, Integer id);
+
+    VideoAuditInfo VideoInfoByItemId(Integer itemId);
+
+    boolean auditPassAndMobileNode(Integer itemId, String username, Integer nextNodeId);
+
+    boolean notPassUpdateStart(Integer itemId, String username, String disciplineInfo);
 }
