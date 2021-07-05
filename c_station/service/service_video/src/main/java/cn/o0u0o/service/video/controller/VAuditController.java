@@ -5,6 +5,7 @@ import cn.o0u0o.common.response.Result;
 import cn.o0u0o.common.response.ResultCodeEnum;
 import cn.o0u0o.common.util.TokenManager;
 import cn.o0u0o.service.video.entity.VAuditStatus;
+import cn.o0u0o.service.video.entity.vo.VideoAuditInfo;
 import cn.o0u0o.service.video.entity.vo.VideoAuditListItem;
 import cn.o0u0o.service.video.service.VAuditService;
 import cn.o0u0o.service.video.service.VAuditStatusService;
@@ -12,10 +13,7 @@ import cn.o0u0o.service.video.service.WorkFlowNodeRoleService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -89,6 +87,42 @@ public class VAuditController {
         // 获取审核列表
         List<VideoAuditListItem> vAuditStatuses = vAuditStatusService.getListByNodeId(nodeId);
         return Result.ok().data("rows", vAuditStatuses);
+    }
+
+    @ApiOperation("根据videoItemId获取视频相关信息")
+    @GetMapping("/info/{itemId}")
+    public Result getVideoInfoByItemId(@PathVariable Integer itemId) {
+
+        VideoAuditInfo videoAuditInfo = vAuditService.getVideoInfoByItemId(itemId);
+        if (videoAuditInfo != null) {
+            return Result.ok().data("info", videoAuditInfo);
+        }
+        return Result.err().message("视频不存在!");
+    }
+
+    @ApiOperation("视频节点审核通过")
+    @PutMapping("/pass/{itemId}")
+    public Result videoAuditPass(@PathVariable Integer itemId, HttpServletRequest request) {
+        String username = tokenManager.getUserNameByToken(request);
+        if (username == null) return Result.setResultCodeEnum(ResultCodeEnum.LOGIN_AUTH);
+
+        Boolean b = vAuditService.auditPass(itemId, username);
+
+        return b ? Result.ok() : Result.err();
+    }
+
+    @ApiOperation("视频节点审核未通过")
+    @PutMapping("/notPass/{itemId}/{disciplineInfo}")
+    public Result videoAuditNotPass(@PathVariable Integer itemId, @PathVariable String disciplineInfo, HttpServletRequest request) {
+        String username = tokenManager.getUserNameByToken(request);
+        if (username == null) return Result.setResultCodeEnum(ResultCodeEnum.LOGIN_AUTH);
+
+        if (disciplineInfo.isEmpty()) {
+            return Result.err().message("禁止空违纪信息未通过视频!");
+        }
+        Boolean b = vAuditService.auditNotPass(itemId, username, disciplineInfo);
+
+        return b ? Result.ok() : Result.err();
     }
 }
 

@@ -27,4 +27,9 @@ public class WorkFlowNodeRoleServiceImpl extends ServiceImpl<WorkFlowNodeRoleMap
     public Integer getNodeIdByUserName(String username) {
         return workFlowNodeMapper.selectNodeIdByUserName(username);
     }
+
+    @Override
+    public Integer getNextNodeIdByUserName(String username) {
+        return workFlowNodeMapper.selectNextNodeIdByUserName(username);
+    }
 }

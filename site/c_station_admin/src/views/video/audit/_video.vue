@@ -14,39 +14,39 @@
         <div class="info tb-box">
           <ul class="th">
             <li>视频标题</li>
-            <li>谁能拒绝这么可爱的萝莉呢！</li>
+            <li>{{ videoInfo.videoTitle }}</li>
           </ul>
           <ul>
             <li>作品简介</li>
-            <li>凡是这种涉及可爱、萝莉的</li>
+            <li>{{ videoInfo.videoBrief }}</li>
           </ul>
           <ul>
             <li>视频ID</li>
-            <li>3254654511</li>
+            <li>{{ videoInfo.videoId }}</li>
           </ul>
           <ul>
             <li>上传时间</li>
-            <li>2021-05-15 12:12:00</li>
+            <li>{{ videoInfo.gmtModified }}</li>
           </ul>
           <ul>
             <li>违纪说明</li>
-            <li>无</li>
+            <li>{{ videoInfo.disciplineInfo }}</li>
           </ul>
           <ul>
             <li>视频状态</li>
-            <li>待审核</li>
+            <li>{{ videoInfo.auditStatus }}</li>
           </ul>
           <ul>
             <li>审核时间</li>
-            <li>2021-05-15 12:12:00</li>
+            <li>{{ videoInfo.auditTime }}</li>
           </ul>
           <ul>
             <li>审核员</li>
-            <li>1052(色情), 1036(政审)</li>
+            <li>{{ videoInfo.auditorInfo }}</li>
           </ul>
           <ul>
             <li>作者</li>
-            <li>风之轻水之净</li>
+            <li>{{ videoInfo.userName }}</li>
           </ul>
         </div>
       </div>
@@ -57,8 +57,8 @@
           </ul>
           <ul style="height: 50px;">
             <li style="padding-top: 5px;">
-              <el-button type="primary">通过</el-button>
-              <el-button type="info">未通过</el-button>
+              <el-button @click="pass()" type="primary">通过</el-button>
+              <el-button @click="dialogVisible = true" type="info">未通过</el-button>
             </li>
           </ul>
         </div>
@@ -92,6 +92,16 @@
         </div>
       </div>
     </div>
+    <el-dialog
+      title="请填写未通过信息"
+      :visible.sync="dialogVisible"
+      width="30%">
+      <el-input type="textarea" v-model="disciplineInfo"></el-input>
+      <span slot="footer" class="dialog-footer">
+    <el-button @click="dialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="notPass()">确 定</el-button>
+  </span>
+    </el-dialog>
     <!--    <router-view />-->
   </div>
 </template>
@@ -111,31 +121,15 @@ export default {
       page: 1,
       limit: 16,
       total: 0,
-      videoInfo: {
-        // 视频标题谁能拒绝这么可爱的萝莉呢！
-        videoTitle: '',
-        // 作品简介凡是这种涉及可爱、萝莉的
-        videoBrief: '',
-        // 视频ID3254654511
-        id: '',
-        // 上传时间2021-05-15 12:12:00
-        gmtCreate: '',
-        // 违纪说明无
-        disciplineInfo: '',
-        // 视频状态待审核
-        auditStatus: '',
-        // 审核时间2021-05-15 12:12:00
-        gmtModified: '',
-        // 审核员1052(色情), 1036(政审)
-        auditorInfo: '',
-        // 作者风之轻水之净
-        userName: ''
-      }
+      videoInfo: {},
+      dialogVisible: false,
+      disciplineInfo: ''
     }
   },
   mounted() {
     // 获取页面数据
     this.getSpriteOriginSnapshot(this.page, this.limit, this.videoItemId)
+    this.loadVideoInfoByItemId()
   },
   methods: {
     getSpriteOriginSnapshot(page, limit, videoId) {
@@ -157,6 +151,60 @@ export default {
     },
     formatedDate(s) {
       return Math.floor(s / 3600) + ':' + Math.floor(s / 60) + ':' + s % 60
+    },
+    loadVideoInfoByItemId() {
+      if (this.videoItemId !== null && this.videoItemId !== undefined) {
+        video.getVideoInfoByItemId(this.videoItemId).then(res => {
+          if (res.code === 20000) {
+            this.videoInfo = res.data.info
+          }
+        })
+      }
+    },
+    // 通过
+    pass() {
+      this.$confirm('确定要通过此条视频嘛？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        // 请求服务器 通过视频
+        video.videoAuditPass(this.videoItemId).then(res => {
+          if (res.code === 20000) {
+            this.$message({
+              type: 'success',
+              message: '通过成功!'
+            })
+            this.$router.push({ name: 'AuditList' })
+          } else {
+            this.$message({
+              type: 'info',
+              message: '操作失败，请刷新重试!'
+            })
+          }
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消操作'
+        })
+      })
+    },
+    // 未通过
+    notPass() {
+      if (this.disciplineInfo !== null) {
+        video.videoAuditNotPass(this.disciplineInfo, this.videoItemId).then(res => {
+          this.dialogVisible = false
+          if (res.code === 20000) {
+            this.$message({
+              type: 'success',
+              message: '操作成功!'
+            })
+          }
+          // 跳转链表
+          this.$router.push({ name: 'AuditList' })
+        })
+      }
     }
   }
 }
@@ -220,7 +268,11 @@ export default {
   line-height: 36px;
   height: 36px;
 }
-
+.tb-box li {
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  overflow: hidden;
+}
 .audit-main-r {
   float: right;
   width: 630px;
@@ -248,5 +300,10 @@ export default {
   position: relative;
   display: inline-block;
   overflow: hidden;
+}
+</style>
+<style>
+.el-dialog__body {
+  padding: 5px 20px;
 }
 </style>

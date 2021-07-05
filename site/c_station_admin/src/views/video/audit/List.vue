@@ -125,7 +125,7 @@ export default {
       }
       // 请求后台
       video.lockAuditVideo(row.id).then(res => {
-        if (res.code === 2000) {
+        if (res.code === 20000) {
           // 锁定成功！
           console.log('锁定成功！')
           this.$router.push({ name: 'AuditVideo', query: { id: row.id, videoItemId: row.videoItemId }})

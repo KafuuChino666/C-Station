@@ -58,6 +58,7 @@ public class VAuditStatusServiceImpl extends ServiceImpl<VAuditStatusMapper, VAu
     public Integer getUnfinishedAudit(String username) {
         QueryWrapper<VAuditStatus> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("auditor", username);
+        queryWrapper.eq("audit_status", 1);
         queryWrapper.select("id");
         VAuditStatus one = this.getOne(queryWrapper);
         if (one != null) {
