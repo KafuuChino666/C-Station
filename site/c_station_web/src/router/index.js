@@ -4,7 +4,7 @@ import Router from 'vue-router'
 // 引入layout
 import DefaultLayout from '../layout/Default'
 import PlatformLayout from '../layout/Platform'
-import CommonLayout from '../layout/Default/CommonLayout'
+import LoginRegisterLayout from '../layout/Default/LoginRegisterLayout'
 
 Vue.use(Router)
 
@@ -18,10 +18,19 @@ export default new Router({
     {
       path: '/login',
       name: 'Login',
-      component: CommonLayout,
+      component: LoginRegisterLayout,
       children: [{
         path: '',
         component: () => import('@/views/login/index')
+      }]
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: LoginRegisterLayout,
+      children: [{
+        path: '',
+        component: () => import('@/views/register/index')
       }]
     },
     {
