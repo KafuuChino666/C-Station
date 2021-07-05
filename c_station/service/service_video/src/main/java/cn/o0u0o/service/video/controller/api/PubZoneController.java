@@ -3,6 +3,7 @@ package cn.o0u0o.service.video.controller.api;
 
 import cn.o0u0o.common.response.Result;
 import cn.o0u0o.service.video.entity.PubZone;
+import cn.o0u0o.service.video.entity.vo.ZoneHierarchy;
 import cn.o0u0o.service.video.service.PubZoneService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -49,5 +50,11 @@ public class PubZoneController {
         return Result.err();
     }
 
+    @ApiOperation("获取zone层级结构")
+    @GetMapping("/hierarchy")
+    public Result getZoneHierarchyStructure() {
+        List<ZoneHierarchy> pubZones = pubZoneService.getZoneHierarchyStructure();
+        return Result.ok().data("zone", pubZones);
+    }
 }
 

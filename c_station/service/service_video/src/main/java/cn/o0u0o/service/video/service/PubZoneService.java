@@ -1,6 +1,7 @@
 package cn.o0u0o.service.video.service;
 
 import cn.o0u0o.service.video.entity.PubZone;
+import cn.o0u0o.service.video.entity.vo.ZoneHierarchy;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public interface PubZoneService extends IService<PubZone> {
     List<PubZone> getChildByParentId(Integer parentId);
 
     Boolean isZoneIdValid(Integer integer);
+
+    List<ZoneHierarchy> getZoneHierarchyStructure();
 }

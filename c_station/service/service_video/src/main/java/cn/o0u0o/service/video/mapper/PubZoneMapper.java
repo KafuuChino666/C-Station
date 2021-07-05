@@ -1,6 +1,7 @@
 package cn.o0u0o.service.video.mapper;
 
 import cn.o0u0o.service.video.entity.PubZone;
+import cn.o0u0o.service.video.entity.vo.ZoneHierarchy;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -21,4 +22,6 @@ public interface PubZoneMapper extends BaseMapper<PubZone> {
     List<PubZone> selectChildByParentId(Integer parentId);
 
     int selectCountById(Integer id);
+
+    List<ZoneHierarchy> structureHierarchy(Integer parentId);
 }

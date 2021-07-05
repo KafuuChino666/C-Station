@@ -13,4 +13,15 @@
         SELECT COUNT(id) FROM pub_zone WHERE id = #{id}
     </select>
 
+    <resultMap id="zoneHierarchy" type="cn.o0u0o.service.video.entity.vo.ZoneHierarchy">
+        <id column="id" property="id"/>
+        <result property="title" column="title"/>
+        <result property="sort" column="sort"/>
+        <collection property="children" select="structureHierarchy"
+                    ofType="cn.o0u0o.service.video.entity.vo.ZoneHierarchy" column="id"/>
+    </resultMap>
+    <select id="structureHierarchy" resultMap="zoneHierarchy">
+        select id, title, sort from pub_zone where parent_id = #{parentId}
+    </select>
+
 </mapper>

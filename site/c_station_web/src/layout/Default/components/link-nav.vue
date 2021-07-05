@@ -41,29 +41,14 @@
       <span class="tab-line"></span>
       <div class="nav-list">
         <ul>
-          <li class="item" v-for="item in 16" :key="item">
+          <li class="item" v-for="i in 15" :key="zones[i].id">
             <a href="#" class="link">
-              <span>动画<div class="num">999+</div></span>
+              <span>{{ zones[i].title }}<div class="num">999+</div></span>
             </a>
             <ul class="nav-item__hover">
-              <li>
+              <li v-for="ch in zones[i].children">
                 <a href="#">
-                  <em>MAD·AMV<i></i></em>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <em>MMD·3D<i></i></em>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <em>短片·手书·配音<i></i></em>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <em>综合<i></i></em>
+                  <em>{{ ch.title }}<i></i></em>
                 </a>
               </li>
             </ul>
@@ -138,8 +123,19 @@
 </template>
 
 <script>
+import home from '../../../api/home'
 export default {
-  name: 'LinkNav'
+  name: 'LinkNav',
+  data() {
+    return {
+      zones: []
+    }
+  },
+  mounted () {
+    home.getZoneHierarchyStructure().then(res => {
+      this.zones = res.data.zone
+    })
+  }
 }
 </script>
 

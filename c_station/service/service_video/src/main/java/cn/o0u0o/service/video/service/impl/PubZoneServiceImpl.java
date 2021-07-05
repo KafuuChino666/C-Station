@@ -1,6 +1,7 @@
 package cn.o0u0o.service.video.service.impl;
 
 import cn.o0u0o.service.video.entity.PubZone;
+import cn.o0u0o.service.video.entity.vo.ZoneHierarchy;
 import cn.o0u0o.service.video.mapper.PubZoneMapper;
 import cn.o0u0o.service.video.service.PubZoneService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -45,5 +46,10 @@ public class PubZoneServiceImpl extends ServiceImpl<PubZoneMapper, PubZone> impl
     @Override
     public Boolean isZoneIdValid(Integer integer) {
         return pubZoneMapper.selectCountById(integer) == 1;
+    }
+
+    @Override
+    public List<ZoneHierarchy> getZoneHierarchyStructure() {
+        return pubZoneMapper.structureHierarchy(0);
     }
 }
