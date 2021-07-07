@@ -7,6 +7,7 @@ import cn.o0u0o.service.video.service.PubZoneService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -49,6 +50,7 @@ public class PubZoneServiceImpl extends ServiceImpl<PubZoneMapper, PubZone> impl
     }
 
     @Override
+    @Cacheable(value = "zones")
     public List<ZoneHierarchy> getZoneHierarchyStructure() {
         return pubZoneMapper.structureHierarchy(0);
     }
