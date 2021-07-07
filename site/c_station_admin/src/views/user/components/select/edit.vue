@@ -23,6 +23,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="用户分类">
+<!--           bug-->
           <el-select v-model="form.selectType" placeholder="请选择类型" style="float: left">
             <el-option
               v-for="item in selectType"

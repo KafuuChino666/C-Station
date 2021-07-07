@@ -20,6 +20,10 @@ export default {
     this.lineChart()
   },
   methods: {
+    // 准备查询出周一到周日一周内的数据
+    queryWeekData() {
+
+    },
     lineChart() {
       // 基于准备好的dom，初始化echarts实例
       const myChart = echarts.init(document.getElementById('myChart'))
@@ -56,24 +60,6 @@ export default {
             type: 'line',
             stack: '总量',
             data: [120, 132, 101, 134, 90, 230, 210]
-          },
-          {
-            name: '专栏',
-            type: 'line',
-            stack: '总量',
-            data: [220, 182, 191, 234, 290, 330, 310]
-          },
-          {
-            name: '私信',
-            type: 'line',
-            stack: '总量',
-            data: [150, 232, 201, 154, 190, 330, 410]
-          },
-          {
-            name: '直播',
-            type: 'line',
-            stack: '总量',
-            data: [320, 332, 301, 334, 390, 330, 320]
           }
         ]
       })
