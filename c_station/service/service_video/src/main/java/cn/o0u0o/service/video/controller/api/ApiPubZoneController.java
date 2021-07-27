@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.PermitAll;
 import java.util.List;
 
 /**
@@ -24,7 +25,7 @@ import java.util.List;
 @CrossOrigin //跨域
 @RestController
 @RequestMapping("/api/video/zone")
-public class PubZoneController {
+public class ApiPubZoneController {
 
     @Autowired
     public PubZoneService pubZoneService;
@@ -56,5 +57,17 @@ public class PubZoneController {
         List<ZoneHierarchy> pubZones = pubZoneService.getZoneHierarchyStructure();
         return Result.ok().data("zone", pubZones);
     }
+
+    @ApiOperation("校验zone Tile合法性")
+    @GetMapping("/verify/title/{title}")
+    public Result verifyTitle(@PathVariable String title) {
+
+        if (!title.isEmpty()) {
+            boolean b = pubZoneService.verifyTitleRepetition(title);
+            return !b ? Result.ok().data("validate", true) : Result.err().message("title重复!");
+        }
+        return Result.err();
+    }
+
 }
 

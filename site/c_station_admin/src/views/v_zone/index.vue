@@ -24,21 +24,21 @@
                 v-if="data.parentId === 0"
                 type="text"
                 size="mini"
-                @click="() => append(data)"
+                @click.stop="() => append(data)"
               >
                 添加
               </el-button>
               <el-button
                 type="text"
                 size="mini"
-                @click="() => update(data)"
+                @click.stop="() => update(data)"
               >
                 修改
               </el-button>
               <el-button
                 type="text"
                 size="mini"
-                @click="() => remove(node, data)"
+                @click.stop="() => remove(node, data)"
               >
                 删除
               </el-button>
@@ -47,7 +47,7 @@
         </el-tree>
       </div>
       <div class="cont-right">
-        <el-form :disabled="formStatus === 'echo'" :model="zoneForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+        <el-form :disabled="formStatus === 'echo'" :model="zoneForm" status-icon :rules="formVerify" ref="zoneForm" label-width="100px" class="demo-ruleForm">
           <el-form-item label="父级" prop="title">
             {{ zoneForm.parentId }}
           </el-form-item>
@@ -64,7 +64,7 @@
             <el-switch v-model="zoneForm.show"></el-switch>
           </el-form-item>
           <el-form-item>
-            <el-button :disabled="formStatus === 'echo'" type="primary" @click="submitForm('ruleForm')">提交</el-button>
+            <el-button :disabled="formStatus === 'echo'" type="primary" @click="submitForm()">提交</el-button>
             <el-button :disabled="formStatus === 'echo'" @click="resetForm()">重置</el-button>
           </el-form-item>
         </el-form>
@@ -75,6 +75,7 @@
 
 <script>
 import zone from '@/api/zone'
+import rule from '@/rules/rule'
 
 export default {
   name: 'Zone',
@@ -89,8 +90,9 @@ export default {
       formStatus: 'echo',
       filterText: '', // 过滤文本
       zoneForm: {
-
-      }
+        show: true
+      },
+      formVerify: rule.zoneForm
     }
   },
   methods: {
@@ -116,6 +118,7 @@ export default {
     append(data) {
       this.formStatus = 'append'
       this.resetForm()
+      this.zoneForm.parentId = data.id
     },
     update(data) {
       this.zoneForm = data
@@ -126,14 +129,22 @@ export default {
     },
     nodeClick(data, node, obj) {
       // 调用回显表单
+      this.formStatus = 'echo'
       this.zoneForm = data
       console.log(data)
     },
     submitForm() {
-
+      this.$refs['zoneForm'].validate((valid) => {
+        if (valid) {
+          this.zoneForm.level = this.zoneForm.parentId !== 0 ? 1 : 0
+          this.zoneForm.show = this.zoneForm.show ? 1 : 0
+          zone.addZone(this.zoneForm)
+        }
+      })
     },
     resetForm() {
       this.zoneForm = {}
+      this.zoneForm.show = true
     }
   }
 }

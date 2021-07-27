@@ -39,8 +39,9 @@ router.beforeEach(async(to, from, next) => {
           const accessRoutes = await store.dispatch('permission/generateRoutes', store.getters.token)
           router.addRoutes(accessRoutes)
           // next({ path: '/' })
-          // next({ ...to, replace: true })
-          next()
+          next({ ...to, replace: true })
+          NProgress.done()
+          // next(`/`)
         } catch (error) {
           // remove token and go to login page to re-login
           await store.dispatch('user/resetToken')

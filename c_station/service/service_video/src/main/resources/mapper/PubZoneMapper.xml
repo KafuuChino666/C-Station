@@ -23,5 +23,8 @@
     <select id="structureHierarchy" resultMap="zoneHierarchy">
         select id, title, sort from pub_zone where parent_id = #{parentId}
     </select>
+    <select id="selectRowByTitle" resultType="java.lang.Integer">
+        select count(*) from pub_zone where title = #{title}
+    </select>
 
 </mapper>

@@ -54,4 +54,29 @@ public class PubZoneServiceImpl extends ServiceImpl<PubZoneMapper, PubZone> impl
     public List<ZoneHierarchy> getZoneHierarchyStructure() {
         return pubZoneMapper.structureHierarchy(0);
     }
+
+    /**
+     * 校验title是否重复.
+     * @param title Title
+     * @return true 重复
+     */
+    @Override
+    public boolean verifyTitleRepetition(String title) {
+        int line = pubZoneMapper.selectRowByTitle(title);
+        return line != 0;
+    }
+
+    @Override
+    public boolean add(PubZone zone) {
+
+        if (zone.getNotes() == null) {
+            zone.setNotes("");
+        }
+        if (zone.getSort() == null) {
+            zone.setSort(1);
+        }
+
+        System.out.println(zone.toString());
+        return save(zone);
+    }
 }

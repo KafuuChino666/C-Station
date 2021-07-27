@@ -23,4 +23,8 @@ public interface PubZoneService extends IService<PubZone> {
     Boolean isZoneIdValid(Integer integer);
 
     List<ZoneHierarchy> getZoneHierarchyStructure();
+
+    boolean verifyTitleRepetition(String title);
+
+    boolean add(PubZone zone);
 }

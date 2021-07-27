@@ -13,5 +13,18 @@ export default {
       url: `/api/video/zone/child/${parentId}`,
       method: 'get'
     })
+  },
+  verifyTitle(title) {
+    return request({
+      url: `/api/video/zone/verify/title/${title}`,
+      method: 'get'
+    })
+  },
+  addZone(zone) {
+    return request({
+      url: `/admin/video/zone/`,
+      method: 'post',
+      data: zone
+    })
   }
 }

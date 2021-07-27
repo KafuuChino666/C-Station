@@ -44,7 +44,6 @@ const actions = {
             router.addRoutes(accessRoutes)
           })
         }
-
         resolve()
       }).catch(error => {
         reject(error)
