@@ -26,4 +26,6 @@ public interface PubZoneMapper extends BaseMapper<PubZone> {
     List<ZoneHierarchy> structureHierarchy(Integer parentId);
 
     int selectRowByTitle(String title);
+
+    boolean logicallyDelete(Integer id);
 }

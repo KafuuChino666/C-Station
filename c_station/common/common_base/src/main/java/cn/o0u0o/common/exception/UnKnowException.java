@@ -1,6 +1,5 @@
 package cn.o0u0o.common.exception;
 
-import cn.o0u0o.common.response.Result;
 import cn.o0u0o.common.response.ResultCodeEnum;
 import lombok.Getter;
 import lombok.Setter;

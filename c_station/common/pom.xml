@@ -10,6 +10,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>common</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>common_base</module>
+        <module>common_security</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

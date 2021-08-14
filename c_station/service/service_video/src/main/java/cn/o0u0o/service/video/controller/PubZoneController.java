@@ -9,6 +9,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.PathParam;
+
 /**
  * @author Guo Yangyang
  * @version 1.0
@@ -30,5 +32,19 @@ public class PubZoneController {
         boolean b = pubZoneService.add(zone);
         return b ? Result.ok().message("添加成功") : Result.err().message("添加失败!");
 
+    }
+
+    @ApiOperation("更新zone")
+    @PutMapping("/")
+    public Result update(@RequestBody PubZone zone) {
+        boolean b = pubZoneService.updateZone(zone);
+        return b ? Result.ok().message("更新成功") : Result.err().message("更新失败!");
+    }
+
+    @ApiOperation("删除zone")
+    @DeleteMapping("/{id}")
+    public Result delete(@PathVariable Integer id) {
+        boolean b = pubZoneService.deleteZone(id);
+        return b ? Result.ok().message("删除成功") : Result.err().message("删除失败!");
     }
 }

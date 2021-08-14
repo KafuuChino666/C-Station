@@ -60,11 +60,8 @@
           <el-form-item label="排序" prop="sort">
             <el-input type="text" v-model="zoneForm.sort" autocomplete="off"></el-input>
           </el-form-item>
-          <el-form-item label="是否显示" prop="show">
-            <el-switch v-model="zoneForm.show"></el-switch>
-          </el-form-item>
           <el-form-item>
-            <el-button :disabled="formStatus === 'echo'" type="primary" @click="submitForm()">提交</el-button>
+            <el-button :disabled="formStatus === 'echo'" type="primary" @click="submitForm()">{{ this.submitButTxt }}</el-button>
             <el-button :disabled="formStatus === 'echo'" @click="resetForm()">重置</el-button>
           </el-form-item>
         </el-form>
@@ -90,9 +87,9 @@ export default {
       formStatus: 'echo',
       filterText: '', // 过滤文本
       zoneForm: {
-        show: true
       },
-      formVerify: rule.zoneForm
+      formVerify: rule.zoneForm,
+      submitButTxt: '提交'
     }
   },
   methods: {
@@ -119,13 +116,37 @@ export default {
       this.formStatus = 'append'
       this.resetForm()
       this.zoneForm.parentId = data.id
+      this.submitButTxt = '提交'
     },
     update(data) {
       this.zoneForm = data
-      this.formStatus = 'edit'
+      this.formStatus = 'update'
+      this.submitButTxt = '更新'
     },
     remove(node, data) {
-
+      this.$confirm('此操作将删除该zone, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        if (data.id !== undefined) {
+          zone.deleteZone(data.id).then(res => {
+            if (res.code === 20000) {
+              this.$message({
+                type: 'success',
+                message: '删除成功!'
+              })
+              // 刷新页面
+              this.$router.go(0)
+            }
+          })
+        }
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
     },
     nodeClick(data, node, obj) {
       // 调用回显表单
@@ -137,14 +158,29 @@ export default {
       this.$refs['zoneForm'].validate((valid) => {
         if (valid) {
           this.zoneForm.level = this.zoneForm.parentId !== 0 ? 1 : 0
-          this.zoneForm.show = this.zoneForm.show ? 1 : 0
-          zone.addZone(this.zoneForm)
+          // this.zoneForm.display = this.zoneForm.display ? 1 : 0
+
+          // 判断表单类型
+          if (this.formStatus === 'update') { // 更新
+            zone.updateZone(this.zoneForm).then(res => {
+              if (res.code === 20000) {
+                // 更新数据
+                this.$router.go(0)
+              }
+            })
+          } else { // 添加
+            zone.addZone(this.zoneForm).then(res => {
+              if (res.code === 20000) {
+                // 更新数据
+                this.$router.go(0)
+              }
+            })
+          }
         }
       })
     },
     resetForm() {
       this.zoneForm = {}
-      this.zoneForm.show = true
     }
   }
 }

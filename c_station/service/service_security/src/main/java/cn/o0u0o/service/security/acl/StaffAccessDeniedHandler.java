@@ -1,8 +1,8 @@
 package cn.o0u0o.service.security.acl;
 
+import com.alibaba.fastjson.JSONObject;
 import cn.o0u0o.common.response.Result;
 import cn.o0u0o.common.response.ResultCodeEnum;
-import com.alibaba.fastjson.JSONObject;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 

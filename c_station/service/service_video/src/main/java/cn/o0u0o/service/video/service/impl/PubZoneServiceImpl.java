@@ -76,7 +76,24 @@ public class PubZoneServiceImpl extends ServiceImpl<PubZoneMapper, PubZone> impl
             zone.setSort(1);
         }
 
-        System.out.println(zone.toString());
-        return save(zone);
+        return pubZoneMapper.insert(zone) == 1;
+    }
+
+    @Override
+    public boolean updateZone(PubZone zone) {
+
+        if (zone.getNotes() == null) {
+            zone.setNotes("");
+        }
+        if (zone.getSort() == null) {
+            zone.setSort(1);
+        }
+
+        return pubZoneMapper.updateById(zone) == 1;
+    }
+
+    @Override
+    public boolean deleteZone(Integer zoneId) {
+        return pubZoneMapper.logicallyDelete(zoneId);
     }
 }

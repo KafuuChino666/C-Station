@@ -1,6 +1,5 @@
 package cn.o0u0o.common.util;
 
-import cn.o0u0o.common.response.Result;
 import io.jsonwebtoken.CompressionCodecs;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

@@ -49,7 +49,8 @@ public class PubZone extends BaseEntity {
     @ApiModelProperty(value = "分区排序")
     private Integer sort;
 
-    private Integer show;
+    @ApiModelProperty(value = "逻辑删除")
+    private Integer isDelete;
 
 
 }

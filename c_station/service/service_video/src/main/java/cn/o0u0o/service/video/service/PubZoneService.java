@@ -27,4 +27,8 @@ public interface PubZoneService extends IService<PubZone> {
     boolean verifyTitleRepetition(String title);
 
     boolean add(PubZone zone);
+
+    boolean updateZone(PubZone zone);
+
+    boolean deleteZone(Integer zoneId);
 }

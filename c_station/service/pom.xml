@@ -28,7 +28,7 @@
 
         <dependency>
             <groupId>cn.o0u0o</groupId>
-            <artifactId>common</artifactId>
+            <artifactId>common_base</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
