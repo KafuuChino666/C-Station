@@ -4,7 +4,6 @@ import cn.o0u0o.service.video.entity.VVideoItem;
 import cn.o0u0o.service.video.entity.vo.VideoUpload;
 import cn.o0u0o.service.video.mapper.VVideoItemMapper;
 import cn.o0u0o.service.video.service.VVideoItemService;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

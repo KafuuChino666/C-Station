@@ -5,7 +5,6 @@ import cn.o0u0o.service.video.entity.VVideoStatus;
 import cn.o0u0o.service.video.entity.vo.QueryForm;
 import cn.o0u0o.service.video.entity.vo.TableData;
 import cn.o0u0o.service.video.entity.vo.VideoInfoForm;
-import cn.o0u0o.service.video.entity.vo.VideoUpload;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;

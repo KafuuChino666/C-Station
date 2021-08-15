@@ -4,7 +4,6 @@ import cn.o0u0o.service.video.entity.VAuditStatus;
 import cn.o0u0o.service.video.entity.vo.VideoAuditInfo;
 import cn.o0u0o.service.video.entity.vo.VideoAuditListItem;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 

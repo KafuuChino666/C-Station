@@ -3,8 +3,6 @@ package cn.o0u0o.service.video.controller;
 
 import cn.o0u0o.common.response.Result;
 import cn.o0u0o.common.util.TokenManager;
-import cn.o0u0o.service.video.entity.VAuditStatus;
-import cn.o0u0o.service.video.mapper.VAuditStatusMapper;
 import cn.o0u0o.service.video.service.VAuditStatusService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -5,7 +5,6 @@ import cn.o0u0o.service.video.mapper.WorkFlowNodeMapper;
 import cn.o0u0o.service.video.mapper.WorkFlowNodeRoleMapper;
 import cn.o0u0o.service.video.service.WorkFlowNodeRoleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

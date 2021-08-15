@@ -1,8 +1,7 @@
 package cn.o0u0o.service.video.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
+
 import cn.o0u0o.common.entity.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

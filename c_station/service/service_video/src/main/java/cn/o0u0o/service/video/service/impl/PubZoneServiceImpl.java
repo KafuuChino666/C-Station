@@ -4,7 +4,6 @@ import cn.o0u0o.service.video.entity.PubZone;
 import cn.o0u0o.service.video.entity.vo.ZoneHierarchy;
 import cn.o0u0o.service.video.mapper.PubZoneMapper;
 import cn.o0u0o.service.video.service.PubZoneService;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;

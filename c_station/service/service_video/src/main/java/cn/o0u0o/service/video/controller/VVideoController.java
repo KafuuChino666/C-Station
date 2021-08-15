@@ -3,7 +3,6 @@ package cn.o0u0o.service.video.controller;
 
 import cn.o0u0o.common.response.Result;
 import cn.o0u0o.service.video.entity.VVideoStatus;
-import cn.o0u0o.service.video.entity.vo.QueryForm;
 import cn.o0u0o.service.video.entity.vo.TableData;
 import cn.o0u0o.service.video.entity.vo.VideoInfoResult;
 import cn.o0u0o.service.video.service.VVideoService;

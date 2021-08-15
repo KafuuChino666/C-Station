@@ -3,7 +3,6 @@ package cn.o0u0o.service.video.mapper;
 import cn.o0u0o.service.video.entity.PubZone;
 import cn.o0u0o.service.video.entity.vo.ZoneHierarchy;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 

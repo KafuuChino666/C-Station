@@ -1,8 +1,6 @@
 package cn.o0u0o.service.video.controller.api;
 
 import cn.o0u0o.common.response.Result;
-import cn.o0u0o.common.response.ResultCodeEnum;
-import cn.o0u0o.service.oss.service.FileService;
 import cn.o0u0o.service.video.entity.vo.FileUploadComplete;
 import cn.o0u0o.service.video.entity.vo.VideoUpload;
 import cn.o0u0o.service.video.service.VVideoService;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import java.io.InputStream;
 
 @Api("视频相关api")
 @CrossOrigin //跨域

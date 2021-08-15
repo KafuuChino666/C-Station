@@ -2,14 +2,11 @@ package cn.o0u0o.service.video.controller;
 
 import cn.o0u0o.common.response.Result;
 import cn.o0u0o.service.video.entity.PubZone;
-import cn.o0u0o.service.video.mapper.PubZoneMapper;
 import cn.o0u0o.service.video.service.PubZoneService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import javax.ws.rs.PathParam;
 
 /**
  * @author Guo Yangyang

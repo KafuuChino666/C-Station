@@ -5,7 +5,6 @@ import cn.o0u0o.common.response.ResultCodeEnum;
 import cn.o0u0o.service.video.entity.vo.VideoUploadAuth;
 import cn.o0u0o.service.video.service.MediaService;
 import cn.o0u0o.service.video.service.VVideoItemService;
-import cn.o0u0o.service.video.service.VVideoService;
 import com.aliyun.vod20170321.models.GetVideoInfoResponse;
 import com.aliyun.vod20170321.models.ListSnapshotsResponse;
 import com.aliyuncs.exceptions.ClientException;

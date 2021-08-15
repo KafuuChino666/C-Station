@@ -1,9 +1,6 @@
 package cn.o0u0o.service.video.controller;
 
 
-import cn.o0u0o.common.response.Result;
-import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;

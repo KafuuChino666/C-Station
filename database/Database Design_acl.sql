@@ -103,5 +103,43 @@ create table acl_role_resource
 );
 
 
+# 首页视频推荐
+CREATE table cms_recommend
+(
+   id                   bigint not null auto_increment,
+	 v_id                 bigint comment '视频id',
+	 priority             int comment '推送优先级',
+	 gmt_create           datetime comment '创建时间',
+   gmt_modified         datetime comment '修改时间',
+   primary key (id)
+);
 
+# 首页轮播
+CREATE TABLE cms_carousel
+(
+   id                   bigint not null auto_increment,
+	 content              VARCHAR(200) comment '文字内容',
+	 img_Url							VARCHAR(400) comment '图片url',
+	 link                 VARCHAR(400) comment '跳转链接',
+	 rank                 int comment '顺序',
+	 reveal								INT(1) comment '是否显示',
+	 gmt_create           datetime comment '创建时间',
+   gmt_modified         datetime comment '修改时间',
+   primary key (id)
+);
+
+# 广告
+CREATE TABLE cms_advertising
+(
+   id                   bigint not null auto_increment,
+	 title                VARCHAR(200) comment '标题',
+	 u_id                 int comment 'uuid',
+	 img_Url							VARCHAR(400) comment '图片url',
+	 link                 VARCHAR(400) comment '跳转链接',
+	 type                 int comment '广告类型',
+	 reveal								INT(1) comment '是否显示',
+	 gmt_create           datetime comment '创建时间',
+   gmt_modified         datetime comment '修改时间',
+   primary key (id)
+);
 

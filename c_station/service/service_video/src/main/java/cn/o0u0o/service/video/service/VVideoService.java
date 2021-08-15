@@ -2,7 +2,9 @@ package cn.o0u0o.service.video.service;
 
 import cn.o0u0o.service.video.entity.VVideo;
 import cn.o0u0o.service.video.entity.VVideoStatus;
-import cn.o0u0o.service.video.entity.vo.*;
+import cn.o0u0o.service.video.entity.vo.TableData;
+import cn.o0u0o.service.video.entity.vo.VideoInfoResult;
+import cn.o0u0o.service.video.entity.vo.VideoUpload;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.web.multipart.MultipartFile;

@@ -59,6 +59,12 @@
             <artifactId>vod20170321</artifactId>
             <version>2.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>cn.o0u0o</groupId>
+            <artifactId>service_oss</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>

@@ -5,7 +5,6 @@ import cn.o0u0o.service.video.mapper.WorkFlowNodeMapper;
 import cn.o0u0o.service.video.service.WorkFlowNodeService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.data.web.config.QuerydslWebConfiguration;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

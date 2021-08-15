@@ -4,7 +4,6 @@ package cn.o0u0o.service.video.controller;
 import cn.o0u0o.common.response.Result;
 import cn.o0u0o.common.response.ResultCodeEnum;
 import cn.o0u0o.common.util.TokenManager;
-import cn.o0u0o.service.video.entity.VAuditStatus;
 import cn.o0u0o.service.video.entity.vo.VideoAuditInfo;
 import cn.o0u0o.service.video.entity.vo.VideoAuditListItem;
 import cn.o0u0o.service.video.service.VAuditService;
@@ -12,7 +11,6 @@ import cn.o0u0o.service.video.service.VAuditStatusService;
 import cn.o0u0o.service.video.service.WorkFlowNodeRoleService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
