@@ -3,23 +3,23 @@ aliyun:
   sms:
     regionId: cn-hangzhou
     keyId: LTAI4GGLCAbWjGCZn8tvfKMf
-    keySecret: Cm6p5rx9WDJbEzw0mu7KCnuSueQabM
+    keySecret: 密钥
     templateCode: SMS_205457566
     signName: Mcsql在线教育
 
   vod:
     keyid: LTAI4G6VskXP7anbL6t4LCkY
-    keysecret: dTYw1CUxOQmzf3016S4AcijtpOp2xd
+    keysecret: 密钥
     templateGroupId: null
     workflowId: null
   oss:
     endpoint: oss-cn-beijing.aliyuncs.com
-    accessKeyId: LTAI4G6VskXP7anbL6t4LCkY
-    accessKeySecret: dTYw1CUxOQmzf3016S4AcijtpOp2xd
+    accessKeyId: KayId
+    accessKeySecret: 密钥
     #bucket可以在控制台创建，也可以使用java代码创建，注意先测试bucket是否已被占用
     bucketname: mcsql-file
 # 顶象
 dingxiang:
   sms:
     appId: f7789efe9697a602b53695a03f16a0ba
-    appSecret: 960e99d8de614ee44f8b707c68ae6876
+    appSecret: 密钥
